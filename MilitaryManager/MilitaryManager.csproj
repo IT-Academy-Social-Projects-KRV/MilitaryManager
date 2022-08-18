@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<UserSecretsId>d19d15f7-50c1-4904-9b71-bffca3a21ce3</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.19" />
+		<PackageReference Include="Numind.AspNetCore.SpaServices.Extensions" Version="1.0.1" />
+	</ItemGroup>
+	<ItemGroup>
+		<!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
+		<Compile Remove="client-app\**" />
+		<Content Remove="client-app\**" />
+		<EmbeddedResource Remove="client-app\**" />
+		<None Remove="client-app\**" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="wwwroot\" />
+	</ItemGroup>
+
+</Project>

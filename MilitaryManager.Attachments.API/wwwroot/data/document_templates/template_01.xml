@@ -1,0 +1,19 @@
+<documnet top="80">
+	<title>ПРОТОКОЛ</title>
+	<ret>5</ret>
+	<p>зі створення ініціативної групи для реєстрації  об’єднання  співвласників багатоквартирного будинку за адресою: м.[city], вул. [street] [number]</p>
+	<ret>10</ret>
+	<p alignment="right" fontStyle="italic">м. [city] [date] року.</p>
+	<ret>20</ret>
+	<p>Присутні співвласники багатоквартирного будинку за адресою: м. [city], вул. [street] [number]:</p>
+	<ret>20</ret>
+	<list data="owners" ret="10" fontStyle="italic">[#].    [owner] - власник квартири № [flatnum];</list>
+	<ret>20</ret>
+	<p fontStyle="bold">Порядок денний:</p>
+	<ret>10</ret>
+	<list data="dayschedule" ret="10">[#].    [text];</list>
+	<ret>20</ret>
+	<p fontStyle="bold">Розгляд питань порядку денного:</p>
+	<ret>10</ret>
+	<list data="scheduleResults" ret="10">[#].    [text];</list>
+</documnet>

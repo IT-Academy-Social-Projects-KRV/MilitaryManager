@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  militarymanager:
+    image: ${DOCKER_REGISTRY-}militarymanager
+    build:
+      context: .
+      dockerfile: MilitaryManager/Dockerfile
+
+  militarymanager.attachments.api:
+    image: ${DOCKER_REGISTRY-}militarymanagerattachmentsapi
+    build:
+      context: .
+      dockerfile: MilitaryManager.Attachments.API/Dockerfile
+
+  militarymanager.units.api:
+    image: ${DOCKER_REGISTRY-}militarymanagerunitsapi
+    build:
+      context: .
+      dockerfile: MilitaryManager.Units.API/Dockerfile
+
+  militarymanager.identity.server:
+    image: ${DOCKER_REGISTRY-}militarymanager_identity_server
+    build:
+      context: .
+      dockerfile: MilitaryManager.IdentityServer/Dockerfile
