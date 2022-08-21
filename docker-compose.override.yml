@@ -37,7 +37,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
-      - ConnectionStrings__DefaultConnection=Server=host.docker.internal;Database=IdentityServer_AspNet_Identity;User ID=Gwa_System;Password=T&t137S5tP!+3SMJQ<r0KJ;MultipleActiveResultSets=true;Application Name=IdentityServer
+      - ConnectionStrings__DefaultConnection=Server=host.docker.internal;Database=IdentityServer_AspNet_Identity;User ID=javist;Password=123456java;MultipleActiveResultSets=true;Application Name=IdentityServer
     ports:
       - "5006:80"
       - "5007:443"
