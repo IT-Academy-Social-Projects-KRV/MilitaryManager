@@ -41,10 +41,12 @@ namespace MilitaryManager.IdentityServer
 
             // Adds IdentityServer
             services.AddIdentityServer()
+                .AddDeveloperSigningCredential()
                 //.AddSigningCredential()
                 .AddInMemoryIdentityResources(IdentityConfig.GetIdentityResources())
                 .AddInMemoryApiResources(IdentityConfig.GetApiResources())
-                .AddInMemoryClients(IdentityConfig.GetClients("http://localhost:5001"))
+                .AddInMemoryApiScopes(IdentityConfig.GetApiScopes())
+                .AddInMemoryClients(IdentityConfig.GetClients("https://localhost:5001"))
                 .AddAspNetIdentity<ApplicationUser>();
 
 
@@ -86,7 +88,7 @@ namespace MilitaryManager.IdentityServer
                 builder => builder
                     .WithOrigins(
                         "http://localhost:4200",
-                        "http://localhost:5001",
+                        "https://localhost:5001",
                         "http://localhost:5000")
                     .SetIsOriginAllowedToAllowWildcardSubdomains()
                     .AllowAnyMethod()

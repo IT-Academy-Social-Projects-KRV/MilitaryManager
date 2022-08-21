@@ -26,10 +26,11 @@ namespace IdentityServer
 				{
 					ClientId = "js",
 					ClientName = "JavaScript Client",
-					AllowedGrantTypes = GrantTypes.Implicit,
+					AllowedGrantTypes = GrantTypes.Code,
 					AllowAccessTokensViaBrowser = true,
 
 					RequireConsent = false,
+					RequireClientSecret = false,
 
 					RedirectUris =           { $"{hostname}/SignInCallback", $"{hostname}/SilentSignInCallback" },
 					PostLogoutRedirectUris = { $"{hostname}/" },
@@ -59,7 +60,7 @@ namespace IdentityServer
 						IdentityServerConstants.StandardScopes.OpenId,
 						IdentityServerConstants.StandardScopes.Profile,
 						IdentityServerConstants.StandardScopes.Email,
-						"api"
+						"api1"
 					},
 
 					RequirePkce = true,
@@ -80,10 +81,19 @@ namespace IdentityServer
 						JwtClaimTypes.Name,
 						JwtClaimTypes.Email,
 						JwtClaimTypes.Role
-					}
+					},
+					Scopes = { "api1" }
 				}
 			};
 
+		}
+
+		public static IEnumerable<ApiScope> GetApiScopes()
+        {
+			return new List<ApiScope> 
+			{ 
+				new ApiScope("api1", "API 1") 
+			};
 		}
 	}
 }

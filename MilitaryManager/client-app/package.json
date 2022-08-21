@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "^14.1.0",
     "@angular/router": "^14.1.0",
     "font-awesome": "^4.7.0",
+    "oidc-client": "^1.11.5",
     "primeflex": "^2.0.0",
     "primeicons": "^5.0.0",
     "primeng": "^11.4.5",

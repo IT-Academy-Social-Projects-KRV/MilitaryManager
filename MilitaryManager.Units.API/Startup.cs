@@ -31,21 +31,28 @@ namespace MilitaryManager.Units.API
 
             //TODO: FIX
             //-------------FIX-----------------
-            services.AddAuthentication(o => {
-                o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddCookie(cfg => cfg.SlidingExpiration = true)
-            .AddJwtBearer(cfg =>
-            {
-                cfg.Audience = "https://localhost:4200/";
-                cfg.Authority = "https://localhost:5007/";
-                cfg.RequireHttpsMetadata = false;
-                cfg.SaveToken = true;
-                cfg.TokenValidationParameters = new TokenValidationParameters();
-                cfg.Configuration = new OpenIdConnectConfiguration(); 
-            });
+            //services.AddAuthentication(o => {
+            //    o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //})
+            //.AddCookie(cfg => cfg.SlidingExpiration = true)
+            //.AddJwtBearer(cfg =>
+            //{
+            //    cfg.Audience = "https://localhost:4200/";
+            //    cfg.Authority = "https://localhost:5007/";
+            //    cfg.RequireHttpsMetadata = false;
+            //    cfg.SaveToken = true;
+            //    cfg.TokenValidationParameters = new TokenValidationParameters();
+            //    cfg.Configuration = new OpenIdConnectConfiguration(); 
+            //});
             //-------------FIX-----------------
+            services.AddAuthentication("Bearer")
+           .AddJwtBearer("Bearer", opt =>
+           {
+               opt.RequireHttpsMetadata = false;
+               opt.Authority = "https://localhost:5007";
+               opt.Audience = "api1";
+           });
 
         }
 
