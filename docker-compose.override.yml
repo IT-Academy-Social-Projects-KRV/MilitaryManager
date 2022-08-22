@@ -8,9 +8,10 @@ services:
     ports:
       - "5000:80"
       - "5001:443"
+
     volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+      - ~/.aspnet/https:/root/.aspnet/https:ro
  
   militarymanager.attachments.api:
     environment:
@@ -19,9 +20,10 @@ services:
     ports:
       - "5002:80"
       - "5003:443"
+
     volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+      - ~/.aspnet/https:/root/.aspnet/https:ro
   militarymanager.units.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -29,19 +31,20 @@ services:
     ports:
       - "5004:80"
       - "5005:443"
+
     volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+      - ~/.aspnet/https:/root/.aspnet/https:ro
 
   militarymanager.identity.server:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
-      - ConnectionStrings__DefaultConnection=Server=host.docker.internal;Database=IdentityServer_AspNet_Identity;User ID=Gwa_System;Password=T&t137S5tP!+3SMJQ<r0KJ;MultipleActiveResultSets=true;Application Name=IdentityServer
+      - ConnectionStrings__DefaultConnection=Server=host.docker.internal;Database=IdentityServer_AspNet_Identity;User ID=SA;Password=0Anglmersh3;MultipleActiveResultSets=true;Application Name=IdentityServer
     ports:
       - "5006:80"
       - "5007:443"
 
     volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+      - ~/.aspnet/https:/root/.aspnet/https:ro
