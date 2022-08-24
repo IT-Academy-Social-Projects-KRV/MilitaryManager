@@ -96,12 +96,8 @@ namespace MilitaryManager.IdentityServer
             );
            
             app.UseIdentityServer();
-            // RolesData.SeedRoles(app).Wait();
-            // app.UseRouting();
 
-            //RolesData.SeedRoles(app).Wait();
-
-           // RolesData.Initialize(app.ApplicationServices);
+            app.UseRouting();
 
             app.UseMvc(routes =>
             {

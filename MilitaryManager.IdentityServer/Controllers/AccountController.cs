@@ -61,17 +61,17 @@ namespace IdentityServer.Controllers
 			return View();
 		}
 
-		/*public async Task<IActionResult> CheckRole()
-		{
-			var user = await _userManager.FindByNameAsync(User.Identity.Name);
+/*        public async Task<IActionResult> CheckRole()
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
-			var userRoles = await _userManager.GetRolesAsync(user);
-				
-			return Ok();
-		}*/
-		//
-		// POST: /Account/Login
-		[HttpPost]
+            var userRoles = await _userManager.GetRolesAsync(user);
+
+            return Ok();
+        }*/
+        //
+        // POST: /Account/Login
+        [HttpPost]
 		[AllowAnonymous]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
@@ -130,22 +130,12 @@ namespace IdentityServer.Controllers
 				{
 					UserName = model.Email,
 					Email = model.Email,
-					//Roles =
-					//{
-					//	new IdentityUserRole<string>
-					//	{
-					//		RoleId = (await _roleManager.FindByNameAsync(Roles.User.ToString())).Id
-					//	}
-					//}
 				};
 				var result = await _userManager.CreateAsync(user, model.Password);
 				if (result.Succeeded)
 				{
-                    var role = new IdentityRole { Name = "User" };
-                    await _roleManager.CreateAsync(role);
-                    await _userManager.AddToRoleAsync(user, role.Name);
 
-
+                    await _userManager.AddToRoleAsync(user, "User");
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
                     // Send an email with this link
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
