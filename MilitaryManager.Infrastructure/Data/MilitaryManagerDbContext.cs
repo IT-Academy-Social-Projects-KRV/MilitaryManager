@@ -12,6 +12,14 @@ namespace MilitaryManager.Infrastructure.Data
     {
         public MilitaryManagerDbContext(DbContextOptions<MilitaryManagerDbContext> options) : base(options)
         {
+            //Database.EnsureCreated();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfiguration(new EntityConfiguration());
         }
 
         public DbSet<Entity> Entities { get; set; }

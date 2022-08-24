@@ -1,4 +1,6 @@
-﻿using MilitaryManager.Core.Entities.Entity;
+﻿using AutoMapper;
+using MilitaryManager.Core.Entities.Entity;
+using MilitaryManager.Core.Interfaces.Repositories;
 using MilitaryManager.Core.Interfaces.Services;
 using System;
 using System.Collections.Generic;
@@ -9,9 +11,18 @@ namespace MilitaryManager.Core.Services
 {
     public class UnitService : IUnitService
     {
-        public Task<List<Entity>> GetEntityAsync(int id)
+        protected readonly IRepository<Entity> _entityRepository;
+
+        public UnitService(IRepository<Entity> entityRepository)
         {
-            throw new NotImplementedException();
+            _entityRepository = entityRepository;
+        }
+
+        public async Task<List<Entity>> GetEntitiesAsync()
+        {
+            var entities = await _entityRepository.GetAllAsync();
+
+            return (List<Entity>)entities;
         }
     }
 }

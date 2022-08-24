@@ -22,6 +22,7 @@ namespace MilitaryManager.Units.API
         {
             services.AddControllers();
             services.AddCustomServices();
+            services.AddRepositories();
             services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));
         }
 

@@ -8,6 +8,6 @@ namespace MilitaryManager.Core.Interfaces.Services
 {
     public interface IUnitService
     {
-        Task<List<Entity>> GetEntityAsync(int id);
+        Task<List<Entity>> GetEntitiesAsync();
     }
 }
