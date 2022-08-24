@@ -61,14 +61,6 @@ namespace IdentityServer.Controllers
 			return View();
 		}
 
-/*        public async Task<IActionResult> CheckRole()
-        {
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-
-            var userRoles = await _userManager.GetRolesAsync(user);
-
-            return Ok();
-        }*/
         //
         // POST: /Account/Login
         [HttpPost]
