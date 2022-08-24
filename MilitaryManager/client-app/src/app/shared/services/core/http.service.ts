@@ -20,14 +20,15 @@ export class HttpService {
     private setHeaders(): HttpHeaders {
         const headersConfig = {
             'Content-Type': 'application/json',
-            Authorization: `Token ${this.token}`,
-            Accept: 'application/json',
+            Authorization: `Bearer ${this.token}`,
+            Accept: 'application/json'
         };
         return new HttpHeaders(headersConfig);
     }
 
     public get token(): string | null {
-        return window.localStorage.getItem('token');
+        //@ts-ignore
+        return JSON.parse(window.sessionStorage.getItem('oidc.user:https://localhost:5007:js')).access_token;
     }
 
     public set token(value: string | null) {

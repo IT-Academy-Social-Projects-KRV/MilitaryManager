@@ -30,11 +30,15 @@ export class AppComponent implements OnInit {
         });
         this._authService.isAuthenticated()
         .then(userAuthenticated => {
-            this.userAuthenticated = userAuthenticated;
+        this.userAuthenticated = userAuthenticated;
         })
     }
 
     public login = () => {
         this._authService.login();
       }
+
+    public logout = () => {
+    this._authService.logout();
+    }
 }

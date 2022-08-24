@@ -33,7 +33,7 @@ namespace IdentityServer
 					RequireClientSecret = false,
 
 					RedirectUris =           { $"{hostname}/SignInCallback", $"{hostname}/SilentSignInCallback" },
-					PostLogoutRedirectUris = { $"{hostname}/" },
+					PostLogoutRedirectUris = { $"{hostname}/SignOutCallback" },
 					AllowedCorsOrigins = { hostname },
 
 					AllowedScopes =
@@ -44,29 +44,7 @@ namespace IdentityServer
 						JwtClaimTypes.Role,
 						"api1"
 					}
-				},
-				//TODO: FIX
-				//-------------FIX-----------------
-				new Client
-				{
-					ClientId = "oidcClient",
-					ClientName = "Example Client Application",
-					ClientSecrets = new List<Secret> {new Secret("SuperSecretPassword".Sha256())}, // change me!
-    
-					AllowedGrantTypes = GrantTypes.Code,
-					RedirectUris = new List<string> {"https://localhost:5007/signin-oidc"},
-					AllowedScopes = new List<string>
-					{
-						IdentityServerConstants.StandardScopes.OpenId,
-						IdentityServerConstants.StandardScopes.Profile,
-						IdentityServerConstants.StandardScopes.Email,
-						"api1"
-					},
-
-					RequirePkce = true,
-					AllowPlainTextPkce = false
 				}
-				//-------------FIX-----------------
 			};
 		}
 

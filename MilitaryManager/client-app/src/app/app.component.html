@@ -10,6 +10,7 @@
 <hr/>
 <a [routerLink]="['/units']">Units</a>
 <hr/>
-<button (click)="login()">Login</button>
+<button *ngIf="!userAuthenticated" (click)="login()">Login</button>
+<button *ngIf="userAuthenticated" (click)="logout()">Logout</button>
 <hr/>
 <router-outlet></router-outlet>

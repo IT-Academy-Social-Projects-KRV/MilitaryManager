@@ -86,10 +86,11 @@ namespace MilitaryManager.IdentityServer
             app.UseStaticFiles();
             app.UseCors(
                 builder => builder
-                    .WithOrigins(
-                        "http://localhost:4200",
-                        "https://localhost:5001",
-                        "http://localhost:5000")
+                    //.WithOrigins(
+                    //    "http://localhost:4200",
+                    //    "https://localhost:5001",
+                    //    "http://localhost:5000")
+                    .AllowAnyOrigin()
                     .SetIsOriginAllowedToAllowWildcardSubdomains()
                     .AllowAnyMethod()
                     .AllowAnyHeader()

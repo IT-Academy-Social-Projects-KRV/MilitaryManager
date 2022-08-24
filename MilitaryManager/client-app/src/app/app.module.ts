@@ -6,12 +6,16 @@ import { PrimeNgComponentsModule } from './modules/primeng-components-module/pri
 import { services } from './shared/services';
 import { Test1Component } from './components/test1/test1.component';
 import { Test2Component } from './components/test2/test2.component';
+import { SigninRedirectCallbackComponent } from './components/signin-redirect-callback/signin-redirect-callback.component';
+import { SignoutRedirectCallbackComponent } from './components/signout-redirect-callback/signout-redirect-callback.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     Test1Component,
-    Test2Component
+    Test2Component,
+    SigninRedirectCallbackComponent,
+    SignoutRedirectCallbackComponent
   ],
   imports: [
     BrowserModule,
