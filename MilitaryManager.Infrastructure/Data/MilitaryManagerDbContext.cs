@@ -1,10 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using MilitaryManager.Core.Entities.Entity;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace MilitaryManager.Infrastructure.Data
 {
@@ -18,10 +12,6 @@ namespace MilitaryManager.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.ApplyConfiguration(new EntityConfiguration());
         }
-
-        public DbSet<Entity> Entities { get; set; }
     }
 }
