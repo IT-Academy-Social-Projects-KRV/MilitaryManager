@@ -6,8 +6,8 @@ import { PrimeNgComponentsModule } from './modules/primeng-components-module/pri
 import { services } from './shared/services';
 import { Test1Component } from './components/test1/test1.component';
 import { Test2Component } from './components/test2/test2.component';
-import { SharedModule } from './shared/shared/shared.module';
 import { HomeComponent } from './components/home/home.component';
+import { AppLayoutModule } from './layout/app.layout.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { HomeComponent } from './components/home/home.component';
     BrowserModule,
     AppRoutingModule,
     PrimeNgComponentsModule,
-    SharedModule
+    AppLayoutModule
   ],
   providers: [
     services
