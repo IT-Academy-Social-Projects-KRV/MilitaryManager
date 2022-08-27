@@ -4,6 +4,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PrimeNgComponentsModule } from './modules/primeng-components-module/primeng-components.module';
 import { services } from './shared/services';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptorService } from './shared/services/auth-interceptor.service';
 import { Test1Component } from './components/test1/test1.component';
 import { Test2Component } from './components/test2/test2.component';
 import { SigninRedirectCallbackComponent } from './components/signin-redirect-callback/signin-redirect-callback.component';
@@ -23,7 +25,8 @@ import { SignoutRedirectCallbackComponent } from './components/signout-redirect-
     PrimeNgComponentsModule,
   ],
   providers: [
-    services
+    services,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })

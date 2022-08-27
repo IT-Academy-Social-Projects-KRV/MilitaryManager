@@ -9,11 +9,13 @@ import {
 import { Observable } from 'rxjs';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { AuthService } from '../auth.service';
 
 @Injectable()
 export class HttpService {
     constructor(
-        private httpClient: HttpClient
+        private httpClient: HttpClient,
+        private _authService: AuthService
     ) {
     }
 
@@ -28,7 +30,8 @@ export class HttpService {
 
     public get token(): string | null {
         //@ts-ignore
-        return JSON.parse(window.sessionStorage.getItem('oidc.user:https://localhost:5007:js')).access_token;
+        //return JSON.parse(window.sessionStorage.getItem('oidc.user:https://localhost:5007:js')).access_token;
+        return this._authService.getAccessToken();
     }
 
     public set token(value: string | null) {
