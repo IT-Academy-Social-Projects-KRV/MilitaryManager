@@ -19,25 +19,6 @@ export class HttpService {
     ) {
     }
 
-    private setHeaders(): HttpHeaders {
-        const headersConfig = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${this.token}`,
-            Accept: 'application/json'
-        };
-        return new HttpHeaders(headersConfig);
-    }
-
-    public get token(): string | null {
-        //@ts-ignore
-        //return JSON.parse(window.sessionStorage.getItem('oidc.user:https://localhost:5007:js')).access_token;
-        return this._authService.getAccessToken();
-    }
-
-    public set token(value: string | null) {
-        window.localStorage.setItem(`token`, value ?? '');
-    }
-
     private formatErrors(error: HttpErrorResponse): Observable<never> {
         // TODO: handle api service level errors
         return throwError(() => error);
@@ -49,25 +30,25 @@ export class HttpService {
 
     get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
         return this.httpClient
-            .get(`${path}`, { headers: this.setHeaders(), params })
+            .get(`${path}`, { params })
             .pipe(catchError((error: HttpErrorResponse) => this.formatErrors(error)));
     }
 
     put(path: string, body: any = {}): Observable<any> {
         return this.httpClient
-            .put(`${path}`, JSON.stringify(body), { headers: this.setHeaders() })
+            .put(`${path}`, JSON.stringify(body))
             .pipe(catchError((error: HttpErrorResponse) => this.formatErrors(error)));
     }
 
     post(path: string, body: any = {}): Observable<any> {
         return this.httpClient
-            .post(`${path}`, JSON.stringify(body), { headers: this.setHeaders() })
+            .post(`${path}`, JSON.stringify(body))
             .pipe(catchError((error: HttpErrorResponse) => this.formatErrors(error)));
     }
 
     delete(path: string): Observable<any> {
         return this.httpClient
-            .delete(`${path}`, { headers: this.setHeaders() })
+            .delete(`${path}`)
             .pipe(catchError((error: HttpErrorResponse) => this.formatErrors(error)));
     }
 }
