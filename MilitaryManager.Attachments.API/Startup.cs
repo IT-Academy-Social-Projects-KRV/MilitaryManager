@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using DocumentGenerator;
+using MilitaryManager.Attachments.API.Services.StoreService;
 
 namespace MilitaryManager.Attachments.API
 {
@@ -21,6 +22,7 @@ namespace MilitaryManager.Attachments.API
         {
             services.AddControllers();
             services.RegisterDocumentGenerationServices();
+            services.AddSingleton<ILocalStoreService, LocalStoreService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MilitaryManager.Attachments.API.Models;
+using MilitaryManager.Attachments.API.Services.StoreService;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -18,15 +19,18 @@ namespace MilitaryManager.Attachments.API.Controllers
         private readonly string _webRootPath;
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly string _documentExportFolder;
+        private readonly ILocalStoreService _localStore;
         public AttachmentsController(
             IWebHostEnvironment hostingEnvironment,
             IDocumentGenerationService service,
-            ILogger<WeatherForecastController> logger)
+            ILogger<WeatherForecastController> logger,
+            ILocalStoreService localStore)
         {
             _documentGenerationService = service;
             _webRootPath = hostingEnvironment.WebRootPath;
             _logger = logger;
             _documentExportFolder = "documents";
+            _localStore = localStore;
         }
 
         [HttpGet]
@@ -63,18 +67,13 @@ namespace MilitaryManager.Attachments.API.Controllers
             return $"https://{Request.Host}/api/attachments/find?name={docName}";
         }
 
+
+        //test method
         [HttpPost]
         [Route("store")]
         public async Task<IActionResult> StoreFile(IFormFile uploadedFile)
         {
-            if (uploadedFile != null)
-            {
-                string path = "/documents/" + uploadedFile.FileName;
-                using (var fileStream = new FileStream(_webRootPath + path, FileMode.Create))
-                {
-                    await uploadedFile.CopyToAsync(fileStream);
-                }
-            }
+           await  _localStore.StoreData(uploadedFile);
             return Ok();
         }
     }
