@@ -1,7 +1,9 @@
 ﻿using BusinessLogic.Services.Documents;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MilitaryManager.Attachments.API.Models;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -60,5 +62,21 @@ namespace MilitaryManager.Attachments.API.Controllers
 
             return $"https://{Request.Host}/api/attachments/find?name={docName}";
         }
+
+        [HttpPost]
+        [Route("store")]
+        public async Task<IActionResult> StoreFile(IFormFile uploadedFile)
+        {
+            if (uploadedFile != null)
+            {
+                string path = "/documents/" + uploadedFile.FileName;
+                using (var fileStream = new FileStream(_webRootPath + path, FileMode.Create))
+                {
+                    await uploadedFile.CopyToAsync(fileStream);
+                }
+            }
+            return Ok();
+        }
     }
 }
+
