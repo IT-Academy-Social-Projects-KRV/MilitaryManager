@@ -20,17 +20,20 @@ namespace MilitaryManager.Attachments.API.Controllers
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly string _documentExportFolder;
         private readonly ILocalStoreService _localStore;
+        private readonly IAzureStoreService _azureStore;
         public AttachmentsController(
             IWebHostEnvironment hostingEnvironment,
             IDocumentGenerationService service,
             ILogger<WeatherForecastController> logger,
-            ILocalStoreService localStore)
+            ILocalStoreService localStore,
+            IAzureStoreService azureStore)
         {
             _documentGenerationService = service;
             _webRootPath = hostingEnvironment.WebRootPath;
             _logger = logger;
             _documentExportFolder = "documents";
             _localStore = localStore;
+            _azureStore = azureStore;
         }
 
         [HttpGet]
@@ -73,7 +76,8 @@ namespace MilitaryManager.Attachments.API.Controllers
         [Route("store")]
         public async Task<IActionResult> StoreFile(IFormFile uploadedFile)
         {
-           await  _localStore.StoreData(uploadedFile);
+            // await  _localStore.StoreData(uploadedFile);
+            _azureStore.StoreData(uploadedFile);
             return Ok();
         }
     }
