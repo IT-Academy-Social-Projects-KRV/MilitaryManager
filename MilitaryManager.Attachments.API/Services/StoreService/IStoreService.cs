@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MilitaryManager.Attachments.API.Services.StoreService
 {
-    public interface ILocalStoreService
+    public interface IStoreService
     {
-         Task StoreData(IFormFile uploadedFile);
+        Task StoreData(IFormFile uploadedFile);
     }
 }

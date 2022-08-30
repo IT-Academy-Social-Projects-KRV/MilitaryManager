@@ -49,20 +49,7 @@ namespace MilitaryManager.IdentityServer
                 .AddInMemoryApiScopes(IdentityConfig.GetApiScopes())
                 .AddInMemoryClients(IdentityConfig.GetClients("https://localhost:5001"))
                 .AddAspNetIdentity<ApplicationUser>();
-                
-            // services.AddRazorPages();
 
-            //services.AddIdentity<ApplicationUser, IdentityRole>()
-            //    .AddEntityFrameworkStores<ApplicationDbContext>()
-            //    .AddDefaultTokenProviders();
-
-            //services.AddIdentityServer()
-            //    .AddInMemoryClients(new List<Client>())
-            //    .AddInMemoryIdentityResources(new List<IdentityResource>())
-            //    .AddInMemoryApiResources(new List<ApiResource>())
-            //    .AddInMemoryApiScopes(new List<ApiScope>())
-            //    .AddTestUsers(new List<TestUser>())
-            //    .AddDeveloperSigningCredential();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,10 +66,8 @@ namespace MilitaryManager.IdentityServer
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
             //app.UseHttpsRedirection();
             //app.UseStaticFiles();
-
             app.UseStaticFiles();
             app.UseCors(
                 builder => builder

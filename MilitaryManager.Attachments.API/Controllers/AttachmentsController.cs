@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MilitaryManager.Attachments.API.Models;
 using MilitaryManager.Attachments.API.Services.StoreService;
@@ -19,21 +20,18 @@ namespace MilitaryManager.Attachments.API.Controllers
         private readonly string _webRootPath;
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly string _documentExportFolder;
-        private readonly ILocalStoreService _localStore;
-        private readonly IAzureStoreService _azureStore;
+        private readonly IConfiguration _configuration;
         public AttachmentsController(
             IWebHostEnvironment hostingEnvironment,
             IDocumentGenerationService service,
             ILogger<WeatherForecastController> logger,
-            ILocalStoreService localStore,
-            IAzureStoreService azureStore)
+            IConfiguration configuration)
         {
             _documentGenerationService = service;
             _webRootPath = hostingEnvironment.WebRootPath;
             _logger = logger;
             _documentExportFolder = "documents";
-            _localStore = localStore;
-            _azureStore = azureStore;
+            _configuration = configuration;
         }
 
         [HttpGet]
@@ -74,10 +72,20 @@ namespace MilitaryManager.Attachments.API.Controllers
         //test method
         [HttpPost]
         [Route("store")]
-        public async Task<IActionResult> StoreFile(IFormFile uploadedFile)
+        public IActionResult StoreFile([FromForm]string method, IFormFile uploadedFile)
         {
-            // await  _localStore.StoreData(uploadedFile);
-            _azureStore.StoreData(uploadedFile);
+            switch (method)
+            {
+                case "Local":
+                    StoreService storeService = new StoreService(new LocalStoreService(_webRootPath));
+                    storeService.StoreData(uploadedFile);
+                    break;
+                case "Azure":
+                    storeService = new StoreService(new AzureStoreService(_configuration));
+                    storeService.StoreData(uploadedFile);
+                    break;
+
+            }
             return Ok();
         }
     }
