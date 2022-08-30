@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
-using Ardalis.Specification;
 
 namespace MilitaryManager.Core.Interfaces.Repositories
 {
@@ -19,9 +17,6 @@ namespace MilitaryManager.Core.Interfaces.Repositories
         IQueryable<TEntity> Query(params Expression<Func<TEntity, object>>[] includes);
         Task<int> SaveChangesAcync();
         Task AddRangeAsync(List<TEntity> entities);
-
-        
-        //Discuss
         //Task<IEnumerable<TEntity>> GetListBySpecAsync(ISpecification<TEntity> specification);
         //Task<bool> AnyBySpecAsync(ISpecification<TEntity> specification, Expression<Func<TEntity, bool>> anyExpression);
         //Task<bool> AllBySpecAsync(ISpecification<TEntity> specification, Expression<Func<TEntity, bool>> allExpression);
