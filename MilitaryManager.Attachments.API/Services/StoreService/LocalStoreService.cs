@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace MilitaryManager.Attachments.API.Services.StoreService
 {
-    public class LocalStoreService : ILocalStoreService
+    public class LocalStoreService : IStoreService
     {
         private readonly string _webRootPath;
-        public LocalStoreService(IWebHostEnvironment hostingEnvironment)
+        public LocalStoreService(string webRootPath)
         {
-            _webRootPath = hostingEnvironment.WebRootPath;
+            _webRootPath = webRootPath;
         }
         public async Task StoreData(IFormFile uploadedFile)
         {

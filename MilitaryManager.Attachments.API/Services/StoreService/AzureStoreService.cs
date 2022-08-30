@@ -1,5 +1,6 @@
 ﻿using Azure.Storage.Blobs;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,16 +9,21 @@ using System.Threading.Tasks;
 
 namespace MilitaryManager.Attachments.API.Services.StoreService
 {
-    public class AzureStoreService : IAzureStoreService
+    public class AzureStoreService : IStoreService
     {
-        private readonly string _connectionString = "DefaultEndpointsProtocol=https;AccountName=militarymanager;" +
-            "AccountKey=C/yu8u+EAak7iTH73rUCUj+2NZr6NNgFRPtFPGnJtPYvpZfaW9QJopXd/Xh0HrmzakkWyw/28hss+AStsgfKVg==;EndpointSuffix=core.windows.net";
-        private readonly string _containerName = "documents";
+        private readonly IConfiguration _configuration;
+
+        public AzureStoreService(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         public async Task StoreData(IFormFile uploadedFile)
         {
-            if(uploadedFile != null)
+            string connectionString = _configuration.GetValue<string>("AzureConfiguration:ConnectionString");
+            string containerName = _configuration.GetValue<string>("AzureConfiguration:ContainerName");
+            if (uploadedFile != null)
             {
-                BlobContainerClient container = new BlobContainerClient(_connectionString, _containerName);
+                BlobContainerClient container = new BlobContainerClient(connectionString, containerName);
                 using (var stream = new MemoryStream())
                 {
                     await uploadedFile.CopyToAsync(stream);

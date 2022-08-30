@@ -22,8 +22,7 @@ namespace MilitaryManager.Attachments.API
         {
             services.AddControllers();
             services.RegisterDocumentGenerationServices();
-            services.AddSingleton<ILocalStoreService, LocalStoreService>();
-            services.AddSingleton<IAzureStoreService, AzureStoreService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
