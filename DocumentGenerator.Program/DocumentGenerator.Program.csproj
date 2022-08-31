@@ -5,4 +5,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DocumentGenerator\DocumentGenerator.csproj" />
+    <ProjectReference Include="..\MilitaryManager.Attachments.API\MilitaryManager.Attachments.API.csproj" />
+  </ItemGroup>
+
 </Project>
