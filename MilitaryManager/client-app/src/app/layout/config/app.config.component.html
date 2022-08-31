@@ -1,5 +1,5 @@
 <p-sidebar [(visible)]="visible" position="right" [transitionOptions]="'.3s cubic-bezier(0, 0, 0.2, 1)'" styleClass="layout-config-sidebar w-20rem">
-    <h5>Scale</h5>
+    <h5>Масштаб</h5>
     <div class="flex align-items-center">
         <button icon="pi pi-minus" type="button" pButton (click)="decrementScale()" class="p-button-text p-button-rounded w-2rem h-2rem mr-2" [disabled]="scale === scales[0]"></button>
         <div class="flex gap-2 align-items-center">
@@ -8,18 +8,18 @@
         <button icon="pi pi-plus"  type="button" pButton (click)="incrementScale()" class="p-button-text p-button-rounded w-2rem h-2rem ml-2" [disabled]="scale === scales[scales.length - 1]"></button>
     </div>
 
-    <h5>Themes</h5>
+    <h5>Теми</h5>
     <div class="grid">
         <div class="col-2 m-3">
             <button class="p-link" (click)="changeTheme('bootstrap4-light-blue', 'light')">
                 <i class="pi pi-sun"></i>
-                <span> light</span>
+                <span> Світла</span>
             </button>
         </div>
         <div class="col-2">
             <button class="p-link" (click)="changeTheme('bootstrap4-dark-blue', 'dark')">
                 <i class="pi pi-moon"></i>
-                <span> dark</span>
+                <span> Темна</span>
             </button>
         </div>
     </div>

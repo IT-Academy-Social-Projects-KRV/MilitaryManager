@@ -15,30 +15,30 @@ export class AppMenuComponent implements OnInit {
     ngOnInit() {
         this.model = [
             {
-                label: 'Home',
+                label: 'Головна',
                 items: [
-                    { label: 'Home', icon: 'pi pi-fw pi-home', routerLink: ['/home'] }
+                    { label: 'Головна', icon: 'pi pi-fw pi-home', routerLink: ['/home'] }
                 ]
             },
             {
-                label: 'Units',
+                label: 'Бійці',
                 items: [
-                    { label: 'All units', icon: 'pi pi-fw pi-users', routerLink: ['/units/list'] },
-                    { label: 'Create unit', icon: 'pi pi-fw pi-user-plus', routerLink: ['/'] }
+                    { label: 'Бійці', icon: 'pi pi-fw pi-users', routerLink: ['/units/list'] },
+                    { label: 'Додати бійця', icon: 'pi pi-fw pi-user-plus', routerLink: ['/'] }
                 ]
             },
             {
-                label: 'Documents',
+                label: 'Накази',
                 items: [
-                    { label: 'All documents', icon: 'pi pi-fw pi-book', routerLink: ['/']},
-                    { label: 'Add document', icon: 'pi pi-fw pi-plus', routerLink: ['/']},
+                    { label: 'Накази', icon: 'pi pi-fw pi-book', routerLink: ['/']},
+                    { label: 'Створити наказ', icon: 'pi pi-fw pi-plus', routerLink: ['/']},
                 ]
             },
             {
-                label: 'Amunition',
+                label: 'Зброя',
                 items: [
-                    { label: 'Amunition', icon: 'pi pi-fw pi-shield', routerLink: ['/'] },
-                    { label: 'Add amunition', icon: 'pi pi-fw pi-plus', routerLink: ['/'] },
+                    { label: 'Зброя', icon: 'pi pi-fw pi-shield', routerLink: ['/'] },
+                    { label: 'Додати зброю', icon: 'pi pi-fw pi-plus', routerLink: ['/'] },
                 ]
             }
         ];
