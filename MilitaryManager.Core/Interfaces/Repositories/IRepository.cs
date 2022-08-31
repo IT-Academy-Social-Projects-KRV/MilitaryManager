@@ -17,8 +17,5 @@ namespace MilitaryManager.Core.Interfaces.Repositories
         IQueryable<TEntity> Query(params Expression<Func<TEntity, object>>[] includes);
         Task<int> SaveChangesAcync();
         Task AddRangeAsync(List<TEntity> entities);
-        //Task<IEnumerable<TEntity>> GetListBySpecAsync(ISpecification<TEntity> specification);
-        //Task<bool> AnyBySpecAsync(ISpecification<TEntity> specification, Expression<Func<TEntity, bool>> anyExpression);
-        //Task<bool> AllBySpecAsync(ISpecification<TEntity> specification, Expression<Func<TEntity, bool>> allExpression);
     }
 }

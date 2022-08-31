@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MilitaryManager.Infrastructure.Data.Repositories
@@ -51,7 +50,6 @@ namespace MilitaryManager.Infrastructure.Data.Repositories
             return await _dbSet.FindAsync(key);
         }
 
-        //Discuss
         public IQueryable<TEntity> Query(params Expression<Func<TEntity, object>>[] includes)
         {
             var query = includes
