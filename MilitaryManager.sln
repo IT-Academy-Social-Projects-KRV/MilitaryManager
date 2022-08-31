@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.2.32616.157
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32802.440
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MilitaryManager", "MilitaryManager\MilitaryManager.csproj", "{F64BF1A1-C8B2-441F-8088-CF7885D9E9FA}"
 EndProject
@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MilitaryManager.Units.API",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MilitaryManager.IdentityServer", "MilitaryManager.IdentityServer\MilitaryManager.IdentityServer.csproj", "{B7C73A12-9CEB-44B9-9E36-2158734F580D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentGenerator", "DocumentGenerator\DocumentGenerator.csproj", "{2A473D5B-590C-4E0A-83FB-B2FE72D5B6F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocumentGenerator", "DocumentGenerator\DocumentGenerator.csproj", "{2A473D5B-590C-4E0A-83FB-B2FE72D5B6F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentGenerator.Program", "DocumentGenerator.Program\DocumentGenerator.Program.csproj", "{135C2653-A2C7-46F2-8CB5-BDED70D10823}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{2A473D5B-590C-4E0A-83FB-B2FE72D5B6F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A473D5B-590C-4E0A-83FB-B2FE72D5B6F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A473D5B-590C-4E0A-83FB-B2FE72D5B6F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{135C2653-A2C7-46F2-8CB5-BDED70D10823}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{135C2653-A2C7-46F2-8CB5-BDED70D10823}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{135C2653-A2C7-46F2-8CB5-BDED70D10823}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{135C2653-A2C7-46F2-8CB5-BDED70D10823}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
