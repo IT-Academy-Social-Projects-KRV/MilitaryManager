@@ -1,3 +1,4 @@
+import { compileDeclareDirectiveFromMetadata } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 

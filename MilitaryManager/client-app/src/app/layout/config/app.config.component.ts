@@ -54,10 +54,6 @@ export class AppConfigComponent {
         this.layoutService.config.ripple = _val;
     }
 
-    onConfigButtonClick() {
-        this.layoutService.showConfigSidebar();
-    }
-
     changeTheme(theme: string, colorScheme: string) {
         const themeLink = <HTMLLinkElement>document.getElementById('theme-css');
         const newHref = themeLink.getAttribute('href')!.replace(this.layoutService.config.theme, theme);
