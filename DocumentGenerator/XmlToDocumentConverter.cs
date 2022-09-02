@@ -111,7 +111,7 @@ namespace DocumentGenerator
 			var docName = DateTime.Now.Ticks.ToString();
 			var xml = GetXmlTemplate(data.Template);
 			var documentGenerator =
-				_documentGeneratorFactory.CreateDocumentGenerator(type, $"{path}\\{docName}",
+				_documentGeneratorFactory.CreateDocumentGenerator(type, $@"{path}/{docName}",
 					GetDocumentParameters(xml));
 
 			var nodeParser = _nodeParserFactory.CreateNodeParser(data.JsonData);

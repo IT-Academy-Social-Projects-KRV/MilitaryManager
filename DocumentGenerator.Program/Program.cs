@@ -15,8 +15,6 @@ namespace DocumentGenerator.Program
             string templateData = "template_01.xml";
             string jsonData = "template_01.json";
 
-
-
             documentGenerationService.GeneratePdfDocument(exportPath, templateName, templateData, jsonData);
 
             Console.WriteLine("press enter please");

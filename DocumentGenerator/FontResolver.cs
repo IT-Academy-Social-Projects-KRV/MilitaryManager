@@ -86,7 +86,7 @@ namespace DocumentGenerator
 		{
 			try
 			{
-				using (var stream = new FileStream($"{_rootPath}\\fonts\\{name}", FileMode.Open, FileAccess.Read))
+				using (var stream = new FileStream($@"{_rootPath}/fonts/{name}", FileMode.Open, FileAccess.Read))
 				{
 					var count = (int)stream.Length;
 					var data = new byte[count];

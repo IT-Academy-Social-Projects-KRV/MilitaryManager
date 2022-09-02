@@ -6,8 +6,60 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="template_01.json" />
+    <None Remove="template_01.xml" />
+    <None Remove="wwwroot\data\document_templates\template_01.json" />
+    <None Remove="wwwroot\data\document_templates\template_01.xml" />
+    <None Remove="wwwroot\fonts\times.ttf" />
+    <None Remove="wwwroot\fonts\timesbd.ttf" />
+    <None Remove="wwwroot\fonts\timesbi.ttf" />
+    <None Remove="wwwroot\fonts\timesi.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="template_01.json">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="template_01.xml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\data\document_templates\template_01.json">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\data\document_templates\template_01.xml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\fonts\times.ttf">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\fonts\timesbd.ttf">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\fonts\timesbi.ttf">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\fonts\timesi.ttf">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DocumentGenerator\DocumentGenerator.csproj" />
     <ProjectReference Include="..\MilitaryManager.Attachments.API\MilitaryManager.Attachments.API.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\documents\" />
   </ItemGroup>
 
 </Project>

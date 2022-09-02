@@ -40,13 +40,15 @@ namespace MilitaryManager.Attachments.API.Controllers
         [Route("generate")]
         public string GenerateNewDocument()
         {
-            var documentTemplatesPath = $"{_webRootPath}\\data\\document_templates";
+            var documentTemplatesPath = $@"{_webRootPath}/data/document_templates";
 
             var templateName = "template_01";
             string templateData = null;
             try
             {
-                templateData = System.IO.File.ReadAllText($"{documentTemplatesPath}\\{templateName}.xml");
+                //wwwroot\data\document_templates
+                templateData = System.IO.File.ReadAllText($@"{documentTemplatesPath}/{templateName}.xml");
+                //templateData = System.IO.File.ReadAllText(@$"G:\CSHARP\SoftServe\MilitaryManager\MilitaryManager.Attachments.API\wwwroot\data\document_templates\template_01.xml");
             }
             catch (Exception ex)
             {
@@ -56,7 +58,7 @@ namespace MilitaryManager.Attachments.API.Controllers
             var jsonData = "{\"city\":\"Рівне\",\"street\":\"Соборна\",\"number\":\"115\",\"date\":\"10.10.2022\"}";
 
             _documentGenerationService.ApplyFontResolver(_webRootPath);
-            var docName = _documentGenerationService.GeneratePdfDocument($"{_webRootPath}\\{_documentExportFolder}", templateName, templateData, jsonData);
+            var docName = _documentGenerationService.GeneratePdfDocument($@"{_webRootPath}/{_documentExportFolder}", templateName, templateData, jsonData);
 
             return $"https://{Request.Host}/api/attachments/find?name={docName}";
         }
