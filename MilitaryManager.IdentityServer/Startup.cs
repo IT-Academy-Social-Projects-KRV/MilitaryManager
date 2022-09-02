@@ -47,9 +47,6 @@ namespace MilitaryManager.IdentityServer
                 .AddInMemoryClients(IdentityConfig.GetClients("http://localhost:5001"))
                 .AddAspNetIdentity<ApplicationUser>();
                 
-          
-
-
             // services.AddRazorPages();
 
             //services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -112,8 +109,6 @@ namespace MilitaryManager.IdentityServer
             //{
             //    endpoints.MapRazorPages();
             //});
-
-             
         }
     }
 }
