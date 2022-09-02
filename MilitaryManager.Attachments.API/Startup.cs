@@ -9,6 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using MilitaryManager.Attachments.API.Interfaces.Repositories;
 using MilitaryManager.Attachments.API.Repositories;
 using MilitaryManager.Attachments.API.Interfaces;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+using MilitaryManager.Attachments.API.Interfaces.Services;
+using MilitaryManager.Attachments.API.Services;
 
 namespace MilitaryManager.Attachments.API
 {
@@ -26,6 +29,11 @@ namespace MilitaryManager.Attachments.API
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            // If using Kestrel:
+            services.Configure<KestrelServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
             // If using IIS:
             services.Configure<IISServerOptions>(options =>
             {
@@ -38,6 +46,12 @@ namespace MilitaryManager.Attachments.API
             services.AddTransient<IStatusHistoryRepository, StatusHistoryRepository>();
             services.AddTransient<ITemplateRepository, TemplateRepository>();
             services.AddTransient<ITypeRepository, TypeRepository>();
+            #endregion
+
+
+            #region services
+            services.AddTransient<IDecreeService, DecreeService>();
+            services.AddTransient<ITemplateService, TemplateService>();
             #endregion
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
