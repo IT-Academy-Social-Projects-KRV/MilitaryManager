@@ -1,12 +1,15 @@
-﻿using BusinessLogic.Services.Documents;
+﻿using AutoMapper;
+using BusinessLogic.Services.Documents;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using MilitaryManager.Attachments.API.DTO;
 using MilitaryManager.Attachments.API.Entities;
 using MilitaryManager.Attachments.API.Interfaces;
 using MilitaryManager.Attachments.API.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -18,21 +21,24 @@ namespace MilitaryManager.Attachments.API.Services
         private readonly ITemplateService _templateService;
         private readonly IDocumentGenerationService _documentGenerationService;
         private readonly string _webRootPath;
+        private readonly IMapper _mapper;
         private readonly string _documentExportFolder;
 
         public DecreeService(IUnitOfWork unitOfWork,
                              ITemplateService templateService,
                              IDocumentGenerationService documentGenerationService,
-                             IWebHostEnvironment hostingEnvironment)
+                             IWebHostEnvironment hostingEnvironment,
+                             IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _templateService = templateService;
             _documentGenerationService = documentGenerationService;
             _webRootPath = hostingEnvironment.WebRootPath;
+            _mapper = mapper;
             _documentExportFolder = "documents";
         }
 
-        public async Task<Decree> GenerateDocument(int templateId, string name, string jsonData)
+        public async Task<DecreeDTO> GenerateDocument(int templateId, string name, string jsonData)
         {
             var template = await _unitOfWork.TemplateRepository.FindById(templateId);
 
@@ -62,17 +68,19 @@ namespace MilitaryManager.Attachments.API.Services
             await _unitOfWork.DecreeRepository.Create(decree);
             await _unitOfWork.SaveChangesAsync();
 
-            return decree;
+            return _mapper.Map<Decree, DecreeDTO>(decree);
         }
 
-        public async Task<IEnumerable<Decree>> GetDocuments()
+        public async Task<IEnumerable<DecreeDTO>> GetDocuments()
         {
-            return await _unitOfWork.DecreeRepository.Get();
+            var decrees = await _unitOfWork.DecreeRepository.Get();
+            return decrees.Select(_mapper.Map<Decree, DecreeDTO>);
         }
 
-        public async Task<Decree> GetDocumentById(int documentId)
+        public async Task<DecreeDTO> GetDocumentById(int documentId)
         {
-            return await _unitOfWork.DecreeRepository.FindById(documentId);
+            var decree = await _unitOfWork.DecreeRepository.FindById(documentId);
+            return _mapper.Map<Decree, DecreeDTO>(decree);
         }
 
         public async Task<FileStream> GetDocumentPdf(int documentId)
@@ -81,9 +89,10 @@ namespace MilitaryManager.Attachments.API.Services
             return new FileStream(Path.Combine(_webRootPath, decree.Path).Replace("\\", "/"), FileMode.Open);
         }
 
-        public Task<IEnumerable<Decree>> GetDocumentsByName(string documentName)
+        public async Task<IEnumerable<DecreeDTO>> GetDocumentsByName(string documentName)
         {
-            throw new System.NotImplementedException();
+            var decrees = await _unitOfWork.DecreeRepository.GetDecreesByName(documentName);
+            return decrees.Select(_mapper.Map<Decree, DecreeDTO>);
         }
 
         public async Task UploadSignedDocument(int documentId, IFormFile signedDocument)
@@ -104,9 +113,10 @@ namespace MilitaryManager.Attachments.API.Services
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public Task DeleteDocument(int documentId)
+        public async Task DeleteDocument(int documentId)
         {
-            throw new System.NotImplementedException();
+            await _unitOfWork.DecreeRepository.Remove(documentId);
+            await _unitOfWork.SaveChangesAsync();
         }
     }
 }

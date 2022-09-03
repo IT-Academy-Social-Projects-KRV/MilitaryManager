@@ -12,6 +12,7 @@ using MilitaryManager.Attachments.API.Interfaces;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using MilitaryManager.Attachments.API.Interfaces.Services;
 using MilitaryManager.Attachments.API.Services;
+using System;
 
 namespace MilitaryManager.Attachments.API
 {
@@ -55,6 +56,7 @@ namespace MilitaryManager.Attachments.API
             #endregion
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddControllers();
             services.RegisterDocumentGenerationServices();

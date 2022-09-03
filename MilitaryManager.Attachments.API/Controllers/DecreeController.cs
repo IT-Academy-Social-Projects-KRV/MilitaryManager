@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MilitaryManager.Attachments.API.DTO;
 using MilitaryManager.Attachments.API.Entities;
 using MilitaryManager.Attachments.API.Interfaces.Services;
 using System.Collections.Generic;
@@ -27,13 +28,12 @@ namespace MilitaryManager.Attachments.API.Controllers
             Request.EnableBuffering();
             Request.Body.Seek(0, SeekOrigin.Begin);
             string jsonRawData = new StreamReader(HttpContext.Request.Body).ReadToEnd();
-            //TODO: return DecreeDTO, to avoid recursion
             var decree = await _decreeService.GenerateDocument(templateId, name, jsonRawData);
             return CreatedAtRoute(nameof(GetById), new { documentId = decree.Id }, decree);
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Decree>>> Get()
+        public async Task<ActionResult<IEnumerable<DecreeDTO>>> Get()
         {
             var decrees = await _decreeService.GetDocuments();
             return Ok(decrees);
@@ -44,6 +44,13 @@ namespace MilitaryManager.Attachments.API.Controllers
         {
             var decree = await _decreeService.GetDocumentById(documentId);
             return Ok(decree);
+        }
+
+        [HttpGet("byName/{documentName}")]
+        public async Task<ActionResult<IEnumerable<DecreeDTO>>> GetByName([FromRoute] string documentName)
+        {
+            var decrees = await _decreeService.GetDocumentsByName(documentName);
+            return Ok(decrees);
         }
 
         [HttpGet("pdf/{documentId}")]
