@@ -36,7 +36,7 @@ namespace MilitaryManager.Attachments.API.Services
             var template = await _unitOfWork.TemplateRepository.FindById(id);
             try
             {
-                return File.ReadAllText(Path.Combine(_webRootPath, template.Path));
+                return File.ReadAllText(Path.Combine(_webRootPath, template.Path).Replace("\\", "/"));
             }
             catch (Exception ex)
             {

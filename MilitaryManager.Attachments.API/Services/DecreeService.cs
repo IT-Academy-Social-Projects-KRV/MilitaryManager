@@ -40,12 +40,12 @@ namespace MilitaryManager.Attachments.API.Services
 
             var templateData = await _templateService.GetTemplateDataByIdAsync(templateId);
 
-            var exportPath = Path.Combine(_webRootPath, _documentExportFolder);
+            var exportPath = Path.Combine(_webRootPath, _documentExportFolder).Replace("\\", "/");
 
             _documentGenerationService.ApplyFontResolver(_webRootPath);
             var docName = _documentGenerationService.GeneratePdfDocument(exportPath, template.Name, templateData, cleanJsonData);
 
-            var dbPath = Path.Combine(_documentExportFolder, docName);
+            var dbPath = Path.Combine(_documentExportFolder, docName).Replace("\\", "/");
 
             var decree = new Decree()
             {
@@ -56,8 +56,6 @@ namespace MilitaryManager.Attachments.API.Services
                 CreatedBy = "testId",
                 TimeStamp = DateTime.Now,
                 TemplateId = templateId,
-                //TOOD: remove hardcode
-                TypeId = 1,
                 StatusId = 1
             };
             
@@ -80,7 +78,7 @@ namespace MilitaryManager.Attachments.API.Services
         public async Task<FileStream> GetDocumentPdf(int documentId)
         {
             var decree = await _unitOfWork.DecreeRepository.FindById(documentId);
-            return new FileStream(Path.Combine(_webRootPath, decree.Path), FileMode.Open);
+            return new FileStream(Path.Combine(_webRootPath, decree.Path).Replace("\\", "/"), FileMode.Open);
         }
 
         public Task<IEnumerable<Decree>> GetDocumentsByName(string documentName)
@@ -92,14 +90,14 @@ namespace MilitaryManager.Attachments.API.Services
         {
             var decree = await GetDocumentById(documentId);
             var docName = $"{DateTime.Now.Ticks}.pdf";
-            var exportPath = Path.Combine(_webRootPath, _documentExportFolder, docName);
+            var exportPath = Path.Combine(_webRootPath, _documentExportFolder, docName).Replace("\\", "/");
 
             using (var stream = new FileStream(exportPath, FileMode.Create))
             {
                 signedDocument.CopyTo(stream);
             }
 
-            var dbPath = Path.Combine(_documentExportFolder, docName);
+            var dbPath = Path.Combine(_documentExportFolder, docName).Replace("\\", "/");
 
             //TODO: change status to -> Signed
             decree.PathSigned = dbPath;

@@ -10,7 +10,7 @@ using MilitaryManager.Attachments.API.Data;
 namespace MilitaryManager.Attachments.API.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220901141122_init")]
+    [Migration("20220903082740_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,16 +54,11 @@ namespace MilitaryManager.Attachments.API.Data.Migrations
                     b.Property<DateTime>("TimeStamp")
                         .HasColumnType("datetime");
 
-                    b.Property<int>("TypeId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("StatusId");
 
                     b.HasIndex("TemplateId");
-
-                    b.HasIndex("TypeId");
 
                     b.ToTable("Decrees");
                 });
@@ -136,7 +131,12 @@ namespace MilitaryManager.Attachments.API.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TypeId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TypeId");
 
                     b.ToTable("Templates");
                 });
@@ -171,12 +171,6 @@ namespace MilitaryManager.Attachments.API.Data.Migrations
                         .HasForeignKey("TemplateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("MilitaryManager.Attachments.API.Entities.Type", "Type")
-                        .WithMany("Decrees")
-                        .HasForeignKey("TypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("MilitaryManager.Attachments.API.Entities.StatusHistory", b =>
@@ -197,6 +191,15 @@ namespace MilitaryManager.Attachments.API.Data.Migrations
                         .WithMany("OldStatuses")
                         .HasForeignKey("OldStatusId")
                         .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MilitaryManager.Attachments.API.Entities.Template", b =>
+                {
+                    b.HasOne("MilitaryManager.Attachments.API.Entities.Type", "Type")
+                        .WithMany("Templates")
+                        .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

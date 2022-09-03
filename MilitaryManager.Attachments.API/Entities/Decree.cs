@@ -12,8 +12,6 @@ namespace MilitaryManager.Attachments.API.Entities
         public DateTime TimeStamp { get; set; }
         public int TemplateId { get; set; }
         public Template Template { get; set; }
-        public int TypeId { get; set; }
-        public Type Type { get; set; }
         public int StatusId { get; set; }
         public Status Status { get; set; }
         public IEnumerable<StatusHistory> StatusHistories { get; set; }

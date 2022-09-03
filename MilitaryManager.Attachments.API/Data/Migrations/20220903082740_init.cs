@@ -21,20 +21,6 @@ namespace MilitaryManager.Attachments.API.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Templates",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(maxLength: 256, nullable: false),
-                    Path = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Templates", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Types",
                 columns: table => new
                 {
@@ -45,6 +31,27 @@ namespace MilitaryManager.Attachments.API.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Types", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Templates",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(maxLength: 256, nullable: false),
+                    Path = table.Column<string>(nullable: false),
+                    TypeId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Templates", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Templates_Types_TypeId",
+                        column: x => x.TypeId,
+                        principalTable: "Types",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -59,7 +66,6 @@ namespace MilitaryManager.Attachments.API.Data.Migrations
                     CreatedBy = table.Column<string>(maxLength: 450, nullable: false),
                     TimeStamp = table.Column<DateTime>(type: "datetime", nullable: false),
                     TemplateId = table.Column<int>(nullable: false),
-                    TypeId = table.Column<int>(nullable: false),
                     StatusId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -75,12 +81,6 @@ namespace MilitaryManager.Attachments.API.Data.Migrations
                         name: "FK_Decrees_Templates_TemplateId",
                         column: x => x.TemplateId,
                         principalTable: "Templates",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Decrees_Types_TypeId",
-                        column: x => x.TypeId,
-                        principalTable: "Types",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -129,11 +129,6 @@ namespace MilitaryManager.Attachments.API.Data.Migrations
                 column: "TemplateId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Decrees_TypeId",
-                table: "Decrees",
-                column: "TypeId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_StatusHistories_DecreeId",
                 table: "StatusHistories",
                 column: "DecreeId");
@@ -147,6 +142,11 @@ namespace MilitaryManager.Attachments.API.Data.Migrations
                 name: "IX_StatusHistories_OldStatusId",
                 table: "StatusHistories",
                 column: "OldStatusId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Templates_TypeId",
+                table: "Templates",
+                column: "TypeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

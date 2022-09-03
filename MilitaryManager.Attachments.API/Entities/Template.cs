@@ -6,6 +6,8 @@ namespace MilitaryManager.Attachments.API.Entities
     {
         public string Name { get; set; }
         public string Path { get; set; }
+        public int TypeId { get; set; }
+        public Type Type { get; set; }
         public IEnumerable<Decree> Decrees { get; set; }
     }
 }
