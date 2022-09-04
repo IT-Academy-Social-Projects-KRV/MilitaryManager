@@ -31,7 +31,7 @@ namespace MilitaryManager.Attachments.API.Controllers
         [Route("find")]
         public FileStreamResult GetDocument([FromQuery] string name)
         {
-            FileStream fileStream = new FileStream($"{_webRootPath}\\{_documentExportFolder}\\{name}", FileMode.Open);
+            FileStream fileStream = new FileStream($@"{_webRootPath}/{_documentExportFolder}/{name}", FileMode.Open);
 
             return new FileStreamResult(fileStream, "application/pdf");
         }
@@ -48,6 +48,7 @@ namespace MilitaryManager.Attachments.API.Controllers
             {
                 //wwwroot\data\document_templates
                 templateData = System.IO.File.ReadAllText($@"{documentTemplatesPath}/{templateName}.xml");
+                // todo remove comments
                 //templateData = System.IO.File.ReadAllText(@$"G:\CSHARP\SoftServe\MilitaryManager\MilitaryManager.Attachments.API\wwwroot\data\document_templates\template_01.xml");
             }
             catch (Exception ex)

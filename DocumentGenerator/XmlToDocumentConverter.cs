@@ -64,7 +64,7 @@ namespace DocumentGenerator
 				Right = 20
 			};
 
-			var docNode = xmlDoc.FirstChild.Name == "documnet" ? xmlDoc.FirstChild : null;
+			var docNode = xmlDoc.FirstChild.Name == "document" ? xmlDoc.FirstChild : null;
 			var attributes = docNode?.Attributes;
 			if (attributes != null)
 			{
@@ -111,7 +111,7 @@ namespace DocumentGenerator
 			var docName = DateTime.Now.Ticks.ToString();
 			var xml = GetXmlTemplate(data.Template);
 			var documentGenerator =
-				_documentGeneratorFactory.CreateDocumentGenerator(type, $@"{path}/{docName}",
+				_documentGeneratorFactory.CreateDocumentGenerator(type, $"{path}\\{docName}",
 					GetDocumentParameters(xml));
 
 			var nodeParser = _nodeParserFactory.CreateNodeParser(data.JsonData);
@@ -122,7 +122,7 @@ namespace DocumentGenerator
 			}
 
 			documentGenerator.SaveDocument();
-			return $"{docName}.pdf";
+			return $@"{docName}.pdf";
 		}
 
 		#endregion

@@ -46,3 +46,6 @@ Desktop.ini
 # macOS junk
 .DS_Store
 .idea
+
+# documents
+*.pdf
