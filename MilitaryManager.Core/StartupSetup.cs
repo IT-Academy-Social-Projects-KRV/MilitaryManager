@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using MilitaryManager.Core.Interfaces.Services;
+using MilitaryManager.Core.Services;
 
 namespace MilitaryManager.Core
 {
@@ -6,7 +8,7 @@ namespace MilitaryManager.Core
     {
         public static void AddCustomServices(this IServiceCollection services)
         {
-
+            services.AddScoped<IUnitServices, UnitServices>();
         }
     }
 }
