@@ -12,7 +12,7 @@ namespace MilitaryManager.Core.Entities.EntityEntity
         public int Id { get; set; }
         public string RegNum { get; set; }
 
-        public List<EntityToAttribute> EntityToAttributes { get; set; } = new List<EntityToAttribute>();
+        public ICollection<EntityToAttribute> EntityToAttributes { get; set; } = new HashSet<EntityToAttribute>();
         public EquipmentToSoldier EquipmentToSoldiers { get; set; } = new EquipmentToSoldier();
     }
 }

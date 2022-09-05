@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MilitaryManager.Infrastructure.Data.Repositories
 {
-    public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class, IBaseEntity
+    internal class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class, IBaseEntity
     {
         protected readonly MilitaryManagerDbContext _dbContext;
         protected readonly DbSet<TEntity> _dbSet;

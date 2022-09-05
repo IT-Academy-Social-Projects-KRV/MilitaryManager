@@ -178,13 +178,13 @@ namespace MilitaryManager.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PatronymicId")
+                    b.Property<int?>("ParentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PositionId")
+                    b.Property<int>("PositionId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RankId")
+                    b.Property<int>("RankId")
                         .HasColumnType("int");
 
                     b.Property<int?>("UnitId")
@@ -192,7 +192,7 @@ namespace MilitaryManager.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PatronymicId");
+                    b.HasIndex("ParentId");
 
                     b.HasIndex("PositionId");
 
@@ -328,17 +328,21 @@ namespace MilitaryManager.Infrastructure.Migrations
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.SoldierEntity.Soldier", b =>
                 {
-                    b.HasOne("MilitaryManager.Core.Entities.SoldierEntity.Soldier", "Patronymic")
+                    b.HasOne("MilitaryManager.Core.Entities.SoldierEntity.Soldier", "Parent")
                         .WithMany("SubSoldiers")
-                        .HasForeignKey("PatronymicId");
+                        .HasForeignKey("ParentId");
 
                     b.HasOne("MilitaryManager.Core.Entities.PositionEntity.Position", "Position")
                         .WithMany("Soldiers")
-                        .HasForeignKey("PositionId");
+                        .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("MilitaryManager.Core.Entities.RankEntity.Rank", "Rank")
                         .WithMany("Soldiers")
-                        .HasForeignKey("RankId");
+                        .HasForeignKey("RankId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("MilitaryManager.Core.Entities.UnitEntity.Unit", "Unit")
                         .WithMany("Soldiers")

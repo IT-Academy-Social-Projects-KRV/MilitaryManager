@@ -12,7 +12,7 @@ namespace MilitaryManager.Core.Entities.AttributeEntity
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public List<Profile> Profiles { get; set; } = new List<Profile>();
-        public List<EntityToAttribute> EntityToAttributes { get; set; } = new List<EntityToAttribute>();
+        public ICollection<Profile> Profiles { get; set; } = new HashSet<Profile>();
+        public ICollection<EntityToAttribute> EntityToAttributes { get; set; } = new HashSet<EntityToAttribute>();
     }
 }

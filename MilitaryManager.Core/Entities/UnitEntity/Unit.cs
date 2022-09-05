@@ -18,7 +18,7 @@ namespace MilitaryManager.Core.Entities.UnitEntity
 
         public virtual ICollection<Unit> SubUnits { get; set; }
 
-        public List<Soldier> Soldiers { get; set; } = new List<Soldier>();
-        public List<EquipmentToSoldier> EquipmentToSoldiers { get; set; } = new List<EquipmentToSoldier>();
+        public ICollection<Soldier> Soldiers { get; set; } = new HashSet<Soldier>();
+        public ICollection<EquipmentToSoldier> EquipmentToSoldiers { get; set; } = new HashSet<EquipmentToSoldier>();
     }
 }

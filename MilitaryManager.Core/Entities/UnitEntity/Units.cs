@@ -9,7 +9,7 @@ namespace MilitaryManager.Core.Entities.UnitEntity
             public UnitsList()
             {
                 Query
-                    .Include(x => x.SubUnits);
+                .Include(x => x.SubUnits);
             }
         }
     }

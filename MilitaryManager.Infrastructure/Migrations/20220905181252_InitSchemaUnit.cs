@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MilitaryManager.Infrastructure.Migrations
 {
-    public partial class InitSchemaUnits : Migration
+    public partial class InitSchemaUnit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -129,16 +129,16 @@ namespace MilitaryManager.Infrastructure.Migrations
                     LastName = table.Column<string>(nullable: false),
                     FirstName = table.Column<string>(nullable: false),
                     UnitId = table.Column<int>(nullable: true),
-                    RankId = table.Column<int>(nullable: true),
-                    PatronymicId = table.Column<int>(nullable: true),
-                    PositionId = table.Column<int>(nullable: true)
+                    RankId = table.Column<int>(nullable: false),
+                    ParentId = table.Column<int>(nullable: true),
+                    PositionId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Soldier", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Soldier_Soldier_PatronymicId",
-                        column: x => x.PatronymicId,
+                        name: "FK_Soldier_Soldier_ParentId",
+                        column: x => x.ParentId,
                         principalSchema: "Unit",
                         principalTable: "Soldier",
                         principalColumn: "Id",
@@ -149,14 +149,14 @@ namespace MilitaryManager.Infrastructure.Migrations
                         principalSchema: "Unit",
                         principalTable: "Position",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Soldier_Rank_RankId",
                         column: x => x.RankId,
                         principalSchema: "Unit",
                         principalTable: "Rank",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Soldier_Unit_UnitId",
                         column: x => x.UnitId,
@@ -319,10 +319,10 @@ namespace MilitaryManager.Infrastructure.Migrations
                 column: "SoldierId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Soldier_PatronymicId",
+                name: "IX_Soldier_ParentId",
                 schema: "Unit",
                 table: "Soldier",
-                column: "PatronymicId");
+                column: "ParentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Soldier_PositionId",

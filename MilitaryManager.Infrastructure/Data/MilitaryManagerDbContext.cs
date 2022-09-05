@@ -12,7 +12,7 @@ using System.Collections.Generic;
 
 namespace MilitaryManager.Infrastructure.Data
 {
-    public class MilitaryManagerDbContext : DbContext
+    internal class MilitaryManagerDbContext : DbContext
     {
         public MilitaryManagerDbContext(DbContextOptions<MilitaryManagerDbContext> options) : base(options)
         {

@@ -35,8 +35,8 @@ namespace MilitaryManager.Core.Entities.SoldierEntity
 
             builder
                 .HasMany(x => x.SubSoldiers)
-                .WithOne(x => x.Patronymic)
-                .HasForeignKey(x => x.PatronymicId);
+                .WithOne(x => x.Parent)
+                .HasForeignKey(x => x.ParentId);
         }
     }
 }

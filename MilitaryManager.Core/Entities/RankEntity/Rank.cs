@@ -11,6 +11,6 @@ namespace MilitaryManager.Core.Entities.RankEntity
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public List<Soldier> Soldiers { get; set; } = new List<Soldier>();
+        public ICollection<Soldier> Soldiers { get; set; } = new HashSet<Soldier>();
     }
 }

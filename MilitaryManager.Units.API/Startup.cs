@@ -22,6 +22,7 @@ namespace MilitaryManager.Units.API
         {
             services.AddControllers();
             services.AddCustomServices();
+            services.AddAutoMapper();
             services.AddRepositories();
             services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));
             services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
