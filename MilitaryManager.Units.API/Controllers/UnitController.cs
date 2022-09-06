@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MilitaryManager.Core.DTO.Units;
+using MilitaryManager.Core.Interfaces.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,41 +10,25 @@ namespace MilitaryManager.Units.API.Controllers
     [Route("api/[controller]")]
     public class UnitController : ControllerBase
     {
-        protected readonly IRepository<Unit> _unitRepository;
-        protected readonly IUnitServices _unitServices;
-        protected readonly IMapper _mapper;
+        protected readonly IUnitService _unitServices;
 
-        public UnitController(IRepository<Unit> unitRepository, IUnitServices unitServices, IMapper mapper)
+        public UnitController(IUnitService unitServices)
         {
-            _unitRepository = unitRepository;
             _unitServices = unitServices;
-            _mapper = mapper;
         }
 
         [HttpGet]
-        [Route("getUnits")]
-        public async Task<IEnumerable<Unit>> GetUnits()
+        [Route("getunits")]
+        public async Task<IEnumerable<UnitDTO>> GetUnits()
         {
-            var entities = await _unitRepository.GetAllAsync();
+            var entities = await _unitServices.GetUnitsAsync();
 
             return entities;
         }
 
-        [HttpPost]
-        [Route("saveUnit")]
-        public async Task<IActionResult> SaveUnit()
-        {
-            var newUnit = new UnitDTO() { Name = "Charles", Address = "Address1", ParentId = 3 };
-            var unit = _mapper.Map<Unit>(newUnit);
-            await _unitRepository.AddAsync(unit);
-            await _unitRepository.SaveChangesAcync();
-
-            return Ok();
-        }
-
         [HttpGet]
-        [Route("getUnitBySpecification")]
-        public async Task<IEnumerable<UnitDTO>> GetUnitBySpecification()
+        [Route("getunitstree")]
+        public async Task<IEnumerable<UnitDTO>> GetUnitsTree()
         {
             var entities = await _unitServices.GetUnitsTreeAsync();
 
@@ -50,12 +36,39 @@ namespace MilitaryManager.Units.API.Controllers
         }
 
         [HttpGet]
-        [Route("getUnitById")]
-        public async Task<Unit> GetUnitById()
+        [Route("getunitbyid/{id}")]
+        public async Task<UnitDTO> GetUnitById(int id)
         {
-            var entities = await _unitRepository.GetByKeyAsync<int>(1);
+            var entity = await _unitServices.GetUnitByIdAsync(id);
 
-            return entities;
+            return entity;
+        }
+
+        [HttpPost]
+        [Route("saveunit")]
+        public async Task<IActionResult> SaveUnit([FromBody] UnitDTO query)
+        {
+            await _unitServices.SaveUnitAsync(query);
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("updateunit")]
+        public async Task<IActionResult> UpdateUnit([FromBody] UnitDTO query)
+        {
+            await _unitServices.UpdateUnitAsync(query);
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("deleteunit")]
+        public async Task<IActionResult> DeleteUnit([FromBody] UnitDTO query)
+        {
+            await _unitServices.DeleteUnitAsync(query);
+
+            return Ok();
         }
     }
 }

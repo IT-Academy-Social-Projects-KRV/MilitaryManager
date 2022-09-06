@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using MilitaryManager.Core.Helpers;
+using MilitaryManager.Core.Interfaces.Services;
+using MilitaryManager.Core.Services;
 
 namespace MilitaryManager.Core
 {
@@ -8,6 +10,7 @@ namespace MilitaryManager.Core
     {
         public static void AddCustomServices(this IServiceCollection services)
         {
+            services.AddScoped<IUnitService, UnitService>();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)
