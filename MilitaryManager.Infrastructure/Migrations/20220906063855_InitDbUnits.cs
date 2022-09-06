@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MilitaryManager.Infrastructure.Migrations
 {
-    public partial class InitSchemaUnit : Migration
+    public partial class InitDbUnits : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -239,42 +239,6 @@ namespace MilitaryManager.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.InsertData(
-                schema: "Unit",
-                table: "Unit",
-                columns: new[] { "Id", "Address", "Name", "ParentId" },
-                values: new object[] { 1, "Address1", "Charles Montgomery Burns", null });
-
-            migrationBuilder.InsertData(
-                schema: "Unit",
-                table: "Unit",
-                columns: new[] { "Id", "Address", "Name", "ParentId" },
-                values: new object[] { 2, "Address1", "Waylon Smithers, Jr.", 1 });
-
-            migrationBuilder.InsertData(
-                schema: "Unit",
-                table: "Unit",
-                columns: new[] { "Id", "Address", "Name", "ParentId" },
-                values: new object[] { 3, "Address1", "Lenny Leonard", 2 });
-
-            migrationBuilder.InsertData(
-                schema: "Unit",
-                table: "Unit",
-                columns: new[] { "Id", "Address", "Name", "ParentId" },
-                values: new object[] { 4, "Address1", "Carl Carlson", 2 });
-
-            migrationBuilder.InsertData(
-                schema: "Unit",
-                table: "Unit",
-                columns: new[] { "Id", "Address", "Name", "ParentId" },
-                values: new object[] { 5, "Address1", "Inanimate Carbon Rod", 4 });
-
-            migrationBuilder.InsertData(
-                schema: "Unit",
-                table: "Unit",
-                columns: new[] { "Id", "Address", "Name", "ParentId" },
-                values: new object[] { 6, "Address1", "Homer Simpson", 5 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_EntityToAttribute_AttributeId",

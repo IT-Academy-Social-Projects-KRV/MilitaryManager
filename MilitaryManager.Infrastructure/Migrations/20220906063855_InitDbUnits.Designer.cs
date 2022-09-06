@@ -10,8 +10,8 @@ using MilitaryManager.Infrastructure.Data;
 namespace MilitaryManager.Infrastructure.Migrations
 {
     [DbContext(typeof(MilitaryManagerDbContext))]
-    [Migration("20220905181252_InitSchemaUnit")]
-    partial class InitSchemaUnit
+    [Migration("20220906063855_InitDbUnits")]
+    partial class InitDbUnits
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -228,49 +228,6 @@ namespace MilitaryManager.Infrastructure.Migrations
                     b.HasIndex("ParentId");
 
                     b.ToTable("Unit","Unit");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "Address1",
-                            Name = "Charles Montgomery Burns"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "Address1",
-                            Name = "Waylon Smithers, Jr.",
-                            ParentId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Address = "Address1",
-                            Name = "Lenny Leonard",
-                            ParentId = 2
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Address = "Address1",
-                            Name = "Carl Carlson",
-                            ParentId = 2
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Address = "Address1",
-                            Name = "Inanimate Carbon Rod",
-                            ParentId = 4
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Address = "Address1",
-                            Name = "Homer Simpson",
-                            ParentId = 5
-                        });
                 });
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.EntityToAttributeEntity.EntityToAttribute", b =>

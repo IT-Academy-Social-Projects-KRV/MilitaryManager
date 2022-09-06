@@ -8,7 +8,6 @@ using MilitaryManager.Core.Entities.ProfileEntity;
 using MilitaryManager.Core.Entities.RankEntity;
 using MilitaryManager.Core.Entities.SoldierEntity;
 using MilitaryManager.Core.Entities.UnitEntity;
-using System.Collections.Generic;
 
 namespace MilitaryManager.Infrastructure.Data
 {
@@ -16,13 +15,8 @@ namespace MilitaryManager.Infrastructure.Data
     {
         public MilitaryManagerDbContext(DbContextOptions<MilitaryManagerDbContext> options) : base(options)
         {
-            //Database.EnsureCreated();
         }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder);
-        //}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new AttributeConfiguration());
@@ -34,17 +28,6 @@ namespace MilitaryManager.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new RankConfiguration());
             modelBuilder.ApplyConfiguration(new SoldierConfiguration());
             modelBuilder.ApplyConfiguration(new UnitConfiguration());
-
-            modelBuilder.Entity<Unit>()
-                .HasData(new List<Unit>()
-                {
-                    new Unit() {Id = 1, Name = "Charles Montgomery Burns", Address = "Address1"},
-                    new Unit() {Id = 2, Name = "Waylon Smithers, Jr.", Address = "Address1", ParentId = 1},
-                    new Unit() {Id = 3, Name = "Lenny Leonard", Address = "Address1", ParentId = 2},
-                    new Unit() {Id = 4, Name = "Carl Carlson", Address = "Address1", ParentId = 2},
-                    new Unit() {Id = 5, Name = "Inanimate Carbon Rod", Address = "Address1", ParentId = 4},
-                    new Unit() {Id = 6, Name = "Homer Simpson", Address = "Address1", ParentId = 5}
-                });
         }
 
         public DbSet<Attribute> Attributes { get; set; }
