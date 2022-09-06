@@ -26,7 +26,7 @@ export class UnitStateService extends StateService<UnitState>{
   }
   
   load() {
-    this.apiService.getAll().subscribe((units) => this.setState({ units}));
+    this.apiService.collection.getAll().subscribe((units) => this.setState({ units}));
   }
 
 }

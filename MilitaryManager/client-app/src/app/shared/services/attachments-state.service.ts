@@ -18,7 +18,7 @@ const initialState: AttachmentState = {
 })
 export class AttachmentStateService extends StateService<AttachmentState>{
 
-  units$: Observable<AttachmentModel[]>= this.select(state => state.attachments).pipe(
+  attachments$: Observable<AttachmentModel[]>= this.select(state => state.attachments).pipe(
     shareReplay({refCount: true, bufferSize: 1}))
 
   constructor(private apiService: AttachmentsService) {
