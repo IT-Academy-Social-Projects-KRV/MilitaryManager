@@ -11,7 +11,7 @@ namespace MilitaryManager.Infrastructure.Migrations
                 name: "Unit");
 
             migrationBuilder.CreateTable(
-                name: "Attribute",
+                name: "Attributes",
                 schema: "Unit",
                 columns: table => new
                 {
@@ -21,11 +21,11 @@ namespace MilitaryManager.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Attribute", x => x.Id);
+                    table.PrimaryKey("PK_Attributes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Entity",
+                name: "Entities",
                 schema: "Unit",
                 columns: table => new
                 {
@@ -35,11 +35,11 @@ namespace MilitaryManager.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Entity", x => x.Id);
+                    table.PrimaryKey("PK_Entities", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Position",
+                name: "Positions",
                 schema: "Unit",
                 columns: table => new
                 {
@@ -49,11 +49,11 @@ namespace MilitaryManager.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Position", x => x.Id);
+                    table.PrimaryKey("PK_Positions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Rank",
+                name: "Ranks",
                 schema: "Unit",
                 columns: table => new
                 {
@@ -63,11 +63,11 @@ namespace MilitaryManager.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Rank", x => x.Id);
+                    table.PrimaryKey("PK_Ranks", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Unit",
+                name: "Units",
                 schema: "Unit",
                 columns: table => new
                 {
@@ -79,18 +79,18 @@ namespace MilitaryManager.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Unit", x => x.Id);
+                    table.PrimaryKey("PK_Units", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Unit_Unit_ParentId",
+                        name: "FK_Units_Units_ParentId",
                         column: x => x.ParentId,
                         principalSchema: "Unit",
-                        principalTable: "Unit",
+                        principalTable: "Units",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "EntityToAttribute",
+                name: "EntityToAttributes",
                 schema: "Unit",
                 columns: table => new
                 {
@@ -102,25 +102,25 @@ namespace MilitaryManager.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EntityToAttribute", x => x.Id);
+                    table.PrimaryKey("PK_EntityToAttributes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EntityToAttribute_Attribute_AttributeId",
+                        name: "FK_EntityToAttributes_Attributes_AttributeId",
                         column: x => x.AttributeId,
                         principalSchema: "Unit",
-                        principalTable: "Attribute",
+                        principalTable: "Attributes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EntityToAttribute_Entity_EntityId",
+                        name: "FK_EntityToAttributes_Entities_EntityId",
                         column: x => x.EntityId,
                         principalSchema: "Unit",
-                        principalTable: "Entity",
+                        principalTable: "Entities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Soldier",
+                name: "Soldiers",
                 schema: "Unit",
                 columns: table => new
                 {
@@ -135,39 +135,39 @@ namespace MilitaryManager.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Soldier", x => x.Id);
+                    table.PrimaryKey("PK_Soldiers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Soldier_Soldier_ParentId",
+                        name: "FK_Soldiers_Soldiers_ParentId",
                         column: x => x.ParentId,
                         principalSchema: "Unit",
-                        principalTable: "Soldier",
+                        principalTable: "Soldiers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Soldier_Position_PositionId",
+                        name: "FK_Soldiers_Positions_PositionId",
                         column: x => x.PositionId,
                         principalSchema: "Unit",
-                        principalTable: "Position",
+                        principalTable: "Positions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Soldier_Rank_RankId",
+                        name: "FK_Soldiers_Ranks_RankId",
                         column: x => x.RankId,
                         principalSchema: "Unit",
-                        principalTable: "Rank",
+                        principalTable: "Ranks",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Soldier_Unit_UnitId",
+                        name: "FK_Soldiers_Units_UnitId",
                         column: x => x.UnitId,
                         principalSchema: "Unit",
-                        principalTable: "Unit",
+                        principalTable: "Units",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "EquipmentToSoldier",
+                name: "EquipmentToSoldiers",
                 schema: "Unit",
                 columns: table => new
                 {
@@ -179,39 +179,39 @@ namespace MilitaryManager.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EquipmentToSoldier", x => x.EquipmentId);
+                    table.PrimaryKey("PK_EquipmentToSoldiers", x => x.EquipmentId);
                     table.ForeignKey(
-                        name: "FK_EquipmentToSoldier_Entity_EquipmentId",
+                        name: "FK_EquipmentToSoldiers_Entities_EquipmentId",
                         column: x => x.EquipmentId,
                         principalSchema: "Unit",
-                        principalTable: "Entity",
+                        principalTable: "Entities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EquipmentToSoldier_Soldier_GivenById",
+                        name: "FK_EquipmentToSoldiers_Soldiers_GivenById",
                         column: x => x.GivenById,
                         principalSchema: "Unit",
-                        principalTable: "Soldier",
+                        principalTable: "Soldiers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EquipmentToSoldier_Soldier_SoldierId",
+                        name: "FK_EquipmentToSoldiers_Soldiers_SoldierId",
                         column: x => x.SoldierId,
                         principalSchema: "Unit",
-                        principalTable: "Soldier",
+                        principalTable: "Soldiers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_EquipmentToSoldier_Unit_UnitId",
+                        name: "FK_EquipmentToSoldiers_Units_UnitId",
                         column: x => x.UnitId,
                         principalSchema: "Unit",
-                        principalTable: "Unit",
+                        principalTable: "Units",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Profile",
+                name: "Profiles",
                 schema: "Unit",
                 columns: table => new
                 {
@@ -223,132 +223,132 @@ namespace MilitaryManager.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Profile", x => x.Id);
+                    table.PrimaryKey("PK_Profiles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Profile_Attribute_AttributeId",
+                        name: "FK_Profiles_Attributes_AttributeId",
                         column: x => x.AttributeId,
                         principalSchema: "Unit",
-                        principalTable: "Attribute",
+                        principalTable: "Attributes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Profile_Soldier_SoldierId",
+                        name: "FK_Profiles_Soldiers_SoldierId",
                         column: x => x.SoldierId,
                         principalSchema: "Unit",
-                        principalTable: "Soldier",
+                        principalTable: "Soldiers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_EntityToAttribute_AttributeId",
+                name: "IX_EntityToAttributes_AttributeId",
                 schema: "Unit",
-                table: "EntityToAttribute",
+                table: "EntityToAttributes",
                 column: "AttributeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EntityToAttribute_EntityId",
+                name: "IX_EntityToAttributes_EntityId",
                 schema: "Unit",
-                table: "EntityToAttribute",
+                table: "EntityToAttributes",
                 column: "EntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EquipmentToSoldier_GivenById",
+                name: "IX_EquipmentToSoldiers_GivenById",
                 schema: "Unit",
-                table: "EquipmentToSoldier",
+                table: "EquipmentToSoldiers",
                 column: "GivenById");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EquipmentToSoldier_SoldierId",
+                name: "IX_EquipmentToSoldiers_SoldierId",
                 schema: "Unit",
-                table: "EquipmentToSoldier",
+                table: "EquipmentToSoldiers",
                 column: "SoldierId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EquipmentToSoldier_UnitId",
+                name: "IX_EquipmentToSoldiers_UnitId",
                 schema: "Unit",
-                table: "EquipmentToSoldier",
+                table: "EquipmentToSoldiers",
                 column: "UnitId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Profile_AttributeId",
+                name: "IX_Profiles_AttributeId",
                 schema: "Unit",
-                table: "Profile",
+                table: "Profiles",
                 column: "AttributeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Profile_SoldierId",
+                name: "IX_Profiles_SoldierId",
                 schema: "Unit",
-                table: "Profile",
+                table: "Profiles",
                 column: "SoldierId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Soldier_ParentId",
+                name: "IX_Soldiers_ParentId",
                 schema: "Unit",
-                table: "Soldier",
+                table: "Soldiers",
                 column: "ParentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Soldier_PositionId",
+                name: "IX_Soldiers_PositionId",
                 schema: "Unit",
-                table: "Soldier",
+                table: "Soldiers",
                 column: "PositionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Soldier_RankId",
+                name: "IX_Soldiers_RankId",
                 schema: "Unit",
-                table: "Soldier",
+                table: "Soldiers",
                 column: "RankId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Soldier_UnitId",
+                name: "IX_Soldiers_UnitId",
                 schema: "Unit",
-                table: "Soldier",
+                table: "Soldiers",
                 column: "UnitId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Unit_ParentId",
+                name: "IX_Units_ParentId",
                 schema: "Unit",
-                table: "Unit",
+                table: "Units",
                 column: "ParentId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "EntityToAttribute",
+                name: "EntityToAttributes",
                 schema: "Unit");
 
             migrationBuilder.DropTable(
-                name: "EquipmentToSoldier",
+                name: "EquipmentToSoldiers",
                 schema: "Unit");
 
             migrationBuilder.DropTable(
-                name: "Profile",
+                name: "Profiles",
                 schema: "Unit");
 
             migrationBuilder.DropTable(
-                name: "Entity",
+                name: "Entities",
                 schema: "Unit");
 
             migrationBuilder.DropTable(
-                name: "Attribute",
+                name: "Attributes",
                 schema: "Unit");
 
             migrationBuilder.DropTable(
-                name: "Soldier",
+                name: "Soldiers",
                 schema: "Unit");
 
             migrationBuilder.DropTable(
-                name: "Position",
+                name: "Positions",
                 schema: "Unit");
 
             migrationBuilder.DropTable(
-                name: "Rank",
+                name: "Ranks",
                 schema: "Unit");
 
             migrationBuilder.DropTable(
-                name: "Unit",
+                name: "Units",
                 schema: "Unit");
         }
     }

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MilitaryManager.Core.Entities.ProfileEntity
 {
-    [Table("Profile", Schema = "Unit")]
+    [Table("Profiles", Schema = "Unit")]
     public class Profile : IBaseEntity
     {
         public int Id { get; set; }

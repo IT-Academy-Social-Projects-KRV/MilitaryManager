@@ -32,7 +32,7 @@ namespace MilitaryManager.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Attribute","Unit");
+                    b.ToTable("Attributes","Unit");
                 });
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.EntityEntity.Entity", b =>
@@ -48,7 +48,7 @@ namespace MilitaryManager.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Entity","Unit");
+                    b.ToTable("Entities","Unit");
                 });
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.EntityToAttributeEntity.EntityToAttribute", b =>
@@ -74,7 +74,7 @@ namespace MilitaryManager.Infrastructure.Migrations
 
                     b.HasIndex("EntityId");
 
-                    b.ToTable("EntityToAttribute","Unit");
+                    b.ToTable("EntityToAttributes","Unit");
                 });
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.EquipmentToSoldierEntity.EquipmentToSoldier", b =>
@@ -102,7 +102,7 @@ namespace MilitaryManager.Infrastructure.Migrations
 
                     b.HasIndex("UnitId");
 
-                    b.ToTable("EquipmentToSoldier","Unit");
+                    b.ToTable("EquipmentToSoldiers","Unit");
                 });
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.PositionEntity.Position", b =>
@@ -118,7 +118,7 @@ namespace MilitaryManager.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Position","Unit");
+                    b.ToTable("Positions","Unit");
                 });
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.ProfileEntity.Profile", b =>
@@ -144,7 +144,7 @@ namespace MilitaryManager.Infrastructure.Migrations
 
                     b.HasIndex("SoldierId");
 
-                    b.ToTable("Profile","Unit");
+                    b.ToTable("Profiles","Unit");
                 });
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.RankEntity.Rank", b =>
@@ -160,7 +160,7 @@ namespace MilitaryManager.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Rank","Unit");
+                    b.ToTable("Ranks","Unit");
                 });
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.SoldierEntity.Soldier", b =>
@@ -200,7 +200,7 @@ namespace MilitaryManager.Infrastructure.Migrations
 
                     b.HasIndex("UnitId");
 
-                    b.ToTable("Soldier","Unit");
+                    b.ToTable("Soldiers","Unit");
                 });
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.UnitEntity.Unit", b =>
@@ -225,7 +225,7 @@ namespace MilitaryManager.Infrastructure.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("Unit","Unit");
+                    b.ToTable("Units","Unit");
                 });
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.EntityToAttributeEntity.EntityToAttribute", b =>

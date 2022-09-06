@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MilitaryManager.Core.Entities.RankEntity
 {
-    [Table("Rank", Schema = "Unit")]
+    [Table("Ranks", Schema = "Unit")]
     public class Rank : IBaseEntity
     {
         public int Id { get; set; }

@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MilitaryManager.Core.Entities.SoldierEntity
 {
-    [Table("Soldier", Schema = "Unit")]
+    [Table("Soldiers", Schema = "Unit")]
     public class Soldier : IBaseEntity
     {
         public int Id { get; set; }

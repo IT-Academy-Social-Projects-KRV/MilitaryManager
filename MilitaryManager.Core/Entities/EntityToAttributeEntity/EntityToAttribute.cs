@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MilitaryManager.Core.Entities.EntityToAttributeEntity
 {
-    [Table("EntityToAttribute", Schema = "Unit")]
+    [Table("EntityToAttributes", Schema = "Unit")]
     public class EntityToAttribute : IBaseEntity
     {
         public int Id { get; set; }
