@@ -42,7 +42,7 @@ namespace MilitaryManager.Core.Services
             return _mapper.Map<UnitDTO>(entity);
         }
 
-        public async Task SaveUnitAsync(UnitDTO query)
+        public async Task CreateUnitAsync(UnitDTO query)
         {
             var unit = _mapper.Map<Unit>(query);
             await _unitRepository.AddAsync(unit);

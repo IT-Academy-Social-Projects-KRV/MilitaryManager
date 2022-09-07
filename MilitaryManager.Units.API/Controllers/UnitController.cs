@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MilitaryManager.Core.DTO.Units;
 using MilitaryManager.Core.Interfaces.Services;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MilitaryManager.Units.API.Controllers
@@ -19,21 +18,21 @@ namespace MilitaryManager.Units.API.Controllers
 
         [HttpGet]
         [Route("get")]
-        public async Task<IEnumerable<UnitDTO>> Get()
+        public async Task<IActionResult> Get()
         {
             return Ok(await _unitServices.GetUnitsAsync());
         }
 
         [HttpGet]
         [Route("gettree")]
-        public async Task<IEnumerable<UnitDTO>> GetTree()
+        public async Task<IActionResult> GetTree()
         {
             return Ok(await _unitServices.GetUnitsTreeAsync());
         }
 
         [HttpGet]
         [Route("getbyid/{id}")]
-        public async Task<UnitDTO> GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
             return Ok(await _unitServices.GetUnitByIdAsync(id));
         }
@@ -42,7 +41,7 @@ namespace MilitaryManager.Units.API.Controllers
         [Route("create")]
         public async Task<IActionResult> Create([FromBody] UnitDTO query)
         {
-            await _unitServices.SaveUnitAsync(query);
+            await _unitServices.CreateUnitAsync(query);
 
             return Ok();
         }
