@@ -18,35 +18,29 @@ namespace MilitaryManager.Units.API.Controllers
         }
 
         [HttpGet]
-        [Route("getunits")]
-        public async Task<IEnumerable<UnitDTO>> GetUnits()
+        [Route("get")]
+        public async Task<IEnumerable<UnitDTO>> Get()
         {
-            var entities = await _unitServices.GetUnitsAsync();
-
-            return entities;
+            return Ok(await _unitServices.GetUnitsAsync());
         }
 
         [HttpGet]
-        [Route("getunitstree")]
-        public async Task<IEnumerable<UnitDTO>> GetUnitsTree()
+        [Route("gettree")]
+        public async Task<IEnumerable<UnitDTO>> GetTree()
         {
-            var entities = await _unitServices.GetUnitsTreeAsync();
-
-            return entities;
+            return Ok(await _unitServices.GetUnitsTreeAsync());
         }
 
         [HttpGet]
-        [Route("getunitbyid/{id}")]
-        public async Task<UnitDTO> GetUnitById(int id)
+        [Route("getbyid/{id}")]
+        public async Task<UnitDTO> GetById(int id)
         {
-            var entity = await _unitServices.GetUnitByIdAsync(id);
-
-            return entity;
+            return Ok(await _unitServices.GetUnitByIdAsync(id));
         }
 
         [HttpPost]
-        [Route("saveunit")]
-        public async Task<IActionResult> SaveUnit([FromBody] UnitDTO query)
+        [Route("create")]
+        public async Task<IActionResult> Create([FromBody] UnitDTO query)
         {
             await _unitServices.SaveUnitAsync(query);
 
@@ -54,8 +48,8 @@ namespace MilitaryManager.Units.API.Controllers
         }
 
         [HttpPost]
-        [Route("updateunit")]
-        public async Task<IActionResult> UpdateUnit([FromBody] UnitDTO query)
+        [Route("update")]
+        public async Task<IActionResult> Update([FromBody] UnitDTO query)
         {
             await _unitServices.UpdateUnitAsync(query);
 
@@ -63,7 +57,7 @@ namespace MilitaryManager.Units.API.Controllers
         }
 
         [HttpPost]
-        [Route("deleteunit")]
+        [Route("delete")]
         public async Task<IActionResult> DeleteUnit([FromBody] UnitDTO query)
         {
             await _unitServices.DeleteUnitAsync(query);
