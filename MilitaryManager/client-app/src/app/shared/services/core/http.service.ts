@@ -46,6 +46,7 @@ export class HttpService {
     get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
         return this.httpClient
             .get(`${path}`, { headers: this.setHeaders(), params })
+            //.get("/assets/decrees.json")
             .pipe(catchError((error: HttpErrorResponse) => this.formatErrors(error)));
     }
 

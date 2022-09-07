@@ -52,7 +52,8 @@ export abstract class BaseService<TModel extends BaseModel>  {
         serviceType: ServiceType = ServiceType.web,
     ) {
         this.single = new BaseSingleService<TModel>(HttpService, controllerName, ConfigService, createModel, serviceType);
-        this.collection = new BaseCollectionService<TModel>(HttpService, `collection/${controllerName}`, ConfigService, createModel, serviceType);
+        this.collection = new BaseCollectionService<TModel>(HttpService, controllerName, ConfigService, createModel, serviceType);
+        //this.collection = new BaseCollectionService<TModel>(HttpService, `collection/${controllerName}`, ConfigService, createModel, serviceType);
     }
 }
 
@@ -81,7 +82,8 @@ class BaseCollectionService<TModel extends BaseModel> extends CoreHttpService {
     getAll(): Observable<TModel[]> {
         return this.httpService.get(`${this.baseUrl}${this.controllerName}`)
             .pipe(
-                map((payloads: any) => payloads.map(this.mapModel)),
+                //map((payloads: any) => payloads.map(this.mapModel)),
+                map((payloads: any) => payloads as TModel[]),
                 catchError(this.handleError)
             );
     }
@@ -106,7 +108,8 @@ class BaseSingleService<TModel extends BaseModel> extends CoreHttpService {
     get(): Observable<TModel> {
         return this.httpService.get(`${this.baseUrl}${this.controllerName}`)
             .pipe(
-                map((payload: any) => this.mapModel(payload)),
+                //map((payload: any) => this.mapModel(payload)),
+                map((payload: any) => payload as TModel),
                 catchError(this.handleError)
             );
     }
