@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MilitaryManager.Core;
 using MilitaryManager.Infrastructure;
 
 namespace MilitaryManager.Units.API
@@ -21,7 +20,6 @@ namespace MilitaryManager.Units.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddCustomServices();
             services.AddRepositories();
             services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));
         }
