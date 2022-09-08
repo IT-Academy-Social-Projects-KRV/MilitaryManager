@@ -1,7 +1,7 @@
 ﻿namespace MilitaryManager.Core.Interfaces
 {
-    public abstract class BaseEntity<T>
+    public interface IBaseEntity
     {
-        public T Id { get; set; }
+        public int Id { get; set; }
     }
 }
