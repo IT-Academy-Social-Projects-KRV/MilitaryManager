@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UnitStateService } from 'src/app/shared/services/unit-state.service';
 
 @Component({
   selector: 'app-unit-edit',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UnitEditComponent implements OnInit {
 
-  constructor() { }
+  constructor(private unitsService: UnitStateService) { }
 
   ngOnInit(): void {
   }
