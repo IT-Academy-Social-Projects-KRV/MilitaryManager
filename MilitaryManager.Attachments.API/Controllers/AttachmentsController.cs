@@ -16,9 +16,8 @@ namespace MilitaryManager.Attachments.API.Controllers
         private readonly string _webRootPath;
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly string _documentExportFolder;
-        public AttachmentsController(
-            IWebHostEnvironment hostingEnvironment,
-            IDocumentGenerationService service,
+
+        public AttachmentsController(IWebHostEnvironment hostingEnvironment, IDocumentGenerationService service,
             ILogger<WeatherForecastController> logger)
         {
             _documentGenerationService = service;
@@ -46,10 +45,7 @@ namespace MilitaryManager.Attachments.API.Controllers
             string templateData = null;
             try
             {
-                //wwwroot\data\document_templates
                 templateData = System.IO.File.ReadAllText($@"{documentTemplatesPath}/{templateName}.xml");
-                // todo remove comments
-                //templateData = System.IO.File.ReadAllText(@$"G:\CSHARP\SoftServe\MilitaryManager\MilitaryManager.Attachments.API\wwwroot\data\document_templates\template_01.xml");
             }
             catch (Exception ex)
             {
@@ -58,8 +54,9 @@ namespace MilitaryManager.Attachments.API.Controllers
 
             var jsonData = "{\"city\":\"Рівне\",\"street\":\"Соборна\",\"number\":\"115\",\"date\":\"10.10.2022\"}";
 
-            _documentGenerationService.ApplyFontResolver(_webRootPath);
-            var docName = _documentGenerationService.GeneratePdfDocument($@"{_webRootPath}/{_documentExportFolder}", templateName, templateData, jsonData);
+            _documentGenerationService.ApplyFontResolver("/wwwroot");//_webRootPath);
+            var docName = _documentGenerationService.GeneratePdfDocument($@"{_webRootPath}/{_documentExportFolder}",
+                templateName, templateData, jsonData);
 
             return $"https://{Request.Host}/api/attachments/find?name={docName}";
         }

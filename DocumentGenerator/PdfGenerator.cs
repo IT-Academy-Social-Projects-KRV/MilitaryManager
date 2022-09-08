@@ -87,7 +87,9 @@ namespace DocumentGenerator
 
 		public void AddTitle(string text)
 		{
-			AddTextBlock(text, fontStyle: XFontStyle.Bold);
+			// todo remove comments
+			//AddTextBlock(text, fontStyle: XFontStyle.Bold);
+			AddTextBlock(text);
 		}
 
 		public void AddTextBlock(string text, int fontSize = 14, XFontStyle fontStyle = XFontStyle.Regular, XParagraphAlignment textAlign = XParagraphAlignment.Center)
