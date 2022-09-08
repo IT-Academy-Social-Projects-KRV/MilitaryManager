@@ -28,7 +28,7 @@ namespace DocumentGenerator.ParsingRules
 		{
 			var style = XFontStyle.Regular;
 			var fontSize = 14;
-			var alignment = XParagraphAlignment.Left;
+			var alignment = XParagraphAlignment.Justify;
 
 			if (attributes != null)
 			{

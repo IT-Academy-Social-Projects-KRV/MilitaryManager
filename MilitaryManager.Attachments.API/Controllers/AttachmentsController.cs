@@ -41,7 +41,7 @@ namespace MilitaryManager.Attachments.API.Controllers
         {
             var documentTemplatesPath = $@"{_webRootPath}/data/document_templates";
 
-            var templateName = "template_01";
+            var templateName = "template_02";
             string templateData = null;
             try
             {
@@ -52,9 +52,27 @@ namespace MilitaryManager.Attachments.API.Controllers
                 _logger.LogError(ex, $"Template for {templateName} document is not available");
             }
 
-            var jsonData = "{\"city\":\"Рівне\",\"street\":\"Соборна\",\"number\":\"115\",\"date\":\"10.10.2022\"}";
+            //var jsonData = "{\"city\":\"Рівне\",\"currentDate\":\"08.09.2022\",\"decreeNumber\":\"777\"}";
+            var jsonData = @"{city:'Рівне',currentDate:'08.09.2022',decreeNumber:'777'
+                            ,lastname:'Скайуокера'
+                            ,name:'Люка'
+                            ,middlename:'Івановича'
+,unitNumber:'№ 5'
+,unitNumberNew:'№ 6'
+,decreeNumber2:'17'
+,day:'05'
+,month:'липня'
+,year:'2022'
+,percent:'15'
+,anotherPercent:'25'
+,first:'01'
+,last:'30'
+,newPlace:'військової частини № 7'
+}";
 
-            _documentGenerationService.ApplyFontResolver("/wwwroot");//_webRootPath);
+           
+
+            _documentGenerationService.ApplyFontResolver("/wwwroot"); //_webRootPath);
             var docName = _documentGenerationService.GeneratePdfDocument($@"{_webRootPath}/{_documentExportFolder}",
                 templateName, templateData, jsonData);
 
