@@ -68,6 +68,7 @@ namespace MilitaryManager.Attachments.API.Controllers
 ,first:'01'
 ,last:'30'
 ,newPlace:'військової частини № 7'
+,father:'Вейдер Дарт Іванович'
 }";
 
            
