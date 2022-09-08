@@ -46,6 +46,9 @@ import { AvatarModule } from 'primeng/avatar';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { TerminalModule } from 'primeng/terminal';
 import { TabViewModule } from 'primeng/tabview';
+import { MenubarModule } from 'primeng/menubar';
+import {SlideMenuModule} from 'primeng/slidemenu';
+
 
 const primeNgModules = [
   ButtonModule,
@@ -92,11 +95,13 @@ const primeNgModules = [
   AvatarModule,
   OverlayPanelModule,
   TerminalModule,
-  TabViewModule
+  TabViewModule,
+  MenubarModule,
+  SlideMenuModule
 ];
 @NgModule({
   imports: [
-    ...primeNgModules,
+    ...primeNgModules
   ],
   exports: [
     ...primeNgModules
