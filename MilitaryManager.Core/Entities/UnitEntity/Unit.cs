@@ -1,7 +1,4 @@
-﻿using MilitaryManager.Core.Interfaces;
-using System.Collections.Generic;
-
-namespace MilitaryManager.Core.Entities.UnitEntity
+﻿namespace MilitaryManager.Core.Entities.UnitEntity
 {
     public class Unit : IBaseEntity<int>
     {

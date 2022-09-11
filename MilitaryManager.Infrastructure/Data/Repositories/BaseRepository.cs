@@ -1,13 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MilitaryManager.Core.Interfaces;
-using MilitaryManager.Core.Interfaces.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-
-namespace MilitaryManager.Infrastructure.Data.Repositories
+﻿namespace MilitaryManager.Infrastructure.Data.Repositories
 {
     public class BaseRepository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class, IBaseEntity<TKey>
     {
@@ -66,6 +57,15 @@ namespace MilitaryManager.Infrastructure.Data.Repositories
         public async Task UpdateAsync(TEntity entity)
         {
             await Task.Run(() => _dbContext.Entry(entity).State = EntityState.Modified);
+        }
+        public async Task<IEnumerable<TEntity>> GetListBySpecAsync(ISpecification<TEntity> specification)
+        {
+            return await ApplySpecification(specification).ToListAsync();
+        }
+        private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> specification)
+        {
+            var evaluator = new SpecificationEvaluator<TEntity>();
+            return evaluator.GetQuery(_dbSet, specification);
         }
     }
 }

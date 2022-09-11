@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-
-namespace MilitaryManager.Core.Interfaces.Repositories
+﻿namespace MilitaryManager.Core.Interfaces.Repositories
 {
     public interface IRepository<TEntity, TKey> where TEntity : class, IBaseEntity<TKey>
     {
@@ -17,5 +11,6 @@ namespace MilitaryManager.Core.Interfaces.Repositories
         IQueryable<TEntity> Query(params Expression<Func<TEntity, object>>[] includes);
         Task<int> SaveChangesAcync();
         Task AddRangeAsync(List<TEntity> entities);
+        Task<IEnumerable<TEntity>> GetListBySpecAsync(ISpecification<TEntity> specification);
     }
 }
