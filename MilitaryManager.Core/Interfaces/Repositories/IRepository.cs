@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ardalis.Specification;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MilitaryManager.Core.Interfaces.Repositories
 {
-    public interface IRepository<TEntity> where TEntity : IBaseEntity
+    public interface IRepository<TEntity> where TEntity : class, IBaseEntity
     {
         Task AddAsync(TEntity entity);
         Task<IEnumerable<TEntity>> GetAllAsync();
@@ -17,5 +18,6 @@ namespace MilitaryManager.Core.Interfaces.Repositories
         IQueryable<TEntity> Query(params Expression<Func<TEntity, object>>[] includes);
         Task<int> SaveChangesAcync();
         Task AddRangeAsync(List<TEntity> entities);
+        Task<IEnumerable<TEntity>> GetListBySpecAsync(ISpecification<TEntity> specification);
     }
 }
