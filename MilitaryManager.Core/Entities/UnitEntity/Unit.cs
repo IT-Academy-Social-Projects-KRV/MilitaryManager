@@ -10,8 +10,8 @@ namespace MilitaryManager.Core.Entities.UnitEntity
         public string Address { get; set; }
         public int? ParentId { get; set; }
 
-        public virtual Unit Parent { get; set; }
+        public Unit Parent { get; set; }
 
-        public virtual ICollection<Unit> SubUnits { get; set; }
+        public ICollection<Unit> SubUnits { get; set; }
     }
 }
