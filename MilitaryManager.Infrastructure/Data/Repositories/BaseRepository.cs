@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MilitaryManager.Infrastructure.Data.Repositories
 {
-    public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class, IBaseEntity
+    public class BaseRepository<TEntity, TType> : IRepository<TEntity, TType> where TEntity : class, IBaseEntity<TType>
     {
         protected readonly MilitaryManagerDbContext _dbContext;
         protected readonly DbSet<TEntity> _dbSet;

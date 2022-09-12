@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MilitaryManager.Core.Interfaces.Repositories
 {
-    public interface IRepository<TEntity> where TEntity : IBaseEntity
+    public interface IRepository<TEntity, TType> where TEntity : class, IBaseEntity<TType>
     {
         Task AddAsync(TEntity entity);
         Task<IEnumerable<TEntity>> GetAllAsync();
