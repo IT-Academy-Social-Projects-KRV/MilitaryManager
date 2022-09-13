@@ -9,6 +9,7 @@ namespace MilitaryManager.Attachments.API.Services.StoreService
     public class StoreService
     {
         public IStoreService Store { private get; set; }
+
         public StoreService(IStoreService storeService)
         {
             Store = storeService;
