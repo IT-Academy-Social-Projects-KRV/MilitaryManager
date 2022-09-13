@@ -1,4 +1,4 @@
-import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
+import { HttpErrorResponse, HttpEventType, HttpResponse } from '@angular/common/http';
 import { AfterViewChecked, AfterViewInit, Component, ComponentFactoryResolver, ComponentRef, OnInit, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DecreeModel } from 'src/app/shared/models/decree.model';
@@ -23,6 +23,7 @@ export class DocumentComponent implements OnInit {
   tabs: string[] = []
   currentTab: number = 0;
   isUploading: boolean = false;
+  isDownloading: boolean = false;
 
   //@ts-ignore
   cols: any[];
@@ -44,7 +45,7 @@ export class DocumentComponent implements OnInit {
 
     //this.apiService.decree.single.get().subscribe(res => { this.decrees = [res]; console.log(res) })
     this.apiService.decree.collection.getAll().subscribe(res => { this.decrees = res })
-    //this.apiService.templates.collection.getAll().subscribe(res => { this.templates = res })
+    this.apiService.templates.collection.getAll().subscribe(res => { this.templates = res })
 
     this.cols = [
       { field: 'id', header: 'Id' },
@@ -104,6 +105,33 @@ export class DocumentComponent implements OnInit {
       },
       error: (err: HttpErrorResponse) => console.log(err)
     });
+  }
+
+  //@ts-ignore
+  download = (id, filePath) => {
+    this.apiService.decree.download(id).subscribe((event) => {
+        if (event.type === HttpEventType.UploadProgress)
+            //this.progress = Math.round((100 * event.loaded) / event.total);
+          this.isDownloading = event.loaded != event.total;
+        else if (event.type === HttpEventType.Response) {
+            //this.message = 'Download success.';
+            this.downloadFile(event, filePath);
+        }
+    });
+  }
+
+  private downloadFile = (data: HttpResponse<Blob>, filePath: String) => {
+      //@ts-ignore
+      const downloadedFile = new Blob([data.body], { type: data.body.type });
+      const a = document.createElement('a');
+      a.setAttribute('style', 'display:none;');
+      document.body.appendChild(a);
+      var filename = filePath.replace(/^.*[\\\/]/, '')
+      a.download = filename;
+      a.href = URL.createObjectURL(downloadedFile);
+      a.target = '_blank';
+      a.click();
+      document.body.removeChild(a);
   }
 
 }

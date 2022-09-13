@@ -20,8 +20,17 @@ export class DecreeService extends BaseService<any> {
     const headersConfig = {
       'Content-Type': 'application/json'
     };
-    return this.httpClient.post(`https://localhost:5003/api/decree/pdf/upload/${id}`, formData, {headers : new HttpHeaders(headersConfig), reportProgress: true, observe: 'events'})    
+    return this.httpClient.post(`https://localhost:5003/api/decree/pdf/upload/${id}`, formData, {reportProgress: true, observe: 'events'})    
+    //return this.httpClient.post(`https://localhost:5003/api/decree/pdf/upload/${id}`, formData, {headers : new HttpHeaders(headersConfig), reportProgress: true, observe: 'events'})    
     
     //return this.httpClient.post(`https://www.googleapis.com/upload/drive/v3/files?uploadType=media`, formData, {headers : new HttpHeaders(headersConfig), reportProgress: true, observe: 'events'})    
+  }
+
+  public download(id: number): Observable<any> { 
+    return this.httpClient.get(`https://localhost:5003/api/decree/pdf/${id}`, {
+      reportProgress: true,
+      observe: 'events',
+      responseType: 'blob'
+    }); 
   }
 }

@@ -27,7 +27,7 @@
                     <tr>
                         <td *ngFor="let col of cols; let index = index">
                             {{decree[col.field]}}
-                            <i *ngIf="col.field =='path'" class="pi pi-download" [ngStyle]="{color:'var(--primary-color)'}" style="cursor: pointer"></i>
+                            <i *ngIf="col.field =='path'" class="pi pi-download" (click)="download(decree.id, decree.path)" [ngStyle]="{color:'var(--primary-color)'}" style="cursor: pointer"></i>
                             <input type="file" accept="application/pdf" #file placeholder="Choose file" (change)="uploadFile(decree.id,file.files)" style="display:none;">
                             <i *ngIf="col.field =='pathSigned' && !isUploading" class="pi pi-upload" (click)="file.click()" [ngStyle]="{color:'var(--primary-color)'}" style="cursor: pointer; display: flex; justify-content: center;"></i>        
                             <i *ngIf="isUploading && col.field =='pathSigned'" class="pi pi-spin pi-spinner" style="font-size: 1rem; display: flex; justify-content: center;"></i>                 
