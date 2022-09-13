@@ -72,8 +72,9 @@ namespace MilitaryManager.Attachments.API.Controllers
         //test method
         [HttpPost]
         [Route("store")]
-        public IActionResult StoreFile([FromForm]string method, IFormFile uploadedFile)
+        public IActionResult StoreFile(IFormFile uploadedFile)
         {
+            string method = _configuration.GetValue<string>("StoreMode:Choosen");
             switch (method)
             {
                 case "Local":

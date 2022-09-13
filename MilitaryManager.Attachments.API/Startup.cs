@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using DocumentGenerator;
 using MilitaryManager.Attachments.API.Services.StoreService;
+using MilitaryManager.Attachments.API.MyConfig;
 
 namespace MilitaryManager.Attachments.API
 {
@@ -22,7 +23,6 @@ namespace MilitaryManager.Attachments.API
         {
             services.AddControllers();
             services.RegisterDocumentGenerationServices();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +50,7 @@ namespace MilitaryManager.Attachments.API
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }

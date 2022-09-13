@@ -52,6 +52,7 @@ services:
       - LOCAL_STORAGE_ACCOUNT_NAME=militarymanager
       - LOCAL_STORAGE_ACCOUNT_KEY=C/yu8u+EAak7iTH73rUCUj+2NZr6NNgFRPtFPGnJtPYvpZfaW9QJopXd/Xh0HrmzakkWyw/28hss+AStsgfKVg==
       - LOCAL_STORAGE_CONTAINER_NAME=documents
+      - ConnectionStrings_DefaultConnection= 
     ports:
       - "5008:80"
       - "5009:443"

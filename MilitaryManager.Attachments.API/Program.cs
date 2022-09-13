@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MilitaryManager.Attachments.API.MyConfig;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace MilitaryManager.Attachments.API
     {
         public static void Main(string[] args)
         {
+            MySettings.DoConfiguration();
             CreateHostBuilder(args).Build().Run();
         }
 
