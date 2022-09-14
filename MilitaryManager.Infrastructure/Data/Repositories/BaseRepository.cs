@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MilitaryManager.Infrastructure.Data.Repositories
 {
-    public class BaseRepository<TEntity, TType> : IRepository<TEntity, TType> where TEntity : class, IBaseEntity<TType>
+    public class BaseRepository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class, IBaseEntity<TKey>
     {
         protected readonly MilitaryManagerDbContext _dbContext;
         protected readonly DbSet<TEntity> _dbSet;
@@ -45,7 +45,7 @@ namespace MilitaryManager.Infrastructure.Data.Repositories
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<TEntity> GetByKeyAsync<TKey>(TKey key)
+        public async Task<TEntity> GetByKeyAsync(TKey key)
         {
             return await _dbSet.FindAsync(key);
         }

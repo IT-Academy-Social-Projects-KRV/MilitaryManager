@@ -1,7 +1,7 @@
 ﻿namespace MilitaryManager.Core.Interfaces
 {
-    public interface IBaseEntity<TType>
+    public interface IBaseEntity<TKey>
     {
-        public TType Id { get; set; }
+        public TKey Id { get; set; }
     }
 }
