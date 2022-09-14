@@ -28,6 +28,13 @@ export class AppMenuComponent implements OnInit {
                 ]
             },
             {
+              label: 'Накази',
+              items: [
+                { label: 'Накази', icon: 'pi pi-fw pi-book', routerLink: ['/']},
+                { label: 'Створити наказ', icon: 'pi pi-fw pi-plus', routerLink: ['/']},
+              ]
+            },
+            {
                 label: 'Накази',
                 items: [
                     { label: 'Накази', icon: 'pi pi-fw pi-book', routerLink: ['/']},
