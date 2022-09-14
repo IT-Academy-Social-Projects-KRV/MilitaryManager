@@ -1,22 +1,17 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MilitaryManager.Attachments.API.Services.StoreService
 {
     public class StoreService
     {
-        public IStoreService Store { private get; set; }
-
-        public StoreService(IStoreService storeService)
+        private IStoreService _storeService;
+        public void setStoreMode(IStoreService storeService)
         {
-            Store = storeService;
+            _storeService = storeService;
         }
         public void StoreData(IFormFile uploadedFile)
         {
-           Store.StoreData(uploadedFile);
+            _storeService.StoreDataAsync(uploadedFile);
         }
     }
 }

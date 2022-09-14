@@ -15,7 +15,7 @@ namespace MilitaryManager.Attachments.API.Services.StoreService
         {
             _webRootPath = webRootPath;
         }
-        public async Task StoreData(IFormFile uploadedFile)
+        public async Task StoreDataAsync(IFormFile uploadedFile)
         {
             if (uploadedFile != null)
             {

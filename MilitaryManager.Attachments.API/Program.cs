@@ -14,7 +14,6 @@ namespace MilitaryManager.Attachments.API
     {
         public static void Main(string[] args)
         {
-            MySettings.DoConfiguration();
             CreateHostBuilder(args).Build().Run();
         }
 

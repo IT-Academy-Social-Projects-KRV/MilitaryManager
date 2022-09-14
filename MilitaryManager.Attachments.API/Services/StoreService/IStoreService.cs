@@ -8,6 +8,6 @@ namespace MilitaryManager.Attachments.API.Services.StoreService
 {
     public interface IStoreService
     {
-        Task StoreData(IFormFile uploadedFile);
+        Task StoreDataAsync(IFormFile uploadedFile);
     }
 }
