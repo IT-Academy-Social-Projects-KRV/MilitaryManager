@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ISize } from './interfaces';
 import { IName } from './interfaces';
+import { IStringSize } from './interfaces';
 
 
 
@@ -9,7 +10,6 @@ import { IName } from './interfaces';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-
 
 export class ProfileComponent implements OnInit {
 
@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
   position: string = '';
   footSizes: ISize[];
   headSizes: ISize[];
-  gasMaskSizes: ISize[];
+  gasMaskSizes: IStringSize[];
   uniforms: IName[];
   bloodTypes: IName[];
   selectedRank: string = '';
@@ -55,11 +55,11 @@ export class ProfileComponent implements OnInit {
       {size: 64}
     ],
     this.gasMaskSizes = [
-      {size: 0},
-      {size: 1},
-      {size: 2},
-      {size: 3},
-      {size: 4}
+      {size: '0'},
+      {size: '1'},
+      {size: '2'},
+      {size: '3'},
+      {size: '4'}
     ],
     this.ranks = [
       {name: 'Молодший лейтенант'},
