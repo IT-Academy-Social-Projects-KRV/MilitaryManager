@@ -8,37 +8,32 @@ using System.IO;
 
 namespace MilitaryManager.Attachments.API.MyConfig
 {
-    public static class MySettings
+    public class MySettings 
     {
+        private readonly AppSettings _appSettings;
+        public  MySettings(AppSettings appSettings)
+        {
+            _appSettings = appSettings;
+        }
         public enum ModesOfStorage
         {
             Azure,
             Local,
             Docker
         }
-        public static void DoConfiguration()
+        public void DoConfiguration()
         {
-            var appSettingsPath = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.Development.json");
-            var json = File.ReadAllText(appSettingsPath);
-
-            var jsonSettings = new JsonSerializerSettings();
-            jsonSettings.Converters.Add(new ExpandoObjectConverter());
-            jsonSettings.Converters.Add(new StringEnumConverter());
-
-            dynamic config = JsonConvert.DeserializeObject<ExpandoObject>(json, jsonSettings);
 
             if (Internet.CheckConnection())
             {
-                config.StoreMode.Choosen = ModesOfStorage.Azure;
+                _appSettings.StoreMode = ModesOfStorage.Azure.ToString();
+                _appSettings.ClientConfigBuild();
             }
             else
             {
-                config.StoreMode.Choosen = ModesOfStorage.Local; 
+                _appSettings.StoreMode = ModesOfStorage.Local.ToString();
+                _appSettings.ClientConfigBuild();
             }
-
-            var newJson = JsonConvert.SerializeObject(config, Formatting.Indented, jsonSettings);
-
-            File.WriteAllText(appSettingsPath, newJson);
         }
         
     }

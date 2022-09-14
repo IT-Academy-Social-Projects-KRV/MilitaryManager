@@ -17,7 +17,7 @@ namespace MilitaryManager.Attachments.API.Services.StoreService
         {
             _configuration = configuration;
         }
-        public async Task StoreData(IFormFile uploadedFile)
+        public async Task StoreDataAsync(IFormFile uploadedFile)
         {
             string connectionString = _configuration.GetValue<string>("AzureConfiguration:ConnectionString");
             string containerName = _configuration.GetValue<string>("AzureConfiguration:ContainerName");
