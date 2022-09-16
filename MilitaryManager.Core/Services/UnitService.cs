@@ -1,4 +1,13 @@
-﻿namespace MilitaryManager.Core.Services
+﻿using AutoMapper;
+using MilitaryManager.Core.DTO.Units;
+using MilitaryManager.Core.Entities.UnitEntity;
+using MilitaryManager.Core.Interfaces.Repositories;
+using MilitaryManager.Core.Interfaces.Services;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace MilitaryManager.Core.Services
 {
     public class UnitService : IUnitService
     {
@@ -18,19 +27,6 @@
             var unitsTree = unitList.Where(x => x.ParentId == null);
 
             return _mapper.Map<IEnumerable<UnitDTO>>(unitsTree);
-        }
-
-        public async Task<IEnumerable<UnitDTO>> GetUnitsAsync()
-        {
-            var entities = await _unitRepository.GetAllAsync();
-
-            return _mapper.Map<IEnumerable<UnitDTO>>(entities);
-        }
-        public async Task<UnitDTO> GetUnitByIdAsync(int id)
-        {
-            var entity = await _unitRepository.GetByKeyAsync<int>(id);
-
-            return _mapper.Map<UnitDTO>(entity);
         }
 
         public async Task CreateUnitAsync(UnitDTO query)

@@ -1,4 +1,15 @@
-﻿namespace MilitaryManager.Infrastructure.Data.Repositories
+﻿using Ardalis.Specification;
+using Ardalis.Specification.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using MilitaryManager.Core.Interfaces;
+using MilitaryManager.Core.Interfaces.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+
+namespace MilitaryManager.Infrastructure.Data.Repositories
 {
     public class BaseRepository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class, IBaseEntity<TKey>
     {
