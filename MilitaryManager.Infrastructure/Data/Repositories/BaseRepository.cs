@@ -1,4 +1,4 @@
-﻿using Ardalis.Specification;
+using Ardalis.Specification;
 using Ardalis.Specification.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MilitaryManager.Core.Interfaces;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MilitaryManager.Infrastructure.Data.Repositories
 {
-    internal class BaseRepository<TEntity, TType> : IRepository<TEntity, TType> where TEntity : class, IBaseEntity<TType>
+    internal class BaseRepository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class, IBaseEntity<TKey>
     {
         protected readonly MilitaryManagerDbContext _dbContext;
         protected readonly DbSet<TEntity> _dbSet;
@@ -47,7 +47,7 @@ namespace MilitaryManager.Infrastructure.Data.Repositories
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<TEntity> GetByKeyAsync<TKey>(TKey key)
+        public async Task<TEntity> GetByKeyAsync(TKey key)
         {
             return await _dbSet.FindAsync(key);
         }
@@ -69,10 +69,12 @@ namespace MilitaryManager.Infrastructure.Data.Repositories
         {
             await Task.Run(() => _dbContext.Entry(entity).State = EntityState.Modified);
         }
+        
         public async Task<IEnumerable<TEntity>> GetListBySpecAsync(ISpecification<TEntity> specification)
         {
             return await ApplySpecification(specification).ToListAsync();
         }
+        
         private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> specification)
         {
             var evaluator = new SpecificationEvaluator<TEntity>();

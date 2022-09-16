@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using MilitaryManager.Core.Helpers;
 using MilitaryManager.Core.Interfaces.Services;
@@ -23,5 +23,4 @@ namespace MilitaryManager.Core
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
         }
-    }
 }

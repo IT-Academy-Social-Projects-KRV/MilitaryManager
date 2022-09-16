@@ -16,7 +16,7 @@ namespace IdentityServer
 				new IdentityResource("role", new []{ JwtClaimTypes.Role })
 			};
 		}
-		
+
 
 		public static IEnumerable<Client> GetClients(string hostname)
 		{

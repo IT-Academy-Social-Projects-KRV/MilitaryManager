@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UnitStateService } from 'src/app/shared/services/unit-state.service';
+
 
 @Component({
   selector: 'app-units-list',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UnitsListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private unitsService: UnitStateService) { }
 
   ngOnInit(): void {
   }
