@@ -1,4 +1,10 @@
-﻿namespace MilitaryManager.Core
+﻿using AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
+using MilitaryManager.Core.Helpers;
+using MilitaryManager.Core.Interfaces.Services;
+using MilitaryManager.Core.Services;
+
+namespace MilitaryManager.Core
 {
     public static class StartupSetup
     {

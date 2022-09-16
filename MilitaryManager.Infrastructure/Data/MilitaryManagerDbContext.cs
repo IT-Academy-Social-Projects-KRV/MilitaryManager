@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using MilitaryManager.Core.Entities.UnitEntity;
+
 namespace MilitaryManager.Infrastructure.Data
 {
     public class MilitaryManagerDbContext : DbContext
