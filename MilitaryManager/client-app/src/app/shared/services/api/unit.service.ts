@@ -10,11 +10,11 @@ import {Observable } from "rxjs";
   providedIn: 'root',
 })
 export class UnitsService extends BaseService<any> {
-  
+
   constructor(
     httpService: HttpService,
     configService: ClientConfigurationService) {
-    super(httpService, 'weatherForecast', configService, UnitModel, ServiceType.units);
+    super(httpService, 'unit', configService, UnitModel, ServiceType.units);
   }
 
 }

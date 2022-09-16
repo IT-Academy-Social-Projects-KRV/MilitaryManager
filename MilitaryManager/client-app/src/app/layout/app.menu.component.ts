@@ -23,15 +23,15 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Бійці',
                 items: [
-                    { label: 'Бійці', icon: 'pi pi-fw pi-users', routerLink: ['/units/list'] },
+                    { label: 'Бійці', icon: 'pi pi-fw pi-users', routerLink: ['/'] },
                     { label: 'Додати бійця', icon: 'pi pi-fw pi-user-plus', routerLink: ['/'] }
                 ]
             },
             {
-              label: 'Накази',
+              label: 'Підрозділи',
               items: [
-                { label: 'Накази', icon: 'pi pi-fw pi-book', routerLink: ['/']},
-                { label: 'Створити наказ', icon: 'pi pi-fw pi-plus', routerLink: ['/']},
+                { label: 'Підрозділи', icon: 'pi pi-fw pi-book', routerLink: ['/units/list']},
+                { label: 'Створити підрозділ', icon: 'pi pi-fw pi-plus', routerLink: ['/units/edit']},
               ]
             },
             {
