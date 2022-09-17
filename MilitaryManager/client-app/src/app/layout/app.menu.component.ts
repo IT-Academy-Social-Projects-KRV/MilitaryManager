@@ -40,6 +40,12 @@ export class AppMenuComponent implements OnInit {
                     { label: 'Зброя', icon: 'pi pi-fw pi-shield', routerLink: ['/'] },
                     { label: 'Додати зброю', icon: 'pi pi-fw pi-plus', routerLink: ['/'] },
                 ]
+            },
+            {
+                label: 'Адміністратор',
+                items: [
+                    { label: 'Додати командира', icon: 'pi pi-user-plus', routerLink: ['/addCommander'] }
+                ]
             }
         ];
     }
