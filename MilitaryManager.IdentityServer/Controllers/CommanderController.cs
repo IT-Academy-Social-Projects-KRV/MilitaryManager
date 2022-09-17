@@ -1,13 +1,10 @@
 ﻿using IdentityServer.Models;
-using IdentityServer4.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MilitaryManager.IdentityServer.Models;
 using MilitaryManager.IdentityServer.Services;
-using System.Linq;
 using System.Threading.Tasks;
-using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace MilitaryManager.IdentityServer.Controllers
 {

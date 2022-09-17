@@ -1,7 +1,5 @@
 ﻿using IdentityServer.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using MilitaryManager.IdentityServer.Models;
 using System.Linq;
 using System.Threading.Tasks;
