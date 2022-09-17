@@ -1,44 +1,36 @@
 ﻿using IdentityServer.Models;
+using IdentityServer4.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MilitaryManager.IdentityServer.Models;
+using MilitaryManager.IdentityServer.Services;
+using System.Linq;
 using System.Threading.Tasks;
+using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace MilitaryManager.IdentityServer.Controllers
 {
-    [Route("commander")]
+    [Route("api/commander")]
     [Authorize]
     public class CommanderController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
 
+        private readonly CommanderService _commanderService;
         public CommanderController(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
+            _commanderService = new CommanderService(_userManager);
         }
-        [Route("register")]
+
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> RegisterCommander([FromBody]CreateUserData userData)
         {
-            var existingUser = await _userManager.FindByNameAsync(userData.Username);
+            var user = await _commanderService.RegisterCommander(userData);
 
-            if (existingUser == null)
-            {
-                var user = new ApplicationUser
-                {
-                    UserName = userData.Username,
-                    Email = userData.Username,
-                };
-
-                var result = await _userManager.CreateAsync(user, userData.Password);
-                if (result.Succeeded)
-                {
-                    await _userManager.AddToRoleAsync(user, userData.Role);
-                }
-            }
-            return Ok();
+            return Ok(user);
         }
     }
 }
