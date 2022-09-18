@@ -49,3 +49,6 @@ Desktop.ini
 
 # documents
 *.pdf
+
+#vs code
+**/.vscode/**

@@ -45,7 +45,8 @@ namespace MilitaryManager.Attachments.API.Controllers
             string templateData = null;
             try
             {
-                templateData = System.IO.File.ReadAllText($@"{documentTemplatesPath}/{templateName}.xml");
+                string path = Path.Combine(documentTemplatesPath, $"{templateName}.xml");
+                templateData = System.IO.File.ReadAllText(path);
             }
             catch (Exception ex)
             {
@@ -70,7 +71,6 @@ namespace MilitaryManager.Attachments.API.Controllers
                             ,father:'Вовк Євгеній Андрійович'
                             }";
 
-           
 
             _documentGenerationService.ApplyFontResolver("/wwwroot"); //_webRootPath);
             var docName = _documentGenerationService.GeneratePdfDocument($@"{_webRootPath}/{_documentExportFolder}",

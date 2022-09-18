@@ -122,7 +122,7 @@ namespace DocumentGenerator
 			}
 
 			documentGenerator.SaveDocument();
-			return $@"{docName}.pdf";
+			return $"{docName}.pdf";
 		}
 
 		#endregion
