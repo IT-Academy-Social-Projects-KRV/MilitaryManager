@@ -5,8 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using DocumentGenerator;
 using MilitaryManager.Attachments.API.Services.StoreService;
-using MilitaryManager.Attachments.API.MyConfig;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Primitives;
+using MilitaryManager.Attachments.API.StoreConfig;
 
 namespace MilitaryManager.Attachments.API
 {
@@ -22,11 +23,8 @@ namespace MilitaryManager.Attachments.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var appSettingsSection = Configuration.GetSection("AppSettings");
-            services.Configure<AppSettings>(appSettingsSection);
-            services.AddScoped(sp => sp.GetService<IOptionsSnapshot<AppSettings>>().Value);
-            services.AddSingleton<IPostConfigureOptions<AppSettings>, ConfigureAppSettingsOptions>();
-
+            services.AddStoreService(Configuration);
+            services.AddTransient<StoreService>();
 
             services.AddControllers();
             services.RegisterDocumentGenerationServices();

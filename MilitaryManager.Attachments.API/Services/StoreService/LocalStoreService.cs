@@ -11,9 +11,9 @@ namespace MilitaryManager.Attachments.API.Services.StoreService
     public class LocalStoreService : IStoreService
     {
         private readonly string _webRootPath;
-        public LocalStoreService(string webRootPath)
+        public LocalStoreService(IWebHostEnvironment webHostEnvironment)
         {
-            _webRootPath = webRootPath;
+            _webRootPath = webHostEnvironment.WebRootPath;
         }
         public async Task StoreDataAsync(IFormFile uploadedFile)
         {
