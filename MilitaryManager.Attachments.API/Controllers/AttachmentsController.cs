@@ -17,7 +17,9 @@ namespace MilitaryManager.Attachments.API.Controllers
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly string _documentExportFolder;
 
-        public AttachmentsController(IWebHostEnvironment hostingEnvironment, IDocumentGenerationService service,
+        public AttachmentsController(
+            IWebHostEnvironment hostingEnvironment, 
+            IDocumentGenerationService service,
             ILogger<WeatherForecastController> logger)
         {
             _documentGenerationService = service;
@@ -30,7 +32,8 @@ namespace MilitaryManager.Attachments.API.Controllers
         [Route("find")]
         public FileStreamResult GetDocument([FromQuery] string name)
         {
-            FileStream fileStream = new FileStream($@"{_webRootPath}/{_documentExportFolder}/{name}", FileMode.Open);
+            string path = Path.Combine(_webRootPath, _documentExportFolder, name);
+            FileStream fileStream = new FileStream(path, FileMode.Open);
 
             return new FileStreamResult(fileStream, "application/pdf");
         }
@@ -39,7 +42,7 @@ namespace MilitaryManager.Attachments.API.Controllers
         [Route("generate")]
         public string GenerateNewDocument()
         {
-            var documentTemplatesPath = $@"{_webRootPath}/data/document_templates";
+            var documentTemplatesPath = Path.Combine(_webRootPath, "data", "document_templates");
 
             var templateName = "template_02";
             string templateData = null;
@@ -73,10 +76,11 @@ namespace MilitaryManager.Attachments.API.Controllers
 
 
             _documentGenerationService.ApplyFontResolver("/wwwroot"); //_webRootPath);
-            var docName = _documentGenerationService.GeneratePdfDocument($@"{_webRootPath}/{_documentExportFolder}",
+            string docPath = Path.Combine(_webRootPath, _documentExportFolder);
+            var docName = _documentGenerationService.GeneratePdfDocument(docPath,
                 templateName, templateData, jsonData);
 
-            return $"https://{Request.Host}/api/attachments/find?name={docName}";
+            return $"https://{Request.Host}/api/attachments/find?name={docName16}";
         }
     }
 }

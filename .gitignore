@@ -52,3 +52,4 @@ Desktop.ini
 
 #vs code
 **/.vscode/**
+/MilitaryManager/client-app/.vscode/extensions.json
