@@ -80,7 +80,7 @@ namespace MilitaryManager.Attachments.API.Controllers
             var docName = _documentGenerationService.GeneratePdfDocument(docPath,
                 templateName, templateData, jsonData);
 
-            return $"https://{Request.Host}/api/attachments/find?name={docName16}";
+            return $"https://{Request.Host}/api/attachments/find?name={docName}";
         }
     }
 }
