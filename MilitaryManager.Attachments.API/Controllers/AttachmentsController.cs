@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MilitaryManager.Attachments.API.Models;
-using MilitaryManager.Attachments.API.MyConfig;
 using MilitaryManager.Attachments.API.Services.StoreService;
 using System;
 using System.IO;
@@ -21,22 +20,20 @@ namespace MilitaryManager.Attachments.API.Controllers
         private readonly string _webRootPath;
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly string _documentExportFolder;
-        private readonly IConfiguration _configuration;
-        private readonly AppSettings _appSettings;
+        private readonly StoreService _storeService;
+
         public AttachmentsController(
             IWebHostEnvironment hostingEnvironment,
             IDocumentGenerationService service,
             ILogger<WeatherForecastController> logger,
-            IConfiguration configuration,
-            AppSettings appSettings
+            StoreService storeService
             )
         {
             _documentGenerationService = service;
             _webRootPath = hostingEnvironment.WebRootPath;
             _logger = logger;
             _documentExportFolder = "documents";
-            _configuration = configuration;
-            _appSettings = appSettings;
+            _storeService = storeService;
         }
 
         [HttpGet]
@@ -77,21 +74,7 @@ namespace MilitaryManager.Attachments.API.Controllers
         [Route("store")]
         public IActionResult StoreFile(IFormFile uploadedFile)
         {
-            StoreService storeService = new StoreService();
-            MySettings mySettings = new MySettings(_appSettings);
-            mySettings.DoConfiguration();
-            string method = _appSettings.clientConfig.Value;
-            switch (method)
-            {
-                case "Local":
-                    storeService.setStoreMode(new LocalStoreService(_webRootPath));
-                    storeService.StoreData(uploadedFile);
-                    break;
-                case "Azure":
-                    storeService.setStoreMode(new AzureStoreService(_configuration));
-                    storeService.StoreData(uploadedFile);
-                    break;
-            }
+            _storeService.StoreData(uploadedFile);
             return Ok();
         }
     }
