@@ -42,13 +42,17 @@ namespace MilitaryManager.Attachments.API.Controllers
         [Route("generate")]
         public string GenerateNewDocument()
         {
+            // todo remove comments
             var documentTemplatesPath = Path.Combine(_webRootPath, "data", "document_templates");
+            //var documentTemplatesPath = Path.Combine("/wwwroot", "data", "document_templates");
 
             var templateName = "template_02";
             string templateData = null;
             try
             {
+                
                 string path = Path.Combine(documentTemplatesPath, $"{templateName}.xml");
+                //var a = System.IO.File.Exists(path);
                 templateData = System.IO.File.ReadAllText(path);
             }
             catch (Exception ex)
@@ -73,7 +77,6 @@ namespace MilitaryManager.Attachments.API.Controllers
                             ,newPlace:'військової частини № 7'
                             ,father:'Вовк Євгеній Андрійович'
                             }";
-
 
             _documentGenerationService.ApplyFontResolver("/wwwroot"); //_webRootPath);
             string docPath = Path.Combine(_webRootPath, _documentExportFolder);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Xml;
 using DocumentGenerator.DataObjects;
 using DocumentGenerator.Interfaces;
@@ -110,8 +111,10 @@ namespace DocumentGenerator
 		{
 			var docName = DateTime.Now.Ticks.ToString();
 			var xml = GetXmlTemplate(data.Template);
+
+            string docPath = Path.Combine(path, docName);
 			var documentGenerator =
-				_documentGeneratorFactory.CreateDocumentGenerator(type, $"{path}\\{docName}",
+				_documentGeneratorFactory.CreateDocumentGenerator(type, docPath,
 					GetDocumentParameters(xml));
 
 			var nodeParser = _nodeParserFactory.CreateNodeParser(data.JsonData);
