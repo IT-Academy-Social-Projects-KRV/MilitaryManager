@@ -63,14 +63,15 @@ export class AuthService {
   public isAuthenticated = (): Promise<boolean> => {
     return this._userManager.getUser()
     .then(user => {
-      if(this._user !== user){
-        // @ts-ignore
-        this._loginChangedSubject.next(this.checkUser(user));
+      if(user)
+      {
+        if(this._user !== user){
+          this._loginChangedSubject.next(this.checkUser(user));
+        }
+        this._user = user;
+        return this.checkUser(user);
       }
-      // @ts-ignore
-      this._user = user;
-      // @ts-ignore
-      return this.checkUser(user);
+      return false;
     })
   }
   

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -25,20 +24,16 @@ namespace MilitaryManager.Units.API.Controllers
         }
 
         [HttpGet]
-        [Authorize]
-        //public IEnumerable<WeatherForecast> Get()
-        public WeatherForecast Get()
+        public IEnumerable<WeatherForecast> Get()
         {
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
-                id = index,
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
-            //.ToArray();
-            .ToArray().FirstOrDefault();
+            .ToArray();
         }
     }
 }
