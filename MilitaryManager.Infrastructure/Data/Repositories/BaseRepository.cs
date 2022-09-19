@@ -22,9 +22,10 @@ namespace MilitaryManager.Infrastructure.Data.Repositories
             _dbSet = _dbContext.Set<TEntity>();
         }
 
-        public async Task AddAsync(TEntity entity)
+        public async Task<TEntity> AddAsync(TEntity entity)
         {
             await _dbSet.AddAsync(entity);
+            return entity;
         }
 
         public async Task AddRangeAsync(List<TEntity> entities)
@@ -32,9 +33,10 @@ namespace MilitaryManager.Infrastructure.Data.Repositories
             await _dbSet.AddRangeAsync(entities);
         }
 
-        public async Task DeleteAsync(TEntity entity)
+        public async Task<TEntity> DeleteAsync(TEntity entity)
         {
             await Task.Run(() => _dbSet.Remove(entity));
+            return entity;
         }
 
         public async Task DeleteRangeAsync(IEnumerable<TEntity> entities)
@@ -65,9 +67,10 @@ namespace MilitaryManager.Infrastructure.Data.Repositories
             return await _dbContext.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(TEntity entity)
+        public async Task<TEntity> UpdateAsync(TEntity entity)
         {
             await Task.Run(() => _dbContext.Entry(entity).State = EntityState.Modified);
+            return entity;
         }
 
         public async Task<IEnumerable<TEntity>> GetListBySpecAsync(ISpecification<TEntity> specification)

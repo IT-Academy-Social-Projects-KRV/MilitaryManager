@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using MilitaryManager.Core.DTO.Units;
 using MilitaryManager.Core.Entities.UnitEntity;
+using MilitaryManager.Core.Helpers;
 using MilitaryManager.Core.Interfaces.Repositories;
 using MilitaryManager.Core.Interfaces.Services;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace MilitaryManager.Core.Services
@@ -20,34 +20,38 @@ namespace MilitaryManager.Core.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<UnitDTO>> GetUnitsTreeAsync()
+        public async Task<IEnumerable<UnitDTO>> GetUnitsTreeAsync(int? id)
         {
-            var specificationUnits = new Units.UnitsList();
-            var unitList = await _unitRepository.GetListBySpecAsync(specificationUnits);
-            var unitsTree = unitList.Where(x => x.ParentId == null);
+            var unitsTree = await _unitRepository.GetListBySpecAsync(GetUnitSpecification.GetSpecification(id));
 
             return _mapper.Map<IEnumerable<UnitDTO>>(unitsTree);
         }
 
-        public async Task CreateUnitAsync(UnitDTO query)
+        public async Task<UnitDTO> CreateUnitAsync(UnitDTO query)
         {
             var unit = _mapper.Map<Unit>(query);
-            await _unitRepository.AddAsync(unit);
+            var newUnit = await _unitRepository.AddAsync(unit);
             await _unitRepository.SaveChangesAcync();
+
+            return _mapper.Map<UnitDTO>(newUnit);
         }
 
-        public async Task UpdateUnitAsync(UnitDTO query)
+        public async Task<UnitDTO> UpdateUnitAsync(UnitDTO query)
         {
             var unit = _mapper.Map<Unit>(query);
-            await _unitRepository.UpdateAsync(unit);
+            var updateUnit = await _unitRepository.UpdateAsync(unit);
             await _unitRepository.SaveChangesAcync();
+
+            return _mapper.Map<UnitDTO>(updateUnit);
         }
 
-        public async Task DeleteUnitAsync(UnitDTO query)
+        public async Task<UnitDTO> DeleteUnitAsync(UnitDTO query)
         {
             var unit = _mapper.Map<Unit>(query);
-            await _unitRepository.DeleteAsync(unit);
+            var deleteUnit = await _unitRepository.DeleteAsync(unit);
             await _unitRepository.SaveChangesAcync();
+
+            return _mapper.Map<UnitDTO>(deleteUnit);
         }
     }
 }

@@ -6,9 +6,9 @@ namespace MilitaryManager.Core.Interfaces.Services
 {
     public interface IUnitService
     {
-        Task<IEnumerable<UnitDTO>> GetUnitsTreeAsync();
-        Task CreateUnitAsync(UnitDTO query);
-        Task UpdateUnitAsync(UnitDTO query);
-        Task DeleteUnitAsync(UnitDTO query);
+        Task<IEnumerable<UnitDTO>> GetUnitsTreeAsync(int? id);
+        Task<UnitDTO> CreateUnitAsync(UnitDTO query);
+        Task<UnitDTO> UpdateUnitAsync(UnitDTO query);
+        Task<UnitDTO> DeleteUnitAsync(UnitDTO query);
     }
 }

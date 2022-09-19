@@ -17,33 +17,28 @@ namespace MilitaryManager.Units.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetTree()
+        [Route("{id:int?}")]
+        public async Task<IActionResult> GetTree([FromRoute] int? id)
         {
-            return Ok(await _unitServices.GetUnitsTreeAsync());
+            return Ok(await _unitServices.GetUnitsTreeAsync(id));
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] UnitDTO query)
         {
-            await _unitServices.CreateUnitAsync(query);
-
-            return Ok();
+            return Ok(await _unitServices.CreateUnitAsync(query));
         }
 
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UnitDTO query)
         {
-            await _unitServices.UpdateUnitAsync(query);
-
-            return Ok();
+            return Ok(await _unitServices.UpdateUnitAsync(query));
         }
 
         [HttpDelete]
         public async Task<IActionResult> DeleteUnit([FromBody] UnitDTO query)
         {
-            await _unitServices.DeleteUnitAsync(query);
-
-            return Ok();
+            return Ok(await _unitServices.DeleteUnitAsync(query));
         }
     }
 }
