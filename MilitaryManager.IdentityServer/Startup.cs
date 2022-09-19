@@ -49,8 +49,7 @@ namespace MilitaryManager.IdentityServer
                 .AddInMemoryApiScopes(IdentityConfig.GetApiScopes())
                 .AddInMemoryClients(IdentityConfig.GetClients("https://localhost:5001"))
                 .AddAspNetIdentity<ApplicationUser>();
-
-
+                
             // services.AddRazorPages();
 
             //services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -95,10 +94,10 @@ namespace MilitaryManager.IdentityServer
                     .AllowAnyMethod()
                     .AllowAnyHeader()
             );
-
+           
             app.UseIdentityServer();
-            // RolesData.SeedRoles(app).Wait();
-            // app.UseRouting();
+
+            app.UseRouting();
 
             app.UseMvc(routes =>
             {

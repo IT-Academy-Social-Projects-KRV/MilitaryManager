@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using MilitaryManager.Infrastructure;
 
 namespace MilitaryManager.Units.API
 {
@@ -45,6 +46,8 @@ namespace MilitaryManager.Units.API
                        ValidateIssuer = false,
                    };
                });
+            services.AddRepositories();
+            services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -10,6 +10,8 @@ import { Test1Component } from './components/test1/test1.component';
 import { Test2Component } from './components/test2/test2.component';
 import { SigninRedirectCallbackComponent } from './components/signin-redirect-callback/signin-redirect-callback.component';
 import { SignoutRedirectCallbackComponent } from './components/signout-redirect-callback/signout-redirect-callback.component';
+import { HomeComponent } from './components/home/home.component';
+import { AppLayoutModule } from './layout/app.layout.module';
 
 @NgModule({
   declarations: [
@@ -17,12 +19,14 @@ import { SignoutRedirectCallbackComponent } from './components/signout-redirect-
     Test1Component,
     Test2Component,
     SigninRedirectCallbackComponent,
-    SignoutRedirectCallbackComponent
+    SignoutRedirectCallbackComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     PrimeNgComponentsModule,
+    AppLayoutModule
   ],
   providers: [
     services,
