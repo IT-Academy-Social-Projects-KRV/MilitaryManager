@@ -30,8 +30,7 @@ export class HttpService {
 
     get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
         return this.httpClient
-            //.get(`${path}`,  { params })
-            .get(`${path}`,  { withCredentials: true })
+            .get(`${path}`,  { params })
             .pipe(catchError((error: HttpErrorResponse) => this.formatErrors(error)));
     }
 

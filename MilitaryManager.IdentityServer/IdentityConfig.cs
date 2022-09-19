@@ -24,8 +24,8 @@ namespace IdentityServer
 			{
 				new Client
 				{
-					ClientId = "js",
-					ClientName = "JavaScript Client",
+					ClientId = "angular",
+					ClientName = "Angular SPA",
 					AllowedGrantTypes = GrantTypes.Code,
 					AllowAccessTokensViaBrowser = true,
 
@@ -42,7 +42,7 @@ namespace IdentityServer
 						IdentityServerConstants.StandardScopes.Profile,
 						IdentityServerConstants.StandardScopes.Email,
 						JwtClaimTypes.Role,
-						"api1"
+						"unitsAPI"
 					}
 				}
 			};
@@ -52,7 +52,7 @@ namespace IdentityServer
 		{
 			return new List<ApiResource>
 			{
-				new ApiResource("api1")
+				new ApiResource("unitsAPI")
 				{
 					UserClaims =
 					{
@@ -60,7 +60,7 @@ namespace IdentityServer
 						JwtClaimTypes.Email,
 						JwtClaimTypes.Role
 					},
-					Scopes = { "api1" }
+					Scopes = { "unitsAPI" }
 				}
 			};
 
@@ -70,7 +70,7 @@ namespace IdentityServer
         {
 			return new List<ApiScope> 
 			{ 
-				new ApiScope("api1", "API 1") 
+				new ApiScope("unitsAPI", "Units API") 
 			};
 		}
 	}

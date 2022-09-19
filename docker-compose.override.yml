@@ -26,6 +26,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
+      - identityUrl=http://militarymanager.identity.server
     ports:
       - "5004:80"
       - "5005:443"

@@ -4,6 +4,7 @@ using IdentityServer.Models;
 using IdentityServer.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -86,11 +87,10 @@ namespace MilitaryManager.IdentityServer
             app.UseStaticFiles();
             app.UseCors(
                 builder => builder
-                    //.WithOrigins(
-                    //    "http://localhost:4200",
-                    //    "https://localhost:5001",
-                    //    "http://localhost:5000")
-                    .AllowAnyOrigin()
+                    .WithOrigins(
+                        "http://localhost:4200",
+                        "https://localhost:5001",
+                        "http://localhost:5000")
                     .SetIsOriginAllowedToAllowWildcardSubdomains()
                     .AllowAnyMethod()
                     .AllowAnyHeader()

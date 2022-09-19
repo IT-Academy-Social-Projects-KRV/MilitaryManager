@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { UserManager, User, UserManagerSettings, WebStorageStateStore } from 'oidc-client';
-import { Constants } from '../constants';
 import { Subject } from 'rxjs';
 import { CookieStorage } from 'cookie-storage';
 
@@ -16,12 +15,12 @@ export class AuthService {
 
   private get idpSettings() : UserManagerSettings {
     return {
-      authority: Constants.idpAuthority,
-      client_id: Constants.clientId,
-      redirect_uri: `${Constants.clientRoot}/SignInCallback`,
-      scope: "openid profile api1",
+      authority: "https://localhost:5007",
+      client_id: "angular",
+      redirect_uri: `${location.origin}/SignInCallback`,
+      scope: "openid profile unitsAPI",
       response_type: "code",
-      post_logout_redirect_uri: `${Constants.clientRoot}/SignOutCallback`,
+      post_logout_redirect_uri: `${location.origin}/SignOutCallback`,
       stateStore: new WebStorageStateStore({ store: new CookieStorage() }),
       userStore: new WebStorageStateStore({ store: new CookieStorage() })
     }

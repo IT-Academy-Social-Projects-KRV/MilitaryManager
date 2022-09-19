@@ -18,9 +18,8 @@ export class AppComponent implements OnInit {
         private clientConfigService: ClientConfigurationService,
         private apiService: ApiService,
         private _authService: AuthService) {
-        this._authService.loginChanged
-        .subscribe(userAuthenticated => {
-        this.userAuthenticated = userAuthenticated;
+        this._authService.loginChanged.subscribe(userAuthenticated => {
+            this.userAuthenticated = userAuthenticated;
         })
     }
 
@@ -28,9 +27,8 @@ export class AppComponent implements OnInit {
         this.configService.single.get().subscribe((data: ConfigModel) => {
             this.clientConfigService.config = data;
         });
-        this._authService.isAuthenticated()
-        .then(userAuthenticated => {
-        this.userAuthenticated = userAuthenticated;
+        this._authService.isAuthenticated().then(userAuthenticated => {
+            this.userAuthenticated = userAuthenticated;
         })
     }
 
