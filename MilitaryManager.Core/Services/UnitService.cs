@@ -1,7 +1,7 @@
-﻿using AutoMapper;
+﻿using Ardalis.Specification;
+using AutoMapper;
 using MilitaryManager.Core.DTO.Units;
 using MilitaryManager.Core.Entities.UnitEntity;
-using MilitaryManager.Core.Helpers;
 using MilitaryManager.Core.Interfaces.Repositories;
 using MilitaryManager.Core.Interfaces.Services;
 using System.Collections.Generic;
@@ -22,7 +22,18 @@ namespace MilitaryManager.Core.Services
 
         public async Task<IEnumerable<UnitDTO>> GetUnitsTreeAsync(int? id)
         {
-            var unitsTree = await _unitRepository.GetListBySpecAsync(GetUnitSpecification.GetSpecification(id));
+            Specification<Unit> specification;
+
+            if (id.HasValue)
+            {
+                specification = new Units.UnitsListById(id.Value);
+            }
+            else
+            {
+                specification = new Units.RootUnitsList();
+            }
+
+            var unitsTree = await _unitRepository.GetListBySpecAsync(specification);
 
             return _mapper.Map<IEnumerable<UnitDTO>>(unitsTree);
         }
