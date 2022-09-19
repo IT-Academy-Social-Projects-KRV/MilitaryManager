@@ -14,10 +14,4 @@ export class Test1Component implements OnInit {
   ngOnInit(): void {
   }
 
-  getWeatherUnits() {
-    this.apiService.units.single.get().subscribe(res => {
-      console.log(res);
-    })
-  }
-
 }
