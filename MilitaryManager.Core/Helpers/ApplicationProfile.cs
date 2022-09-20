@@ -8,8 +8,7 @@ namespace MilitaryManager.Core.Helpers
     {
         public ApplicationProfile()
         {
-            CreateMap<UnitDTO, Unit>();
-            CreateMap<Unit, UnitDTO>();
+            CreateMap<UnitDTO, Unit>().ReverseMap();
         }
     }
 }
