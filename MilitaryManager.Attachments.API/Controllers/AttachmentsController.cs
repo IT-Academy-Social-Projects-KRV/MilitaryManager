@@ -42,9 +42,8 @@ namespace MilitaryManager.Attachments.API.Controllers
         [Route("generate")]
         public string GenerateNewDocument()
         {
-            // todo remove comments
+            
             var documentTemplatesPath = Path.Combine(_webRootPath, "data", "document_templates");
-            //var documentTemplatesPath = Path.Combine("/wwwroot", "data", "document_templates");
 
             var templateName = "template_02";
             string templateData = null;
@@ -52,7 +51,6 @@ namespace MilitaryManager.Attachments.API.Controllers
             {
                 
                 string path = Path.Combine(documentTemplatesPath, $"{templateName}.xml");
-                //var a = System.IO.File.Exists(path);
                 templateData = System.IO.File.ReadAllText(path);
             }
             catch (Exception ex)
