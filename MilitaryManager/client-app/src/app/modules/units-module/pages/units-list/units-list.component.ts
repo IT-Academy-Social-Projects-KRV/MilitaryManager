@@ -14,6 +14,30 @@ import {TreeNode} from "primeng/api";
 })
 export class UnitsListComponent implements OnInit {
 
+  units: TreeNode<UnitModel>[] = [];
+
+  loading: boolean = false;
+
+  constructor(private unitsService: UnitsService,
+              private clientConfigService: ClientConfigurationService,
+              private unitService: UnitsService) { }
+
+  ngOnInit() {
+    this.loading = true;
+    setTimeout(() => {
+      this.unitsService.getLazyUnits(null).subscribe(units => this.units = units);
+      this.loading = false;
+    }, 1000);
+  }
+
+  nodeExpand(event: any) {
+    if (event.node) {
+      //in a real application, make a call to a remote url to load children of the current node and add the new nodes as children
+      this.unitsService.getLazyUnits(event.node.id).subscribe(nodes => {
+        event.node.children = nodes});
+    }
+  }
+/*
   nodes: TreeNode<UnitModel>[] = [];
 
   constructor(private unitsService: UnitStateService,
@@ -25,6 +49,7 @@ export class UnitsListComponent implements OnInit {
     this.unitService.single.get().subscribe((data) => {
       this.nodes = data;
     });
+ */
 /*
     this.nodes = [
       {
@@ -49,6 +74,5 @@ export class UnitsListComponent implements OnInit {
       }
     ];
  */
-  }
 
 }

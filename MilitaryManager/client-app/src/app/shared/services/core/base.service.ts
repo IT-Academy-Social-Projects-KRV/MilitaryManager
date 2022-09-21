@@ -127,7 +127,7 @@ class BaseSingleService<TModel extends BaseModel> extends CoreHttpService {
             );
     }
 
-    getById(id: number): Observable<TModel> {
+    getById(id: number | null): Observable<TModel> {
         return this.httpService.get(`${this.baseUrl}${this.controllerName}/${id}`)
             .pipe(
                 map((payload: any) => this.mapModel(payload)),
