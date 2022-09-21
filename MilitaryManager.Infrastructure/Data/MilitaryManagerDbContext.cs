@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using MilitaryManager.Core.Entities.UnitEntity;
 
 namespace MilitaryManager.Infrastructure.Data
 {
@@ -12,6 +13,9 @@ namespace MilitaryManager.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new UnitConfiguration());
         }
+
+        public DbSet<Unit> Units { get; set; }
     }
 }
