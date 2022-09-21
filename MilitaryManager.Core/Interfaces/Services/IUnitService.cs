@@ -9,6 +9,6 @@ namespace MilitaryManager.Core.Interfaces.Services
         Task<IEnumerable<UnitDTO>> GetUnitsTreeAsync(int? id);
         Task<UnitDTO> CreateUnitAsync(UnitDTO query);
         Task<UnitDTO> UpdateUnitAsync(UnitDTO query);
-        Task<UnitDTO> DeleteUnitAsync(UnitDTO query);
+        Task<UnitDTO> DeleteUnitAsync(int id);
     }
 }

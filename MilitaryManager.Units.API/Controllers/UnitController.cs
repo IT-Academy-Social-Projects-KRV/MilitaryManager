@@ -36,9 +36,10 @@ namespace MilitaryManager.Units.API.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteUnit([FromBody] UnitDTO query)
+        [Route("{id}")]
+        public async Task<IActionResult> DeleteUnit([FromRoute] int id)
         {
-            return Ok(await _unitServices.DeleteUnitAsync(query));
+            return Ok(await _unitServices.DeleteUnitAsync(id));
         }
     }
 }
