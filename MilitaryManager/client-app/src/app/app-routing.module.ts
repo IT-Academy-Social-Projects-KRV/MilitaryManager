@@ -13,6 +13,7 @@ const routes: Routes = [
     { path: 'test1', component: Test1Component },
     { path: 'test2', component: Test2Component },
     { path: 'units', loadChildren: () => import("./modules/units-module/units.module").then(m => m.UnitsModule) },
+    { path: 'attachments', loadChildren: () => import("./modules/attachments-module/attachments.module").then(m => m.AttachmentsModule) },
     { path: '**', redirectTo: 'home' }
   ]}
   ];
