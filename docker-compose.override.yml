@@ -13,6 +13,8 @@ services:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
  
   militarymanager.attachments.api:
+    networks:
+      - my-network
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
@@ -47,5 +49,26 @@ services:
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+
+  azure-blob-storage:
+   image: mcr.microsoft.com/azure-blob-storage:latest
+   hostname: azure-blob-storage
+   environment:
+      LOCAL_STORAGE_ACCOUNT_NAME: militarymanager
+      LOCAL_STORAGE_ACCOUNT_KEY: C/yu8u+EAak7iTH73rUCUj+2NZr6NNgFRPtFPGnJtPYvpZfaW9QJopXd/Xh0HrmzakkWyw/28hss+AStsgfKVg==   
+   volumes:
+       - "D:\\univer\\SoftServe\\azure-blob-storage\\data\\BlockBlob:/blobroot"
+   ports:
+      - 11002:11002
+   networks:
+      - my-network
+
+networks:
+   my-network:
+        external: true
+volumes:
+      blobdata:
+          external: true
 
 
