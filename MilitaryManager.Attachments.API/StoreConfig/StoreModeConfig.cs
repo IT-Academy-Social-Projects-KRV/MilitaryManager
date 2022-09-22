@@ -19,7 +19,7 @@ namespace MilitaryManager.Attachments.API.StoreConfig
                     services.AddTransient<IStoreService, AzureStoreService>();
                     break;
                 case "AzureDockerContainer":
-                    services.AddTransient<IStoreService, AzureStoreService>();
+                    services.AddTransient<IStoreService, DockerContainerStoreService>();
                     break;
             }
         }
