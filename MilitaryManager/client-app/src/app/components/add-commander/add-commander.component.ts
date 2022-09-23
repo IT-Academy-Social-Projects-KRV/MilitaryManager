@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { IdentityService } from 'src/app/shared/services/api/identity.service';
 import { UserModel } from 'src/app/shared/models/user.model';
-import {MessageService} from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Role } from './role';
 
 @Component({
   selector: 'app-add-commander',
@@ -10,30 +11,32 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./add-commander.component.scss']
 })
 export class AddCommanderComponent implements OnInit {
-  roles: string[];
-  username: string='';
-  password: string='';
-  role: string='';
-  useRedClass:boolean = false;
+  roles: Role[];
+  username: string = '';
+  password: string = '';
+  role: string = '';
+  useRedClass: boolean = false;
 
   constructor(private identityService: IdentityService, private messageService: MessageService) {
-    this.roles = ['UnitCommander', 'SubUnitCommander']
+    this.roles = [
+      { ua_role: 'Командир частини', en_role: 'UnitCommander' },
+      { ua_role: 'Командир підрозділу', en_role: 'SubUnitCommander' }]
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   addCommander() {
-    if(!(this.password=='' || this.username=='' || this.role=='')){
+    if (!(this.password == '' || this.username == '' || this.role == '')) {
       this.useRedClass = false;
       this.identityService.single.create(new UserModel(null, this.username, this.password, this.role))
         .subscribe(
           data => this.messageService.add({ severity: 'success', summary: 'Командира створено', detail: 'user created' }),
           error => {
-            this.messageService.add({ severity: 'error', summary: 'Командира не створено!', detail: String((error as HttpErrorResponse).error).split('\n')[0]});
+            this.messageService.add({ severity: 'error', summary: 'Командира не створено!', detail: String((error as HttpErrorResponse).error).split('\n')[0] });
             this.useRedClass = true;
           });
     }
-    else{
+    else {
       this.useRedClass = true;
     }
   }
