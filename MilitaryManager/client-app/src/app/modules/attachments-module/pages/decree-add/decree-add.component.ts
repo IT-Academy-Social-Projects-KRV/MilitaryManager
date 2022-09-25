@@ -12,7 +12,7 @@ import { MessageService } from 'primeng/api';
 })
 export class DecreeAddComponent implements OnInit {
 
-  decrees: AttachmentModel[]=Decrees;
+  decrees: AttachmentModel[]=[];
   units: UnitModel[]= Units;
   selectedUnit: UnitModel = new UnitModel(null);
 
@@ -21,7 +21,7 @@ export class DecreeAddComponent implements OnInit {
     constructor(private attachmentsService: AttachmentsService, private messageService: MessageService) { 
     }
 
-    handleClick(soldier: UnitModel) {
+    addSoldier(soldier: UnitModel) {
       if (soldier.id!=null)
       {
         let newDecree = new AttachmentModel(soldier.id);
@@ -65,19 +65,20 @@ export class DecreeAddComponent implements OnInit {
     }
 
     ngOnInit() {
-
+      this.units = this.units.map((unit: any) => {
+        return {
+          ...unit,
+          displayLabel: unit.surname + ' ' + unit.name + ' ' + unit.surname,
+        };
+      });
     }
 
 }
 
-export const Decrees: AttachmentModel[] = [
-  { id: 1, soldier: new UnitModel(1), action: "Внутрішнє переміщення", date: new Date(), payOff: true},
- ];
- 
- export const Units: UnitModel[]=[
-     {id:1},
-     {id:2},
-     {id:3},
-     {id:4},
-     {id:5},
- ];
+export const Units: UnitModel[]=[
+  {id:1, name: "Петро", surname: "Петренко", middlename: "Петрович"},
+  {id:2, name: "Іван", surname: "Іваненко", middlename: "Іванович"},
+  {id:3, name: "Андрій", surname: "Островський", middlename: "Михайлович"},
+  {id:4, name: "Степан", surname: "Панас", middlename: "Іванович"},
+  {id:5, name: "Мирослав", surname: "Загакайло", middlename: "Павлович"},
+];

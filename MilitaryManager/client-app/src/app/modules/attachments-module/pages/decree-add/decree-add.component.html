@@ -1,12 +1,19 @@
 <h2>Створити наказ</h2>
 <h5>Додати бійця</h5>
 <p-toast></p-toast>
-<p-dropdown [options]="units" [(ngModel)]="selectedUnit" optionLabel="id" [filter]="true" filterBy="id" [showClear]="true" placeholder="Виберіть бійця">
-        <ng-template let-unit pTemplate="item">
-                    {{unit.id}}
+    <p-dropdown
+    [showClear]="true"
+    [options]="units"
+    [(ngModel)]="selectedUnit"
+    filterBy="displayLabel"
+    [filter]="true"
+    optionLabel="displayLabel"
+    placeholder="Виберіть бійця">
+     <ng-template let-unit pTemplate="item">
+                     {{unit.surname}} {{unit.name}} {{unit.middlename}}
         </ng-template>
     </p-dropdown>
-<button pButton type="button" label="Додати" class="p-button-raised p-button-rounded" class="p-button" (click)="handleClick(selectedUnit)"></button>
+<button pButton type="button" label="Додати" class="p-button-raised p-button-rounded" class="p-button" (click)="addSoldier(selectedUnit)"></button>
 <div class="add-decree">
         <p-table [value]="decrees" dataKey="id" editMode="row" responsiveLayout="scroll" class="decrees">
             <ng-template pTemplate="header">
@@ -23,10 +30,12 @@
                     <td style='width:30%'>
                         <p-cellEditor>
                             <ng-template pTemplate="input">
-                                <input pInputText type="text" [(ngModel)]="decree.soldier.id">
+                                <input pInputText type="text" [(ngModel)]="decree.soldier.surname">
+                                <input pInputText type="text" [(ngModel)]="decree.soldier.name">
+                                <input pInputText type="text" [(ngModel)]="decree.soldier.middlename">
                             </ng-template>
                             <ng-template pTemplate="output">
-                                {{decree.soldier.id}}
+                                 {{decree.soldier.surname}} {{decree.soldier.name}} {{decree.soldier.middlename}}
                             </ng-template>
                         </p-cellEditor>
                     </td>
