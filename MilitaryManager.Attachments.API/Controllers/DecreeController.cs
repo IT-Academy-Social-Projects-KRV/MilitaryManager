@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MilitaryManager.Attachments.API.DTO;
-using MilitaryManager.Attachments.API.Entities;
-using MilitaryManager.Attachments.API.Interfaces.Services;
+using MilitaryManager.Core.DTO.Attachments;
+using MilitaryManager.Core.Entities.DecreeEntity;
+using MilitaryManager.Core.Interfaces.Services;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,50 +23,51 @@ namespace MilitaryManager.Attachments.API.Controllers
 
         [HttpPost]
         [Route("generate")]
-        public async Task<ActionResult> GenerateDocument([FromQuery] int templateId, [FromQuery] string name)
+        public async Task<ActionResult> GenerateDecree([FromQuery] int templateId, [FromQuery] string name)
         {
             Request.EnableBuffering();
             Request.Body.Seek(0, SeekOrigin.Begin);
             string jsonRawData = new StreamReader(HttpContext.Request.Body).ReadToEnd();
-            var decree = await _decreeService.GenerateDocument(templateId, name, jsonRawData);
+            var decree = await _decreeService.GenerateDecreeAsync(templateId, name, jsonRawData);
             return CreatedAtRoute(nameof(GetById), new { documentId = decree.Id }, decree);
         }
 
         [HttpGet]
+        [Route("collection")]
         public async Task<ActionResult<IEnumerable<DecreeDTO>>> Get()
         {
-            var decrees = await _decreeService.GetDocuments();
+            var decrees = await _decreeService.GetDecreesAsync();
             return Ok(decrees);
         }
 
-        [HttpGet("{documentId}", Name = nameof(GetById))]
-        public async Task<ActionResult<Decree>> GetById([FromRoute] int documentId)
+        [HttpGet("{id}", Name = nameof(GetById))]
+        public async Task<ActionResult<Decree>> GetById([FromRoute] int id)
         {
-            var decree = await _decreeService.GetDocumentById(documentId);
+            var decree = await _decreeService.GetDecreeByIdAsync(id);
             return Ok(decree);
         }
 
-        [HttpGet("byName/{documentName}")]
-        public async Task<ActionResult<IEnumerable<DecreeDTO>>> GetByName([FromRoute] string documentName)
+        [HttpGet("collection/byName/{documentName}")]
+        public async Task<ActionResult<IEnumerable<DecreeDTO>>> GetByName([FromRoute] string name)
         {
-            var decrees = await _decreeService.GetDocumentsByName(documentName);
+            var decrees = await _decreeService.GetDecreesByNameAsync(name);
             return Ok(decrees);
         }
 
         [HttpGet("pdf/{documentId}")]
-        public async Task<FileStreamResult> GetPdfById([FromRoute] int documentId)
+        public async Task<FileStreamResult> GetPdfById([FromRoute] int id)
         {
-            var fileStream = await _decreeService.GetDocumentPdf(documentId);
+            var fileStream = await _decreeService.GetDecreePdfAsync(id);
             return new FileStreamResult(fileStream, "application/pdf");
         }
 
         [HttpPost]
         [Route("pdf/upload/{documentId}")]
-        public async Task<ActionResult> UploadPdfSigned([FromRoute] int documentId)
+        public async Task<ActionResult> UploadPdfSigned([FromRoute] int id)
         {
             var formCollection = await Request.ReadFormAsync();
             var file = formCollection.Files.First();
-            await _decreeService.UploadSignedDocument(documentId, file);
+            await _decreeService.UploadSignedDecreeAsync(id, file);
             return Ok();
         }
     }

@@ -4,15 +4,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using DocumentGenerator;
-using MilitaryManager.Attachments.API.Data;
-using Microsoft.EntityFrameworkCore;
-using MilitaryManager.Attachments.API.Interfaces.Repositories;
-using MilitaryManager.Attachments.API.Repositories;
-using MilitaryManager.Attachments.API.Interfaces;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
-using MilitaryManager.Attachments.API.Interfaces.Services;
-using MilitaryManager.Attachments.API.Services;
-using System;
+using MilitaryManager.Infrastructure;
+using MilitaryManager.Core;
 
 namespace MilitaryManager.Attachments.API
 {
@@ -28,8 +22,6 @@ namespace MilitaryManager.Attachments.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             // If using Kestrel:
             services.Configure<KestrelServerOptions>(options =>
             {
@@ -41,22 +33,10 @@ namespace MilitaryManager.Attachments.API
                 options.AllowSynchronousIO = true;
             });
 
-            #region repositories
-            services.AddTransient<IDecreeRepository, DecreeRepository>();
-            services.AddTransient<IStatusRepository, StatusRepository>();
-            services.AddTransient<IStatusHistoryRepository, StatusHistoryRepository>();
-            services.AddTransient<ITemplateRepository, TemplateRepository>();
-            services.AddTransient<ITypeRepository, TypeRepository>();
-            #endregion
-
-
-            #region services
-            services.AddTransient<IDecreeService, DecreeService>();
-            services.AddTransient<ITemplateService, TemplateService>();
-            #endregion
-
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddCustomServices();
+            services.AddAutoMapper();
+            services.AddRepositories();
+            services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));
 
             services.AddControllers();
             services.RegisterDocumentGenerationServices();

@@ -26,9 +26,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DocumentGenerator\DocumentGenerator.csproj" />
+    <ProjectReference Include="..\MilitaryManager.Core\MilitaryManager.Core.csproj" />
+    <ProjectReference Include="..\MilitaryManager.Infrastructure\MilitaryManager.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Exceptions\" />
     <Folder Include="wwwroot\documents\" />
   </ItemGroup>
 

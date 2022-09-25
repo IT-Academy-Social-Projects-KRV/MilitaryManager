@@ -11,6 +11,8 @@ namespace MilitaryManager.Core
         public static void AddCustomServices(this IServiceCollection services)
         {
             services.AddScoped<IUnitService, UnitService>();
+            services.AddScoped<IDecreeService, DecreeService>();
+            services.AddScoped<ITemplateService, TemplateService>();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)

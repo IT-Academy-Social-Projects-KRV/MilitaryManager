@@ -46,8 +46,6 @@ namespace MilitaryManager.Attachments.API.Controllers
         {
             var documentTemplatesPath = $"{_webRootPath}/data/document_templates";
 
-            //var templateName = "template_01";
-
             // reads raw json body and removes special symbols
             Request.EnableBuffering();
             Request.Body.Seek(0, SeekOrigin.Begin);
@@ -65,12 +63,9 @@ namespace MilitaryManager.Attachments.API.Controllers
                 _logger.LogError(ex, $"Template for {templateName} document is not available");
             }
 
-            //var jsonData = "{\"city\":\"Рівне\",\"street\":\"Соборна\",\"number\":\"115\",\"date\":\"10.10.2022\"}";
-
             _documentGenerationService.ApplyFontResolver(_webRootPath);
             var docName = _documentGenerationService.GeneratePdfDocument($"{_webRootPath}/{_documentExportFolder}", templateName, templateData, cleanData);
 
-            //return $"https://{Request.Host}/api/attachments/find?name={docName}";
             return CreatedAtRoute("find", new { name = docName }, docName);
         }
     }
