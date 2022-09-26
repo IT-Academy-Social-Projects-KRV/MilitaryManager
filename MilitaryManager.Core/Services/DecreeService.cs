@@ -56,12 +56,7 @@ namespace MilitaryManager.Core.Services
             var exportPath = Path.Combine(wwwroot, _documentExportFolder).Replace("\\", "/");
 
             _documentGenerationService.ApplyFontResolver(wwwroot);
-            //TODO: Maybe make new method GeneratePdfDocumentFile, that returns IFormFile
             var bytesFile = _documentGenerationService.GeneratePdfDocumentFile(exportPath, null, templateData, cleanJsonData);
-            //TODO: заглушка, GeneratePdfDocument має повернути FormFile pdf
-            //var pdfFile = new FormFile(new MemoryStream(), 0, 0, "test", "test");
-
-            //var dbPath = Path.Combine(_documentExportFolder, docName).Replace("\\", "/");
             string path = null;
             using (var ms = new MemoryStream(bytesFile))
             {

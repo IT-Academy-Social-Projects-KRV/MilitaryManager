@@ -52,7 +52,7 @@ namespace MilitaryManager.Attachments.API
 
             app.UseCors(
                 builder => builder
-                    .WithOrigins("http://localhost:4200", "http://localhost:5001", "http://localhost:5000", "http://localhost:5003")
+                    .WithOrigins("http://localhost:4200", "https://localhost:5001", "http://localhost:5000", "http://localhost:5003")
                     .SetIsOriginAllowedToAllowWildcardSubdomains()
                     .AllowAnyMethod()
                     .AllowAnyHeader()
