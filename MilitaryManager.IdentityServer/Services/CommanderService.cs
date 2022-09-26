@@ -19,7 +19,6 @@ namespace MilitaryManager.IdentityServer.Services
         {
             var existingUser = await _userManager.FindByNameAsync(userData.Username);
 
-
             if (existingUser != null)
             {
                 throw new Exception("this user exsits");

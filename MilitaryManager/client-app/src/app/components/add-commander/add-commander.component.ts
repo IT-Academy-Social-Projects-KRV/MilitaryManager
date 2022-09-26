@@ -19,8 +19,8 @@ export class AddCommanderComponent implements OnInit {
 
   constructor(private identityService: IdentityService, private messageService: MessageService) {
     this.roles = [
-      { ua_role: 'Командир частини', en_role: 'UnitCommander' },
-      { ua_role: 'Командир підрозділу', en_role: 'SubUnitCommander' }]
+      { name: 'Командир частини', value: 'UnitCommander' },
+      { name: 'Командир підрозділу', value: 'SubUnitCommander' }]
   }
 
   ngOnInit(): void { }

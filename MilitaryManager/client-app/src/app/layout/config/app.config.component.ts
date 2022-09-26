@@ -11,7 +11,7 @@ export class AppConfigComponent implements OnInit{
     @Input() minimal: boolean = false;
 
     ngOnInit() {
-        this.incrementScale(12)
+        this.incrementScale(14)
     }
 
     constructor(public layoutService: LayoutService, public menuService: MenuService) {}
