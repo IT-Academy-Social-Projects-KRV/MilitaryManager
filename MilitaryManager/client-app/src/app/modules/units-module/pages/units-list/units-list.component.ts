@@ -9,18 +9,9 @@ import { UnitModel } from 'src/app/shared/models/unit.model';
 })
 export class UnitsListComponent implements OnInit {
 
-  constructor(private unitsService: UnitStateService) { 
-    this.units = [
-      {id:1},
-      {id:2},
-      {id:3},
-      {id:4},
-      {id:5}
-  ];
-  }
+  constructor(private unitsService: UnitStateService) { }
 
   ngOnInit(): void {
   }
-  units: UnitModel[];
 
 }

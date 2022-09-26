@@ -49,8 +49,8 @@ export class DecreeAddComponent implements OnInit {
             }
             else
             {
-            delete this.clonedDecrees[attachment.id];
-            this.messageService.add({severity:'success', summary: 'Успішна спроба', detail:'Дані змінено'});
+              delete this.clonedDecrees[attachment.id];
+              this.messageService.add({severity:'success', summary: 'Успішна спроба', detail:'Дані змінено'});
             }
         }
         
@@ -68,7 +68,7 @@ export class DecreeAddComponent implements OnInit {
       this.units = this.units.map((unit: any) => {
         return {
           ...unit,
-          displayLabel: unit.surname + ' ' + unit.name + ' ' + unit.surname,
+          displayLabel: unit.surname + ' ' + unit.name + ' ' + unit.middlename,
         };
       });
     }
