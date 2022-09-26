@@ -1,5 +1,6 @@
 ﻿using Azure.Storage.Blobs;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,37 +11,39 @@ namespace MilitaryManager.Attachments.API.Services.StoreService
 {
     public class DockerContainerStoreService : IStoreService
     {
+        private readonly IConfiguration _configuration;
+
+        public DockerContainerStoreService(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         public async Task StoreDataAsync(IFormFile uploadedFile)
         {
-            string connectionString = "DefaultEndpointsProtocol=http;BlobEndpoint=http://host.docker.internal:11002/militarymanager;AccountName=militarymanager;AccountKey=C/yu8u+EAak7iTH73rUCUj+2NZr6NNgFRPtFPGnJtPYvpZfaW9QJopXd/Xh0HrmzakkWyw/28hss+AStsgfKVg==";
+            string connectionString = _configuration.GetValue<string>("DockerAzureConfiguration:ConnectionString");
 
-
-            // Create a BlobServiceClient object which will be used to create a container client
             BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
 
-            //Create a unique name for the container
-            string containerName = "azure-blob-storage321321312311114";
+            string containerName = _configuration.GetValue<string>("DockerAzureConfiguration:ContainerName");
 
-            // Create the container and return a container client object
             BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
             if (!containerClient.Exists())
             {
                 containerClient = await blobServiceClient.CreateBlobContainerAsync(containerName);
             }
-            // Create a local file in the ./data/ directory for uploading and downloading
+
             string localPath = "";
-            string fileName = "quickstart" + Guid.NewGuid().ToString() + ".txt";
-            string localFilePath = Path.Combine(localPath, fileName);
+            string localFilePath = Path.Combine(localPath, uploadedFile.FileName);
 
-            // Write text to the file
-            await File.WriteAllTextAsync(localFilePath, "Hello, World!");
 
-            // Get a reference to a blob
-            BlobClient blobClient = containerClient.GetBlobClient(fileName);
+         //   string fileName = "quickstart" + Guid.NewGuid().ToString() + ".txt";
+         //   string localFilePath = Path.Combine(localPath, fileName);
 
-            Console.WriteLine("Uploading to Blob storage as blob:\n\t {0}\n", blobClient.Uri);
+            //await System.IO.File.WriteAllTextAsync(localFilePath, "Hello, World!");
 
-            // Upload data from the local file
+           // BlobClient blobClient = containerClient.GetBlobClient(fileName);
+
+            BlobClient blobClient = containerClient.GetBlobClient(uploadedFile.FileName);
+
             await blobClient.UploadAsync(localFilePath, true);
         }
     }
