@@ -1,3 +1,5 @@
+using System.IO;
+
 namespace BusinessLogic.Services.Documents
 {
 	/// <summary>
@@ -14,6 +16,8 @@ namespace BusinessLogic.Services.Documents
 		/// <param name="jsonData">Data for template</param>
 		/// <returns></returns>
 		string GeneratePdfDocument(string exportPath, string templateName, string templateData, string jsonData);
+
+		byte[] GeneratePdfDocumentFile(string exportPath, string templateName, string templateData, string jsonData);
 
 		/// <summary>
 		/// Generate Word document

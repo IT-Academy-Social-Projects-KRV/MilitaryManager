@@ -9,7 +9,7 @@ namespace MilitaryManager.Core.Entities.StatusHistoryEntity
     {
         public int Id { get; set; }
         public string PerformedBy { get; set; }
-        public DateTimeOffset TimeStamp { get; set; }
+        public DateTime TimeStamp { get; set; }
         public int DecreeId { get; set; }
         public Decree Decree { get; set; }
         public int OldStatusId { get; set; }

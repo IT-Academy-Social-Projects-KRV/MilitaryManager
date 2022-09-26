@@ -33,7 +33,7 @@ namespace MilitaryManager.Attachments.API.Controllers
             Request.Body.Seek(0, SeekOrigin.Begin);
             string jsonRawData = new StreamReader(HttpContext.Request.Body).ReadToEnd();
             var decree = await _decreeService.GenerateDecreeAsync(_webRootPath, templateId, name, jsonRawData);
-            return CreatedAtRoute(nameof(GetById), new { documentId = decree.Id }, decree);
+            return CreatedAtRoute(nameof(GetById), new { id = decree.Id }, decree);
         }
 
         [HttpGet]

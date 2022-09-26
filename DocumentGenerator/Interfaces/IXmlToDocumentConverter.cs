@@ -1,3 +1,5 @@
+using System.IO;
+
 namespace DocumentGenerator.Interfaces
 {
 	/// <summary>
@@ -13,5 +15,7 @@ namespace DocumentGenerator.Interfaces
 		/// <param name="data">Doceumtn Data</param>
 		/// <returns>Path for document</returns>
 		string CreateDocument(DocumentType type, string path, IDocumentData data);
+
+		byte[] CreateDocumentFile(DocumentType type, string path, IDocumentData data);
 	}
 }

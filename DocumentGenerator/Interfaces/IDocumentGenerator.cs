@@ -1,5 +1,6 @@
 using PdfSharpCore.Drawing;
 using PdfSharpCore.Drawing.Layout;
+using System.IO;
 
 namespace DocumentGenerator.Interfaces
 {
@@ -34,5 +35,7 @@ namespace DocumentGenerator.Interfaces
 		/// Save Pdf document
 		/// </summary>
 		void SaveDocument();
+
+		byte[] SaveDocumentFile();
 	}
 }

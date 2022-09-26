@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using BusinessLogic.Services.Documents;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
+//using Microsoft.AspNetCore.Http.Internal;
 using MilitaryManager.Core.DTO.Attachments;
 using MilitaryManager.Core.Entities.DecreeEntity;
 using MilitaryManager.Core.Entities.TemplateEntity;
@@ -57,12 +57,17 @@ namespace MilitaryManager.Core.Services
 
             _documentGenerationService.ApplyFontResolver(wwwroot);
             //TODO: Maybe make new method GeneratePdfDocumentFile, that returns IFormFile
-            var docName = _documentGenerationService.GeneratePdfDocument(exportPath, null, templateData, cleanJsonData);
+            var bytesFile = _documentGenerationService.GeneratePdfDocumentFile(exportPath, null, templateData, cleanJsonData);
             //TODO: заглушка, GeneratePdfDocument має повернути FormFile pdf
-            var pdfFile = new FormFile(new MemoryStream(), 0, 0, "test", "test");
+            //var pdfFile = new FormFile(new MemoryStream(), 0, 0, "test", "test");
 
             //var dbPath = Path.Combine(_documentExportFolder, docName).Replace("\\", "/");
-            var path = await _storeService.StoreDataAsync(pdfFile);
+            string path = null;
+            using (var ms = new MemoryStream(bytesFile))
+            {
+                var pdfFile = new FormFile(ms, 0, bytesFile.Length, "test", "tester");
+                path = await _storeService.StoreDataAsync(pdfFile);
+            }
 
             var decree = new Decree()
             {
