@@ -8,6 +8,7 @@ import { Test1Component } from './components/test1/test1.component';
 import { Test2Component } from './components/test2/test2.component';
 import { HomeComponent } from './components/home/home.component';
 import { AppLayoutModule } from './layout/app.layout.module';
+import { AddCommanderComponent } from './components/add-commander/add-commander.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { AppLayoutModule } from './layout/app.layout.module';
     Test1Component,
     Test2Component,
     HomeComponent,
+    AddCommanderComponent,
   ],
   imports: [
     BrowserModule,

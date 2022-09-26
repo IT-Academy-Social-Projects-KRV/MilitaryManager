@@ -85,7 +85,7 @@ namespace MilitaryManager.IdentityServer
                 builder => builder
                     .WithOrigins(
                         "http://localhost:4200",
-                        "http://localhost:5001",
+                        "https://localhost:5001",
                         "http://localhost:5000")
                     .SetIsOriginAllowedToAllowWildcardSubdomains()
                     .AllowAnyMethod()

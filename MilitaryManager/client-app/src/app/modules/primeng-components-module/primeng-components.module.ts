@@ -48,6 +48,7 @@ import { TerminalModule } from 'primeng/terminal';
 import { TabViewModule } from 'primeng/tabview';
 import { MenubarModule } from 'primeng/menubar';
 import {SlideMenuModule} from 'primeng/slidemenu';
+import { FormsModule } from '@angular/forms';
 
 
 const primeNgModules = [
@@ -97,7 +98,8 @@ const primeNgModules = [
   TerminalModule,
   TabViewModule,
   MenubarModule,
-  SlideMenuModule
+  SlideMenuModule,
+  FormsModule
 ];
 @NgModule({
   imports: [
