@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MilitaryManager.Core.DTO.Attachments;
 using MilitaryManager.Core.Entities.DecreeEntity;
@@ -12,13 +13,16 @@ namespace MilitaryManager.Attachments.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DecreeController : ControllerBase
+    public class DecreesController : ControllerBase
     {
         private readonly IDecreeService _decreeService;
+        private readonly string _webRootPath;
 
-        public DecreeController(IDecreeService decreeService)
+        public DecreesController(IDecreeService decreeService,
+                                IWebHostEnvironment hostingEnvironment)
         {
             _decreeService = decreeService;
+            _webRootPath = hostingEnvironment.WebRootPath;
         }
 
         [HttpPost]
@@ -28,7 +32,7 @@ namespace MilitaryManager.Attachments.API.Controllers
             Request.EnableBuffering();
             Request.Body.Seek(0, SeekOrigin.Begin);
             string jsonRawData = new StreamReader(HttpContext.Request.Body).ReadToEnd();
-            var decree = await _decreeService.GenerateDecreeAsync(templateId, name, jsonRawData);
+            var decree = await _decreeService.GenerateDecreeAsync(_webRootPath, templateId, name, jsonRawData);
             return CreatedAtRoute(nameof(GetById), new { documentId = decree.Id }, decree);
         }
 

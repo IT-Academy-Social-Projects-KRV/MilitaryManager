@@ -11,7 +11,6 @@ using MilitaryManager.Core.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -25,6 +24,7 @@ namespace MilitaryManager.Core.Services
         protected readonly IDocumentGenerationService _documentGenerationService;
         protected readonly IMapper _mapper;
         protected readonly IStoreService _storeService;
+        private readonly string _documentExportFolder;
 
         public DecreeService(IRepository<Decree, int> decreeRepository,
                              IRepository<Template, int> templateRepository,
@@ -38,9 +38,10 @@ namespace MilitaryManager.Core.Services
             _documentGenerationService = documentGenerationService;
             _mapper = mapper;
             _storeService = storeService;
+            _documentExportFolder = "documents";
         }
 
-        public async Task<DecreeDTO> GenerateDecreeAsync(int templateId, string name, string jsonData)
+        public async Task<DecreeDTO> GenerateDecreeAsync(string wwwroot, int templateId, string name, string jsonData)
         {
             var template = await _templateRepository.GetByKeyAsync(templateId);
 
@@ -52,10 +53,11 @@ namespace MilitaryManager.Core.Services
                 templateData = reader.ReadToEnd();
             }
 
-            //var exportPath = Path.Combine(_webRootPath, _documentExportFolder).Replace("\\", "/");
+            var exportPath = Path.Combine(wwwroot, _documentExportFolder).Replace("\\", "/");
 
-            //_documentGenerationService.ApplyFontResolver(_webRootPath);
-            //var docName = _documentGenerationService.GeneratePdfDocument(exportPath, template.Name, templateData, cleanJsonData);
+            _documentGenerationService.ApplyFontResolver(wwwroot);
+            //TODO: Maybe make new method GeneratePdfDocumentFile, that returns IFormFile
+            var docName = _documentGenerationService.GeneratePdfDocument(exportPath, null, templateData, cleanJsonData);
             //TODO: заглушка, GeneratePdfDocument має повернути FormFile pdf
             var pdfFile = new FormFile(new MemoryStream(), 0, 0, "test", "test");
 
