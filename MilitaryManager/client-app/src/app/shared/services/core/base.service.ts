@@ -87,7 +87,7 @@ class BaseCollectionService<TModel extends BaseModel> extends CoreHttpService {
     }
 }
 
-class BaseSingleService<TModel extends BaseModel> extends CoreHttpService {
+export class BaseSingleService<TModel extends BaseModel> extends CoreHttpService {
     public constructor(
         protected override httpService: HttpService,
         protected override controllerName: string,
@@ -99,7 +99,7 @@ class BaseSingleService<TModel extends BaseModel> extends CoreHttpService {
     }
 
     private mapModel(payload: any): TModel {
-        const model = new this.createModel(payload.id ?? null);
+        const model = new this.createModel(payload[0].id ?? null);
         return model;
     }
 
@@ -127,7 +127,7 @@ class BaseSingleService<TModel extends BaseModel> extends CoreHttpService {
             );
     }
 
-    getById(id: number | null): Observable<TModel> {
+    getById(id: number): Observable<TModel> {
         return this.httpService.get(`${this.baseUrl}${this.controllerName}/${id}`)
             .pipe(
                 map((payload: any) => this.mapModel(payload)),

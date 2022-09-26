@@ -5,6 +5,7 @@ import { UnitsService } from 'src/app/shared/services/api/unit.service';
 import {ConfigModel} from "../../../../shared/models/config.model";
 import {ClientConfigurationService} from "../../../../shared/services/core/client-configuration.service";
 import {TreeNode} from "primeng/api";
+import {BaseService} from "../../../../shared/services/core/base.service";
 
 
 @Component({
@@ -19,13 +20,12 @@ export class UnitsListComponent implements OnInit {
   loading: boolean = false;
 
   constructor(private unitsService: UnitsService,
-              private clientConfigService: ClientConfigurationService,
-              private unitService: UnitsService) { }
+              private clientConfigService: ClientConfigurationService) { }
 
   ngOnInit() {
     this.loading = true;
     setTimeout(() => {
-      this.unitsService.getLazyUnits(null).subscribe(units => this.units = units);
+      this.unitsService.single.get().subscribe(units => this.units = units);
       this.loading = false;
     }, 1000);
   }
@@ -33,7 +33,7 @@ export class UnitsListComponent implements OnInit {
   nodeExpand(event: any) {
     if (event.node) {
       //in a real application, make a call to a remote url to load children of the current node and add the new nodes as children
-      this.unitsService.getLazyUnits(event.node.id).subscribe(nodes => {
+      this.unitsService.single.getById(event.node.id).subscribe(nodes => {
         event.node.children = nodes});
     }
   }
@@ -51,7 +51,7 @@ export class UnitsListComponent implements OnInit {
     });
  */
 /*
-    this.nodes = [
+    this.units = [
       {
         key: '0',
         label: 'Introduction',
@@ -73,6 +73,5 @@ export class UnitsListComponent implements OnInit {
         ]
       }
     ];
- */
-
+*/
 }
