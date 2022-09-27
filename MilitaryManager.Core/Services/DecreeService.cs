@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using BusinessLogic.Services.Documents;
 using Microsoft.AspNetCore.Http;
-//using Microsoft.AspNetCore.Http.Internal;
 using MilitaryManager.Core.DTO.Attachments;
 using MilitaryManager.Core.Entities.DecreeEntity;
+using MilitaryManager.Core.Entities.SignedPdfEntity;
 using MilitaryManager.Core.Entities.TemplateEntity;
 using MilitaryManager.Core.Interfaces;
 using MilitaryManager.Core.Interfaces.Repositories;
@@ -11,6 +11,7 @@ using MilitaryManager.Core.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -20,7 +21,7 @@ namespace MilitaryManager.Core.Services
     {
         protected readonly IRepository<Decree, int> _decreeRepository;
         protected readonly IRepository<Template, int> _templateRepository;
-        protected readonly ITemplateService _templateService;
+        protected readonly IRepository<SignedPdf, int> _signedPdfRepository;
         protected readonly IDocumentGenerationService _documentGenerationService;
         protected readonly IMapper _mapper;
         protected readonly IStoreService _storeService;
@@ -28,13 +29,14 @@ namespace MilitaryManager.Core.Services
 
         public DecreeService(IRepository<Decree, int> decreeRepository,
                              IRepository<Template, int> templateRepository,
-                             ITemplateService templateService,
+                             IRepository<SignedPdf, int> signedPdfRepository,
                              IDocumentGenerationService documentGenerationService,
                              IMapper mapper,
                              IStoreService storeService)
         {
             _decreeRepository = decreeRepository;
             _templateRepository = templateRepository;
+            _signedPdfRepository = signedPdfRepository;
             _documentGenerationService = documentGenerationService;
             _mapper = mapper;
             _storeService = storeService;
@@ -83,19 +85,26 @@ namespace MilitaryManager.Core.Services
 
         public async Task<IEnumerable<DecreeDTO>> GetDecreesAsync()
         {
-            var decrees = await _decreeRepository.GetAllAsync();
+            var specification = new Decrees.DetailDecreesList();
+            var decrees = await _decreeRepository.GetListBySpecAsync(specification);
             return _mapper.Map<IEnumerable<DecreeDTO>>(decrees);
         }
 
         public async Task<DecreeDTO> GetDecreeByIdAsync(int id)
         {
-            var decree = await _decreeRepository.GetByKeyAsync(id);
-            return _mapper.Map<DecreeDTO>(decree);
+            var specification = new Decrees.DetailDecreeById(id);
+            var decree = await _decreeRepository.GetListBySpecAsync(specification);
+            return _mapper.Map<DecreeDTO>(decree.FirstOrDefault());
         }
 
         public async Task<FileStream> GetDecreePdfAsync(int id)
         {
             var decree = await _decreeRepository.GetByKeyAsync(id);
+            if (decree.StatusId == 1)
+            {
+                decree.StatusId = 2;
+                await _decreeRepository.SaveChangesAcync();
+            }
             return await _storeService.RetrieveDataAsync(decree.Path);
         }
 
@@ -108,12 +117,21 @@ namespace MilitaryManager.Core.Services
 
         public async Task UploadSignedDecreeAsync(int id, IFormFile sign)
         {
-            var decree = await GetDecreeByIdAsync(id);
+            var decree = await _decreeRepository.GetByKeyAsync(id);
+            var signedPdf = await _signedPdfRepository.GetByKeyAsync(id);
+
+            if (signedPdf == null)
+            {
+                signedPdf = new SignedPdf() { Id = id };
+                await _signedPdfRepository.AddAsync(signedPdf);
+            }
 
             var path = await _storeService.StoreDataAsync(sign);
 
-            //TODO: change status to -> Signed
-            decree.PathSigned = path;
+            signedPdf.Path = path;
+
+            decree.StatusId = 3;
+            await _signedPdfRepository.SaveChangesAcync();
             await _decreeRepository.SaveChangesAcync();
         }
 

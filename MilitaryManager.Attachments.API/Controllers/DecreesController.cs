@@ -51,14 +51,14 @@ namespace MilitaryManager.Attachments.API.Controllers
             return Ok(decree);
         }
 
-        [HttpGet("collection/byName/{documentName}")]
+        [HttpGet("collection/byName/{name}")]
         public async Task<ActionResult<IEnumerable<DecreeDTO>>> GetByName([FromRoute] string name)
         {
             var decrees = await _decreeService.GetDecreesByNameAsync(name);
             return Ok(decrees);
         }
 
-        [HttpGet("pdf/{documentId}")]
+        [HttpGet("pdf/{id}")]
         public async Task<FileStreamResult> GetPdfById([FromRoute] int id)
         {
             var fileStream = await _decreeService.GetDecreePdfAsync(id);
@@ -66,7 +66,7 @@ namespace MilitaryManager.Attachments.API.Controllers
         }
 
         [HttpPost]
-        [Route("pdf/upload/{documentId}")]
+        [Route("pdf/upload/{id}")]
         public async Task<ActionResult> UploadPdfSigned([FromRoute] int id)
         {
             var formCollection = await Request.ReadFormAsync();

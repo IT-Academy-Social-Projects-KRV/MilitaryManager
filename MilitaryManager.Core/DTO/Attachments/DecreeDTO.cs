@@ -8,6 +8,8 @@
         public string PathSigned { get; set; }
         public string CreatedBy { get; set; }
         public int TemplateId { get; set; }
+        public string Template { get; set; }
         public int StatusId { get; set; }
+        public string Status { get; set; }
     }
 }
