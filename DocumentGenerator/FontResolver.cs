@@ -60,11 +60,9 @@ namespace DocumentGenerator
             {
                 case "Times#":
                     return LoadFontData("times.ttf");
-                    ;
 
                 case "Times#b":
                     return LoadFontData("timesbd.ttf");
-                    ;
 
                 case "Times#i":
                     return LoadFontData("timesi.ttf");

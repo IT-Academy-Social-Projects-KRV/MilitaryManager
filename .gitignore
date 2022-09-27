@@ -52,4 +52,6 @@ Desktop.ini
 
 #vs code
 **/.vscode/**
-/MilitaryManager/client-app/.vscode/extensions.json
+
+# MilitaryManager\MilitaryManager.Attachments.API\wwwroot\fonts\.uuid
+.uuid

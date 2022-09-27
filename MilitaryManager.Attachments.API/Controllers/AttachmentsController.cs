@@ -42,14 +42,12 @@ namespace MilitaryManager.Attachments.API.Controllers
         [Route("generate")]
         public string GenerateNewDocument()
         {
-            
             var documentTemplatesPath = Path.Combine(_webRootPath, "data", "document_templates");
 
             var templateName = "template_02";
             string templateData = null;
             try
             {
-                
                 string path = Path.Combine(documentTemplatesPath, $"{templateName}.xml");
                 templateData = System.IO.File.ReadAllText(path);
             }
@@ -77,6 +75,7 @@ namespace MilitaryManager.Attachments.API.Controllers
                             }";
 
             _documentGenerationService.ApplyFontResolver("/wwwroot"); //_webRootPath);
+
             string docPath = Path.Combine(_webRootPath, _documentExportFolder);
             var docName = _documentGenerationService.GeneratePdfDocument(docPath,
                 templateName, templateData, jsonData);
