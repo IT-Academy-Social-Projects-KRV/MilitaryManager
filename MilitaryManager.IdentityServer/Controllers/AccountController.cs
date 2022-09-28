@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using IdentityServer.Models;
@@ -60,9 +61,9 @@ namespace IdentityServer.Controllers
 			return View();
 		}
 
-		//
-		// POST: /Account/Login
-		[HttpPost]
+                //
+                // POST: /Account/Login
+                [HttpPost]
 		[AllowAnonymous]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
@@ -106,8 +107,7 @@ namespace IdentityServer.Controllers
 		{
 			ViewData["ReturnUrl"] = returnUrl;
 			return View();
-		}
-
+		}		
 		//
 		// POST: /Account/Register
 		[HttpPost]
@@ -122,24 +122,19 @@ namespace IdentityServer.Controllers
 				{
 					UserName = model.Email,
 					Email = model.Email,
-					//Roles =
-					//{
-					//	new IdentityUserRole<string>
-					//	{
-					//		RoleId = (await _roleManager.FindByNameAsync(Roles.User.ToString())).Id
-					//	}
-					//}
 				};
 				var result = await _userManager.CreateAsync(user, model.Password);
 				if (result.Succeeded)
 				{
-					// For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
-					// Send an email with this link
-					//var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-					//var callbackUrl = Url.Action(nameof(ConfirmEmail), "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-					//await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
-					//    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
-					await _signInManager.SignInAsync(user, isPersistent: false);
+
+                    await _userManager.AddToRoleAsync(user, "User");
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
+                    // Send an email with this link
+                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    //var callbackUrl = Url.Action(nameof(ConfirmEmail), "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                    //await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
+                    //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
+                    await _signInManager.SignInAsync(user, isPersistent: false);
 					_logger.LogInformation(3, "User created a new account with password.");
 					return RedirectToLocal(returnUrl);
 				}

@@ -1,0 +1,17 @@
+<p-sidebar [(visible)]="visible" position="right" [transitionOptions]="'.3s cubic-bezier(0, 0, 0.2, 1)'" styleClass="layout-config-sidebar w-20rem">
+    <h5>Теми</h5>
+    <div class="grid">
+        <div class="col-2 m-3">
+            <button class="p-link" (click)="changeTheme('bootstrap4-light-blue', 'light')">
+                <i class="pi pi-sun"></i>
+                <span> Світла</span>
+            </button>
+        </div>
+        <div class="col-2">
+            <button class="p-link" (click)="changeTheme('bootstrap4-dark-blue', 'dark')">
+                <i class="pi pi-moon"></i>
+                <span> Темна</span>
+            </button>
+        </div>
+    </div>
+</p-sidebar>

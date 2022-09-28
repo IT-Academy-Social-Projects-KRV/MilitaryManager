@@ -1,4 +1,9 @@
+using IdentityServer.Data;
+using IdentityServer.Models;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Diagnostics.CodeAnalysis;
 
@@ -8,6 +13,39 @@ namespace MilitaryManager.IdentityServer
     {
         public static void Main(string[] args)
         {
+            var host = CreateHostBuilder(args).Build();
+
+
+            using (var scope = host.Services.CreateScope())
+            {
+                var serviceProvider = scope.ServiceProvider;
+
+                RolesData.SeedRoles(serviceProvider).Wait();
+
+                //TODO SEED ADMIN here
+                var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+                const string USERNAME = "myadmin@myadmin.com";
+                const string PASSWORD = "Admin1@";
+
+                var existingUser = userManager.FindByNameAsync(USERNAME).Result;
+
+                if (existingUser == null)
+                {
+                    var user = new ApplicationUser
+                    {
+                        UserName = USERNAME,
+                        Email = USERNAME,
+                    };
+
+                    var result = userManager.CreateAsync(user, PASSWORD).Result;
+                    if (result.Succeeded)
+                    {
+                        userManager.AddToRoleAsync(user, "Admin");
+                    }
+                }
+            }
+
             CreateHostBuilder(args).Build().Run();
         }
 

@@ -46,8 +46,7 @@ namespace MilitaryManager.IdentityServer
                 .AddInMemoryApiResources(IdentityConfig.GetApiResources())
                 .AddInMemoryClients(IdentityConfig.GetClients("http://localhost:5001"))
                 .AddAspNetIdentity<ApplicationUser>();
-
-
+                
             // services.AddRazorPages();
 
             //services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -86,16 +85,16 @@ namespace MilitaryManager.IdentityServer
                 builder => builder
                     .WithOrigins(
                         "http://localhost:4200",
-                        "http://localhost:5001",
+                        "https://localhost:5001",
                         "http://localhost:5000")
                     .SetIsOriginAllowedToAllowWildcardSubdomains()
                     .AllowAnyMethod()
                     .AllowAnyHeader()
             );
-
+           
             app.UseIdentityServer();
-            // RolesData.SeedRoles(app).Wait();
-            // app.UseRouting();
+
+            app.UseRouting();
 
             app.UseMvc(routes =>
             {
