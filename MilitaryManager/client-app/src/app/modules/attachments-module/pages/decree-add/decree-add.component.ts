@@ -18,7 +18,7 @@ export class DecreeAddComponent implements OnInit {
 
     clonedDecrees: { [s: string]: AttachmentModel; } = {};
 
-    constructor(private attachmentsService: AttachmentsService, private messageService: MessageService) { 
+    constructor(private attachmentsService: AttachmentsService, private messageService: MessageService) {
     }
 
     addSoldier(soldier: UnitModel) {
@@ -34,9 +34,10 @@ export class DecreeAddComponent implements OnInit {
   }
 
     onRowEditInit(attachment: AttachmentModel) {
-      if(attachment.id!=null)
+      var tmp = new AttachmentModel(attachment.id, attachment.soldier, attachment.action, attachment.date, attachment.payOff);
+      if(tmp.id!=null)
       {
-        this.clonedDecrees[attachment.id]=attachment; 
+        this.clonedDecrees[tmp.id]=tmp;
       }
     }
 
@@ -53,7 +54,7 @@ export class DecreeAddComponent implements OnInit {
               this.messageService.add({severity:'success', summary: 'Успішна спроба', detail:'Дані змінено'});
             }
         }
-        
+
     }
 
     onRowEditCancel(attachment: AttachmentModel, index: number) {
@@ -75,7 +76,7 @@ export class DecreeAddComponent implements OnInit {
 }
 
 export const Units: UnitModel[]=[
-  {id:1,_id:1, name: "Петро", surname: "Петренко", middlename: "Петрович"},
+  {id:1, _id: 1, name: "Петро", surname: "Петренко", middlename: "Петрович"},
   /*{id:2, name: "Іван", surname: "Іваненко", middlename: "Іванович"},
   {id:3, name: "Андрій", surname: "Островський", middlename: "Михайлович"},
   {id:4, name: "Степан", surname: "Панас", middlename: "Іванович"},
