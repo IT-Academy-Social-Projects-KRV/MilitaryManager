@@ -34,10 +34,14 @@ export class DecreeAddComponent implements OnInit {
   }
 
     onRowEditInit(attachment: AttachmentModel) {
-      var tmp = new AttachmentModel(attachment.id, attachment.soldier, attachment.action, attachment.date, attachment.payOff);
-      if(tmp.id!=null)
+      let editAttachment = new AttachmentModel(attachment.id)
+      editAttachment.soldier= attachment.soldier
+      editAttachment.action = attachment.action
+      editAttachment.date = attachment.date
+      editAttachment.payOff= attachment.payOff;
+      if(editAttachment.id!=null)
       {
-        this.clonedDecrees[tmp.id]=tmp;
+        this.clonedDecrees[editAttachment.id]=editAttachment;
       }
     }
 
