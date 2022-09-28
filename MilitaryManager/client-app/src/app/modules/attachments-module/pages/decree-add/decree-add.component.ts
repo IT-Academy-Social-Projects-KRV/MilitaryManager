@@ -36,7 +36,7 @@ export class DecreeAddComponent implements OnInit {
     onRowEditInit(attachment: AttachmentModel) {
       if(attachment.id!=null)
       {
-        this.clonedDecrees[attachment.id] = {...attachment};
+        this.clonedDecrees[attachment.id]=attachment; 
       }
     }
 
@@ -60,7 +60,6 @@ export class DecreeAddComponent implements OnInit {
       if(attachment.id!=null)
       {
         this.decrees[index] = this.clonedDecrees[attachment.id];
-        delete this.clonedDecrees[attachment.id];
       }
     }
 
@@ -76,9 +75,9 @@ export class DecreeAddComponent implements OnInit {
 }
 
 export const Units: UnitModel[]=[
-  {id:1, name: "Петро", surname: "Петренко", middlename: "Петрович"},
-  {id:2, name: "Іван", surname: "Іваненко", middlename: "Іванович"},
+  {id:1,_id:1, name: "Петро", surname: "Петренко", middlename: "Петрович"},
+  /*{id:2, name: "Іван", surname: "Іваненко", middlename: "Іванович"},
   {id:3, name: "Андрій", surname: "Островський", middlename: "Михайлович"},
   {id:4, name: "Степан", surname: "Панас", middlename: "Іванович"},
-  {id:5, name: "Мирослав", surname: "Загакайло", middlename: "Павлович"},
+  {id:5, name: "Мирослав", surname: "Загакайло", middlename: "Павлович"},*/
 ];
