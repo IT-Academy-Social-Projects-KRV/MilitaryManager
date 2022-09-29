@@ -1,5 +1,5 @@
 ﻿using MilitaryManager.Core.Entities.EntityToAttributeEntity;
-using MilitaryManager.Core.Entities.EquipmentToSoldierEntity;
+using MilitaryManager.Core.Entities.EquipmentToUnitEntity;
 using MilitaryManager.Core.Interfaces;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,6 +13,6 @@ namespace MilitaryManager.Core.Entities.EntityEntity
         public string RegNum { get; set; }
 
         public ICollection<EntityToAttribute> EntityToAttributes { get; set; }
-        public EquipmentToSoldier EquipmentToSoldiers { get; set; }
+        public EquipmentToUnit EquipmentToUnit { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MilitaryManager.Infrastructure.Migrations
 {
-    public partial class InitFullDb : Migration
+    public partial class InitFullDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -197,7 +197,7 @@ namespace MilitaryManager.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EquipmentToSoldiers",
+                name: "EquipmentToUnit",
                 schema: "Unit",
                 columns: table => new
                 {
@@ -209,30 +209,30 @@ namespace MilitaryManager.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EquipmentToSoldiers", x => x.Id);
+                    table.PrimaryKey("PK_EquipmentToUnit", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EquipmentToSoldiers_Divisions_DivisionId",
+                        name: "FK_EquipmentToUnit_Divisions_DivisionId",
                         column: x => x.DivisionId,
                         principalSchema: "Unit",
                         principalTable: "Divisions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EquipmentToSoldiers_Units_GivenById",
+                        name: "FK_EquipmentToUnit_Units_GivenById",
                         column: x => x.GivenById,
                         principalSchema: "Unit",
                         principalTable: "Units",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EquipmentToSoldiers_Entities_Id",
+                        name: "FK_EquipmentToUnit_Entities_Id",
                         column: x => x.Id,
                         principalSchema: "Unit",
                         principalTable: "Entities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EquipmentToSoldiers_Units_UnitId",
+                        name: "FK_EquipmentToUnit_Units_UnitId",
                         column: x => x.UnitId,
                         principalSchema: "Unit",
                         principalTable: "Units",
@@ -277,21 +277,21 @@ namespace MilitaryManager.Infrastructure.Migrations
                 column: "EntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EquipmentToSoldiers_DivisionId",
+                name: "IX_EquipmentToUnit_DivisionId",
                 schema: "Unit",
-                table: "EquipmentToSoldiers",
+                table: "EquipmentToUnit",
                 column: "DivisionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EquipmentToSoldiers_GivenById",
+                name: "IX_EquipmentToUnit_GivenById",
                 schema: "Unit",
-                table: "EquipmentToSoldiers",
+                table: "EquipmentToUnit",
                 column: "GivenById");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EquipmentToSoldiers_UnitId",
+                name: "IX_EquipmentToUnit_UnitId",
                 schema: "Unit",
-                table: "EquipmentToSoldiers",
+                table: "EquipmentToUnit",
                 column: "UnitId");
 
             migrationBuilder.CreateIndex(
@@ -359,7 +359,7 @@ namespace MilitaryManager.Infrastructure.Migrations
                 schema: "Unit");
 
             migrationBuilder.DropTable(
-                name: "EquipmentToSoldiers",
+                name: "EquipmentToUnit",
                 schema: "Unit");
 
             migrationBuilder.DropTable(

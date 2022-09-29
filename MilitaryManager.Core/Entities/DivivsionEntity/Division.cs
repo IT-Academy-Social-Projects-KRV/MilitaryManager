@@ -1,4 +1,4 @@
-﻿using MilitaryManager.Core.Entities.EquipmentToSoldierEntity;
+﻿using MilitaryManager.Core.Entities.EquipmentToUnitEntity;
 using MilitaryManager.Core.Entities.UnitEntity;
 using MilitaryManager.Core.Interfaces;
 using System.Collections.Generic;
@@ -19,6 +19,6 @@ namespace MilitaryManager.Core.Entities.DivisionEntity
         public ICollection<Division> SubDivision { get; set; }
 
         public ICollection<Unit> Units { get; set; }
-        public ICollection<EquipmentToSoldier> EquipmentToSoldiers { get; set; }
+        public ICollection<EquipmentToUnit> EquipmentToUnits { get; set; }
     }
 }

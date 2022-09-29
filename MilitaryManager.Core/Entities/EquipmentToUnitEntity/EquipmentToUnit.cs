@@ -5,10 +5,10 @@ using MilitaryManager.Core.Interfaces;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MilitaryManager.Core.Entities.EquipmentToSoldierEntity
+namespace MilitaryManager.Core.Entities.EquipmentToUnitEntity
 {
-    [Table("EquipmentToSoldiers", Schema = "Unit")]
-    public class EquipmentToSoldier : IBaseEntity<int>
+    [Table("EquipmentToUnit", Schema = "Unit")]
+    public class EquipmentToUnit : IBaseEntity<int>
     {
         public int Id { get; set; }
         public int? UnitId { get; set; }

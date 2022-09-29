@@ -2,19 +2,19 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MilitaryManager.Core.Entities.DivisionEntity;
 
-namespace MilitaryManager.Core.Entities.EquipmentToSoldierEntity
+namespace MilitaryManager.Core.Entities.EquipmentToUnitEntity
 {
-    public class EquipmentToSoldierConfiguration : IEntityTypeConfiguration<EquipmentToSoldier>
+    public class EquipmentToUnitConfiguration : IEntityTypeConfiguration<EquipmentToUnit>
     {
-        public void Configure(EntityTypeBuilder<EquipmentToSoldier> builder)
+        public void Configure(EntityTypeBuilder<EquipmentToUnit> builder)
         {
             builder
                 .HasKey(x => x.Id);
 
             builder
                 .HasOne(x => x.Equipment)
-                .WithOne(x => x.EquipmentToSoldiers)
-                .HasForeignKey<EquipmentToSoldier>(x => x.Id);
+                .WithOne(x => x.EquipmentToUnit)
+                .HasForeignKey<EquipmentToUnit>(x => x.Id);
 
             builder
                 .Property(x => x.GivenDate)
@@ -22,7 +22,7 @@ namespace MilitaryManager.Core.Entities.EquipmentToSoldierEntity
 
             builder
                 .HasOne(x => x.Unit)
-                .WithMany(x => x.EquipmentToSoldiers)
+                .WithMany(x => x.EquipmentToUnits)
                 .HasForeignKey(x => x.UnitId);
 
             builder
@@ -31,8 +31,8 @@ namespace MilitaryManager.Core.Entities.EquipmentToSoldierEntity
                 .HasForeignKey(x => x.GivenById);
 
             builder
-                .HasOne((System.Linq.Expressions.Expression<System.Func<EquipmentToSoldier, Division>>)(x => x.Division))
-                .WithMany(x => x.EquipmentToSoldiers)
+                .HasOne((System.Linq.Expressions.Expression<System.Func<EquipmentToUnit, Division>>)(x => x.Division))
+                .WithMany(x => x.EquipmentToUnits)
                 .HasForeignKey(x => x.DivisionId);
         }
     }

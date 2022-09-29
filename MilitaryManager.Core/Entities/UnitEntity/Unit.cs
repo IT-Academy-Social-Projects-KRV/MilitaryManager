@@ -1,5 +1,5 @@
 ﻿using MilitaryManager.Core.Entities.DivisionEntity;
-using MilitaryManager.Core.Entities.EquipmentToSoldierEntity;
+using MilitaryManager.Core.Entities.EquipmentToUnitEntity;
 using MilitaryManager.Core.Entities.PositionEntity;
 using MilitaryManager.Core.Entities.ProfileEntity;
 using MilitaryManager.Core.Entities.RankEntity;
@@ -28,7 +28,7 @@ namespace MilitaryManager.Core.Entities.UnitEntity
         public ICollection<Unit> SubUnits { get; set; }
 
         public ICollection<Profile> Profiles { get; set; }
-        public ICollection<EquipmentToSoldier> EquipmentToSoldiers { get; set; }
-        public ICollection<EquipmentToSoldier> EquipmentToWarehouseMan { get; set; }
+        public ICollection<EquipmentToUnit> EquipmentToUnits { get; set; }
+        public ICollection<EquipmentToUnit> EquipmentToWarehouseMan { get; set; }
     }
 }

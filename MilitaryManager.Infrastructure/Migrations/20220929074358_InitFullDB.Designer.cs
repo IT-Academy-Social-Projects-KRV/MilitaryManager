@@ -10,8 +10,8 @@ using MilitaryManager.Infrastructure.Data;
 namespace MilitaryManager.Infrastructure.Migrations
 {
     [DbContext(typeof(MilitaryManagerDbContext))]
-    [Migration("20220929072903_InitFullDb")]
-    partial class InitFullDb
+    [Migration("20220929074358_InitFullDB")]
+    partial class InitFullDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -104,7 +104,7 @@ namespace MilitaryManager.Infrastructure.Migrations
                     b.ToTable("EntityToAttributes","Unit");
                 });
 
-            modelBuilder.Entity("MilitaryManager.Core.Entities.EquipmentToSoldierEntity.EquipmentToSoldier", b =>
+            modelBuilder.Entity("MilitaryManager.Core.Entities.EquipmentToUnitEntity.EquipmentToUnit", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("int");
@@ -129,7 +129,7 @@ namespace MilitaryManager.Infrastructure.Migrations
 
                     b.HasIndex("UnitId");
 
-                    b.ToTable("EquipmentToSoldiers","Unit");
+                    b.ToTable("EquipmentToUnit","Unit");
                 });
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.PositionEntity.Position", b =>
@@ -252,10 +252,10 @@ namespace MilitaryManager.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MilitaryManager.Core.Entities.EquipmentToSoldierEntity.EquipmentToSoldier", b =>
+            modelBuilder.Entity("MilitaryManager.Core.Entities.EquipmentToUnitEntity.EquipmentToUnit", b =>
                 {
                     b.HasOne("MilitaryManager.Core.Entities.DivisionEntity.Division", "Division")
-                        .WithMany("EquipmentToSoldiers")
+                        .WithMany("EquipmentToUnits")
                         .HasForeignKey("DivisionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -267,13 +267,13 @@ namespace MilitaryManager.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("MilitaryManager.Core.Entities.EntityEntity.Entity", "Equipment")
-                        .WithOne("EquipmentToSoldiers")
-                        .HasForeignKey("MilitaryManager.Core.Entities.EquipmentToSoldierEntity.EquipmentToSoldier", "Id")
+                        .WithOne("EquipmentToUnit")
+                        .HasForeignKey("MilitaryManager.Core.Entities.EquipmentToUnitEntity.EquipmentToUnit", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MilitaryManager.Core.Entities.UnitEntity.Unit", "Unit")
-                        .WithMany("EquipmentToSoldiers")
+                        .WithMany("EquipmentToUnits")
                         .HasForeignKey("UnitId");
                 });
 
