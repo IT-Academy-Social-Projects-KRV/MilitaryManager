@@ -4,6 +4,7 @@ using IdentityServer.Models;
 using IdentityServer.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -41,10 +42,12 @@ namespace MilitaryManager.IdentityServer
 
             // Adds IdentityServer
             services.AddIdentityServer()
+                .AddDeveloperSigningCredential()
                 //.AddSigningCredential()
                 .AddInMemoryIdentityResources(IdentityConfig.GetIdentityResources())
                 .AddInMemoryApiResources(IdentityConfig.GetApiResources())
-                .AddInMemoryClients(IdentityConfig.GetClients("http://localhost:5001"))
+                .AddInMemoryApiScopes(IdentityConfig.GetApiScopes())
+                .AddInMemoryClients(IdentityConfig.GetClients("https://localhost:5001"))
                 .AddAspNetIdentity<ApplicationUser>();
                 
             // services.AddRazorPages();
