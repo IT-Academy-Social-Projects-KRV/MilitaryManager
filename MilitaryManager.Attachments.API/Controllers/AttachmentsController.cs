@@ -5,6 +5,8 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using MilitaryManager.Core.Interfaces.Services;
+using MilitaryManager.Core.Services;
 
 namespace MilitaryManager.Attachments.API.Controllers
 {
@@ -17,15 +19,21 @@ namespace MilitaryManager.Attachments.API.Controllers
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly string _documentExportFolder;
 
+        private readonly IUnitService _unitService;
+
         public AttachmentsController(
             IWebHostEnvironment hostingEnvironment, 
             IDocumentGenerationService service,
-            ILogger<WeatherForecastController> logger)
+            ILogger<WeatherForecastController> logger
+            , IUnitService UnitService
+            )
         {
             _documentGenerationService = service;
             _webRootPath = hostingEnvironment.WebRootPath;
             _logger = logger;
             _documentExportFolder = "documents";
+
+            _unitService = UnitService;
         }
 
         [HttpGet]
@@ -55,6 +63,9 @@ namespace MilitaryManager.Attachments.API.Controllers
             {
                 _logger.LogError(ex, $"Template for {templateName} document is not available");
             }
+
+            var unit = _unitService.GetUnitAsync(1);
+            Console.WriteLine($"{unit.Result.Id}, {unit.Result.Name}, {unit.Result.Address}");
 
             var jsonData = @"{city:'Рівне',currentDate:'08.09.2022',decreeNumber:'777'
                             ,lastname:'Скайуокера'

@@ -18,7 +18,7 @@ namespace MilitaryManager.Units.API.Controllers
         }
 
         [HttpGet]
-        [Route("{id:int?}")]
+        [Route("{id:int}")]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
             return Ok(await _unitServices.GetUnitAsync(id));
