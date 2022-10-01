@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using MilitaryManager.Core;
 using MilitaryManager.Infrastructure;
 
@@ -23,6 +24,10 @@ namespace MilitaryManager.Units.API
             services.AddCustomServices();
             services.AddAutoMapper();
             services.AddRepositories();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("Units", new OpenApiInfo { Title = "Unit", Version = "v1" });
+            });
             services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));
             services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
@@ -40,6 +45,12 @@ namespace MilitaryManager.Units.API
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/Units/swagger.json", "Unit V1");
+            });
 
             app.UseCors(
                 builder => builder
