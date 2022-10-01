@@ -25,7 +25,7 @@ namespace MilitaryManager.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new AttributeConfiguration());
             modelBuilder.ApplyConfiguration(new EntityConfiguration());
             modelBuilder.ApplyConfiguration(new EntityToAttributeConfiguration());
-            modelBuilder.ApplyConfiguration(new EquipmentToUnitConfiguration());
+            modelBuilder.ApplyConfiguration(new UnitToEquipmentConfiguration());
             modelBuilder.ApplyConfiguration(new PositionConfiguration());
             modelBuilder.ApplyConfiguration(new ProfileConfiguration());
             modelBuilder.ApplyConfiguration(new RankConfiguration());

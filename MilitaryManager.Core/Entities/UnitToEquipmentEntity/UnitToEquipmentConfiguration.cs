@@ -4,7 +4,7 @@ using MilitaryManager.Core.Entities.DivisionEntity;
 
 namespace MilitaryManager.Core.Entities.EquipmentToUnitEntity
 {
-    public class EquipmentToUnitConfiguration : IEntityTypeConfiguration<UnitToEquipment>
+    public class UnitToEquipmentConfiguration : IEntityTypeConfiguration<UnitToEquipment>
     {
         public void Configure(EntityTypeBuilder<UnitToEquipment> builder)
         {
