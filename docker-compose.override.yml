@@ -58,10 +58,9 @@ services:
       LOCAL_STORAGE_ACCOUNT_NAME: militarymanager
       LOCAL_STORAGE_ACCOUNT_KEY: C/yu8u+EAak7iTH73rUCUj+2NZr6NNgFRPtFPGnJtPYvpZfaW9QJopXd/Xh0HrmzakkWyw/28hss+AStsgfKVg==   
    volumes:
-       - "D:\\univer\\SoftServe\\azure-blob-storage\\data\\BlockBlob:/blobroot"
+       - "blobdata:/data"
    ports:
-      - "5008:80"
-      - "5009:443"
+     - 11002:11002
    networks:
       - my-network
 
