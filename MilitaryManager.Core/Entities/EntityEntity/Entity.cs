@@ -13,6 +13,6 @@ namespace MilitaryManager.Core.Entities.EntityEntity
         public string RegNum { get; set; }
 
         public ICollection<EntityToAttribute> EntityToAttributes { get; set; }
-        public EquipmentToUnit EquipmentToUnit { get; set; }
+        public UnitToEquipment UnitToEquipment { get; set; }
     }
 }

@@ -19,6 +19,6 @@ namespace MilitaryManager.Core.Entities.DivisionEntity
         public ICollection<Division> SubDivision { get; set; }
 
         public ICollection<Unit> Units { get; set; }
-        public ICollection<EquipmentToUnit> EquipmentToUnits { get; set; }
+        public ICollection<UnitToEquipment> UnitToEquipments { get; set; }
     }
 }

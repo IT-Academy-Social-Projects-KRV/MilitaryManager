@@ -7,8 +7,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MilitaryManager.Core.Entities.EquipmentToUnitEntity
 {
-    [Table("EquipmentToUnit", Schema = "Unit")]
-    public class EquipmentToUnit : IBaseEntity<int>
+    [Table("UnitToEquipments", Schema = "Unit")]
+    public class UnitToEquipment : IBaseEntity<int>
     {
         public int Id { get; set; }
         public int? UnitId { get; set; }

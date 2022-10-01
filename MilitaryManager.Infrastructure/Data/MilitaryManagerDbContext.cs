@@ -35,7 +35,7 @@ namespace MilitaryManager.Infrastructure.Data
         public DbSet<Attribute> Attributes { get; set; }
         public DbSet<Entity> Entities { get; set; }
         public DbSet<EntityToAttribute> EntityToAttributes { get; set; }
-        public DbSet<EquipmentToUnit> EquipmentToUnits { get; set; }
+        public DbSet<UnitToEquipment> UnitToEquipments { get; set; }
         public DbSet<Position> Positions { get; set; }
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Rank> Ranks { get; set; }

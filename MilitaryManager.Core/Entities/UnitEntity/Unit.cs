@@ -28,7 +28,7 @@ namespace MilitaryManager.Core.Entities.UnitEntity
         public ICollection<Unit> SubUnits { get; set; }
 
         public ICollection<Profile> Profiles { get; set; }
-        public ICollection<EquipmentToUnit> EquipmentToUnits { get; set; }
-        public ICollection<EquipmentToUnit> EquipmentToWarehouseMan { get; set; }
+        public ICollection<UnitToEquipment> UnitToEquipments { get; set; }
+        public ICollection<UnitToEquipment> EquipmentToWarehouseMan { get; set; }
     }
 }
