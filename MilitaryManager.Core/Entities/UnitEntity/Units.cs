@@ -13,7 +13,7 @@ namespace MilitaryManager.Core.Entities.UnitEntity
                 .Where(x => x.ParentId == null);
             }
         }
-
+        
         internal class UnitsListById : Specification<Unit>
         {
             public UnitsListById(int id)
