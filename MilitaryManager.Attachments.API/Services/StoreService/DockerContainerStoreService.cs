@@ -25,26 +25,17 @@ namespace MilitaryManager.Attachments.API.Services.StoreService
 
             string containerName = _configuration.GetValue<string>("DockerAzureConfiguration:ContainerName");
 
-            BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
-            if (!containerClient.Exists())
+            if (uploadedFile != null)
             {
-                containerClient = await blobServiceClient.CreateBlobContainerAsync(containerName);
+                BlobContainerClient container = new BlobContainerClient(connectionString, containerName);
+                using (var stream = new MemoryStream())
+                {
+                    await uploadedFile.CopyToAsync(stream);
+                    stream.Position = 0;
+                    await container.UploadBlobAsync(uploadedFile.FileName, stream);
+                }
+
             }
-
-            string localPath = "";
-            string localFilePath = Path.Combine(localPath, uploadedFile.FileName);
-
-
-         //   string fileName = "quickstart" + Guid.NewGuid().ToString() + ".txt";
-         //   string localFilePath = Path.Combine(localPath, fileName);
-
-            //await System.IO.File.WriteAllTextAsync(localFilePath, "Hello, World!");
-
-           // BlobClient blobClient = containerClient.GetBlobClient(fileName);
-
-            BlobClient blobClient = containerClient.GetBlobClient(uploadedFile.FileName);
-
-            await blobClient.UploadAsync(localFilePath, true);
         }
     }
 }
