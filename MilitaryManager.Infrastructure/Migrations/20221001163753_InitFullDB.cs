@@ -197,7 +197,7 @@ namespace MilitaryManager.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EquipmentToUnit",
+                name: "UnitToEquipments",
                 schema: "Unit",
                 columns: table => new
                 {
@@ -209,30 +209,30 @@ namespace MilitaryManager.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EquipmentToUnit", x => x.Id);
+                    table.PrimaryKey("PK_UnitToEquipments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EquipmentToUnit_Divisions_DivisionId",
+                        name: "FK_UnitToEquipments_Divisions_DivisionId",
                         column: x => x.DivisionId,
                         principalSchema: "Unit",
                         principalTable: "Divisions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EquipmentToUnit_Units_GivenById",
+                        name: "FK_UnitToEquipments_Units_GivenById",
                         column: x => x.GivenById,
                         principalSchema: "Unit",
                         principalTable: "Units",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EquipmentToUnit_Entities_Id",
+                        name: "FK_UnitToEquipments_Entities_Id",
                         column: x => x.Id,
                         principalSchema: "Unit",
                         principalTable: "Entities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EquipmentToUnit_Units_UnitId",
+                        name: "FK_UnitToEquipments_Units_UnitId",
                         column: x => x.UnitId,
                         principalSchema: "Unit",
                         principalTable: "Units",
@@ -277,24 +277,6 @@ namespace MilitaryManager.Infrastructure.Migrations
                 column: "EntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EquipmentToUnit_DivisionId",
-                schema: "Unit",
-                table: "EquipmentToUnit",
-                column: "DivisionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_EquipmentToUnit_GivenById",
-                schema: "Unit",
-                table: "EquipmentToUnit",
-                column: "GivenById");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_EquipmentToUnit_UnitId",
-                schema: "Unit",
-                table: "EquipmentToUnit",
-                column: "UnitId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Profiles_AttributeId",
                 schema: "Unit",
                 table: "Profiles",
@@ -304,6 +286,24 @@ namespace MilitaryManager.Infrastructure.Migrations
                 name: "IX_Profiles_UnitId",
                 schema: "Unit",
                 table: "Profiles",
+                column: "UnitId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UnitToEquipments_DivisionId",
+                schema: "Unit",
+                table: "UnitToEquipments",
+                column: "DivisionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UnitToEquipments_GivenById",
+                schema: "Unit",
+                table: "UnitToEquipments",
+                column: "GivenById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UnitToEquipments_UnitId",
+                schema: "Unit",
+                table: "UnitToEquipments",
                 column: "UnitId");
 
             migrationBuilder.AddForeignKey(
@@ -359,10 +359,6 @@ namespace MilitaryManager.Infrastructure.Migrations
                 schema: "Unit");
 
             migrationBuilder.DropTable(
-                name: "EquipmentToUnit",
-                schema: "Unit");
-
-            migrationBuilder.DropTable(
                 name: "Positions",
                 schema: "Unit");
 
@@ -375,15 +371,19 @@ namespace MilitaryManager.Infrastructure.Migrations
                 schema: "Unit");
 
             migrationBuilder.DropTable(
+                name: "UnitToEquipments",
+                schema: "Unit");
+
+            migrationBuilder.DropTable(
+                name: "Attributes",
+                schema: "Unit");
+
+            migrationBuilder.DropTable(
                 name: "Divisions",
                 schema: "Unit");
 
             migrationBuilder.DropTable(
                 name: "Entities",
-                schema: "Unit");
-
-            migrationBuilder.DropTable(
-                name: "Attributes",
                 schema: "Unit");
 
             migrationBuilder.DropIndex(
