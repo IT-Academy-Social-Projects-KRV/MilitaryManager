@@ -1,13 +1,4 @@
-﻿using Ardalis.Specification;
-using AutoMapper;
-using MilitaryManager.Core.DTO.Units;
-using MilitaryManager.Core.Entities.UnitEntity;
-using MilitaryManager.Core.Interfaces.Repositories;
-using MilitaryManager.Core.Interfaces.Services;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace MilitaryManager.Core.Services
+﻿namespace MilitaryManager.Core.Services
 {
     public class UnitService : IUnitService
     {
@@ -56,9 +47,9 @@ namespace MilitaryManager.Core.Services
             return _mapper.Map<UnitDTO>(updateUnit);
         }
 
-        public async Task<UnitDTO> DeleteUnitAsync(UnitDTO query)
+        public async Task<UnitDTO> DeleteUnitAsync(int id)
         {
-            var unit = _mapper.Map<Unit>(query);
+            var unit = new Unit() { Id = id };
             var deleteUnit = await _unitRepository.DeleteAsync(unit);
             await _unitRepository.SaveChangesAcync();
 

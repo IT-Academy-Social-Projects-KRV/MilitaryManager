@@ -1,6 +1,4 @@
-﻿using Ardalis.Specification;
-
-namespace MilitaryManager.Core.Entities.UnitEntity
+﻿namespace MilitaryManager.Core.Entities.UnitEntity
 {
     public class Units
     {
@@ -13,6 +11,7 @@ namespace MilitaryManager.Core.Entities.UnitEntity
                 .Where(x => x.ParentId == null);
             }
         }
+
         internal class UnitsListById : Specification<Unit>
         {
             public UnitsListById(int id)

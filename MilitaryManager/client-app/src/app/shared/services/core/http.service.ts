@@ -9,29 +9,14 @@ import {
 import { Observable } from 'rxjs';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { AuthService } from '../auth.service';
 
 @Injectable()
 export class HttpService {
     constructor(
-        private httpClient: HttpClient
+        private httpClient: HttpClient,
+        private _authService: AuthService
     ) {
-    }
-
-    private setHeaders(): HttpHeaders {
-        const headersConfig = {
-            'Content-Type': 'application/json',
-            Authorization: `Token ${this.token}`,
-            Accept: 'application/json',
-        };
-        return new HttpHeaders(headersConfig);
-    }
-
-    public get token(): string | null {
-        return window.localStorage.getItem('token');
-    }
-
-    public set token(value: string | null) {
-        window.localStorage.setItem(`token`, value ?? '');
     }
 
     private formatErrors(error: HttpErrorResponse): Observable<never> {
@@ -45,25 +30,25 @@ export class HttpService {
 
     get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
         return this.httpClient
-            .get(`${path}`, { headers: this.setHeaders(), params })
+            .get(`${path}`,  { params })
             .pipe(catchError((error: HttpErrorResponse) => this.formatErrors(error)));
     }
 
     put(path: string, body: any = {}): Observable<any> {
         return this.httpClient
-            .put(`${path}`, JSON.stringify(body), { headers: this.setHeaders() })
+            .put(`${path}`, JSON.stringify(body))
             .pipe(catchError((error: HttpErrorResponse) => this.formatErrors(error)));
     }
 
     post(path: string, body: any = {}): Observable<any> {
         return this.httpClient
-            .post(`${path}`, JSON.stringify(body), { headers: this.setHeaders() })
+            .post(`${path}`, JSON.stringify(body))
             .pipe(catchError((error: HttpErrorResponse) => this.formatErrors(error)));
     }
 
     delete(path: string): Observable<any> {
         return this.httpClient
-            .delete(`${path}`, { headers: this.setHeaders() })
+            .delete(`${path}`)
             .pipe(catchError((error: HttpErrorResponse) => this.formatErrors(error)));
     }
 }

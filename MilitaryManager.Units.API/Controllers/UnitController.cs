@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MilitaryManager.Core.DTO.Units;
-using MilitaryManager.Core.Interfaces.Services;
-using System.Threading.Tasks;
-
-namespace MilitaryManager.Units.API.Controllers
+﻿namespace MilitaryManager.Units.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -32,21 +27,22 @@ namespace MilitaryManager.Units.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUnit([FromBody] UnitDTO query)
+        public async Task<IActionResult> Create([FromBody] UnitDTO query)
         {
             return Ok(await _unitServices.CreateUnitAsync(query));
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateUnit([FromBody] UnitDTO query)
+        public async Task<IActionResult> Update([FromBody] UnitDTO query)
         {
             return Ok(await _unitServices.UpdateUnitAsync(query));
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteUnit([FromBody] UnitDTO query)
+        [Route("{id}")]
+        public async Task<IActionResult> DeleteUnit([FromRoute] int id)
         {
-            return Ok(await _unitServices.DeleteUnitAsync(query.Id));
+            return Ok(await _unitServices.DeleteUnitAsync(id));
         }
     }
 }
