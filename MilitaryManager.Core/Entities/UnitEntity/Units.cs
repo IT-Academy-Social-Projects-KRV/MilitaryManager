@@ -1,4 +1,6 @@
-﻿namespace MilitaryManager.Core.Entities.UnitEntity
+﻿using Ardalis.Specification;
+
+namespace MilitaryManager.Core.Entities.UnitEntity
 {
     public class Units
     {
