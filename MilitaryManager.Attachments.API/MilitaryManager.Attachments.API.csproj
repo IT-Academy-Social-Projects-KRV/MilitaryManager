@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
     <Folder Include="wwwroot\data\img\" />
     <Folder Include="wwwroot\documents\" />
   </ItemGroup>

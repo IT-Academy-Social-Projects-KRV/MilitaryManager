@@ -6,7 +6,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using MilitaryManager.Core.Interfaces.Services;
-using MilitaryManager.Core.Services;
+using Newtonsoft.Json;
 
 namespace MilitaryManager.Attachments.API.Controllers
 {
@@ -64,8 +64,11 @@ namespace MilitaryManager.Attachments.API.Controllers
                 _logger.LogError(ex, $"Template for {templateName} document is not available");
             }
 
-            var unit = _unitService.GetUnitAsync(1);
-            Console.WriteLine($"{unit.Result.Id}, {unit.Result.Name}, {unit.Result.Address}");
+            var unit = _unitService.GetUnitAsync(1).Result;
+            var obj = new { name = unit.Name };
+            var jsonData2 = JsonConvert.SerializeObject(obj);
+
+            Console.WriteLine(jsonData2);
 
             var jsonData = @"{city:'Рівне',currentDate:'08.09.2022',decreeNumber:'777'
                             ,lastname:'Скайуокера'
@@ -89,7 +92,7 @@ namespace MilitaryManager.Attachments.API.Controllers
 
             string docPath = Path.Combine(_webRootPath, _documentExportFolder);
             var docName = _documentGenerationService.GeneratePdfDocument(docPath,
-                templateName, templateData, jsonData);
+                templateName, templateData, jsonData2);
 
             return $"https://{Request.Host}/api/attachments/find?name={docName}";
         }
