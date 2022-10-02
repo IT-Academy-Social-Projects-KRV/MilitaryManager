@@ -21,18 +21,16 @@ namespace MilitaryManager.Attachments.API.Controllers
 
         private readonly IUnitService _unitService;
 
-        public AttachmentsController(
-            IWebHostEnvironment hostingEnvironment, 
+        public AttachmentsController(IWebHostEnvironment hostingEnvironment,
             IDocumentGenerationService service,
-            ILogger<WeatherForecastController> logger
-            , IUnitService UnitService
-            )
+            ILogger<WeatherForecastController> logger,
+            IUnitService UnitService)
         {
             _documentGenerationService = service;
             _webRootPath = hostingEnvironment.WebRootPath;
             _logger = logger;
             _documentExportFolder = "documents";
-
+            
             _unitService = UnitService;
         }
 
@@ -68,7 +66,6 @@ namespace MilitaryManager.Attachments.API.Controllers
             var obj = new { name = unit.Name };
             var jsonData2 = JsonConvert.SerializeObject(obj);
 
-
             var jsonData = @"{city:'Рівне',currentDate:'08.09.2022',decreeNumber:'777'
                             ,lastname:'Скайуокера'
                             ,name:'Люка'
@@ -90,6 +87,7 @@ namespace MilitaryManager.Attachments.API.Controllers
             _documentGenerationService.ApplyFontResolver("/wwwroot"); //_webRootPath);
 
             string docPath = Path.Combine(_webRootPath, _documentExportFolder);
+
             var docName = _documentGenerationService.GeneratePdfDocument(docPath,
                 templateName, templateData, jsonData2);
 
