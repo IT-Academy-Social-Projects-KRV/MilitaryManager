@@ -68,7 +68,6 @@ namespace MilitaryManager.Attachments.API.Controllers
             var obj = new { name = unit.Name };
             var jsonData2 = JsonConvert.SerializeObject(obj);
 
-            Console.WriteLine(jsonData2);
 
             var jsonData = @"{city:'Рівне',currentDate:'08.09.2022',decreeNumber:'777'
                             ,lastname:'Скайуокера'
