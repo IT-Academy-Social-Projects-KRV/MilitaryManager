@@ -52,7 +52,7 @@ export abstract class BaseService<TModel extends BaseModel>  {
         serviceType: ServiceType = ServiceType.web,
     ) {
         this.single = new BaseSingleService<TModel>(HttpService, controllerName, ConfigService, createModel, serviceType);
-        this.collection = new BaseCollectionService<TModel>(HttpService, `collection/${controllerName}`, ConfigService, createModel, serviceType);
+        this.collection = new BaseCollectionService<TModel>(HttpService, `${controllerName}/collection`, ConfigService, createModel, serviceType);
     }
 }
 
@@ -68,14 +68,7 @@ class BaseCollectionService<TModel extends BaseModel> extends CoreHttpService {
     }
 
     private mapModel(payload: any): TModel {
-        const model = new this.createModel(payload.id ?? null);
-        // TODO: Implement set payload function fo models or use parsing revivers
-        // or use lodash to parse json objects
-        // model.setPayload(payload);
-        // Example JSON.parse({}, reviverExtensions.defaultReviver)
-
-        Object.assign(model, payload);
-        return model;
+        return JSON.parse(payload);
     }
 
     getAll(): Observable<TModel[]> {

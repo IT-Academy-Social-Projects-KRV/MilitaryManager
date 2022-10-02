@@ -18,9 +18,10 @@ namespace MilitaryManager.Units.API.Controllers
 
 
         [HttpGet]
+        [Route("collection")]
         public async Task<IActionResult> GetRootTreeUnit()
         {
-            return Ok(await _unitServices.GetUnitsTreeAsync());
+            return Ok(await _unitServices.GetUnitsTreeAsync(null));
         }
 
         [HttpGet]
@@ -45,7 +46,7 @@ namespace MilitaryManager.Units.API.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteUnit([FromBody] UnitDTO query)
         {
-            return Ok(await _unitServices.DeleteUnitAsync(query));
+            return Ok(await _unitServices.DeleteUnitAsync(query.Id));
         }
     }
 }
