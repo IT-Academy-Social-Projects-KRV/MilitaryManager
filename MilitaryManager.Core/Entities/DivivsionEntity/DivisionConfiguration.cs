@@ -19,9 +19,7 @@ namespace MilitaryManager.Core.Entities.DivisionEntity
                 .IsRequired();
 
             builder
-
                 .HasMany(x => x.SubDivisions)
-
                 .WithOne(x => x.Parent)
                 .HasForeignKey(x => x.ParentId);
         }

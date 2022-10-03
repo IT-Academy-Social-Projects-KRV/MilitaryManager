@@ -231,9 +231,7 @@ namespace MilitaryManager.Infrastructure.Migrations
             modelBuilder.Entity("MilitaryManager.Core.Entities.DivisionEntity.Division", b =>
                 {
                     b.HasOne("MilitaryManager.Core.Entities.DivisionEntity.Division", "Parent")
-
                         .WithMany("SubDivisions")
-
                         .HasForeignKey("ParentId");
                 });
 
