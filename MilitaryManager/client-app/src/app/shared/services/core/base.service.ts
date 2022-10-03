@@ -30,14 +30,6 @@ export abstract class CoreHttpService {
         }
         throw error;
     }
-
-    protected get token(): string | null {
-        return this.httpService.token;
-    }
-
-    protected set token(value: string | null) {
-        this.httpService.token = value;
-    }
 }
 
 export abstract class BaseService<TModel extends BaseModel>  {

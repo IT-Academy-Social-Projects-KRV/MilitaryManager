@@ -1,8 +1,11 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Logging;
+using Microsoft.IdentityModel.Tokens;
 using MilitaryManager.Core;
 using MilitaryManager.Infrastructure;
 
@@ -20,6 +23,20 @@ namespace MilitaryManager.Units.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+               .AddJwtBearer(opt =>
+               {
+                   var identityUrl = Configuration.GetValue<string>("IdentityUrl");
+
+                   opt.RequireHttpsMetadata = false;
+                   opt.Authority = identityUrl;
+                   opt.Audience = "unitsAPI";
+                   opt.TokenValidationParameters = new TokenValidationParameters
+                   {
+                       // As issuer is HTTPS localhost, and authority is HTTP docker, but should be the same
+                       ValidateIssuer = false,
+                   };
+               });
             services.AddCustomServices();
             services.AddAutoMapper();
             services.AddRepositories();
@@ -33,21 +50,27 @@ namespace MilitaryManager.Units.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                IdentityModelEventSource.ShowPII = true;
             }
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();
-
-            app.UseAuthorization();
-
             app.UseCors(
                 builder => builder
-                    .WithOrigins("http://localhost:4200", "http://localhost:5001", "http://localhost:5000")
-                    .SetIsOriginAllowedToAllowWildcardSubdomains()
+                    .WithOrigins(
+                        "http://localhost:4200",
+                        "https://localhost:5001",
+                        "http://localhost:5000")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
+                    .AllowCredentials()
             );
+
+            app.UseRouting();
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

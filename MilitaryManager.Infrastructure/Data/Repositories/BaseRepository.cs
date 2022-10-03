@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MilitaryManager.Infrastructure.Data.Repositories
 {
-    internal class BaseRepository<TEntity, TType> : IRepository<TEntity, TType> where TEntity : class, IBaseEntity<TType>
+    internal class BaseRepository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class, IBaseEntity<TKey>
     {
         protected readonly MilitaryManagerDbContext _dbContext;
         protected readonly DbSet<TEntity> _dbSet;
@@ -22,9 +22,10 @@ namespace MilitaryManager.Infrastructure.Data.Repositories
             _dbSet = _dbContext.Set<TEntity>();
         }
 
-        public async Task AddAsync(TEntity entity)
+        public async Task<TEntity> AddAsync(TEntity entity)
         {
             await _dbSet.AddAsync(entity);
+            return entity;
         }
 
         public async Task AddRangeAsync(List<TEntity> entities)
@@ -32,9 +33,10 @@ namespace MilitaryManager.Infrastructure.Data.Repositories
             await _dbSet.AddRangeAsync(entities);
         }
 
-        public async Task DeleteAsync(TEntity entity)
+        public async Task<TEntity> DeleteAsync(TEntity entity)
         {
             await Task.Run(() => _dbSet.Remove(entity));
+            return entity;
         }
 
         public async Task DeleteRangeAsync(IEnumerable<TEntity> entities)
@@ -47,7 +49,7 @@ namespace MilitaryManager.Infrastructure.Data.Repositories
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<TEntity> GetByKeyAsync<TKey>(TKey key)
+        public async Task<TEntity> GetByKeyAsync(TKey key)
         {
             return await _dbSet.FindAsync(key);
         }
@@ -65,14 +67,17 @@ namespace MilitaryManager.Infrastructure.Data.Repositories
             return await _dbContext.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(TEntity entity)
+        public async Task<TEntity> UpdateAsync(TEntity entity)
         {
             await Task.Run(() => _dbContext.Entry(entity).State = EntityState.Modified);
+            return entity;
         }
+
         public async Task<IEnumerable<TEntity>> GetListBySpecAsync(ISpecification<TEntity> specification)
         {
             return await ApplySpecification(specification).ToListAsync();
         }
+
         private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> specification)
         {
             var evaluator = new SpecificationEvaluator<TEntity>();

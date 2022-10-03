@@ -16,7 +16,7 @@ namespace IdentityServer
 				new IdentityResource("role", new []{ JwtClaimTypes.Role })
 			};
 		}
-		
+
 
 		public static IEnumerable<Client> GetClients(string hostname)
 		{
@@ -24,15 +24,16 @@ namespace IdentityServer
 			{
 				new Client
 				{
-					ClientId = "js",
-					ClientName = "JavaScript Client",
-					AllowedGrantTypes = GrantTypes.Implicit,
+					ClientId = "angular",
+					ClientName = "Angular SPA",
+					AllowedGrantTypes = GrantTypes.Code,
 					AllowAccessTokensViaBrowser = true,
 
 					RequireConsent = false,
+					RequireClientSecret = false,
 
 					RedirectUris =           { $"{hostname}/SignInCallback", $"{hostname}/SilentSignInCallback" },
-					PostLogoutRedirectUris = { $"{hostname}/" },
+					PostLogoutRedirectUris = { $"{hostname}/SignOutCallback" },
 					AllowedCorsOrigins = { hostname },
 
 					AllowedScopes =
@@ -41,7 +42,7 @@ namespace IdentityServer
 						IdentityServerConstants.StandardScopes.Profile,
 						IdentityServerConstants.StandardScopes.Email,
 						JwtClaimTypes.Role,
-						"api1"
+						"unitsAPI"
 					}
 				}
 			};
@@ -51,17 +52,26 @@ namespace IdentityServer
 		{
 			return new List<ApiResource>
 			{
-				new ApiResource("api1")
+				new ApiResource("unitsAPI")
 				{
 					UserClaims =
 					{
 						JwtClaimTypes.Name,
 						JwtClaimTypes.Email,
 						JwtClaimTypes.Role
-					}
+					},
+					Scopes = { "unitsAPI" }
 				}
 			};
 
+		}
+
+		public static IEnumerable<ApiScope> GetApiScopes()
+        {
+			return new List<ApiScope> 
+			{ 
+				new ApiScope("unitsAPI", "Units API") 
+			};
 		}
 	}
 }

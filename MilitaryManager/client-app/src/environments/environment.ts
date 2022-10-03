@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   webserverApiPath: '/api/',
-  webUrl: 'https://localhost:5001'
+  webUrl: 'https://localhost:5001',
+  identityUrl: 'https://localhost:5007'
 };
 
 /*

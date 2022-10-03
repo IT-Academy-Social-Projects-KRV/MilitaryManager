@@ -11,6 +11,6 @@ namespace MilitaryManager.Core.DTO.Units
 
         public UnitDTO Parent { get; set; }
 
-        public ICollection<UnitDTO> SubUnits { get; set; }
+        public List<UnitDTO> SubUnits { get; set; }
     }
 }
