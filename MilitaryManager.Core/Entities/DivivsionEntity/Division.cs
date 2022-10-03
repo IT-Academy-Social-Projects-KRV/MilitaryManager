@@ -16,7 +16,11 @@ namespace MilitaryManager.Core.Entities.DivisionEntity
 
         public Division Parent { get; set; }
 
+<<<<<<< HEAD
         public ICollection<Division> SubDivision { get; set; }
+=======
+        public ICollection<Division> SubDivisions { get; set; }
+>>>>>>> develop
 
         public ICollection<Unit> Units { get; set; }
         public ICollection<UnitToEquipment> UnitToEquipments { get; set; }
