@@ -59,32 +59,32 @@ class BaseCollectionService<TModel extends BaseModel> extends CoreHttpService {
         super(httpService, controllerName, configService, serviceType);
     }
 
-    private mapModel(payload: any): TModel {
-      const model = new this.createModel(payload.id ?? null);
-      // TODO: Implement set payload function fo models or use parsing revivers
-      // or use lodash to parse json objects
-      // model.setPayload(payload);
-      // Example JSON.parse({}, reviverExtensions.defaultReviver)
+  private mapModel(payload: any): TModel {
+    const model = new this.createModel(payload.id ?? null);
+    // TODO: Implement set payload function fo models or use parsing revivers
+    // or use lodash to parse json objects
+    // model.setPayload(payload);
+    // Example JSON.parse({}, reviverExtensions.defaultReviver)
 
-      Object.assign(model, payload);
-      return model;
-    }
+    Object.assign(model, payload);
+    return model;
+  }
 
-    getAll(): Observable<TModel[]> {
-        return this.httpService.get(`${this.baseUrl}${this.controllerName}`)
-            .pipe(
-                map((payloads: any) => payloads.map((payload: any) => this.mapModel(payload))),
-                catchError(this.handleError)
-            );
-    }
+  getAll(): Observable<TModel[]> {
+      return this.httpService.get(`${this.baseUrl}${this.controllerName}`)
+          .pipe(
+              map((payloads: any) => payloads.map((payload: any) => this.mapModel(payload))),
+              catchError(this.handleError)
+          );
+  }
 
-    getListById(id: number): Observable<TModel[]> {
-      return this.httpService.get(`${this.baseUrl}${this.controllerName}/${id}`)
-        .pipe(
-          map((payloads: any) => payloads.map((payload: any) => this.mapModel(payload))),
-          catchError(this.handleError)
-        );
-    }
+  getListById(id: number): Observable<TModel[]> {
+    return this.httpService.get(`${this.baseUrl}${this.controllerName}/${id}`)
+      .pipe(
+        map((payloads: any) => payloads.map((payload: any) => this.mapModel(payload))),
+        catchError(this.handleError)
+      );
+  }
 }
 
 class BaseSingleService<TModel extends BaseModel> extends CoreHttpService {
