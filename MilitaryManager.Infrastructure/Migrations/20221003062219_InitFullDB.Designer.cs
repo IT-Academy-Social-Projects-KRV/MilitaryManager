@@ -10,7 +10,7 @@ using MilitaryManager.Infrastructure.Data;
 namespace MilitaryManager.Infrastructure.Migrations
 {
     [DbContext(typeof(MilitaryManagerDbContext))]
-    [Migration("20221001163753_InitFullDB")]
+    [Migration("20221003062219_InitFullDB")]
     partial class InitFullDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -233,7 +233,7 @@ namespace MilitaryManager.Infrastructure.Migrations
             modelBuilder.Entity("MilitaryManager.Core.Entities.DivisionEntity.Division", b =>
                 {
                     b.HasOne("MilitaryManager.Core.Entities.DivisionEntity.Division", "Parent")
-                        .WithMany("SubDivision")
+                        .WithMany("SubDivisions")
                         .HasForeignKey("ParentId");
                 });
 
