@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
-using System.Threading.Tasks;
 using MilitaryManager.Core.Interfaces.Services;
 using Newtonsoft.Json;
 
@@ -64,32 +63,14 @@ namespace MilitaryManager.Attachments.API.Controllers
 
             var unit = _unitService.GetUnitAsync(1).Result;
             var obj = new { name = unit.Name };
-            var jsonData2 = JsonConvert.SerializeObject(obj);
-
-            var jsonData = @"{city:'Рівне',currentDate:'08.09.2022',decreeNumber:'777'
-                            ,lastname:'Скайуокера'
-                            ,name:'Люка'
-                            ,middlename:'Івановича'
-                            ,unitNumber:'№ 5'
-                            ,unitNumberNew:'№ 6'
-                            ,decreeNumber2:'17'
-                            ,day:'05'
-                            ,month:'липня'
-                            ,year:'2022'
-                            ,percent:'15'
-                            ,anotherPercent:'25'
-                            ,first:'01'
-                            ,last:'30'
-                            ,newPlace:'військової частини № 7'
-                            ,father:'Вовк Євгеній Андрійович'
-                            }";
+            var jsonData = JsonConvert.SerializeObject(obj);
 
             _documentGenerationService.ApplyFontResolver("/wwwroot"); //_webRootPath);
 
             string docPath = Path.Combine(_webRootPath, _documentExportFolder);
 
             var docName = _documentGenerationService.GeneratePdfDocument(docPath,
-                templateName, templateData, jsonData2);
+                templateName, templateData, jsonData);
 
             return $"https://{Request.Host}/api/attachments/find?name={docName}";
         }
