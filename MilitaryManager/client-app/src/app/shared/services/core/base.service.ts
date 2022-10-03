@@ -65,13 +65,7 @@ class BaseCollectionService<TModel extends BaseModel> extends CoreHttpService {
       // or use lodash to parse json objects
       // model.setPayload(payload);
       // Example JSON.parse({}, reviverExtensions.defaultReviver)
-/*
-      payload.label = "haha";
-      payload.data = "haha";
-      payload.expandedIcon = "pi pi-folder-open";
-      payload.collapsedIcon = "pi pi-folder";
-      payload.leaf = false;
-      */
+
       Object.assign(model, payload);
       return model;
     }
@@ -82,6 +76,14 @@ class BaseCollectionService<TModel extends BaseModel> extends CoreHttpService {
                 map((payloads: any) => payloads.map((payload: any) => this.mapModel(payload))),
                 catchError(this.handleError)
             );
+    }
+
+    getListById(id: number): Observable<TModel[]> {
+      return this.httpService.get(`${this.baseUrl}${this.controllerName}/${id}`)
+        .pipe(
+          map((payloads: any) => payloads.map((payload: any) => this.mapModel(payload))),
+          catchError(this.handleError)
+        );
     }
 }
 
@@ -98,12 +100,6 @@ class BaseSingleService<TModel extends BaseModel> extends CoreHttpService {
 
     private mapModel(payload: any): TModel {
         const model = new this.createModel(payload.id ?? null);
-
-        payload.label = "haha";
-        payload.data = "haha";
-        payload.expandedIcon = "pi pi-folder-open";
-        payload.collapsedIcon = "pi pi-folder";
-        payload.leaf = false;
         Object.assign(model, payload);
         return model;
     }

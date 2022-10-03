@@ -26,15 +26,14 @@ export class UnitsListComponent implements OnInit {
     this.loading = true;
     setTimeout(() => {
       this.unitsService.collection.getAll()
-        .subscribe( function (units){
-        units.forEach(function (unit){
+        .subscribe(  (units) => {
+        units.forEach( (unit) => {
           unit.label = unit.lastName + unit.firstName;
           unit.expandedIcon = "pi pi-folder-open";
           unit.collapsedIcon = "pi pi-folder";
           unit.leaf = false;
         })
-
-        return units;
+          this.units = units;
       }); //units => this.units = units
       this.loading = false;
     }, 1000);
