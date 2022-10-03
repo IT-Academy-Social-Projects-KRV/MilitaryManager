@@ -60,19 +60,32 @@ class BaseCollectionService<TModel extends BaseModel> extends CoreHttpService {
     }
 
     private mapModel(payload: any): TModel {
-        return JSON.parse(payload);
+      const model = new this.createModel(payload.id ?? null);
+      // TODO: Implement set payload function fo models or use parsing revivers
+      // or use lodash to parse json objects
+      // model.setPayload(payload);
+      // Example JSON.parse({}, reviverExtensions.defaultReviver)
+/*
+      payload.label = "haha";
+      payload.data = "haha";
+      payload.expandedIcon = "pi pi-folder-open";
+      payload.collapsedIcon = "pi pi-folder";
+      payload.leaf = false;
+      */
+      Object.assign(model, payload);
+      return model;
     }
 
     getAll(): Observable<TModel[]> {
         return this.httpService.get(`${this.baseUrl}${this.controllerName}`)
             .pipe(
-                map((payloads: any) => payloads.map(this.mapModel)),
+                map((payloads: any) => payloads.map((payload: any) => this.mapModel(payload))),
                 catchError(this.handleError)
             );
     }
 }
 
-export class BaseSingleService<TModel extends BaseModel> extends CoreHttpService {
+class BaseSingleService<TModel extends BaseModel> extends CoreHttpService {
     public constructor(
         protected override httpService: HttpService,
         protected override controllerName: string,
@@ -84,7 +97,14 @@ export class BaseSingleService<TModel extends BaseModel> extends CoreHttpService
     }
 
     private mapModel(payload: any): TModel {
-        const model = new this.createModel(payload[0].id ?? null);
+        const model = new this.createModel(payload.id ?? null);
+
+        payload.label = "haha";
+        payload.data = "haha";
+        payload.expandedIcon = "pi pi-folder-open";
+        payload.collapsedIcon = "pi pi-folder";
+        payload.leaf = false;
+        Object.assign(model, payload);
         return model;
     }
 
