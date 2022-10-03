@@ -17,14 +17,5 @@ export class UnitsService extends BaseService<any> {
     configService: ClientConfigurationService) {
     super(httpService, 'unit', configService, UnitModel, ServiceType.units);
   }
-
-  /*
-  getLazyUnits(id: number | null) {
-    return this.single.getById(id);
-    // .get<any>('assets/showcase/data/files-lazy.json')
-    // .toPromise()
-    // .then(res => <TreeNode[]>res.data);
-  }
-  */
 }
 

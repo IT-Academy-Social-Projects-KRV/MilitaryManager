@@ -20,7 +20,7 @@ namespace MilitaryManager.Core.Entities.UnitEntity
             {
                 Query
                 .Include(x => x.SubUnits)
-                .Where(x => x.Id == id);
+                .Where(x => x.ParentId == id);
             }
         }
     }

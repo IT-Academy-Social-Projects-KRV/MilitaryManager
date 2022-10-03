@@ -26,11 +26,11 @@ namespace MilitaryManager.Core.Services
             return _mapper.Map<IEnumerable<UnitDTO>>(unitsTree);
         }
 
-        public async Task<UnitDTO> GetNodeTreeAsync(int id)
+        public async Task<IEnumerable<UnitDTO>> GetNodeTreeAsync(int id)
         {
-            var unitsTree = await _unitRepository.GetFirstBySpecAsync(new Units.UnitsListById(id));
+            var unitsTree = await _unitRepository.GetListBySpecAsync(new Units.UnitsListById(id));
 
-            return _mapper.Map<UnitDTO>(unitsTree);
+            return _mapper.Map<IEnumerable<UnitDTO>>(unitsTree);
         }
 
         public async Task<UnitDTO> CreateUnitAsync(UnitDTO query)

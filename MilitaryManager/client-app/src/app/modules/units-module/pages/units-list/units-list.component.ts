@@ -28,59 +28,28 @@ export class UnitsListComponent implements OnInit {
       this.unitsService.collection.getAll()
         .subscribe(  (units) => {
         units.forEach( (unit) => {
-          unit.label = unit.lastName + unit.firstName;
-          unit.expandedIcon = "pi pi-folder-open";
-          unit.collapsedIcon = "pi pi-folder";
+          unit.label = `${unit.lastName} ${unit.firstName}`;
+          unit.expandedIcon = "pi pi-user-minus";
+          unit.collapsedIcon = "pi pi-user-plus";
           unit.leaf = false;
         })
           this.units = units;
-      }); //units => this.units = units
+      });
       this.loading = false;
     }, 1000);
   }
 
   nodeExpand(event: any) {
     if (event.node) {
-      //in a real application, make a call to a remote url to load children of the current node and add the new nodes as children
-      this.unitsService.single.getById(event.node.id).subscribe(nodes => {
-        event.node.children = nodes});
+      this.unitsService.collection.getListById(event.node.id).subscribe((units) => {
+        units.forEach( (unit) => {
+          unit.label = `${unit.lastName} ${unit.firstName}`;
+          unit.expandedIcon = "pi pi-user-minus";
+          unit.collapsedIcon = "pi pi-user-plus";
+          unit.leaf = false;
+        })
+        event.node.children = units;
+      });
     }
   }
-/*
-  nodes: TreeNode<UnitModel>[] = [];
-
-  constructor(private unitsService: UnitStateService,
-              private clientConfigService: ClientConfigurationService,
-              private unitService: UnitsService) { }
-
-  ngOnInit() {
-
-    this.unitService.single.get().subscribe((data) => {
-      this.nodes = data;
-    });
- */
-/*
-    this.units = [
-      {
-        key: '0',
-        label: 'Introduction',
-        children: [
-          {key: '0-0', label: 'What is Angular', data:'https://angular.io', type: 'url'},
-          {key: '0-1', label: 'Getting Started', data: 'https://angular.io/guide/setup-local', type: 'url'},
-          {key: '0-2', label: 'Learn and Explore', data:'https://angular.io/guide/architecture', type: 'url'},
-          {key: '0-3', label: 'Take a Look', data: 'https://angular.io/start', type: 'url'}
-        ]
-      },
-      {
-        key: '1',
-        label: 'Components In-Depth',
-        children: [
-          {key: '1-0', label: 'Component Registration', data: 'https://angular.io/guide/component-interaction', type: 'url'},
-          {key: '1-1', label: 'User Input', data: 'https://angular.io/guide/user-input', type: 'url'},
-          {key: '1-2', label: 'Hooks', data: 'https://angular.io/guide/lifecycle-hooks', type: 'url'},
-          {key: '1-3', label: 'Attribute Directives', data: 'https://angular.io/guide/attribute-directives', type: 'url'}
-        ]
-      }
-    ];
-*/
 }

@@ -25,7 +25,7 @@ namespace MilitaryManager.Units.API.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("collection/{id}")]
         public async Task<IActionResult> GetTreeNodeUnit([FromRoute] int id)
         {
             return Ok(await _unitServices.GetNodeTreeAsync(id));
