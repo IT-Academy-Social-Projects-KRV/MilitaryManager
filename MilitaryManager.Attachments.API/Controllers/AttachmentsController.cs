@@ -5,10 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MilitaryManager.Attachments.API.Models;
-using MilitaryManager.Attachments.API.Services.StoreService;
 using System;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace MilitaryManager.Attachments.API.Controllers
 {
@@ -20,20 +18,17 @@ namespace MilitaryManager.Attachments.API.Controllers
         private readonly string _webRootPath;
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly string _documentExportFolder;
-        private readonly StoreService _storeService;
 
         public AttachmentsController(
             IWebHostEnvironment hostingEnvironment,
             IDocumentGenerationService service,
-            ILogger<WeatherForecastController> logger,
-            StoreService storeService
+            ILogger<WeatherForecastController> logger
             )
         {
             _documentGenerationService = service;
             _webRootPath = hostingEnvironment.WebRootPath;
             _logger = logger;
             _documentExportFolder = "documents";
-            _storeService = storeService;
         }
 
         [HttpGet]
@@ -70,13 +65,6 @@ namespace MilitaryManager.Attachments.API.Controllers
             return $"https://{Request.Host}/api/attachments/find?name={docName}";
         }
 
-        [HttpPost]
-        [Route("store")]
-        public IActionResult StoreFile(IFormFile uploadedFile)
-        {
-            _storeService.StoreData(uploadedFile);
-            return Ok();
-        }
     }
 }
 

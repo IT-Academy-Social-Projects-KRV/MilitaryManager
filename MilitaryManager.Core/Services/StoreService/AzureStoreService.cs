@@ -4,27 +4,23 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace MilitaryManager.Attachments.API.Services.StoreService
+namespace MilitaryManager.Core.Services.StoreService
 {
-    public class DockerContainerStoreService : IStoreService
+    public class AzureStoreService : IStoreService
     {
         private readonly IConfiguration _configuration;
 
-        public DockerContainerStoreService(IConfiguration configuration)
+        public AzureStoreService(IConfiguration configuration)
         {
             _configuration = configuration;
         }
         public async Task StoreDataAsync(IFormFile uploadedFile)
         {
-            string connectionString = _configuration.GetValue<string>("DockerAzureConfiguration:ConnectionString");
-
-            BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
-
-            string containerName = _configuration.GetValue<string>("DockerAzureConfiguration:ContainerName");
-
+            string connectionString = _configuration.GetValue<string>("AzureConfiguration:ConnectionString");
+            string containerName = _configuration.GetValue<string>("AzureConfiguration:ContainerName");
             if (uploadedFile != null)
             {
                 BlobContainerClient container = new BlobContainerClient(connectionString, containerName);

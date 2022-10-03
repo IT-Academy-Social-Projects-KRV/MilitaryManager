@@ -1,9 +1,12 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MilitaryManager.Attachments.API.Services.StoreService;
+using MilitaryManager.Core.Services;
+using MilitaryManager.Core.Services.StoreService;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-
-namespace MilitaryManager.Attachments.API.StoreConfig
+namespace MilitaryManager.Infrastructure.StoreConfig
 {
     public static class StoreModeConfig
     {

@@ -1,17 +1,16 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace MilitaryManager.Attachments.API.Services.StoreService
+
+
+namespace MilitaryManager.Core.Services.StoreService
 {
     public class LocalStoreService : IStoreService
     {
         private readonly string _webRootPath;
-        public LocalStoreService(IWebHostEnvironment webHostEnvironment)
+        public LocalStoreService(IHostingEnvironment webHostEnvironment)
         {
             _webRootPath = webHostEnvironment.WebRootPath;
         }

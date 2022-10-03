@@ -4,10 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using DocumentGenerator;
-using MilitaryManager.Attachments.API.Services.StoreService;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.Primitives;
-using MilitaryManager.Attachments.API.StoreConfig;
+using MilitaryManager.Core.Services.StoreService;
+using MilitaryManager.Infrastructure.StoreConfig;
 
 namespace MilitaryManager.Attachments.API
 {
