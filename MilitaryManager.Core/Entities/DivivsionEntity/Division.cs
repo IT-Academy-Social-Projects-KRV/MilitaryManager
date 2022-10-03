@@ -1,4 +1,10 @@
-﻿namespace MilitaryManager.Core.Entities.DivisionEntity
+﻿using MilitaryManager.Core.Entities.EquipmentToUnitEntity;
+using MilitaryManager.Core.Entities.UnitEntity;
+using MilitaryManager.Core.Interfaces;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace MilitaryManager.Core.Entities.DivisionEntity
 {
     [Table("Divisions", Schema = "Unit")]
     public class Division : IBaseEntity<int>

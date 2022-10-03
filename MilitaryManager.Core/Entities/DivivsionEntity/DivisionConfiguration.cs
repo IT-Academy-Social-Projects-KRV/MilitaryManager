@@ -1,4 +1,7 @@
-﻿namespace MilitaryManager.Core.Entities.DivisionEntity
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace MilitaryManager.Core.Entities.DivisionEntity
 {
     public class DivisionConfiguration : IEntityTypeConfiguration<Division>
     {
