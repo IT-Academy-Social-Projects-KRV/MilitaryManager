@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace MilitaryManager.Core.Entities.DivisionEntity
+﻿namespace MilitaryManager.Core.Entities.DivisionEntity
 {
     public class DivisionConfiguration : IEntityTypeConfiguration<Division>
     {
@@ -19,7 +16,7 @@ namespace MilitaryManager.Core.Entities.DivisionEntity
                 .IsRequired();
 
             builder
-                .HasMany(x => x.SubDivision)
+                .HasMany(x => x.SubDivisions)
                 .WithOne(x => x.Parent)
                 .HasForeignKey(x => x.ParentId);
         }
