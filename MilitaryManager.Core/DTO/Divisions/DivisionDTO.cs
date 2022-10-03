@@ -13,6 +13,6 @@ namespace MilitaryManager.Core.DTO.Divisions
 
         public DivisionDTO Parent { get; set; }
 
-        public List<DivisionDTO> SubDivision { get; set; }
+        public List<DivisionDTO> SubDivisions { get; set; }
     }
 }

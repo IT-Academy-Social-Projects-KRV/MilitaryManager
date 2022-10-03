@@ -10,7 +10,7 @@ namespace MilitaryManager.Core.Entities.DivivsionEntity
             public DivisionsListById(int id)
             {
                 Query
-                .Include(x => x.SubDivision)
+                .Include(x => x.SubDivisions)
                 .Where(x => x.Id == id);
             }
         }
@@ -20,7 +20,7 @@ namespace MilitaryManager.Core.Entities.DivivsionEntity
             public RootDivisionList()
             {
                 Query
-                .Include(x => x.SubDivision)
+                .Include(x => x.SubDivisions)
                 .Where(x => x.ParentId == null);
             }
         }
