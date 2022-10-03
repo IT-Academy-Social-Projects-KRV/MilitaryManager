@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { UnitModel } from "../../models/unit.model";
 import { HttpService } from "../core/http.service";
-import {BaseService, CoreHttpService} from "../core/base.service";
+import { BaseService } from "../core/base.service";
 import { ClientConfigurationService } from "../core/client-configuration.service";
 import { ServiceType } from "../core/serviceType";
 import {catchError, map, Observable} from "rxjs";
