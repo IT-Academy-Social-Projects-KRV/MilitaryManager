@@ -50,8 +50,8 @@ Desktop.ini
 # documents
 *.pdf
 
-#vs code
-MilitaryManager/client-app/.vscode/
+# vs code
+# .vscode
 
 # MilitaryManager\MilitaryManager.Attachments.API\wwwroot\fonts\.uuid
 .uuid
