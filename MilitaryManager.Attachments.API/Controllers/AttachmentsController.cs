@@ -22,8 +22,7 @@ namespace MilitaryManager.Attachments.API.Controllers
         public AttachmentsController(
             IWebHostEnvironment hostingEnvironment,
             IDocumentGenerationService service,
-            ILogger<WeatherForecastController> logger
-            )
+            ILogger<WeatherForecastController> logger)
         {
             _documentGenerationService = service;
             _webRootPath = hostingEnvironment.WebRootPath;
