@@ -19,16 +19,16 @@ namespace MilitaryManager.Units.API.Controllers
 
         [HttpGet]
         [Route("collection")]
-        public async Task<IActionResult> GetRootTreeUnit()
+        public async Task<IActionResult> GetRootTree()
         {
-            return Ok(await _unitServices.GetUnitTreeAsync(null));
+            return Ok(await _unitServices.GetUnitsTreeAsync(null));
         }
 
         [HttpGet]
         [Route("collection/{id}")]
-        public async Task<IActionResult> GetTreeNodeUnit([FromRoute] int id)
+        public async Task<IActionResult> GetTreeNode([FromRoute] int id)
         {
-            return Ok(await _unitServices.GetUnitTreeAsync(id));
+            return Ok(await _unitServices.GetUnitsTreeAsync(id));
         }
 
         [HttpPost]

@@ -20,7 +20,7 @@ namespace MilitaryManager.Core.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<UnitDTO>> GetUnitTreeAsync(int? id)
+        public async Task<IEnumerable<UnitDTO>> GetUnitsTreeAsync(int? id)
         {
             Specification<Unit> specification;
 
