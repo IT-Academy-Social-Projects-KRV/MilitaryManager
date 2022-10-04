@@ -1,13 +1,14 @@
 ﻿using Azure.Storage.Blobs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using MilitaryManager.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MilitaryManager.Core.Services.StoreService
+namespace MilitaryManager.Infrastructure.Services.StoreServices
 {
     public class AzureStoreService : IStoreService
     {
