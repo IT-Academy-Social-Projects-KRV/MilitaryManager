@@ -64,7 +64,6 @@ namespace MilitaryManager.Attachments.API.Controllers
 
             return $"https://{Request.Host}/api/attachments/find?name={docName}";
         }
-
     }
 }
 

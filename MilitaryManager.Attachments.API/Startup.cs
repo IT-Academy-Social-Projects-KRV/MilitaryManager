@@ -53,7 +53,6 @@ namespace MilitaryManager.Attachments.API
             {
                 endpoints.MapControllers();
             });
-
         }
     }
 }

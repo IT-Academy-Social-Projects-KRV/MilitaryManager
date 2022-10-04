@@ -49,7 +49,19 @@ namespace MilitaryManager.IdentityServer
                 .AddInMemoryApiScopes(IdentityConfig.GetApiScopes())
                 .AddInMemoryClients(IdentityConfig.GetClients("https://localhost:5001"))
                 .AddAspNetIdentity<ApplicationUser>();
+            // services.AddRazorPages();
 
+            //services.AddIdentity<ApplicationUser, IdentityRole>()
+            //    .AddEntityFrameworkStores<ApplicationDbContext>()
+            //    .AddDefaultTokenProviders();
+
+            //services.AddIdentityServer()
+            //    .AddInMemoryClients(new List<Client>())
+            //    .AddInMemoryIdentityResources(new List<IdentityResource>())
+            //    .AddInMemoryApiResources(new List<ApiResource>())
+            //    .AddInMemoryApiScopes(new List<ApiScope>())
+            //    .AddTestUsers(new List<TestUser>())
+            //    .AddDeveloperSigningCredential();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
