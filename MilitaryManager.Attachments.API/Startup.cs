@@ -7,6 +7,9 @@ using DocumentGenerator;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using MilitaryManager.Infrastructure;
 using MilitaryManager.Core;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 namespace MilitaryManager.Attachments.API
 {
@@ -33,10 +36,34 @@ namespace MilitaryManager.Attachments.API
                 options.AllowSynchronousIO = true;
             });
 
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+               .AddJwtBearer(opt =>
+               {
+                   var identityUrl = Configuration.GetValue<string>("IdentityUrl");
+
+                   opt.RequireHttpsMetadata = false;
+                   opt.Authority = identityUrl;
+                   opt.Audience = "attachmentsAPI";
+                   opt.TokenValidationParameters = new TokenValidationParameters
+                   {
+                       // As issuer is HTTPS localhost, and authority is HTTP docker, but should be the same
+                       ValidateIssuer = false,
+                       ValidateAudience = false,
+                       ValidAudience = "attachmentsAPI",
+                       ValidIssuer = identityUrl,
+
+                   };
+               });
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("Attachments", new OpenApiInfo { Title = "Attachment", Version = "v1" });
+            });
+
             services.AddCustomServices();
             services.AddAutoMapper();
             services.AddRepositories();
             services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));
+            services.AddHttpContextAccessor();
 
             services.AddControllers();
             services.RegisterDocumentGenerationServices();
@@ -50,6 +77,14 @@ namespace MilitaryManager.Attachments.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseHttpsRedirection();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/Attachments/swagger.json", "Attachment V1");
+            });
+
             app.UseCors(
                 builder => builder
                     .WithOrigins("http://localhost:4200", "https://localhost:5001", "http://localhost:5000", "http://localhost:5003")
@@ -58,8 +93,9 @@ namespace MilitaryManager.Attachments.API
                     .AllowAnyHeader()
             );
 
-            app.UseHttpsRedirection();
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

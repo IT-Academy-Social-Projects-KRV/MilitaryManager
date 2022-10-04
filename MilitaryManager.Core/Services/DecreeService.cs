@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace MilitaryManager.Core.Services
@@ -25,6 +26,7 @@ namespace MilitaryManager.Core.Services
         protected readonly IDocumentGenerationService _documentGenerationService;
         protected readonly IMapper _mapper;
         protected readonly IStoreService _storeService;
+        protected readonly IHttpContextAccessor _httpContextAccessor;
         private readonly string _documentExportFolder;
 
         public DecreeService(IRepository<Decree, int> decreeRepository,
@@ -32,7 +34,8 @@ namespace MilitaryManager.Core.Services
                              IRepository<SignedPdf, int> signedPdfRepository,
                              IDocumentGenerationService documentGenerationService,
                              IMapper mapper,
-                             IStoreService storeService)
+                             IStoreService storeService,
+                             IHttpContextAccessor httpContextAccessor)
         {
             _decreeRepository = decreeRepository;
             _templateRepository = templateRepository;
@@ -40,11 +43,13 @@ namespace MilitaryManager.Core.Services
             _documentGenerationService = documentGenerationService;
             _mapper = mapper;
             _storeService = storeService;
+            _httpContextAccessor = httpContextAccessor;
             _documentExportFolder = "documents";
         }
 
         public async Task<DecreeDTO> GenerateDecreeAsync(string wwwroot, int templateId, string name, string jsonData)
         {
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var template = await _templateRepository.GetByKeyAsync(templateId);
 
             string templateData = null;
@@ -68,8 +73,7 @@ namespace MilitaryManager.Core.Services
             {
                 Name = name,
                 Path = path,
-                //TODO: add UserId from token - User.FindFirst(ClaimTypes.NameIdentifier)?.Value
-                CreatedBy = "testId",
+                CreatedBy = userId,
                 TimeStamp = DateTime.Now,
                 TemplateId = templateId,
                 StatusId = (int)DecreeStatus.CREATED

@@ -7,8 +7,8 @@ namespace MilitaryManager.Core.Enums
     public enum DecreeStatus
     {
         CREATED = 1,
-        DOWNLOADED = 2,
-        SIGNED = 3,
-        COMPLETED = 4
+        DOWNLOADED,
+        SIGNED,
+        COMPLETED
     }
 }
