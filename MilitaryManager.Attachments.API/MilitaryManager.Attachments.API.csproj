@@ -1,26 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UserSecretsId>994a9585-5b8c-4de2-b12f-57d75623946d</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<UserSecretsId>994a9585-5b8c-4de2-b12f-57d75623946d</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+	</PropertyGroup>
 	
 	<ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
-  </ItemGroup>
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\DocumentGenerator\DocumentGenerator.csproj" />
-    <ProjectReference Include="..\MilitaryManager.Core\MilitaryManager.Core.csproj" />
-    <ProjectReference Include="..\MilitaryManager.Infrastructure\MilitaryManager.Infrastructure.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\DocumentGenerator\DocumentGenerator.csproj" />
+		<ProjectReference Include="..\MilitaryManager.Core\MilitaryManager.Core.csproj" />
+		<ProjectReference Include="..\MilitaryManager.Infrastructure\MilitaryManager.Infrastructure.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\data\img\" />
-    <Folder Include="wwwroot\documents\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="wwwroot\data\img\" />
+		<Folder Include="wwwroot\documents\" />
+	</ItemGroup>
 
 
 </Project>

@@ -4,104 +4,104 @@ using PdfSharpCore.Fonts;
 
 namespace DocumentGenerator
 {
-    /// <summary>
-    /// Contains logic for getting custom fonts for document
-    /// </summary>
-    public class FontResolver : IFontResolver
-    {
-        #region Data Members
-
-        private readonly string _rootPath;
-
-        #endregion
-
-        #region Constructors
-
         /// <summary>
-        /// FontResolver
+        /// Contains logic for getting custom fonts for document
         /// </summary>
-        /// <param name="rootPath">Root web path</param>
-        public FontResolver(string rootPath)
+        public class FontResolver : IFontResolver
         {
-            _rootPath = rootPath;
-        }
+            #region Data Members
 
-        #endregion
+            private readonly string _rootPath;
 
-        #region IFontResolver Members
+            #endregion
 
-        public FontResolverInfo ResolveTypeface(string familyName, bool isBold, bool isItalic)
-        {
-            // Ignore case of font names.
-            var name = familyName.ToLower().TrimEnd('#');
+            #region Constructors
 
-            // Deal with the fonts we know.
-            switch (name)
+            /// <summary>
+            /// FontResolver
+            /// </summary>
+            /// <param name="rootPath">Root web path</param>
+            public FontResolver(string rootPath)
             {
-                case "times new roman":
-                    if (isBold)
-                    {
-                        if (isItalic) return new FontResolverInfo("Times#bi");
-                        return new FontResolverInfo("Times#b");
-                    }
-
-                    if (isItalic) return new FontResolverInfo("Times#i");
-                    return new FontResolverInfo("Times#");
+                _rootPath = rootPath;
             }
 
-            // We pass all other font requests to the default handler.
-            // When running on a web server without sufficient permission, you can return a default font at this stage.
-            return PlatformFontResolver.ResolveTypeface(familyName, isBold, isItalic);
-        }
+            #endregion
 
-        public byte[] GetFont(string faceName)
-        {
-            switch (faceName)
+            #region IFontResolver Members
+
+            public FontResolverInfo ResolveTypeface(string familyName, bool isBold, bool isItalic)
             {
-                case "Times#":
-                    return LoadFontData("times.ttf");
+                // Ignore case of font names.
+                var name = familyName.ToLower().TrimEnd('#');
 
-                case "Times#b":
-                    return LoadFontData("timesbd.ttf");
-
-                case "Times#i":
-                    return LoadFontData("timesi.ttf");
-
-                case "Times#bi":
-                    return LoadFontData("timesbi.ttf");
-            }
-
-            return null;
-        }
-
-        #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// Returns the specified font from an embedded resource.
-        /// </summary>
-        private byte[] LoadFontData(string name)
-        {
-            try
-            {
-                string path = Path.Combine(_rootPath, "fonts", name);
-                using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+                // Deal with the fonts we know.
+                switch (name)
                 {
-                    var count = (int)stream.Length;
-                    var data = new byte[count];
-                    stream.Read(data, 0, count);
-                    return data;
+                    case "times new roman":
+                        if (isBold)
+                        {
+                            if (isItalic) return new FontResolverInfo("Times#bi");
+                            return new FontResolverInfo("Times#b");
+                        }
+
+                        if (isItalic) return new FontResolverInfo("Times#i");
+                        return new FontResolverInfo("Times#");
+                }
+
+                // We pass all other font requests to the default handler.
+                // When running on a web server without sufficient permission, you can return a default font at this stage.
+                return PlatformFontResolver.ResolveTypeface(familyName, isBold, isItalic);
+            }
+
+            public byte[] GetFont(string faceName)
+            {
+                switch (faceName)
+                {
+                    case "Times#":
+                        return LoadFontData("times.ttf");
+
+                    case "Times#b":
+                        return LoadFontData("timesbd.ttf");
+
+                    case "Times#i":
+                        return LoadFontData("timesi.ttf");
+
+                    case "Times#bi":
+                        return LoadFontData("timesbi.ttf");
+                }
+
+                return null;
+            }
+
+            #endregion
+
+            #region Methods
+
+            /// <summary>
+            /// Returns the specified font from an embedded resource.
+            /// </summary>
+            private byte[] LoadFontData(string name)
+            {
+                try
+                {
+                    string path = Path.Combine(_rootPath, "fonts", name);
+                    using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+                    {
+                        var count = (int)stream.Length;
+                        var data = new byte[count];
+                        stream.Read(data, 0, count);
+                        return data;
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new ArgumentException($"Can not find font {name}");
                 }
             }
-            catch (Exception)
-            {
-                throw new ArgumentException($"Can not find font {name}");
-            }
+
+            public string DefaultFontName => "times new roman";
+
+            #endregion
         }
-
-        public string DefaultFontName => "times new roman";
-
-        #endregion
-    }
 }
