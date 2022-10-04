@@ -36,7 +36,7 @@ export class UnitsListComponent implements OnInit {
           this.units = units;
       });
       this.loading = false;
-    }, 1000);
+    });
   }
 
   nodeExpand(event: any) {
