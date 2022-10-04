@@ -1,4 +1,6 @@
-﻿namespace MilitaryManager.Core.DTO.Attachments
+﻿using System;
+
+namespace MilitaryManager.Core.DTO.Attachments
 {
     public class DecreeDTO
     {
@@ -7,6 +9,7 @@
         public string Path { get; set; }
         public string PathSigned { get; set; }
         public string CreatedBy { get; set; }
+        public DateTime TimeStamp { get; set; }
         public int TemplateId { get; set; }
         public string Template { get; set; }
         public int StatusId { get; set; }

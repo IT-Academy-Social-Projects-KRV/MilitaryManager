@@ -9,6 +9,6 @@ namespace MilitaryManager.Core.Entities.TemplateEntity
         public int Id { get; set; }
         public string Type { get; set; }
         public string Path { get; set; }
-        public IEnumerable<Decree> Decrees { get; set; }
+        public ICollection<Decree> Decrees { get; set; }
     }
 }

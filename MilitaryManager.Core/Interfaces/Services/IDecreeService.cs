@@ -12,8 +12,11 @@ namespace MilitaryManager.Core.Interfaces.Services
         Task<IEnumerable<DecreeDTO>> GetDecreesAsync();
         Task<DecreeDTO> GetDecreeByIdAsync(int id);
         Task<FileStream> GetDecreePdfAsync(int id);
+        Task<FileStream> GetSignedDecreePdfAsync(int id);
         Task<IEnumerable<DecreeDTO>> GetDecreesByNameAsync(string name);
         Task UploadSignedDecreeAsync(int id, IFormFile sign);
+        Task<DecreeDTO> UpdateDecreeAsync(UpdateDecreeDTO decreeDTO);
+        Task<DecreeDTO> CompleteDecreeAsync(int id);
         Task<DecreeDTO> DeleteDecreeAsync(int id);
     }
 }

@@ -9,8 +9,8 @@ namespace MilitaryManager.Core.Entities.StatusEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public IEnumerable<Decree> Decrees { get; set; }
-        public IEnumerable<StatusHistory> OldStatuses { get; set; }
-        public IEnumerable<StatusHistory> NewStatuses { get; set; }
+        public ICollection<Decree> Decrees { get; set; }
+        public ICollection<StatusHistory> OldStatuses { get; set; }
+        public ICollection<StatusHistory> NewStatuses { get; set; }
     }
 }

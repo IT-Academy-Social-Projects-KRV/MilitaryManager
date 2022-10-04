@@ -11,32 +11,6 @@ namespace MilitaryManager.Core.Entities.StatusEntity
             builder.Property(status => status.Name)
                 .HasMaxLength(50)
                 .IsRequired();
-
-            List<Status> statuses = new List<Status>()
-            {
-                new Status
-                {
-                    Id = 1,
-                    Name = "Created"
-                },
-                new Status
-                {
-                    Id = 2,
-                    Name = "Downloaded"
-                },
-                new Status
-                {
-                    Id = 3,
-                    Name = "Signed"
-                },
-                new Status
-                {
-                    Id = 4,
-                    Name = "Completed"
-                },
-            };
-
-            builder.HasData(statuses);
         }
     }
 }

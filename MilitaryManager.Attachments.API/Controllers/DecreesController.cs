@@ -4,9 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using MilitaryManager.Core.DTO.Attachments;
 using MilitaryManager.Core.Entities.DecreeEntity;
 using MilitaryManager.Core.Interfaces.Services;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace MilitaryManager.Attachments.API.Controllers
@@ -25,22 +26,18 @@ namespace MilitaryManager.Attachments.API.Controllers
             _webRootPath = hostingEnvironment.WebRootPath;
         }
 
-        [HttpPost]
-        [Route("generate")]
-        public async Task<ActionResult> GenerateDecree([FromQuery] int templateId, [FromQuery] string name)
-        {
-            Request.EnableBuffering();
-            Request.Body.Seek(0, SeekOrigin.Begin);
-            string jsonRawData = new StreamReader(HttpContext.Request.Body).ReadToEnd();
-            var decree = await _decreeService.GenerateDecreeAsync(_webRootPath, templateId, name, jsonRawData);
-            return CreatedAtRoute(nameof(GetById), new { id = decree.Id }, decree);
-        }
-
         [HttpGet]
         [Route("collection")]
         public async Task<ActionResult<IEnumerable<DecreeDTO>>> Get()
         {
             var decrees = await _decreeService.GetDecreesAsync();
+            return Ok(decrees);
+        }
+
+        [HttpGet("collection/byName/{name}")]
+        public async Task<ActionResult<IEnumerable<DecreeDTO>>> GetByName([FromRoute] string name)
+        {
+            var decrees = await _decreeService.GetDecreesByNameAsync(name);
             return Ok(decrees);
         }
 
@@ -51,28 +48,50 @@ namespace MilitaryManager.Attachments.API.Controllers
             return Ok(decree);
         }
 
-        [HttpGet("collection/byName/{name}")]
-        public async Task<ActionResult<IEnumerable<DecreeDTO>>> GetByName([FromRoute] string name)
-        {
-            var decrees = await _decreeService.GetDecreesByNameAsync(name);
-            return Ok(decrees);
-        }
-
-        [HttpGet("pdf/{id}")]
-        public async Task<FileStreamResult> GetPdfById([FromRoute] int id)
-        {
-            var fileStream = await _decreeService.GetDecreePdfAsync(id);
-            return new FileStreamResult(fileStream, "application/pdf");
-        }
-
         [HttpPost]
-        [Route("pdf/upload/{id}")]
-        public async Task<ActionResult> UploadPdfSigned([FromRoute] int id)
+        public async Task<ActionResult> GenerateDecree()
         {
-            var formCollection = await Request.ReadFormAsync();
-            var file = formCollection.Files.First();
-            await _decreeService.UploadSignedDecreeAsync(id, file);
-            return Ok();
+            Request.EnableBuffering();
+            Request.Body.Seek(0, SeekOrigin.Begin);
+            string jsonData = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
+            int templateId;
+            string decreeName;
+            var modelValues = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonData);
+            try
+            {
+                templateId = (int)(long)modelValues["templateId"];
+                modelValues.Remove("templateId");
+                decreeName = (string)modelValues["decreeName"];
+                modelValues.Remove("decreeName");
+            }
+            catch (Exception)
+            {
+                return BadRequest("Request body should include \"templateId\" and \"decreeName\" fields. The rest fields for template data");
+            }
+            jsonData = JsonConvert.SerializeObject(modelValues);
+            var decree = await _decreeService.GenerateDecreeAsync(_webRootPath, templateId, decreeName, jsonData);
+            return CreatedAtRoute(nameof(GetById), new { id = decree.Id }, decree);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateDecree([FromBody] UpdateDecreeDTO decreeDTO)
+        {
+            var decree = await _decreeService.UpdateDecreeAsync(decreeDTO);
+            return Ok(decree);
+        }
+
+        [HttpPut("complete/{id}")]
+        public async Task<ActionResult> CompleteDecree([FromRoute] int id)
+        {
+            var decree = await _decreeService.CompleteDecreeAsync(id);
+            return Ok(decree);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteDecree([FromRoute] int id)
+        {
+            var decree = await _decreeService.DeleteDecreeAsync(id);
+            return Ok(decree);
         }
     }
 }

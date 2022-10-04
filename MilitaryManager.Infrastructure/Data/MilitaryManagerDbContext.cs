@@ -5,6 +5,7 @@ using MilitaryManager.Core.Entities.StatusEntity;
 using MilitaryManager.Core.Entities.StatusHistoryEntity;
 using MilitaryManager.Core.Entities.TemplateEntity;
 using MilitaryManager.Core.Entities.UnitEntity;
+using MilitaryManager.Infrastructure.Data.SeedData;
 
 namespace MilitaryManager.Infrastructure.Data
 {
@@ -24,6 +25,7 @@ namespace MilitaryManager.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new StatusHistoryConfiguration());
             modelBuilder.ApplyConfiguration(new TemplateConfiguration());
             modelBuilder.ApplyConfiguration(new SignedPdfConfiguration());
+            modelBuilder.Seed();
         }
 
         public DbSet<Unit> Units { get; set; }

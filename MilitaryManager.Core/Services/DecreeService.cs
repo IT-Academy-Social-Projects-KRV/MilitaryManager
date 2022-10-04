@@ -5,6 +5,7 @@ using MilitaryManager.Core.DTO.Attachments;
 using MilitaryManager.Core.Entities.DecreeEntity;
 using MilitaryManager.Core.Entities.SignedPdfEntity;
 using MilitaryManager.Core.Entities.TemplateEntity;
+using MilitaryManager.Core.Enums;
 using MilitaryManager.Core.Interfaces;
 using MilitaryManager.Core.Interfaces.Repositories;
 using MilitaryManager.Core.Interfaces.Services;
@@ -12,7 +13,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace MilitaryManager.Core.Services
@@ -47,8 +47,6 @@ namespace MilitaryManager.Core.Services
         {
             var template = await _templateRepository.GetByKeyAsync(templateId);
 
-            var cleanJsonData = string.Join("", Regex.Split(jsonData, @"(?:\r\n|\n|\r|\s)"));
-
             string templateData = null;
             using (StreamReader reader = new StreamReader(await _storeService.RetrieveDataAsync(template.Path)))
             {
@@ -58,11 +56,11 @@ namespace MilitaryManager.Core.Services
             var exportPath = Path.Combine(wwwroot, _documentExportFolder).Replace("\\", "/");
 
             _documentGenerationService.ApplyFontResolver(wwwroot);
-            var bytesFile = _documentGenerationService.GeneratePdfDocumentFile(exportPath, null, templateData, cleanJsonData);
+            var bytesFile = _documentGenerationService.GeneratePdfDocumentFile(exportPath, null, templateData, jsonData);
             string path = null;
             using (var ms = new MemoryStream(bytesFile))
             {
-                var pdfFile = new FormFile(ms, 0, bytesFile.Length, "test", "tester");
+                var pdfFile = new FormFile(ms, 0, bytesFile.Length, "name", "fileName");
                 path = await _storeService.StoreDataAsync(pdfFile);
             }
 
@@ -74,7 +72,7 @@ namespace MilitaryManager.Core.Services
                 CreatedBy = "testId",
                 TimeStamp = DateTime.Now,
                 TemplateId = templateId,
-                StatusId = 1
+                StatusId = (int)DecreeStatus.CREATED
             };
             
             await _decreeRepository.AddAsync(decree);
@@ -100,11 +98,17 @@ namespace MilitaryManager.Core.Services
         public async Task<FileStream> GetDecreePdfAsync(int id)
         {
             var decree = await _decreeRepository.GetByKeyAsync(id);
-            if (decree.StatusId == 1)
+            if (decree.StatusId == (int)DecreeStatus.CREATED)
             {
-                decree.StatusId = 2;
+                decree.StatusId = (int)DecreeStatus.SIGNED;
                 await _decreeRepository.SaveChangesAcync();
             }
+            return await _storeService.RetrieveDataAsync(decree.Path);
+        }
+
+        public async Task<FileStream> GetSignedDecreePdfAsync(int id)
+        {
+            var decree = await _signedPdfRepository.GetByKeyAsync(id);
             return await _storeService.RetrieveDataAsync(decree.Path);
         }
 
@@ -130,9 +134,25 @@ namespace MilitaryManager.Core.Services
 
             signedPdf.Path = path;
 
-            decree.StatusId = 3;
+            decree.StatusId = (int)DecreeStatus.DOWNLOADED;
             await _signedPdfRepository.SaveChangesAcync();
             await _decreeRepository.SaveChangesAcync();
+        }
+
+        public async Task<DecreeDTO> UpdateDecreeAsync(UpdateDecreeDTO decreeDTO)
+        {
+            var decree = await _decreeRepository.GetByKeyAsync(decreeDTO.Id);
+            decree.Name = decreeDTO.Name;
+            await _decreeRepository.SaveChangesAcync();
+            return _mapper.Map<DecreeDTO>(decree);
+        }
+
+        public async Task<DecreeDTO> CompleteDecreeAsync(int id)
+        {
+            var decree = await _decreeRepository.GetByKeyAsync(id);
+            decree.StatusId = (int)DecreeStatus.COMPLETED;
+            await _decreeRepository.SaveChangesAcync();
+            return _mapper.Map<DecreeDTO>(decree);
         }
 
         public async Task<DecreeDTO> DeleteDecreeAsync(int id)

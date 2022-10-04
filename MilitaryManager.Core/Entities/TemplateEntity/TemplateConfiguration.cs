@@ -14,18 +14,6 @@ namespace MilitaryManager.Core.Entities.TemplateEntity
 
             builder.Property(template => template.Path)
                 .IsRequired();
-
-            List<Template> templates = new List<Template>()
-            {
-                new Template()
-                {
-                    Id = 1,
-                    Type = "Протокол",
-                    Path = "data/document_templates/template_01.xml"
-                }
-            };
-
-            builder.HasData(templates);
         }
     }
 }

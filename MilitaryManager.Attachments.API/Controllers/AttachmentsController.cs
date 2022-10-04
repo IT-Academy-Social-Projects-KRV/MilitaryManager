@@ -30,7 +30,6 @@ namespace MilitaryManager.Attachments.API.Controllers
         }
 
         [HttpGet(Name="find")]
-        [Route("find")]
         public FileStreamResult GetDocument([FromQuery] string name)
         {
             FileStream fileStream = new FileStream($"{_webRootPath}\\{_documentExportFolder}\\{name}", FileMode.Open);
@@ -38,20 +37,14 @@ namespace MilitaryManager.Attachments.API.Controllers
             return new FileStreamResult(fileStream, "application/pdf");
         }
 
-        // GET: GetTemplates
-
         [HttpPost]
-        [Route("generate")]
         public IActionResult GenerateNewDocument([FromQuery] string templateName)
         {
             var documentTemplatesPath = $"{_webRootPath}/data/document_templates";
 
-            // reads raw json body and removes special symbols
             Request.EnableBuffering();
             Request.Body.Seek(0, SeekOrigin.Begin);
-            string jsonRawData = new StreamReader(HttpContext.Request.Body).ReadToEnd();
-
-            string cleanData = string.Join("", Regex.Split(jsonRawData, @"(?:\r\n|\n|\r|\s)"));
+            string jsonData = new StreamReader(HttpContext.Request.Body).ReadToEnd();
 
             string templateData = null;
             try
@@ -64,7 +57,7 @@ namespace MilitaryManager.Attachments.API.Controllers
             }
 
             _documentGenerationService.ApplyFontResolver(_webRootPath);
-            var docName = _documentGenerationService.GeneratePdfDocument($"{_webRootPath}/{_documentExportFolder}", templateName, templateData, cleanData);
+            var docName = _documentGenerationService.GeneratePdfDocument($"{_webRootPath}/{_documentExportFolder}", templateName, templateData, jsonData);
 
             return CreatedAtRoute("find", new { name = docName }, docName);
         }

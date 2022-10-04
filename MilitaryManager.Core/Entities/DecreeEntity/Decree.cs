@@ -20,6 +20,6 @@ namespace MilitaryManager.Core.Entities.DecreeEntity
         public int StatusId { get; set; }
         public Status Status { get; set; }
         public SignedPdf SignedPdf { get; set; }
-        public IEnumerable<StatusHistory> StatusHistories { get; set; }
+        public ICollection<StatusHistory> StatusHistories { get; set; }
     }
 }
