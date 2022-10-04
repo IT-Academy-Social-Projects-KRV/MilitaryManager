@@ -6,6 +6,7 @@ using MilitaryManager.Core.Entities.DivivsionEntity;
 using MilitaryManager.Core.Interfaces.Repositories;
 using MilitaryManager.Core.Interfaces.Services;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 
@@ -22,16 +23,18 @@ namespace MilitaryManager.Core.Services
         }
         public async Task<IEnumerable<DivisionDTO>> GetAllDivisionsAsync()
         {
-            Specification<Division> specification = new Divisions.RootDivisionList();
+            Specification<Division> specification = new Divisions.DivisionsList();
             var divisions = await _divisionRepository.GetListBySpecAsync(specification);
+            var getDivisions = divisions.Where(x => x.ParentId == null);
 
-            return _mapper.Map<IEnumerable<DivisionDTO>>(divisions);
+            return _mapper.Map<IEnumerable<DivisionDTO>>(getDivisions);
         }
 
         public async Task<IEnumerable<DivisionDTO>> GetDivisionByKeyAsync(int id)
         {
-            Specification<Division> specification = new Divisions.DivisionsListById(id);
-            var getDivision = await _divisionRepository.GetListBySpecAsync(specification);
+            Specification<Division> specification = new Divisions.DivisionsList();
+            var division = await _divisionRepository.GetListBySpecAsync(specification);
+            var getDivision = division.Where(x => x.Id == id);
 
             return _mapper.Map<IEnumerable<DivisionDTO>>(getDivision);
         }

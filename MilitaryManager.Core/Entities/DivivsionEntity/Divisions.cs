@@ -5,23 +5,11 @@ namespace MilitaryManager.Core.Entities.DivivsionEntity
 {
     public class Divisions
     {
-        internal class DivisionsListById : Specification<Division>
+        internal class DivisionsList : Specification<Division>
         {
-            public DivisionsListById(int id)
+            public DivisionsList()
             {
-                Query
-                .Include(x => x.SubDivisions)
-                .Where(x => x.Id == id);
-            }
-        }
-
-        internal class RootDivisionList : Specification<Division>
-        {
-            public RootDivisionList()
-            {
-                Query
-                .Include(x => x.SubDivisions)
-                .Where(x => x.ParentId == null);
+                Query.Include(x => x.SubDivisions);
             }
         }
     }
