@@ -1,14 +1,9 @@
-<div class="content-section introduction">
-  <div class="feature-intro">
-    <h1>Ієрархія бійців</h1>
-  </div>
-</div>
-
 <div class="content-section implementation">
-  <div class="card">
+  <div class="card" id="tree">
     <p-tree [value]="units" (onNodeExpand)="nodeExpand($event)" [loading]="loading"></p-tree>
-
-    <p-toast></p-toast>
+  </div>
+  <div class="card" id="unit_info">
+    Unit Inform
   </div>
 </div>
 
