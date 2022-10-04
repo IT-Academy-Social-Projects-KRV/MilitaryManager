@@ -19,5 +19,6 @@ namespace MilitaryManager.Core.Interfaces.Repositories
         Task<int> SaveChangesAcync();
         Task AddRangeAsync(List<TEntity> entities);
         Task<IEnumerable<TEntity>> GetListBySpecAsync(ISpecification<TEntity> specification);
+        Task<TEntity> GetFirstBySpecAsync(ISpecification<TEntity> specification);
     }
 }

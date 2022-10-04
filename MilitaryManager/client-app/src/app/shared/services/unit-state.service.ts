@@ -24,7 +24,7 @@ export class UnitStateService extends StateService<UnitState>{
   constructor(private apiService: UnitsService) {
     super(initialState);
   }
-  
+
   load() {
     this.apiService.collection.getAll().subscribe((units) => this.setState({ units}));
   }
