@@ -21,14 +21,14 @@ namespace MilitaryManager.Units.API.Controllers
         [Route("collection")]
         public async Task<IActionResult> GetRootTreeUnit()
         {
-            return Ok(await _unitServices.GetRootTreeAsync());
+            return Ok(await _unitServices.GetUnitTreeAsync(null));
         }
 
         [HttpGet]
         [Route("collection/{id}")]
         public async Task<IActionResult> GetTreeNodeUnit([FromRoute] int id)
         {
-            return Ok(await _unitServices.GetNodeTreeAsync(id));
+            return Ok(await _unitServices.GetUnitTreeAsync(id));
         }
 
         [HttpPost]

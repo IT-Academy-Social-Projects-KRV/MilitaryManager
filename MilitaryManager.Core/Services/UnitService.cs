@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Ardalis.Specification;
+using AutoMapper;
 using MilitaryManager.Core.DTO.Units;
 using MilitaryManager.Core.Entities.UnitEntity;
 using MilitaryManager.Core.Interfaces.Repositories;
@@ -19,16 +20,20 @@ namespace MilitaryManager.Core.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<UnitDTO>> GetRootTreeAsync()
+        public async Task<IEnumerable<UnitDTO>> GetUnitTreeAsync(int? id)
         {
-            var unitsTree = await _unitRepository.GetListBySpecAsync(new Units.RootUnitsList());
+            Specification<Unit> specification;
 
-            return _mapper.Map<IEnumerable<UnitDTO>>(unitsTree);
-        }
+            if (id.HasValue)
+            {
+                specification = new Units.UnitsListByParentId(id.Value);
+            }
+            else
+            {
+                specification = new Units.RootUnitsList();
+            }
 
-        public async Task<IEnumerable<UnitDTO>> GetNodeTreeAsync(int id)
-        {
-            var unitsTree = await _unitRepository.GetListBySpecAsync(new Units.UnitsListById(id));
+            var unitsTree = await _unitRepository.GetListBySpecAsync(specification);
 
             return _mapper.Map<IEnumerable<UnitDTO>>(unitsTree);
         }
