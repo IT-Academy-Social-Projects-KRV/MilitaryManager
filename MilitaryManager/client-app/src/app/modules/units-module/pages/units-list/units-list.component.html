@@ -1,4 +1,9 @@
-<body>
-    <p>units-list works!</p>
-</body>
+<div class="content-section implementation">
+  <div class="card" id="tree">
+    <p-tree [value]="units" (onNodeExpand)="nodeExpand($event)" [loading]="loading"></p-tree>
+  </div>
+  <div class="card" id="unit_info">
+    Unit Inform
+  </div>
+</div>
 

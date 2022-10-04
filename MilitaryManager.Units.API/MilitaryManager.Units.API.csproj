@@ -15,11 +15,18 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.28" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MilitaryManager.Core\MilitaryManager.Core.csproj" />
     <ProjectReference Include="..\MilitaryManager.Infrastructure\MilitaryManager.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MilitaryManager.Core">
+      <HintPath>..\MilitaryManager.Core\bin\Debug\netcoreapp3.1\MilitaryManager.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 
