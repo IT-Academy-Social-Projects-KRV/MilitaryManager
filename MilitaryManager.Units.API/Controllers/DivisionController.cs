@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MilitaryManager.Core.DTO.Divisions;
 using MilitaryManager.Core.Interfaces.Services;
+using System;
 using System.Threading.Tasks;
 
 namespace MilitaryManager.Units.API.Controllers
@@ -45,7 +46,16 @@ namespace MilitaryManager.Units.API.Controllers
         [Route("{id}")]
         public async Task<IActionResult> DeleteDivision([FromRoute] int id)
         {
-            return Ok(await _divisionService.DeleteDivisionAsync(id));
+            try
+            {
+               var deleteDivision = await _divisionService.DeleteDivisionAsync(id);
+
+               return Ok(deleteDivision);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

@@ -5,10 +5,10 @@ using MilitaryManager.Core.Entities.DivisionEntity;
 using MilitaryManager.Core.Entities.DivivsionEntity;
 using MilitaryManager.Core.Interfaces.Repositories;
 using MilitaryManager.Core.Interfaces.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 
 namespace MilitaryManager.Core.Services
 {
@@ -59,12 +59,17 @@ namespace MilitaryManager.Core.Services
 
         public async Task<DivisionDTO> DeleteDivisionAsync(int id)
         {
-            var division = new Division() { Id = id };
-            var deleteDivision = await _divisionRepository.DeleteAsync(division);
+            var foundDivision = await _divisionRepository.GetByKeyAsync(id);
+
+            if (foundDivision == null)
+            {
+                throw new ArgumentException("Division not found");
+            }
+
+            var deleteDivision = await _divisionRepository.DeleteAsync(foundDivision);
             await _divisionRepository.SaveChangesAcync();
 
             return _mapper.Map<DivisionDTO>(deleteDivision);
         }
-
     }
 }
