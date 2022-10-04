@@ -12,7 +12,9 @@ namespace IdentityServer.Data
     public enum Roles
     {
         User,
-        Admin
+        Admin,
+        UnitCommander,
+        SubUnitCommander
     }
 
     public static class RolesData

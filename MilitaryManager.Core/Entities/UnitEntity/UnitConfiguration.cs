@@ -11,12 +11,27 @@ namespace MilitaryManager.Core.Entities.UnitEntity
                 .HasKey(x => x.Id);
 
             builder
-                .Property(x => x.Name)
+                .Property(x => x.LastName)
                 .IsRequired();
 
             builder
-                .Property(x => x.Address)
+                .Property(x => x.FirstName)
                 .IsRequired();
+
+            builder
+                .HasOne(x => x.Division)
+                .WithMany(x => x.Units)
+                .HasForeignKey(x => x.DivisionId);
+
+            builder
+                .HasOne(x => x.Rank)
+                .WithMany(x => x.Units)
+                .HasForeignKey(x => x.RankId);
+
+            builder
+                .HasOne(x => x.Position)
+                .WithMany(x => x.Units)
+                .HasForeignKey(x => x.PositionId);
 
             builder
                 .HasMany(x => x.SubUnits)
