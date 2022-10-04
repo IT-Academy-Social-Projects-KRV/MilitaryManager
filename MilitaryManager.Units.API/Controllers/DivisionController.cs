@@ -31,15 +31,15 @@ namespace MilitaryManager.Units.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateDivision([FromBody] DivisionDTO query)
+        public async Task<IActionResult> CreateDivision([FromBody] DivisionDTO dto)
         {
-            return Ok(await _divisionService.CreateDivisionAsync(query));
+            return Ok(await _divisionService.CreateDivisionAsync(dto));
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateDivision([FromBody] DivisionDTO query)
+        public async Task<IActionResult> UpdateDivision([FromBody] DivisionDTO dto)
         {
-            return Ok(await _divisionService.UpdateDivisionAsync(query));
+            return Ok(await _divisionService.UpdateDivisionAsync(dto));
         }
 
         [HttpDelete]
