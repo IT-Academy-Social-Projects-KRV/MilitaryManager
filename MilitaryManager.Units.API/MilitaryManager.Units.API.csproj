@@ -23,5 +23,11 @@
     <ProjectReference Include="..\MilitaryManager.Infrastructure\MilitaryManager.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="MilitaryManager.Core">
+      <HintPath>..\MilitaryManager.Core\bin\Debug\netcoreapp3.1\MilitaryManager.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 
 </Project>
