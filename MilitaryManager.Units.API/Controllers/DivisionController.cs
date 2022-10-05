@@ -8,6 +8,7 @@ namespace MilitaryManager.Units.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [ApiExplorerSettings(GroupName = "Divisions")]
     public class DivisionController : ControllerBase
     {
         protected readonly IDivisionService _divisionService;
@@ -18,6 +19,7 @@ namespace MilitaryManager.Units.API.Controllers
         }
 
         [HttpGet]
+        [Route("collection")]
         public async Task<IActionResult> Get()
         {
             return Ok(await _divisionService.GetAllDivisionsAsync());
