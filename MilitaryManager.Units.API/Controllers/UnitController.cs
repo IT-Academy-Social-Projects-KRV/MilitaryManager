@@ -7,6 +7,7 @@ namespace MilitaryManager.Units.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [ApiExplorerSettings(GroupName = "Units")]
     public class UnitController : ControllerBase
     {
         protected readonly IUnitService _unitServices;
