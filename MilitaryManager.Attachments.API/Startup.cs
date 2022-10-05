@@ -47,10 +47,7 @@ namespace MilitaryManager.Attachments.API
                    opt.TokenValidationParameters = new TokenValidationParameters
                    {
                        // As issuer is HTTPS localhost, and authority is HTTP docker, but should be the same
-                       ValidateIssuer = false,
-                       ValidateAudience = false,
-                       ValidAudience = "attachmentsAPI",
-                       ValidIssuer = identityUrl,
+                       ValidateIssuer = false
 
                    };
                });

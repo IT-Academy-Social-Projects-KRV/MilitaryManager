@@ -6,6 +6,7 @@ using MilitaryManager.Core.Entities.DecreeEntity;
 using MilitaryManager.Core.Entities.SignedPdfEntity;
 using MilitaryManager.Core.Entities.TemplateEntity;
 using MilitaryManager.Core.Enums;
+using MilitaryManager.Core.Exceptions;
 using MilitaryManager.Core.Interfaces;
 using MilitaryManager.Core.Interfaces.Repositories;
 using MilitaryManager.Core.Interfaces.Services;
@@ -161,7 +162,11 @@ namespace MilitaryManager.Core.Services
 
         public async Task<DecreeDTO> DeleteDecreeAsync(int id)
         {
-            var decree = new Decree() { Id = id };
+            var decree = await _decreeRepository.GetByKeyAsync(id);
+            if (decree == null)
+            {
+                throw new NotFoundException($"Decree with id {id} not found");
+            }    
             var deleteDecree = await _decreeRepository.DeleteAsync(decree);
             await _decreeRepository.SaveChangesAcync();
 
