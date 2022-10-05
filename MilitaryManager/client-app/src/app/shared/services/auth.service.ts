@@ -18,7 +18,7 @@ export class AuthService {
       authority: "https://localhost:5007",
       client_id: "angular",
       redirect_uri: `${location.origin}/SignInCallback`,
-      scope: "openid profile unitsAPI",
+      scope: "openid profile unitsAPI attachmentsAPI",
       response_type: "code",
       post_logout_redirect_uri: `${location.origin}/SignOutCallback`,
       stateStore: new WebStorageStateStore({ store: new CookieStorage() }),
