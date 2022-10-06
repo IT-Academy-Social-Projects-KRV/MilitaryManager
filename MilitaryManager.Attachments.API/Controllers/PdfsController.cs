@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MilitaryManager.Core.DTO.Attachments;
 using MilitaryManager.Core.Interfaces.Services;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace MilitaryManager.Attachments.API.Controllers
@@ -32,11 +31,9 @@ namespace MilitaryManager.Attachments.API.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> UploadPdfSigned([FromBody] UploadPdfSignedDTO uploadPdfSignedDTO)
+        public async Task<ActionResult> UploadPdfSigned([FromForm] UploadPdfSignedDTO uploadPdfSignedDTO)
         {
-            var formCollection = await Request.ReadFormAsync();
-            var file = formCollection.Files.First();
-            await _decreeService.UploadSignedDecreeAsync(uploadPdfSignedDTO.Id, file);
+            await _decreeService.UploadSignedDecreeAsync(uploadPdfSignedDTO.Id, uploadPdfSignedDTO.File);
             return Ok();
         }
     }
