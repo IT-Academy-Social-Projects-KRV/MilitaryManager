@@ -1,4 +1,4 @@
-﻿using MilitaryManager.Core.DTO.Divisions;
+using MilitaryManager.Core.DTO.Divisions;
 using MilitaryManager.Core.DTO.Positions;
 using MilitaryManager.Core.DTO.Ranks;
 using MilitaryManager.Core.Entities.DivisionEntity;
@@ -27,6 +27,7 @@ namespace MilitaryManager.Core.DTO.Units
         public PositionDTO Position { get; set; }
 
         public List<UnitDTO> SubUnits { get; set; }
+
 
         //public List<ProfileDTO> Profiles { get; set; }
         public List<UnitToEquipmentDTO> UnitToEquipments { get; set; }

@@ -1,6 +1,8 @@
-﻿using MilitaryManager.Core.DTO.Divisions;
+
+using MilitaryManager.Core.DTO.Divisions;
 using MilitaryManager.Core.DTO.Entities;
 using MilitaryManager.Core.Entities.DivisionEntity;
+
 using MilitaryManager.Core.Entities.EntityEntity;
 using MilitaryManager.Core.Entities.UnitEntity;
 using System;
