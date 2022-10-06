@@ -18,6 +18,7 @@ namespace MilitaryManager.Attachments.API.Controllers
         private readonly string _webRootPath;
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly string _documentExportFolder;
+
         public AttachmentsController(
             IWebHostEnvironment hostingEnvironment,
             IDocumentGenerationService service,
@@ -63,3 +64,4 @@ namespace MilitaryManager.Attachments.API.Controllers
         }
     }
 }
+

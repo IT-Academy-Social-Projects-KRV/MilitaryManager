@@ -13,6 +13,7 @@ namespace MilitaryManager.Core
             services.AddScoped<IUnitService, UnitService>();
             services.AddScoped<IDecreeService, DecreeService>();
             services.AddScoped<ITemplateService, TemplateService>();
+            services.AddScoped<IDivisionService, DivisionService>();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)

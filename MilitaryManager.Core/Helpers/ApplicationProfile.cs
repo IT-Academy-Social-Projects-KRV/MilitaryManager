@@ -3,7 +3,9 @@ using MilitaryManager.Core.DTO.Attachments;
 using MilitaryManager.Core.DTO.Units;
 using MilitaryManager.Core.Entities.DecreeEntity;
 using MilitaryManager.Core.Entities.TemplateEntity;
+using MilitaryManager.Core.DTO.Divisions;
 using MilitaryManager.Core.Entities.UnitEntity;
+using MilitaryManager.Core.Entities.DivisionEntity;
 
 namespace MilitaryManager.Core.Helpers
 {
@@ -17,6 +19,7 @@ namespace MilitaryManager.Core.Helpers
                 .ForMember(dest => dest.Template, opt => opt.MapFrom(src => src.Template.Type))
                 .ForMember(dest => dest.PathSigned, opt => opt.MapFrom(src => src.SignedPdf.Path));
             CreateMap<Template, TemplateDTO>().ReverseMap();
+            CreateMap<DivisionDTO, Division>().ReverseMap();
         }
     }
 }

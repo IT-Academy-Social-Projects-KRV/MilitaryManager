@@ -24,3 +24,18 @@ services:
     build:
       context: .
       dockerfile: MilitaryManager.IdentityServer/Dockerfile
+
+  azure-blob-storage:
+   image: mcr.microsoft.com/azure-blob-storage:latest
+   hostname: azure-blob-storage
+   environment:
+      LOCAL_STORAGE_ACCOUNT_NAME: militarymanager
+      LOCAL_STORAGE_ACCOUNT_KEY: C/yu8u+EAak7iTH73rUCUj+2NZr6NNgFRPtFPGnJtPYvpZfaW9QJopXd/Xh0HrmzakkWyw/28hss+AStsgfKVg==   
+   volumes:
+       - "blobdata:/data"
+   ports:
+      - 11002:11002
+
+volumes:
+    blobdata:
+        external: false

@@ -10,6 +10,8 @@ using MilitaryManager.Core;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using MilitaryManager.Core.Services.StoreService;
+using MilitaryManager.Infrastructure.StoreConfig;
 
 namespace MilitaryManager.Attachments.API
 {
@@ -61,6 +63,9 @@ namespace MilitaryManager.Attachments.API
             services.AddRepositories();
             services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));
             services.AddHttpContextAccessor();
+
+            services.AddStoreService(Configuration);
+            services.AddTransient<StoreService>();
 
             services.AddControllers();
             services.RegisterDocumentGenerationServices();

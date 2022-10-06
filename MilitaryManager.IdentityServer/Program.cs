@@ -22,7 +22,6 @@ namespace MilitaryManager.IdentityServer
 
                 RolesData.SeedRoles(serviceProvider).Wait();
 
-                //TODO SEED ADMIN here
                 var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
                 const string USERNAME = "myadmin@myadmin.com";

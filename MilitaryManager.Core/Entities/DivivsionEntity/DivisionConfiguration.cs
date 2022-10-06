@@ -12,10 +12,12 @@ namespace MilitaryManager.Core.Entities.DivisionEntity
 
             builder
                 .Property(x => x.Name)
+                .HasMaxLength(50)
                 .IsRequired();
 
             builder
                 .Property(x => x.Address)
+                .HasMaxLength(50)
                 .IsRequired();
 
             builder
