@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using MilitaryManager.Core;
 using MilitaryManager.Infrastructure;
 
@@ -37,6 +38,11 @@ namespace MilitaryManager.Units.API
                        ValidateIssuer = false,
                    };
                });
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("Units", new OpenApiInfo { Title = "Unit", Version = "v1" });
+                c.SwaggerDoc("Divisions", new OpenApiInfo { Title = "Division", Version = "v1" });
+            });
             services.AddCustomServices();
             services.AddAutoMapper();
             services.AddRepositories();
@@ -54,6 +60,13 @@ namespace MilitaryManager.Units.API
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/Units/swagger.json", "Unit V1");
+                c.SwaggerEndpoint("/swagger/Divisions/swagger.json", "Division V1");
+            });
 
             app.UseCors(
                 builder => builder
