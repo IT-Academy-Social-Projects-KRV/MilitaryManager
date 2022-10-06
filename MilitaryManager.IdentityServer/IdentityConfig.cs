@@ -42,7 +42,8 @@ namespace IdentityServer
 						IdentityServerConstants.StandardScopes.Profile,
 						IdentityServerConstants.StandardScopes.Email,
 						JwtClaimTypes.Role,
-						"unitsAPI"
+						"unitsAPI",
+						"attachmentsAPI"
 					}
 				}
 			};
@@ -61,6 +62,16 @@ namespace IdentityServer
 						JwtClaimTypes.Role
 					},
 					Scopes = { "unitsAPI" }
+				},
+				new ApiResource("attachmentsAPI")
+				{
+					UserClaims =
+					{
+						JwtClaimTypes.Name,
+						JwtClaimTypes.Email,
+						JwtClaimTypes.Role
+					},
+					Scopes = { "attachmentsAPI" }
 				}
 			};
 
@@ -70,7 +81,8 @@ namespace IdentityServer
         {
 			return new List<ApiScope> 
 			{ 
-				new ApiScope("unitsAPI", "Units API") 
+				new ApiScope("unitsAPI", "Units API"),
+				new ApiScope("attachmentsAPI", "Attachments API")
 			};
 		}
 	}

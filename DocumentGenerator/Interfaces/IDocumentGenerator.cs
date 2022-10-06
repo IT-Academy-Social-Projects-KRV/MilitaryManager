@@ -1,5 +1,6 @@
 using PdfSharpCore.Drawing;
 using PdfSharpCore.Drawing.Layout;
+using System.IO;
 
 namespace DocumentGenerator.Interfaces
 {
@@ -30,9 +31,11 @@ namespace DocumentGenerator.Interfaces
         /// <param name="height">Retreat height</param>
         void AddRetreat(double height);
 
-        /// <summary>
-        /// Save Pdf document
-        /// </summary>
-        void SaveDocument();
-    }
+		/// <summary>
+		/// Save Pdf document
+		/// </summary>
+		void SaveDocument();
+
+		byte[] SaveDocumentFile();
+	}
 }
