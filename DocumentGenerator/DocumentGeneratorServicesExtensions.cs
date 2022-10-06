@@ -13,5 +13,4 @@ namespace DocumentGenerator
             return services;
         }
     }
-
 }
