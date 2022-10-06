@@ -29,7 +29,7 @@ namespace MilitaryManager.Attachments.API.Controllers
             _webRootPath = hostingEnvironment.WebRootPath;
             _logger = logger;
             _documentExportFolder = "documents";
-            
+
             _unitService = UnitService;
         }
 
@@ -61,8 +61,8 @@ namespace MilitaryManager.Attachments.API.Controllers
                 _logger.LogError(ex, $"Template for {templateName} document is not available");
             }
 
-            var unit = _unitService.GetUnitAsync(1).Result;
-            var obj = new { name = unit.Name };
+            var unit = _unitService.GetUnitAsync(5).Result;
+            var obj = new { lastName = unit.LastName, firstName = unit.FirstName };
             var jsonData = JsonConvert.SerializeObject(obj);
 
             _documentGenerationService.ApplyFontResolver("/wwwroot"); //_webRootPath);

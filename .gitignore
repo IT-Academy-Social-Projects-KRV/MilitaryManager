@@ -48,7 +48,7 @@ Desktop.ini
 .idea
 
 # documents
-*.pdf
+MilitaryManager.Attachments.API/wwwroot/documents/*.pdf
 
-# MilitaryManager\MilitaryManager.Attachments.API\wwwroot\fonts\.uuid
+# .\MilitaryManager.Attachments.API\wwwroot\fonts\.uuid
 .uuid
