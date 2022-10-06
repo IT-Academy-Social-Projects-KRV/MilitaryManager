@@ -1,10 +1,12 @@
 ﻿using BusinessLogic.Services.Documents;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using MilitaryManager.Attachments.API.Models;
 using System;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace MilitaryManager.Attachments.API.Controllers
 {
@@ -16,6 +18,7 @@ namespace MilitaryManager.Attachments.API.Controllers
         private readonly string _webRootPath;
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly string _documentExportFolder;
+
         public AttachmentsController(
             IWebHostEnvironment hostingEnvironment,
             IDocumentGenerationService service,
@@ -62,3 +65,4 @@ namespace MilitaryManager.Attachments.API.Controllers
         }
     }
 }
+
