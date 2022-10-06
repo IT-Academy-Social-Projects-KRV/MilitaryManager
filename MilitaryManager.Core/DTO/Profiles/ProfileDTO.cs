@@ -1,9 +1,11 @@
-﻿using MilitaryManager.Core.Entities.UnitEntity;
+﻿using MilitaryManager.Core.DTO.Attributes;
+using MilitaryManager.Core.DTO.Units;
+using MilitaryManager.Core.Entities.UnitEntity;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MilitaryManager.Core.DTO.Units
+namespace MilitaryManager.Core.DTO.Profiles
 {
     public class ProfileDTO
     {

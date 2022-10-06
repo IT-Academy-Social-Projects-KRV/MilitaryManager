@@ -1,9 +1,10 @@
-﻿using MilitaryManager.Core.Entities.EntityEntity;
+﻿using MilitaryManager.Core.DTO.Attributes;
+using MilitaryManager.Core.Entities.EntityEntity;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MilitaryManager.Core.DTO.Units
+namespace MilitaryManager.Core.DTO.Entities
 {
     public class EntityToAttributeDTO
     {

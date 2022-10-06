@@ -1,9 +1,11 @@
-﻿using MilitaryManager.Core.Entities.EntityToAttributeEntity;
+﻿using MilitaryManager.Core.DTO.Entities;
+using MilitaryManager.Core.DTO.Profiles;
+using MilitaryManager.Core.Entities.EntityToAttributeEntity;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MilitaryManager.Core.DTO.Units
+namespace MilitaryManager.Core.DTO.Attributes
 {
     public class AttributeDTO
     {
