@@ -1,1 +1,15 @@
 @use "src/app/components/test1/test1.component";
+#tree{
+  padding: 8px;
+  flex-basis: 30%;
+}
+
+#unit_info{
+  flex-basis: 70%;
+}
+
+#container{
+  gap: 10px;
+  align-items: stretch;
+}
+

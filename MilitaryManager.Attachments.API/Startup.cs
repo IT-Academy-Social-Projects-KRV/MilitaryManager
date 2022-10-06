@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using DocumentGenerator;
+using MilitaryManager.Core.Services.StoreService;
+using MilitaryManager.Infrastructure.StoreConfig;
 
 namespace MilitaryManager.Attachments.API
 {
@@ -19,6 +21,9 @@ namespace MilitaryManager.Attachments.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddStoreService(Configuration);
+            services.AddTransient<StoreService>();
+
             services.AddControllers();
             services.RegisterDocumentGenerationServices();
         }

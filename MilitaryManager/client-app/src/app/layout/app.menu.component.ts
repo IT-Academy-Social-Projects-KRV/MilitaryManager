@@ -30,7 +30,7 @@ export class AppMenuComponent implements OnInit {
                 label: 'Бійці',
                 items: [
                     { label: 'Бійці', icon: 'pi pi-fw pi-users', routerLink: ['/units/list'] },
-                    { label: 'Додати бійця', icon: 'pi pi-fw pi-user-plus', routerLink: ['/'] }
+                    { label: 'Додати бійця', icon: 'pi pi-fw pi-user-plus', routerLink: ['/units/edit'] }
                 ]
             },
             {

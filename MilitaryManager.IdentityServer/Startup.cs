@@ -49,7 +49,6 @@ namespace MilitaryManager.IdentityServer
                 .AddInMemoryApiScopes(IdentityConfig.GetApiScopes())
                 .AddInMemoryClients(IdentityConfig.GetClients("https://localhost:5001"))
                 .AddAspNetIdentity<ApplicationUser>();
-                
             // services.AddRazorPages();
 
             //services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -79,10 +78,8 @@ namespace MilitaryManager.IdentityServer
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
             //app.UseHttpsRedirection();
             //app.UseStaticFiles();
-
             app.UseStaticFiles();
             app.UseCors(
                 builder => builder
