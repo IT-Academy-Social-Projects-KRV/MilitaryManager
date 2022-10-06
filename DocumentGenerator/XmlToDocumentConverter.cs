@@ -71,28 +71,16 @@ namespace DocumentGenerator
             if (attributes != null)
             {
                 var bottomAttribute = docNode.Attributes?["bottom"];
-                if (bottomAttribute != null)
-                {
-                    trimMargins.Bottom = Convert.ToInt32(bottomAttribute.Value);
-                }
+                if (bottomAttribute != null) trimMargins.Bottom = Convert.ToInt32(bottomAttribute.Value);
 
                 var leftAttribute = docNode.Attributes?["left"];
-                if (leftAttribute != null)
-                {
-                    trimMargins.Left = Convert.ToInt32(leftAttribute.Value);
-                }
+                if (leftAttribute != null) trimMargins.Left = Convert.ToInt32(leftAttribute.Value);
 
                 var topAttribute = docNode.Attributes?["top"];
-                if (topAttribute != null)
-                {
-                    trimMargins.Top = Convert.ToInt32(topAttribute.Value);
-                }
+                if (topAttribute != null) trimMargins.Top = Convert.ToInt32(topAttribute.Value);
 
                 var rightAttribute = docNode.Attributes?["right"];
-                if (rightAttribute != null)
-                {
-                    trimMargins.Right = Convert.ToInt32(rightAttribute.Value);
-                }
+                if (rightAttribute != null) trimMargins.Right = Convert.ToInt32(rightAttribute.Value);
             }
 
             return new DocumentParams
@@ -117,17 +105,14 @@ namespace DocumentGenerator
             var docName = DateTime.Now.Ticks.ToString();
             var xml = GetXmlTemplate(data.Template);
 
-            string docPath = Path.Combine(path, docName);
+            var docPath = Path.Combine(path, docName);
             var documentGenerator =
                 _documentGeneratorFactory.CreateDocumentGenerator(type, docPath,
                     GetDocumentParameters(xml));
 
             var nodeParser = _nodeParserFactory.CreateNodeParser(data.JsonData);
 
-            foreach (XmlNode node in xml.FirstChild.ChildNodes)
-            {
-                nodeParser.ParseNode(documentGenerator, node);
-            }
+            foreach (XmlNode node in xml.FirstChild.ChildNodes) nodeParser.ParseNode(documentGenerator, node);
 
             documentGenerator.SaveDocument();
             return $"{docName}.pdf";

@@ -42,9 +42,7 @@ namespace BusinessLogic.Services.Documents
         public void ApplyFontResolver(string webRootPath)
         {
             if (GlobalFontSettings.FontResolver == null)
-            {
                 GlobalFontSettings.FontResolver = new FontResolver(webRootPath);
-            }
         }
 
         #endregion

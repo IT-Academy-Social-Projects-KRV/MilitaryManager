@@ -85,7 +85,7 @@ namespace DocumentGenerator
         {
             try
             {
-                string path = Path.Combine(_rootPath, "fonts", name);
+                var path = Path.Combine(_rootPath, "fonts", name);
                 using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
                 {
                     var count = (int)stream.Length;
