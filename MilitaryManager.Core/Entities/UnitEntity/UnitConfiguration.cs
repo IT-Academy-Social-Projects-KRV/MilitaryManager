@@ -12,10 +12,12 @@ namespace MilitaryManager.Core.Entities.UnitEntity
 
             builder
                 .Property(x => x.LastName)
+                .HasMaxLength(50)
                 .IsRequired();
 
             builder
                 .Property(x => x.FirstName)
+                .HasMaxLength(50)
                 .IsRequired();
 
             builder

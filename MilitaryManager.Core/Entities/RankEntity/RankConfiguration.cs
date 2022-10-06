@@ -12,6 +12,7 @@ namespace MilitaryManager.Core.Entities.RankEntity
 
             builder
                 .Property(x => x.Name)
+                .HasMaxLength(50)
                 .IsRequired();
         }
     }
