@@ -7,6 +7,7 @@ namespace MilitaryManager.Units.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [ApiExplorerSettings(GroupName = "Units")]
     public class UnitController : ControllerBase
     {
         protected readonly IUnitService _unitServices;
@@ -16,9 +17,17 @@ namespace MilitaryManager.Units.API.Controllers
             _unitServices = unitServices;
         }
 
+
         [HttpGet]
-        [Route("{id:int?}")]
-        public async Task<IActionResult> GetTree([FromRoute] int? id)
+        [Route("collection")]
+        public async Task<IActionResult> GetRootTree()
+        {
+            return Ok(await _unitServices.GetUnitsTreeAsync(null));
+        }
+
+        [HttpGet]
+        [Route("collection/{id}")]
+        public async Task<IActionResult> GetTreeNode([FromRoute] int id)
         {
             return Ok(await _unitServices.GetUnitsTreeAsync(id));
         }

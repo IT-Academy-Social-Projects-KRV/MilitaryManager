@@ -26,7 +26,7 @@ namespace MilitaryManager.Core.Services
 
             if (id.HasValue)
             {
-                specification = new Units.UnitsListById(id.Value);
+                specification = new Units.UnitsListByParentId(id.Value);
             }
             else
             {

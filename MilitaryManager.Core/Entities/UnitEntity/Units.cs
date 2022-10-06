@@ -9,18 +9,16 @@ namespace MilitaryManager.Core.Entities.UnitEntity
             public RootUnitsList()
             {
                 Query
-                .Include(x => x.SubUnits)
                 .Where(x => x.ParentId == null);
             }
         }
-        
-        internal class UnitsListById : Specification<Unit>
+
+        internal class UnitsListByParentId : Specification<Unit>
         {
-            public UnitsListById(int id)
+            public UnitsListByParentId(int id)
             {
                 Query
-                .Include(x => x.SubUnits)
-                .Where(x => x.Id == id);
+                .Where(x => x.ParentId == id);
             }
         }
     }

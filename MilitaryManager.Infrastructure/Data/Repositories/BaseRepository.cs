@@ -78,9 +78,10 @@ namespace MilitaryManager.Infrastructure.Data.Repositories
             return await ApplySpecification(specification).ToListAsync();
         }
 
-        public async Task<TEntity> GetUnitBySpecAsync(ISpecification<TEntity> specification)
+        public async Task<TEntity> GetFirstBySpecAsync(ISpecification<TEntity> specification)
         {
-            return await ApplySpecification(specification).FirstOrDefaultAsync();
+            var res = await ApplySpecification(specification).FirstOrDefaultAsync();
+            return res;
         }
 
         private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> specification)
