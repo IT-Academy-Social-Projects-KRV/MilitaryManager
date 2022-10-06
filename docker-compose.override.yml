@@ -13,8 +13,6 @@ services:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
  
   militarymanager.attachments.api:
-    networks:
-      - my-network
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
@@ -61,14 +59,7 @@ services:
        - "blobdata:/data"
    ports:
      - 11002:11002
-   networks:
-      - my-network
 
-networks:
-   my-network:
-        external: true
 volumes:
-      blobdata:
-          external: true
-
-
+    blobdata:
+        external: false
