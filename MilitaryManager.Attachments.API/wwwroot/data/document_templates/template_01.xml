@@ -1,4 +1,4 @@
-<documnet top="80">
+<document top="80">
 	<title>ПРОТОКОЛ</title>
 	<ret>5</ret>
 	<p>зі створення ініціативної групи для реєстрації  об’єднання  співвласників багатоквартирного будинку за адресою: м.[city], вул. [street] [number]</p>
@@ -16,4 +16,4 @@
 	<p fontStyle="bold">Розгляд питань порядку денного:</p>
 	<ret>10</ret>
 	<list data="scheduleResults" ret="10">[#].    [text];</list>
-</documnet>
+</document>

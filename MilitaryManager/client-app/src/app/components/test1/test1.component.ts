@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { services } from 'src/app/shared/services';
+import { ApiService } from 'src/app/shared/services/api/api.service';
 
 @Component({
   selector: 'app-test1',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Test1Component implements OnInit {
 
-  constructor() { }
+  constructor(public apiService: ApiService) { }
 
   ngOnInit(): void {
   }

@@ -23,5 +23,8 @@
 	<ItemGroup>
 	  <Folder Include="wwwroot\" />
 	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\MilitaryManager.Core\MilitaryManager.Core.csproj" />
+	</ItemGroup>
 
 </Project>
