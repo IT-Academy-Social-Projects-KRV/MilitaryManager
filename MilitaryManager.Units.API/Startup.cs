@@ -43,7 +43,7 @@ namespace MilitaryManager.Units.API
                 c.SwaggerDoc("Units", new OpenApiInfo { Title = "Unit", Version = "v1" });
                 c.SwaggerDoc("Divisions", new OpenApiInfo { Title = "Division", Version = "v1" });
             });
-            services.AddCustomServices();
+            services.AddCustomUnitsServices();
             services.AddAutoMapper();
             services.AddRepositories();
             services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));

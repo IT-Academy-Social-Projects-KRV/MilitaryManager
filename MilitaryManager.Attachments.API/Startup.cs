@@ -58,7 +58,7 @@ namespace MilitaryManager.Attachments.API
                 c.SwaggerDoc("Attachments", new OpenApiInfo { Title = "Attachment", Version = "v1" });
             });
 
-            services.AddCustomServices();
+            services.AddCustomAttachmentsServices();
             services.AddAutoMapper();
             services.AddRepositories();
             services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));

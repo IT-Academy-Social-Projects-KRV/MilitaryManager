@@ -8,12 +8,15 @@ namespace MilitaryManager.Core
 {
     public static class StartupSetup
     {
-        public static void AddCustomServices(this IServiceCollection services)
+        public static void AddCustomUnitsServices(this IServiceCollection services)
         {
             services.AddScoped<IUnitService, UnitService>();
+            services.AddScoped<IDivisionService, DivisionService>();
+        }
+        public static void AddCustomAttachmentsServices(this IServiceCollection services)
+        {
             services.AddScoped<IDecreeService, DecreeService>();
             services.AddScoped<ITemplateService, TemplateService>();
-            services.AddScoped<IDivisionService, DivisionService>();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)
