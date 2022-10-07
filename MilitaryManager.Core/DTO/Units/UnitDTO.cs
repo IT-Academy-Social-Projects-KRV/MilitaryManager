@@ -1,12 +1,6 @@
 ﻿using MilitaryManager.Core.DTO.Divisions;
 using MilitaryManager.Core.DTO.Positions;
 using MilitaryManager.Core.DTO.Ranks;
-using MilitaryManager.Core.Entities.DivisionEntity;
-using MilitaryManager.Core.Entities.EquipmentToUnitEntity;
-using MilitaryManager.Core.Entities.PositionEntity;
-using MilitaryManager.Core.Entities.ProfileEntity;
-using MilitaryManager.Core.Entities.RankEntity;
-using MilitaryManager.Core.Entities.UnitEntity;
 using System.Collections.Generic;
 
 namespace MilitaryManager.Core.DTO.Units
