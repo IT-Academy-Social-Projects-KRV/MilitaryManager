@@ -16,7 +16,8 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
-      - ConnectionStrings__DefaultConnection=Server=host.docker.internal;Database=Units;User ID=sa;Password=password1;MultipleActiveResultSets=true;Application Name=MilitaryManager.Attachments.API
+      - identityUrl=http://militarymanager.identity.server
+      - ConnectionStrings__DefaultConnection=Server=host.docker.internal;Database=MilitaryManager_Attachments;User ID=Gwa_System;Password=T&t137S5tP!+3SMJQ<r0KJ;MultipleActiveResultSets=true;Application Name=Attachments
     ports:
       - "5002:80"
       - "5003:443"
@@ -48,3 +49,19 @@ services:
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+
+  azure-blob-storage:
+   image: mcr.microsoft.com/azure-blob-storage:latest
+   hostname: azure-blob-storage
+   environment:
+      LOCAL_STORAGE_ACCOUNT_NAME: militarymanager
+      LOCAL_STORAGE_ACCOUNT_KEY: C/yu8u+EAak7iTH73rUCUj+2NZr6NNgFRPtFPGnJtPYvpZfaW9QJopXd/Xh0HrmzakkWyw/28hss+AStsgfKVg==   
+   volumes:
+       - "blobdata:/data"
+   ports:
+     - 11002:11002
+
+volumes:
+    blobdata:
+        external: false

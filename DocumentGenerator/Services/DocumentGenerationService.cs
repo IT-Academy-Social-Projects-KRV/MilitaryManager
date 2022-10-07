@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using DocumentGenerator;
 using DocumentGenerator.DataObjects;
 using DocumentGenerator.Interfaces;
@@ -22,7 +23,8 @@ namespace BusinessLogic.Services.Documents
         /// <summary>
         /// Create DocumentGenerationService
         /// </summary>
-        public DocumentGenerationService() : this(new XmlToDocumentConverter())
+        public DocumentGenerationService()
+            : this(new XmlToDocumentConverter())
         {
         }
 
@@ -52,7 +54,12 @@ namespace BusinessLogic.Services.Documents
         private string GenerateDocument(DocumentType documentType, string exportPath, string templateName,
             string templateData, string jsonData)
         {
-            var documentData = new DocumentData { Name = templateName, Template = templateData, JsonData = jsonData };
+            var documentData = new DocumentData
+            {
+                Name = templateName,
+                Template = templateData,
+                JsonData = jsonData
+            };
             try
             {
                 return _xmlToDocumentConverter.CreateDocument(documentType, exportPath, documentData);
@@ -63,7 +70,25 @@ namespace BusinessLogic.Services.Documents
             }
         }
 
-        #endregion
+		private byte[] GenerateDocumentFile(DocumentType documentType, string exportPath, string templateName, string templateData, string jsonData)
+		{
+			var documentData = new DocumentData
+			{
+				Name = templateName,
+				Template = templateData,
+				JsonData = jsonData
+			};
+			try
+			{
+				return _xmlToDocumentConverter.CreateDocumentFile(documentType, exportPath, documentData);
+			}
+			catch (Exception exception)
+			{
+				return null;
+			}
+		}
+
+		#endregion
 
         #region IDocumentGenerationService Members
 
@@ -76,6 +101,11 @@ namespace BusinessLogic.Services.Documents
         {
             return GenerateDocument(DocumentType.Doc, exportPath, templateName, templateData, jsonData);
         }
+
+        public byte[] GeneratePdfDocumentFile(string exportPath, string templateName, string templateData, string jsonData)
+		{
+			return GenerateDocumentFile(DocumentType.Pdf, exportPath, templateName, templateData, jsonData);
+		}
 
         #endregion
     }

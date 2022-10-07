@@ -7,12 +7,20 @@
   <ItemGroup>
     <PackageReference Include="Ardalis.Specification" Version="4.2.0" />
     <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.13.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.28" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.28" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+	<FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DocumentGenerator\DocumentGenerator.csproj" />
     <Folder Include="Interfaces\Services\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 </Project>

@@ -1,9 +1,12 @@
 ﻿using BusinessLogic.Services.Documents;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using MilitaryManager.Core.Interfaces.Services;
 using Newtonsoft.Json;
 
@@ -33,14 +36,38 @@ namespace MilitaryManager.Attachments.API.Controllers
             _unitService = UnitService;
         }
 
-        [HttpGet]
-        [Route("find")]
+        [HttpGet(Name="find")]
         public FileStreamResult GetDocument([FromQuery] string name)
         {
             string path = Path.Combine(_webRootPath, _documentExportFolder, name);
             FileStream fileStream = new FileStream(path, FileMode.Open);
 
             return new FileStreamResult(fileStream, "application/pdf");
+        }
+
+        [HttpPost]
+        public IActionResult GenerateNewDocument([FromQuery] string templateName)
+        {
+            var documentTemplatesPath = $"{_webRootPath}/data/document_templates";
+
+            Request.EnableBuffering();
+            Request.Body.Seek(0, SeekOrigin.Begin);
+            string jsonData = new StreamReader(HttpContext.Request.Body).ReadToEnd();
+
+            string templateData = null;
+            try
+            {
+                templateData = System.IO.File.ReadAllText($"{documentTemplatesPath}/{templateName}.xml");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Template for {templateName} document is not available");
+            }
+
+            _documentGenerationService.ApplyFontResolver(_webRootPath);
+            var docName = _documentGenerationService.GeneratePdfDocument($"{_webRootPath}/{_documentExportFolder}", templateName, templateData, jsonData);
+
+            return CreatedAtRoute("find", new { name = docName }, docName);
         }
 
         [HttpGet]

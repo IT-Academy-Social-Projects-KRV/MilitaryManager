@@ -12,6 +12,7 @@ namespace MilitaryManager.Core.Entities.EntityToAttributeEntity
 
             builder
                 .Property(x => x.Value)
+                .HasMaxLength(50)
                 .IsRequired();
 
             builder

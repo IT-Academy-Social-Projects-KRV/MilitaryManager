@@ -118,6 +118,24 @@ namespace DocumentGenerator
             return $"{docName}.pdf";
         }
 
+		public byte[] CreateDocumentFile(DocumentType type, string path, IDocumentData data)
+		{
+			var docName = DateTime.Now.Ticks.ToString();
+			var xml = GetXmlTemplate(data.Template);
+			var documentGenerator =
+				_documentGeneratorFactory.CreateDocumentGenerator(type, $"{path}\\{docName}",
+					GetDocumentParameters(xml));
+
+			var nodeParser = _nodeParserFactory.CreateNodeParser(data.JsonData);
+
+			foreach (XmlNode node in xml.FirstChild.ChildNodes)
+			{
+				nodeParser.ParseNode(documentGenerator, node);
+			}
+
+			return documentGenerator.SaveDocumentFile();
+		}
+
         #endregion
     }
 }

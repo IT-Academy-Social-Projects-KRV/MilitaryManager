@@ -41,11 +41,13 @@ namespace DocumentGenerator
                 case "times new roman":
                     if (isBold)
                     {
-                        if (isItalic) return new FontResolverInfo("Times#bi");
+                        if (isItalic)
+                            return new FontResolverInfo("Times#bi");
                         return new FontResolverInfo("Times#b");
                     }
 
-                    if (isItalic) return new FontResolverInfo("Times#i");
+                    if (isItalic)
+                        return new FontResolverInfo("Times#i");
                     return new FontResolverInfo("Times#");
             }
 

@@ -41,8 +41,9 @@ namespace MilitaryManager.Units.API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("Units", new OpenApiInfo { Title = "Unit", Version = "v1" });
+                c.SwaggerDoc("Divisions", new OpenApiInfo { Title = "Division", Version = "v1" });
             });
-            services.AddCustomServices();
+            services.AddCustomUnitsServices();
             services.AddAutoMapper();
             services.AddRepositories();
             services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));
@@ -64,6 +65,7 @@ namespace MilitaryManager.Units.API
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/Units/swagger.json", "Unit V1");
+                c.SwaggerEndpoint("/swagger/Divisions/swagger.json", "Division V1");
             });
 
             app.UseCors(
