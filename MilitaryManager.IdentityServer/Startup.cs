@@ -4,6 +4,7 @@ using IdentityServer.Models;
 using IdentityServer.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -41,13 +42,13 @@ namespace MilitaryManager.IdentityServer
 
             // Adds IdentityServer
             services.AddIdentityServer()
+                .AddDeveloperSigningCredential()
                 //.AddSigningCredential()
                 .AddInMemoryIdentityResources(IdentityConfig.GetIdentityResources())
                 .AddInMemoryApiResources(IdentityConfig.GetApiResources())
-                .AddInMemoryClients(IdentityConfig.GetClients("http://localhost:5001"))
+                .AddInMemoryApiScopes(IdentityConfig.GetApiScopes())
+                .AddInMemoryClients(IdentityConfig.GetClients("https://localhost:5001"))
                 .AddAspNetIdentity<ApplicationUser>();
-
-
             // services.AddRazorPages();
 
             //services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -77,25 +78,23 @@ namespace MilitaryManager.IdentityServer
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
             //app.UseHttpsRedirection();
             //app.UseStaticFiles();
-
             app.UseStaticFiles();
             app.UseCors(
                 builder => builder
                     .WithOrigins(
                         "http://localhost:4200",
-                        "http://localhost:5001",
+                        "https://localhost:5001",
                         "http://localhost:5000")
                     .SetIsOriginAllowedToAllowWildcardSubdomains()
                     .AllowAnyMethod()
                     .AllowAnyHeader()
             );
-
+           
             app.UseIdentityServer();
-            // RolesData.SeedRoles(app).Wait();
-            // app.UseRouting();
+
+            app.UseRouting();
 
             app.UseMvc(routes =>
             {

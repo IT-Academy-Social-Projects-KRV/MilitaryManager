@@ -30,14 +30,6 @@ export abstract class CoreHttpService {
         }
         throw error;
     }
-
-    protected get token(): string | null {
-        return this.httpService.token;
-    }
-
-    protected set token(value: string | null) {
-        this.httpService.token = value;
-    }
 }
 
 export abstract class BaseService<TModel extends BaseModel>  {
@@ -52,8 +44,7 @@ export abstract class BaseService<TModel extends BaseModel>  {
         serviceType: ServiceType = ServiceType.web,
     ) {
         this.single = new BaseSingleService<TModel>(HttpService, controllerName, ConfigService, createModel, serviceType);
-        this.collection = new BaseCollectionService<TModel>(HttpService, controllerName, ConfigService, createModel, serviceType);
-        //this.collection = new BaseCollectionService<TModel>(HttpService, `collection/${controllerName}`, ConfigService, createModel, serviceType);
+        this.collection = new BaseCollectionService<TModel>(HttpService, `${controllerName}/collection`, ConfigService, createModel, serviceType);
     }
 }
 
@@ -68,25 +59,32 @@ class BaseCollectionService<TModel extends BaseModel> extends CoreHttpService {
         super(httpService, controllerName, configService, serviceType);
     }
 
-    private mapModel(payload: any): TModel {
-        const model = new this.createModel(payload.id ?? null);
-        // TODO: Implement set payload function fo models or use parsing revivers
-        // or use lodash to parse json objects
-        // model.setPayload(payload);
-        // Example JSON.parse({}, reviverExtensions.defaultReviver)
+  private mapModel(payload: any): TModel {
+    const model = new this.createModel(payload.id ?? null);
+    // TODO: Implement set payload function fo models or use parsing revivers
+    // or use lodash to parse json objects
+    // model.setPayload(payload);
+    // Example JSON.parse({}, reviverExtensions.defaultReviver)
 
-        Object.assign(model, payload);
-        return model;
-    }
+    Object.assign(model, payload);
+    return model;
+  }
 
-    getAll(): Observable<TModel[]> {
-        return this.httpService.get(`${this.baseUrl}${this.controllerName}`)
-            .pipe(
-                //map((payloads: any) => payloads.map(this.mapModel)),
-                map((payloads: any) => payloads as TModel[]),
-                catchError(this.handleError)
-            );
-    }
+  getAll(): Observable<TModel[]> {
+      return this.httpService.get(`${this.baseUrl}${this.controllerName}`)
+          .pipe(
+              map((payloads: any) => payloads.map((payload: any) => this.mapModel(payload))),
+              catchError(this.handleError)
+          );
+  }
+
+  getListById(id: number): Observable<TModel[]> {
+    return this.httpService.get(`${this.baseUrl}${this.controllerName}/${id}`)
+      .pipe(
+        map((payloads: any) => payloads.map((payload: any) => this.mapModel(payload))),
+        catchError(this.handleError)
+      );
+  }
 }
 
 class BaseSingleService<TModel extends BaseModel> extends CoreHttpService {
@@ -102,14 +100,14 @@ class BaseSingleService<TModel extends BaseModel> extends CoreHttpService {
 
     private mapModel(payload: any): TModel {
         const model = new this.createModel(payload.id ?? null);
+        Object.assign(model, payload);
         return model;
     }
 
     get(): Observable<TModel> {
         return this.httpService.get(`${this.baseUrl}${this.controllerName}`)
             .pipe(
-                //map((payload: any) => this.mapModel(payload)),
-                map((payload: any) => payload as TModel),
+                map((payload: any) => this.mapModel(payload)),
                 catchError(this.handleError)
             );
     }

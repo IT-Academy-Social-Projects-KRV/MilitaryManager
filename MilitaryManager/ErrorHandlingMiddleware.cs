@@ -3,6 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using MilitaryManager.Core.Exceptions;
 using Newtonsoft.Json;
 
 
@@ -90,6 +91,10 @@ namespace MilitaryManager
             catch (ArgumentException ex)
             {
                 await HandleExceptionAsync(context, ex, HttpStatusCode.BadRequest);
+            }
+            catch (NotFoundException ex)
+            {
+                await HandleExceptionAsync(context, ex, HttpStatusCode.NotFound);
             }
             catch (Exception ex)
             {
