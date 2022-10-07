@@ -7,5 +7,7 @@ export class DecreeModel extends BaseModel {
     public createdBy: string | null = null;
     public timeStamp: Date | null = null;
     public templateId: number | null = null;
+    public template: string | null = null;
     public statusId: number | null = null;
+    public status: string | null = null;
 }

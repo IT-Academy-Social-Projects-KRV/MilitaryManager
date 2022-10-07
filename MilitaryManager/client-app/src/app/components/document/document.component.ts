@@ -48,14 +48,14 @@ export class DocumentComponent implements OnInit {
     this.apiService.templates.collection.getAll().subscribe(res => { this.templates = res })
 
     this.cols = [
-      { field: 'id', header: 'Id' },
+      { field: 'id', header: 'Id', width: '5%' },
       { field: 'name', header: 'Name' },
       { field: 'path', header: 'Path' },
       { field: 'pathSigned', header: 'Path Signed' },
       { field: 'createdBy', header: 'Created By' },
-      { field: 'timeStamp', header: 'Time Stamp' },
-      { field: 'templateId', header: 'Template Id' },
-      { field: 'statusId', header: 'Status Id' }
+      { field: 'timeStamp', header: 'Time Stamp', date: true, format: 'dd.MM.yyyy HH:mm' },
+      { field: 'template', header: 'Template' },
+      { field: 'status', header: 'Status' }
   ];
   }
 
@@ -87,6 +87,7 @@ export class DocumentComponent implements OnInit {
     }
     let fileToUpload = <File>files[0];
     const formData = new FormData();
+    formData.append('id', id);
     formData.append('file', fileToUpload, fileToUpload.name);
     
     //this.http.post('https://localhost:5001/api/upload', formData, {reportProgress: true, observe: 'events'})
@@ -110,6 +111,19 @@ export class DocumentComponent implements OnInit {
   //@ts-ignore
   download = (id, filePath) => {
     this.apiService.decree.download(id).subscribe((event) => {
+        if (event.type === HttpEventType.UploadProgress)
+            //this.progress = Math.round((100 * event.loaded) / event.total);
+          this.isDownloading = event.loaded != event.total;
+        else if (event.type === HttpEventType.Response) {
+            //this.message = 'Download success.';
+            this.downloadFile(event, filePath);
+        }
+    });
+  }
+
+  //@ts-ignore
+  downloadSigned = (id, filePath) => {
+    this.apiService.decree.downloadSigned(id).subscribe((event) => {
         if (event.type === HttpEventType.UploadProgress)
             //this.progress = Math.round((100 * event.loaded) / event.total);
           this.isDownloading = event.loaded != event.total;

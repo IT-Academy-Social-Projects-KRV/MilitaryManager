@@ -12,22 +12,27 @@ export class DecreeService extends BaseService<any> {
   constructor(
     httpService: HttpService,
     protected httpClient: HttpClient,
-    configService: ClientConfigurationService) {
-    super(httpService, 'decree', configService, DecreeModel, ServiceType.attachments);
+    protected configService: ClientConfigurationService) {
+    super(httpService, 'decrees', configService, DecreeModel, ServiceType.attachments);
   }
 
   uploadSign(id: number, formData: FormData): Observable<any> {
-    const headersConfig = {
-      'Content-Type': 'application/json'
-    };
-    return this.httpClient.post(`https://localhost:5003/api/decree/pdf/upload/${id}`, formData, {reportProgress: true, observe: 'events'})    
-    //return this.httpClient.post(`https://localhost:5003/api/decree/pdf/upload/${id}`, formData, {headers : new HttpHeaders(headersConfig), reportProgress: true, observe: 'events'})    
-    
-    //return this.httpClient.post(`https://www.googleapis.com/upload/drive/v3/files?uploadType=media`, formData, {headers : new HttpHeaders(headersConfig), reportProgress: true, observe: 'events'})    
+    const baseHost = this.configService.getEnvSetting(ServiceType.attachments);
+    return this.httpClient.put(`${baseHost}/api/pdfs`, formData, {reportProgress: true, observe: 'events'}) 
   }
 
   public download(id: number): Observable<any> { 
-    return this.httpClient.get(`https://localhost:5003/api/decree/pdf/${id}`, {
+    const baseHost = this.configService.getEnvSetting(ServiceType.attachments);
+    return this.httpClient.get(`${baseHost}/api/pdfs/${id}`, {
+      reportProgress: true,
+      observe: 'events',
+      responseType: 'blob'
+    }); 
+  }
+
+  public downloadSigned(id: number): Observable<any> { 
+    const baseHost = this.configService.getEnvSetting(ServiceType.attachments);
+    return this.httpClient.get(`${baseHost}/api/pdfs/signed/${id}`, {
       reportProgress: true,
       observe: 'events',
       responseType: 'blob'

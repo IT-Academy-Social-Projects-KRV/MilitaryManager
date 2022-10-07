@@ -18,18 +18,21 @@
             <p-table [value]="decrees" [scrollable]="true" scrollHeight="50vh">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th *ngFor="let col of cols">
+                        <th *ngFor="let col of cols" [ngStyle]="{'width': col.width}">
                             {{col.header}}
                         </th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-decree>
                     <tr>
-                        <td *ngFor="let col of cols; let index = index">
-                            {{decree[col.field]}}
+                        <td *ngFor="let col of cols; let index = index" [ngStyle]="{'width': col.width}">
+                            <!-- {{decree[col.field]}} -->
+                            {{ col.date ? (decree[col.field]| date : col.format) : decree[col.field] }}
                             <i *ngIf="col.field =='path'" class="pi pi-download" (click)="download(decree.id, decree.path)" [ngStyle]="{color:'var(--primary-color)'}" style="cursor: pointer"></i>
-                            <input type="file" accept="application/pdf" #file placeholder="Choose file" (change)="uploadFile(decree.id,file.files)" style="display:none;">
-                            <i *ngIf="col.field =='pathSigned' && !isUploading" class="pi pi-upload" (click)="file.click()" [ngStyle]="{color:'var(--primary-color)'}" style="cursor: pointer; display: flex; justify-content: center;"></i>        
+                            <input type="file" accept="application/pdf" #file placeholder="Choose file" (change)="uploadFile(decree.id,file.files)" style="display:none;">   
+                            <i *ngIf="col.field =='pathSigned' && !isUploading && decree[col.field] != null" class="pi pi-download" (click)="downloadSigned(decree.id, decree.pathSigned)" [ngStyle]="{color:'var(--primary-color)'}" style="cursor: pointer;"></i>
+                            <i *ngIf="col.field =='pathSigned' && !isUploading && decree[col.field] != null" class="pi pi-upload p-pl-1" (click)="file.click()" [ngStyle]="{color:'var(--primary-color)'}" style="cursor: pointer;"></i>      
+                            <i *ngIf="col.field =='pathSigned' && !isUploading && decree[col.field] == null" class="pi pi-upload" (click)="file.click()" [ngStyle]="{color:'var(--primary-color)'}" style="cursor: pointer; display: flex; justify-content: center;"></i>      
                             <i *ngIf="isUploading && col.field =='pathSigned'" class="pi pi-spin pi-spinner" style="font-size: 1rem; display: flex; justify-content: center;"></i>                 
                         </td>
                     </tr>
@@ -47,12 +50,12 @@
             </div>
             <div class="p-d-flex p-flex-row">                
                 <div *ngFor="let template of templates" class="p-card p-p-1 p-md-3 p-d-flex p-flex-column">
-                    <div class="p-card-header p-d-flex p-jc-center">
+                    <div class="p-card-header p-d-flex p-jc-center p-pt-4">
                         <i class="pi pi-copy" style="font-size: 3rem"></i>
                     </div>
                     <div class="p-card-body p-d-flex p-flex-column p-ai-center p-col">
                         <div class="p-card-title p-col p-text-center">
-                            {{template.name}}
+                            {{template.type}}
                         </div>
                         <div class="p-card-subtitle">
                             Наказ

@@ -24,7 +24,6 @@ import { DocumentComponent } from './components/document/document.component';
     SignoutRedirectCallbackComponent,
     HomeComponent,
     AddCommanderComponent,
-    Test2Component,
     DocumentComponent
   ],
   imports: [
