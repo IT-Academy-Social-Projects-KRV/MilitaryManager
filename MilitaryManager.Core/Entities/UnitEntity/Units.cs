@@ -51,6 +51,7 @@ namespace MilitaryManager.Core.Entities.UnitEntity
                     .Include(x => x.EquipmentToWarehouseMan)
                     .Include(x => x.Division)
                 .Where(x => x.Id == id);
+
             }
         }
     }
