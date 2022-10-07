@@ -18,15 +18,10 @@ namespace MilitaryManager.Core.DTO.Units
         public int PositionId { get; set; }
 
         public DivisionDTO Division { get; set; }
-        public RankDTO Rank { get; set; }
+        public string Rank { get; set; }
         public UnitDTO Parent { get; set; }
-        public PositionDTO Position { get; set; }
-
-        public List<UnitDTO> SubUnits { get; set; }
-
+        public string Position { get; set; }
         public List<ProfileDTO> Profiles { get; set; }
         public List<UnitToEquipmentDTO> UnitToEquipments { get; set; }
-        public List<UnitToEquipmentDTO> EquipmentToWarehouseMan { get; set; }
-
     }
 }

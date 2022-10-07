@@ -24,7 +24,9 @@ namespace MilitaryManager.Core.Helpers
     {
         public ApplicationProfile()
         {
-            CreateMap<UnitDTO, Unit>().ReverseMap();
+            CreateMap<UnitDTO, Unit>().ReverseMap()
+                .ForMember(dest => dest.Rank, opt => opt.MapFrom(src => src.Rank.Name))
+                .ForMember(dest => dest.Position, opt => opt.MapFrom(src => src.Position.Name));
             CreateMap<Decree, DecreeDTO>()
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.Name))
                 .ForMember(dest => dest.Template, opt => opt.MapFrom(src => src.Template.Type))
@@ -36,8 +38,8 @@ namespace MilitaryManager.Core.Helpers
             CreateMap<EntityDTO, Entity>().ReverseMap();
             CreateMap<EntityToAttributeDTO, EntityToAttribute>().ReverseMap();
             CreateMap<PositionDTO, Position>().ReverseMap();
-            CreateMap<Profile, ProfileDTO>();
             CreateMap<UnitToEquipmentDTO, UnitToEquipment>().ReverseMap();
+            CreateMap<ProfileDTO, Entities.ProfileEntity.Profile>().ReverseMap();
         }
     }
 }

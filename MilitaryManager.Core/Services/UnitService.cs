@@ -1,9 +1,12 @@
 ﻿using Ardalis.Specification;
 using AutoMapper;
+using MilitaryManager.Core.DTO.Entities;
 using MilitaryManager.Core.DTO.Units;
+using MilitaryManager.Core.Entities.EntityEntity;
 using MilitaryManager.Core.Entities.UnitEntity;
 using MilitaryManager.Core.Interfaces.Repositories;
 using MilitaryManager.Core.Interfaces.Services;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -14,7 +17,8 @@ namespace MilitaryManager.Core.Services
         protected readonly IRepository<Unit, int> _unitRepository;
         protected readonly IMapper _mapper;
 
-        public UnitService(IRepository<Unit, int> unitRepository, IMapper mapper)
+        public UnitService(IRepository<Unit, int> unitRepository,
+        IMapper mapper)
         {
             _unitRepository = unitRepository;
             _mapper = mapper;
@@ -37,10 +41,21 @@ namespace MilitaryManager.Core.Services
 
             return _mapper.Map<IEnumerable<UnitDTO>>(unitsTree);
         }
-
-        public async Task<UnitDTO> CreateUnitAsync(UnitDTO query)
+        public async Task<IEnumerable<UnitDTO>> GetUnitsAsync()
         {
-            var unit = _mapper.Map<Unit>(query);
+            var units = await _unitRepository.GetListBySpecAsync(new Units.UnitsList());
+
+            return _mapper.Map<IEnumerable<UnitDTO>>(units);
+        }
+        public async Task<UnitDTO> GetUnitsByIdAsync(int id)
+        {
+            var units = await _unitRepository.GetFirstBySpecAsync(new Units.UnitById(id));
+
+            return _mapper.Map<UnitDTO>(units);
+        }
+        public async Task<UnitDTO> CreateUnitAsync(UnitDTO dto)
+        {
+            var unit = _mapper.Map<Unit>(dto);
             var newUnit = await _unitRepository.AddAsync(unit);
             await _unitRepository.SaveChangesAcync();
 
@@ -58,7 +73,11 @@ namespace MilitaryManager.Core.Services
 
         public async Task<UnitDTO> DeleteUnitAsync(int id)
         {
-            var unit = new Unit() { Id = id };
+            var unit = await _unitRepository.GetFirstBySpecAsync(new Units.UnitById(id));
+            if (unit == null)
+            {
+                throw new ArgumentException("Unit not found");
+            }
             var deleteUnit = await _unitRepository.DeleteAsync(unit);
             await _unitRepository.SaveChangesAcync();
 

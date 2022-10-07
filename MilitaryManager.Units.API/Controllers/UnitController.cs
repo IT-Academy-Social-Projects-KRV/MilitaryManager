@@ -32,6 +32,20 @@ namespace MilitaryManager.Units.API.Controllers
             return Ok(await _unitServices.GetUnitsTreeAsync(id));
         }
 
+        [HttpGet]
+        [Route("units")]
+        public async Task<IActionResult> GetUnits()
+        {
+            return Ok(await _unitServices.GetUnitsAsync());
+        }
+
+        [HttpGet]
+        [Route("units/{id}")]
+        public async Task<IActionResult> GetUnit([FromRoute] int id)
+        {
+            return Ok(await _unitServices.GetUnitsByIdAsync(id));
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] UnitDTO query)
         {
