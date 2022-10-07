@@ -26,14 +26,14 @@ namespace MilitaryManager.Attachments.API.Controllers
         public AttachmentsController(IWebHostEnvironment hostingEnvironment,
             IDocumentGenerationService service,
             ILogger<WeatherForecastController> logger,
-            IUnitService UnitService)
+            IUnitService unitService)
         {
             _documentGenerationService = service;
             _webRootPath = hostingEnvironment.WebRootPath;
             _logger = logger;
             _documentExportFolder = "documents";
 
-            _unitService = UnitService;
+            _unitService = unitService;
         }
 
         [HttpGet(Name="find")]
