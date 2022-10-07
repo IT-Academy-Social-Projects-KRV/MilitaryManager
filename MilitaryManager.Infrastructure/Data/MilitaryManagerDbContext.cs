@@ -1,5 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MilitaryManager.Core.Entities.AttributeEntity;
+using MilitaryManager.Core.Entities.AuditEntities.ChangeEntity;
+using MilitaryManager.Core.Entities.AuditEntities.ChangeTypeEntity;
+using MilitaryManager.Core.Entities.AuditEntities.ChangeValueEntity;
+using MilitaryManager.Core.Entities.AuditEntities.ColumnEntity;
+using MilitaryManager.Core.Entities.AuditEntities.TableEntity;
 using MilitaryManager.Core.Entities.DivisionEntity;
 using MilitaryManager.Core.Entities.EntityEntity;
 using MilitaryManager.Core.Entities.EntityToAttributeEntity;

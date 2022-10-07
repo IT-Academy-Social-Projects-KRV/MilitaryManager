@@ -1,8 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\20221007141251_Triggers.sql" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Ardalis.Specification" Version="4.2.0" />

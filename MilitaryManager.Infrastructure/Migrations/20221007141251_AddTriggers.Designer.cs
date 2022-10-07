@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MilitaryManager.Infrastructure.Data;
 
 namespace MilitaryManager.Infrastructure.Migrations
 {
     [DbContext(typeof(MilitaryManagerDbContext))]
-    partial class MilitaryManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221007141251_AddTriggers")]
+    partial class AddTriggers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
