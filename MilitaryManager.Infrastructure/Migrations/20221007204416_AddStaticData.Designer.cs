@@ -10,8 +10,8 @@ using MilitaryManager.Infrastructure.Data;
 namespace MilitaryManager.Infrastructure.Migrations
 {
     [DbContext(typeof(MilitaryManagerDbContext))]
-    [Migration("20221007141038_CreateAuditSchema")]
-    partial class CreateAuditSchema
+    [Migration("20221007204416_AddStaticData")]
+    partial class AddStaticData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -84,6 +84,23 @@ namespace MilitaryManager.Infrastructure.Migrations
                     b.HasKey("Code");
 
                     b.ToTable("ChangeType","audit");
+
+                    b.HasData(
+                        new
+                        {
+                            Code = "I",
+                            Name = "Insert"
+                        },
+                        new
+                        {
+                            Code = "U",
+                            Name = "Update"
+                        },
+                        new
+                        {
+                            Code = "D",
+                            Name = "Delete"
+                        });
                 });
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.AuditEntities.ChangeValueEntity.ChangeValue", b =>
@@ -124,6 +141,53 @@ namespace MilitaryManager.Infrastructure.Migrations
                     b.HasIndex("TableName");
 
                     b.ToTable("Column","audit");
+
+                    b.HasData(
+                        new
+                        {
+                            Name = "UnitParentId",
+                            TableName = "Units"
+                        },
+                        new
+                        {
+                            Name = "DivisionsId",
+                            TableName = "Units"
+                        },
+                        new
+                        {
+                            Name = "FirstName",
+                            TableName = "Units"
+                        },
+                        new
+                        {
+                            Name = "LastName",
+                            TableName = "Units"
+                        },
+                        new
+                        {
+                            Name = "PositionsId",
+                            TableName = "Units"
+                        },
+                        new
+                        {
+                            Name = "RankId",
+                            TableName = "Units"
+                        },
+                        new
+                        {
+                            Name = "Name",
+                            TableName = "Divisions"
+                        },
+                        new
+                        {
+                            Name = "Address",
+                            TableName = "Divisions"
+                        },
+                        new
+                        {
+                            Name = "DivisionParentId",
+                            TableName = "Divisions"
+                        });
                 });
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.AuditEntities.TableEntity.Table", b =>
@@ -138,6 +202,53 @@ namespace MilitaryManager.Infrastructure.Migrations
                     b.HasKey("Name");
 
                     b.ToTable("Table","audit");
+
+                    b.HasData(
+                        new
+                        {
+                            Name = "Attributes",
+                            Description = "Attributes for units and divisions"
+                        },
+                        new
+                        {
+                            Name = "Divisions",
+                            Description = "Information about divisions"
+                        },
+                        new
+                        {
+                            Name = "Entities",
+                            Description = "List of equipments"
+                        },
+                        new
+                        {
+                            Name = "EntityToAttributes",
+                            Description = "Decoupling table for the connection between equipment and its attributes"
+                        },
+                        new
+                        {
+                            Name = "Positions",
+                            Description = "List of unit positions"
+                        },
+                        new
+                        {
+                            Name = "Profiles",
+                            Description = "Decoupling table for the connection between unit and its attributes"
+                        },
+                        new
+                        {
+                            Name = "Ranks",
+                            Description = "List of unit ranks"
+                        },
+                        new
+                        {
+                            Name = "Units",
+                            Description = "Information about unit"
+                        },
+                        new
+                        {
+                            Name = "UnitToEquipments",
+                            Description = "Decoupling table for the connection between unit and its equipment"
+                        });
                 });
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.DivisionEntity.Division", b =>

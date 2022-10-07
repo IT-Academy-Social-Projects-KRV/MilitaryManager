@@ -1,6 +1,7 @@
 ﻿using MilitaryManager.Core.Entities.AuditEntities.ChangeTypeEntity;
 using MilitaryManager.Core.Entities.AuditEntities.ChangeValueEntity;
 using MilitaryManager.Core.Entities.AuditEntities.TableEntity;
+using MilitaryManager.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,7 +10,7 @@ using System.Text;
 namespace MilitaryManager.Core.Entities.AuditEntities.ChangeEntity
 {
     [Table("Change", Schema = "audit")]
-    public class Change
+    public class Change : IBaseEntity<int>
     {
         public int Id { get; set; }
         public int? UserId { get; set; }

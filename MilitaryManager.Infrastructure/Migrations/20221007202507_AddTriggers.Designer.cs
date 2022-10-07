@@ -10,7 +10,7 @@ using MilitaryManager.Infrastructure.Data;
 namespace MilitaryManager.Infrastructure.Migrations
 {
     [DbContext(typeof(MilitaryManagerDbContext))]
-    [Migration("20221007141251_AddTriggers")]
+    [Migration("20221007202507_AddTriggers")]
     partial class AddTriggers
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

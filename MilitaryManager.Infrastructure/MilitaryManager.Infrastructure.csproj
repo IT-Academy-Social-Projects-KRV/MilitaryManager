@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\20221007141251_Triggers.sql" />
+    <EmbeddedResource Include="Migrations\20221007202507_Triggers.sql" />
   </ItemGroup>
 
   <ItemGroup>
