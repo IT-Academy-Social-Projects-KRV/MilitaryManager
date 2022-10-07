@@ -1,7 +1,7 @@
 ﻿using Azure.Storage.Blobs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
-using MilitaryManager.Core.Services;
+using MilitaryManager.Core.Services.StoreService;
 using System;
 using System.Collections.Generic;
 using System.IO;
