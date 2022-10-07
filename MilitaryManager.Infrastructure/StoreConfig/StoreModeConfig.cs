@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MilitaryManager.Core.Services;
+using MilitaryManager.Core.Services.StoreService;
 using MilitaryManager.Infrastructure.Services.StoreServices;
 using System;
 using System.Collections.Generic;
