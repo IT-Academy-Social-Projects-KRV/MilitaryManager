@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MilitaryManager.Infrastructure.Data;
 
 namespace MilitaryManager.Infrastructure.Migrations
 {
     [DbContext(typeof(MilitaryManagerDbContext))]
-    partial class MilitaryManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221006160935_Attachments")]
+    partial class Attachments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,8 +30,7 @@ namespace MilitaryManager.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -84,13 +85,11 @@ namespace MilitaryManager.Infrastructure.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ParentId")
                         .HasColumnType("int");
@@ -111,8 +110,7 @@ namespace MilitaryManager.Infrastructure.Migrations
 
                     b.Property<string>("RegNum")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -134,8 +132,7 @@ namespace MilitaryManager.Infrastructure.Migrations
 
                     b.Property<string>("Value")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -183,8 +180,7 @@ namespace MilitaryManager.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -206,8 +202,7 @@ namespace MilitaryManager.Infrastructure.Migrations
 
                     b.Property<string>("Value")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -227,8 +222,7 @@ namespace MilitaryManager.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -364,13 +358,11 @@ namespace MilitaryManager.Infrastructure.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ParentId")
                         .HasColumnType("int");
