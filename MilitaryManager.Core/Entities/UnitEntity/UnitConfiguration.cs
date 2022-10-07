@@ -21,6 +21,11 @@ namespace MilitaryManager.Core.Entities.UnitEntity
                 .IsRequired();
 
             builder
+               .Property(x => x.SecondName)
+               .HasMaxLength(50)
+               .IsRequired();
+
+            builder
                 .HasOne(x => x.Division)
                 .WithMany(x => x.Units)
                 .HasForeignKey(x => x.DivisionId);
