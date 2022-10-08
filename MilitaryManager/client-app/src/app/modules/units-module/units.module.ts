@@ -4,11 +4,13 @@ import { UnitsListComponent } from './pages/units-list/units-list.component';
 import { UnitEditComponent } from './pages/unit-edit/unit-edit.component';
 import { RouterModule } from '@angular/router';
 import { PrimeNgComponentsModule } from '../primeng-components-module/primeng-components.module';
+import { UnitInfoComponent } from './pages/unit-info/unit-info.component';
 
 @NgModule({
   declarations: [
     UnitsListComponent,
-    UnitEditComponent
+    UnitEditComponent,
+    UnitInfoComponent
   ],
   imports: [
     CommonModule,
