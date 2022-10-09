@@ -39,6 +39,11 @@ namespace MilitaryManager.Core.Entities.UnitEntity
                 .HasMany(x => x.SubUnits)
                 .WithOne(x => x.Parent)
                 .HasForeignKey(x => x.ParentId);
+
+            builder
+               .HasOne(x => x.UnitUser)
+               .WithOne(x => x.Unit)
+               .HasForeignKey<UnitUser>(x => x.Id);
         }
     }
 }

@@ -21,6 +21,7 @@ namespace MilitaryManager.Core.Entities.UnitEntity
         public int PositionId { get; set; }
 
         public Division Division { get; set; }
+        public UnitUser UnitUser { get; set; }
         public Rank Rank { get; set; }
         public Unit Parent { get; set; }
         public Position Position { get; set; }
