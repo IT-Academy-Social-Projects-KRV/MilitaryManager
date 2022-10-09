@@ -1,6 +1,10 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
 FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS base
+RUN apt-get update
+RUN apt-get install fontconfig -y
+RUN rm /usr/share/fonts/truetype -rf
+RUN ln -s /app/wwwroot/fonts /usr/share/fonts/our-fonts
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443

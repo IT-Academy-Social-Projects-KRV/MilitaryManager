@@ -36,6 +36,45 @@ namespace MilitaryManager.Infrastructure.Migrations
                     b.ToTable("Attributes","Unit");
                 });
 
+            modelBuilder.Entity("MilitaryManager.Core.Entities.DecreeEntity.Decree", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TemplateId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StatusId");
+
+                    b.HasIndex("TemplateId");
+
+                    b.ToTable("Decrees");
+                });
+
             modelBuilder.Entity("MilitaryManager.Core.Entities.AuditEntities.ChangeEntity.Change", b =>
                 {
                     b.Property<int>("Id")
@@ -409,6 +448,123 @@ namespace MilitaryManager.Infrastructure.Migrations
                     b.ToTable("Ranks","Unit");
                 });
 
+            modelBuilder.Entity("MilitaryManager.Core.Entities.SignedPdfEntity.SignedPdf", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SignedPdfs");
+                });
+
+            modelBuilder.Entity("MilitaryManager.Core.Entities.StatusEntity.Status", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Statuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Created"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Downloaded"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Signed"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Completed"
+                        });
+                });
+
+            modelBuilder.Entity("MilitaryManager.Core.Entities.StatusHistoryEntity.StatusHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DecreeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NewStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OldStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PerformedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DecreeId");
+
+                    b.HasIndex("NewStatusId");
+
+                    b.HasIndex("OldStatusId");
+
+                    b.ToTable("StatusHistories");
+                });
+
+            modelBuilder.Entity("MilitaryManager.Core.Entities.TemplateEntity.Template", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Templates");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Path = "data/document_templates/template_01.xml",
+                            Type = "Протокол"
+                        });
+                });
+
             modelBuilder.Entity("MilitaryManager.Core.Entities.UnitEntity.Unit", b =>
                 {
                     b.Property<int>("Id")
@@ -449,6 +605,21 @@ namespace MilitaryManager.Infrastructure.Migrations
                     b.HasIndex("RankId");
 
                     b.ToTable("Units","Unit");
+                });
+
+            modelBuilder.Entity("MilitaryManager.Core.Entities.DecreeEntity.Decree", b =>
+                {
+                    b.HasOne("MilitaryManager.Core.Entities.StatusEntity.Status", "Status")
+                        .WithMany("Decrees")
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MilitaryManager.Core.Entities.TemplateEntity.Template", "Template")
+                        .WithMany("Decrees")
+                        .HasForeignKey("TemplateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.AuditEntities.ChangeEntity.Change", b =>
@@ -549,6 +720,36 @@ namespace MilitaryManager.Infrastructure.Migrations
                         .WithMany("Profiles")
                         .HasForeignKey("UnitId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MilitaryManager.Core.Entities.SignedPdfEntity.SignedPdf", b =>
+                {
+                    b.HasOne("MilitaryManager.Core.Entities.DecreeEntity.Decree", "Decree")
+                        .WithOne("SignedPdf")
+                        .HasForeignKey("MilitaryManager.Core.Entities.SignedPdfEntity.SignedPdf", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MilitaryManager.Core.Entities.StatusHistoryEntity.StatusHistory", b =>
+                {
+                    b.HasOne("MilitaryManager.Core.Entities.DecreeEntity.Decree", "Decree")
+                        .WithMany("StatusHistories")
+                        .HasForeignKey("DecreeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MilitaryManager.Core.Entities.StatusEntity.Status", "NewStatus")
+                        .WithMany("NewStatuses")
+                        .HasForeignKey("NewStatusId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MilitaryManager.Core.Entities.StatusEntity.Status", "OldStatus")
+                        .WithMany("OldStatuses")
+                        .HasForeignKey("OldStatusId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
