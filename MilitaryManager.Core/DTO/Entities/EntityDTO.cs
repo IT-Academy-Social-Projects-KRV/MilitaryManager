@@ -11,8 +11,5 @@ namespace MilitaryManager.Core.DTO.Entities
     {
         public int Id { get; set; }
         public string RegNum { get; set; }
-
-        public List<EntityToAttributeDTO> EntityToAttributes { get; set; }
-        public UnitToEquipmentDTO UnitToEquipment { get; set; }
     }
 }

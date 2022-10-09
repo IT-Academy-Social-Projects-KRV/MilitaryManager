@@ -33,14 +33,13 @@ namespace MilitaryManager.Units.API.Controllers
         }
 
         [HttpGet]
-        [Route("units")]
         public async Task<IActionResult> GetUnits()
         {
             return Ok(await _unitServices.GetUnitsAsync());
         }
 
         [HttpGet]
-        [Route("units/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> GetUnit([FromRoute] int id)
         {
             return Ok(await _unitServices.GetUnitsByIdAsync(id));

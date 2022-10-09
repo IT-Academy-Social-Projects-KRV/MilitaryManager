@@ -73,7 +73,7 @@ namespace MilitaryManager.Core.Services
 
         public async Task<UnitDTO> DeleteUnitAsync(int id)
         {
-            var unit = await _unitRepository.GetFirstBySpecAsync(new Units.UnitById(id));
+            var unit = await _unitRepository.GetByKeyAsync(id);
             if (unit == null)
             {
                 throw new ArgumentException("Unit not found");
