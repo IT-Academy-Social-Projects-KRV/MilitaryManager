@@ -1,36 +1,44 @@
 <hr>
-<div class="p-float-label p-grid p-mt-4 p-col-4">
-  <input type="text" pInputText id="inputtext" value={{unit.firstName}}>
-  <label for="inputtext">First Name</label>
+<div class="p-float-label">
+  <input type="text" pInputText id="inputFirstName" [value]=unit.firstName>
+  <label for="inputFirstName">First Name</label>
 </div>
 <hr>
 
-<div class="p-float-label p-grid p-mt-4 p-col-4">
-  <input type="text" pInputText>
+<div class="p-float-label">
+  <input type="text" pInputText id="inputtext">
   <label for="inputtext">Middle Name</label>
 </div>
 <hr>
 
-<div class="p-float-label p-grid p-mt-4 p-col-4">
+<div class="p-float-label">
   <input type="text" pInputText>
   <label for="inputtext">Last Name</label>
 </div>
 <hr>
 
-<div class="p-float-label p-grid p-mt-4 p-col-4">
+<div class="p-float-label">
   <input type="text" pInputText>
   <label for="inputtext">Rank</label>
 </div>
 <hr>
 
-<div class="p-float-label p-grid p-mt-4 p-col-4">
+<div class="p-float-label">
   <input type="text" pInputText>
   <label for="inputtext">Position</label>
 </div>
 <hr>
 
-<div class="p-float-label p-grid p-mt-4 p-col-4">
+<div class="p-float-label">
   <input type="text" pInputText>
   <label for="inputtext">Division</label>
+</div>
+<hr>
+<div>
+  <p-button id="" (onClick)="pushTheButton()">push the button</p-button>
+</div>
+<br>
+<div>
+  <p-button id="get_unit_info" (onClick)="getSelectedUnitData()">get full selected unit info</p-button>
 </div>
 
