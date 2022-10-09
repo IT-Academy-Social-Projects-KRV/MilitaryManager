@@ -17,23 +17,22 @@ export class UnitInfoComponent implements OnInit {
   a = new Observable<UnitModel>();
 
   constructor(private unitsService: UnitsService,
-              private clientConfigService: ClientConfigurationService,
-              unit: UnitModel) {
+              private clientConfigService: ClientConfigurationService) {
   }
 
   ngOnInit(): void {
-    this.loading = true;
+    // this.loading = true;
 
     // this.unit = this.unitsService.single.getById(5)
     //   .pipe()
-      // .map(function(u: any): UnitModel {
-      // return new UnitModel(u.firstName);
-      // });
+    //   .map(function(u: any): UnitModel {
+    //   return new UnitModel(u.firstName);
+    //   });
 
       // .subscribe(u)
 
 
 
-    this.loading = false;
+    // this.loading = false;
   }
 }
