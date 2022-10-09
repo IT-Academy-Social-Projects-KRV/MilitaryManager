@@ -10,7 +10,7 @@ import {BaseModel} from "../../models/base.model";
 @Injectable({
   providedIn: 'root',
 })
-export class UnitsService extends BaseService<any> {
+export class DivisionsService extends BaseService<any> {
 
   constructor(
     httpService: HttpService,

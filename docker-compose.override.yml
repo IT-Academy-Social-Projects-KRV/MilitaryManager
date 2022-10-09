@@ -66,9 +66,9 @@ services:
 
 networks:
    my-network:
-        external: true
+        external: false
 volumes:
       blobdata:
-          external: true
+          external: false
 
 

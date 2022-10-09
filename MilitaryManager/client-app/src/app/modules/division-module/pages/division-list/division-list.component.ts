@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UnitModel } from 'src/app/shared/models/unit.model';
-import { UnitsService } from 'src/app/shared/services/api/unit.service';
+import { DivisionsService } from 'src/app/shared/services/api/division.service';
 import {ClientConfigurationService} from "../../../../shared/services/core/client-configuration.service";
 import {TreeNode} from "primeng/api";
+import {DivisionModel} from "../../../../shared/models/division.model";
 
 
 @Component({
@@ -12,52 +12,34 @@ import {TreeNode} from "primeng/api";
 })
 export class DivisionListComponent implements OnInit {
 
-  units: TreeNode<UnitModel>[] = [];
+  divisions: TreeNode<DivisionModel>[] = [];
 
   loading: boolean = false;
 
-  constructor(private unitsService: UnitsService,
+  constructor(private divisionsService: DivisionsService,
               private clientConfigService: ClientConfigurationService) { }
 
   ngOnInit() {
     this.loading = true;
     setTimeout(() => {
-      this.unitsService.collection.getAll()
-        .subscribe(  (units) => {
-        units.forEach( (unit) => {
-          unit.label = `${unit.lastName} ${unit.firstName}`;
-          unit.expandedIcon = "pi pi-user-minus";
-          unit.collapsedIcon = "pi pi-user-plus";
-          unit.leaf = false;
+      this.divisionsService.collection.getAll()
+        .subscribe(  (divisions) => {
+          divisions.forEach( (division) => {
+          this.recursiveTree(division)
         })
-          this.units = units;
+          this.divisions = divisions;
       });
       this.loading = false;
     });
   }
 
-
   recursiveTree(division: any){
     division.label = division.name;
     division.expandedIcon = "pi pi-user-minus";
     division.collapsedIcon = "pi pi-user-plus";
-    division.leaf = false;
-    division.children = division.subDivisions.forEach((subDivision: any) => {
+    division.subDivisions.forEach((subDivision: any) => {
       this.recursiveTree(subDivision);
     });
-  }
-
-  nodeExpand(event: any) {
-    if (event.node) {
-      this.unitsService.collection.getListById(event.node.id).subscribe((units) => {
-        units.forEach( (unit) => {
-          unit.label = `${unit.lastName} ${unit.firstName}`;
-          unit.expandedIcon = "pi pi-user-minus";
-          unit.collapsedIcon = "pi pi-user-plus";
-          unit.leaf = false;
-        })
-        event.node.children = units;
-      });
-    }
+    division.children = division.subDivisions;
   }
 }
