@@ -11,19 +11,17 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 export class DecreeService extends BaseService<any> {
   constructor(
     httpService: HttpService,
-    protected httpClient: HttpClient,
-    protected configService: ClientConfigurationService) {
+    private httpClient: HttpClient,
+    configService: ClientConfigurationService) {
     super(httpService, 'decrees', configService, DecreeModel, ServiceType.attachments);
   }
 
   uploadSign(id: number, formData: FormData): Observable<any> {
-    const baseHost = this.configService.getEnvSetting(ServiceType.attachments);
-    return this.httpClient.put(`${baseHost}/api/pdfs`, formData, {reportProgress: true, observe: 'events'}) 
+    return this.httpClient.put(`${this.single.baseUrl}pdfs`, formData, { reportProgress: true, observe: 'events' }) 
   }
 
   public download(id: number): Observable<any> { 
-    const baseHost = this.configService.getEnvSetting(ServiceType.attachments);
-    return this.httpClient.get(`${baseHost}/api/pdfs/${id}`, {
+    return this.httpClient.get(`${this.single.baseUrl}pdfs/${id}`, {
       reportProgress: true,
       observe: 'events',
       responseType: 'blob'
@@ -31,11 +29,14 @@ export class DecreeService extends BaseService<any> {
   }
 
   public downloadSigned(id: number): Observable<any> { 
-    const baseHost = this.configService.getEnvSetting(ServiceType.attachments);
-    return this.httpClient.get(`${baseHost}/api/pdfs/signed/${id}`, {
+    return this.httpClient.get(`${this.single.baseUrl}pdfs/signed/${id}`, {
       reportProgress: true,
       observe: 'events',
       responseType: 'blob'
     }); 
+  }
+
+  public completeDecree(id: number): Observable<any> { 
+    return this.httpClient.put(`${this.single.baseUrl}decrees/complete/${id}`, {}); 
   }
 }

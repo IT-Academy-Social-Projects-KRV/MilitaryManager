@@ -1,6 +1,8 @@
-import { HttpErrorResponse, HttpEventType, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEventType, HttpRequest, HttpResponse } from '@angular/common/http';
 import { AfterViewChecked, AfterViewInit, Component, ComponentFactoryResolver, ComponentRef, OnInit, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { DecreeModel } from 'src/app/shared/models/decree.model';
 import { TemplateModel } from 'src/app/shared/models/template.model';
 import { ApiService } from 'src/app/shared/services/api/api.service';
@@ -9,7 +11,8 @@ import { Test1Component } from '../test1/test1.component';
 @Component({
   selector: 'app-document',
   templateUrl: './document.component.html',
-  styleUrls: ['./document.component.scss']
+  styleUrls: ['./document.component.scss'],
+  providers: [ConfirmationService, MessageService]
 })
 export class DocumentComponent implements OnInit {
 
@@ -23,6 +26,7 @@ export class DocumentComponent implements OnInit {
   tabs: string[] = []
   currentTab: number = 0;
   isUploading: boolean = false;
+  uploadingId: number = 0;
   isDownloading: boolean = false;
 
   //@ts-ignore
@@ -33,43 +37,41 @@ export class DocumentComponent implements OnInit {
   //@ts-ignore
   private componentRef: ComponentRef<any>;
 
-  constructor(public apiService: ApiService) { }
+  constructor(public apiService: ApiService, 
+              private confirmationService: ConfirmationService, 
+              private messageService: MessageService,
+              private router: Router) { }
 
   ngOnInit(): void {
-    // this.decrees = [
-    //   { id: 1, _id: 1, name: 'Наказ від 04.09.2022', path: '', pathSigned: '', createdBy: 'userId', timeStamp: new Date(), templateId: 1, statusId: 1},
-    //   { id: 2, _id: 2, name: 'Наказ від 05.09.2022', path: '', pathSigned: '', createdBy: 'userId', timeStamp: new Date(), templateId: 1, statusId: 1},
-    //   { id: 3, _id: 3, name: 'Наказ від 06.09.2022', path: '', pathSigned: '', createdBy: 'userId', timeStamp: new Date(), templateId: 1, statusId: 1},
-    //   { id: 4, _id: 4, name: 'Наказ від 07.09.2022', path: '', pathSigned: '', createdBy: 'userId', timeStamp: new Date(), templateId: 1, statusId: 1}
-    // ];
-
-    //this.apiService.decree.single.get().subscribe(res => { this.decrees = [res]; console.log(res) })
     this.apiService.decree.collection.getAll().subscribe(res => { this.decrees = res })
     this.apiService.templates.collection.getAll().subscribe(res => { this.templates = res })
 
     this.cols = [
-      { field: 'id', header: 'Id', width: '5%' },
+      //{ field: 'id', header: 'Id', width: '5%' },
       { field: 'name', header: 'Name' },
       { field: 'path', header: 'Path' },
       { field: 'pathSigned', header: 'Path Signed' },
-      { field: 'createdBy', header: 'Created By' },
+      //{ field: 'createdBy', header: 'Created By' },
       { field: 'timeStamp', header: 'Time Stamp', date: true, format: 'dd.MM.yyyy HH:mm' },
       { field: 'template', header: 'Template' },
-      { field: 'status', header: 'Status' }
+      { field: 'status', header: 'Status' },
+      { field: 'buttons', header: '', width: '5%'}
+
   ];
   }
 
   addNewDocument() {
-    this.tabs.push('Новий документ ' + (this.tabs.length + 1));
+    this.router.navigate(['/attachments/add'], { replaceUrl: true });
+    // this.tabs.push('Новий документ ' + (this.tabs.length + 1));
 
-    setTimeout(() => {
-      this.currentTab = this.tabs.length + 1
-      if(this.targets.length > 0)
-      {
-        const target: ViewContainerRef = this.targets.toArray()[this.tabs.length - 1];
-        this.componentRef = target.createComponent(Test1Component);
-      }
-    }, 1)
+    // setTimeout(() => {
+    //   this.currentTab = this.tabs.length + 1
+    //   if(this.targets.length > 0)
+    //   {
+    //     const target: ViewContainerRef = this.targets.toArray()[this.tabs.length - 1];
+    //     this.componentRef = target.createComponent(Test1Component);
+    //   }
+    // }, 1)
     
   }
 
@@ -89,20 +91,18 @@ export class DocumentComponent implements OnInit {
     const formData = new FormData();
     formData.append('id', id);
     formData.append('file', fileToUpload, fileToUpload.name);
-    
-    //this.http.post('https://localhost:5001/api/upload', formData, {reportProgress: true, observe: 'events'})
+
     this.apiService.decree.uploadSign(id, formData)
       .subscribe({
         next: (event) => {
         if (event.type === HttpEventType.UploadProgress)
         {
-          //this.progress = Math.round(100 * event.loaded / event.total);
+          this.uploadingId = id;
           this.isUploading = event.loaded != event.total;
         }
-        /*else if (event.type === HttpEventType.Response) {
-          this.message = 'Upload success.';
-          this.onUploadFinished.emit(event.body);
-        }*/
+        else if (event.type === HttpEventType.Response) {
+          this.apiService.decree.collection.getAll().subscribe(res => { this.decrees = res })
+        }
       },
       error: (err: HttpErrorResponse) => console.log(err)
     });
@@ -117,6 +117,7 @@ export class DocumentComponent implements OnInit {
         else if (event.type === HttpEventType.Response) {
             //this.message = 'Download success.';
             this.downloadFile(event, filePath);
+            this.apiService.decree.collection.getAll().subscribe(res => { this.decrees = res })
         }
     });
   }
@@ -146,6 +147,25 @@ export class DocumentComponent implements OnInit {
       a.target = '_blank';
       a.click();
       document.body.removeChild(a);
+  }
+
+  completeDecree = (event: Event, id: number) => {
+    console.log("clicked on complete " + id)
+    this.confirmationService.confirm({
+      //@ts-ignore
+      target: event.target,
+      message: 'This action will change decree status to Comleted. Continue?',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.apiService.decree.completeDecree(id).subscribe(res => {
+          this.messageService.add({severity:'success', summary:'Confirmed', detail:'You have completed decree'});
+          this.apiService.decree.collection.getAll().subscribe(res => { this.decrees = res })
+        })
+      },
+      reject: () => {
+          this.messageService.add({severity:'error', summary:'Rejected', detail:'You have rejected'});
+      }
+  });
   }
 
 }

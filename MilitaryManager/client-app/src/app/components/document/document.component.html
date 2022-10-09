@@ -1,4 +1,6 @@
 <div>
+    <p-toast></p-toast>
+    <p-confirmPopup></p-confirmPopup>
     <p-tabView [controlClose]="true" (onClose)="handleClose($event)" [(activeIndex)]="currentTab">
         <p-tabPanel header="Накази" leftIcon="pi pi-file">
             <div class="p-d-flex p-flex-row p-jc-between">
@@ -31,9 +33,10 @@
                             <i *ngIf="col.field =='path'" class="pi pi-download" (click)="download(decree.id, decree.path)" [ngStyle]="{color:'var(--primary-color)'}" style="cursor: pointer"></i>
                             <input type="file" accept="application/pdf" #file placeholder="Choose file" (change)="uploadFile(decree.id,file.files)" style="display:none;">   
                             <i *ngIf="col.field =='pathSigned' && !isUploading && decree[col.field] != null" class="pi pi-download" (click)="downloadSigned(decree.id, decree.pathSigned)" [ngStyle]="{color:'var(--primary-color)'}" style="cursor: pointer;"></i>
-                            <i *ngIf="col.field =='pathSigned' && !isUploading && decree[col.field] != null" class="pi pi-upload p-pl-1" (click)="file.click()" [ngStyle]="{color:'var(--primary-color)'}" style="cursor: pointer;"></i>      
+                            <i *ngIf="col.field =='pathSigned' && !isUploading && decree[col.field] != null && decree.statusId != 4" class="pi pi-upload p-pl-1" (click)="file.click()" [ngStyle]="{color:'var(--primary-color)'}" style="cursor: pointer;"></i>      
                             <i *ngIf="col.field =='pathSigned' && !isUploading && decree[col.field] == null" class="pi pi-upload" (click)="file.click()" [ngStyle]="{color:'var(--primary-color)'}" style="cursor: pointer; display: flex; justify-content: center;"></i>      
-                            <i *ngIf="isUploading && col.field =='pathSigned'" class="pi pi-spin pi-spinner" style="font-size: 1rem; display: flex; justify-content: center;"></i>                 
+                            <i *ngIf="isUploading && uploadingId == decree.id && col.field =='pathSigned'" class="pi pi-spin pi-spinner" style="font-size: 1rem; display: flex; justify-content: center;"></i>       
+                            <button *ngIf="col.field =='buttons'" [disabled]="decree.statusId != 3" pButton pRipple type="button" icon="pi pi-check" (click)="completeDecree($event, decree.id)" [class]="'p-button-rounded p-button-text p-mr-2 ' + (decree.statusId != 3 ?'p-button-secondary' : 'p-button-success')"></button>          
                         </td>
                     </tr>
                 </ng-template>
