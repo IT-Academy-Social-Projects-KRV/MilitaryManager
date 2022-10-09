@@ -12,6 +12,7 @@ namespace MilitaryManager.Core.Services
     public class UnitService : IUnitService
     {
         protected readonly IRepository<Unit, int> _unitRepository;
+        protected readonly IRepository<UnitUser, int> _unitUserRepository;
         protected readonly IMapper _mapper;
 
         public UnitService(IRepository<Unit, int> unitRepository, IMapper mapper)
@@ -63,6 +64,11 @@ namespace MilitaryManager.Core.Services
             await _unitRepository.SaveChangesAcync();
 
             return _mapper.Map<UnitDTO>(deleteUnit);
+        }
+
+        public async Task<UnitUser> GetUnitUserByKeyAsync(int id)
+        {
+            return await _unitUserRepository.GetByKeyAsync(id);
         }
     }
 }

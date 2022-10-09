@@ -50,5 +50,12 @@ namespace MilitaryManager.Units.API.Controllers
         {
             return Ok(await _unitServices.DeleteUnitAsync(id));
         }
+
+        [HttpGet]
+        [Route("UnitUser/{id}")]
+        public async Task<IActionResult> GetUnitUser([FromRoute] int id)
+        {
+            return Ok(await _unitServices.GetUnitUserByKeyAsync(id));
+        }
     }
 }
