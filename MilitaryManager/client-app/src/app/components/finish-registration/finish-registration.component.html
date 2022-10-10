@@ -1,1 +1,44 @@
-<p>finish-registration works!</p>
+<h2>Будь ласка завершіть реєстрацію</h2>
+<div class="p-grid p-mt-4">
+    <div class=" p-col-4">
+        <span class="p-float-label">
+            <input id="float-input" type="text" pInputText [(ngModel)]="firstname"> 
+            <label for="float-input">Ім'я</label>
+        </span>
+    </div>
+    <div class=" p-col-4">
+        <span class="p-float-label">
+            <input id="float-input" type="text" pInputText [(ngModel)]="middlename"> 
+            <label for="float-input">По батькові</label>
+        </span>
+    </div>
+    <div class=" p-col-4">
+        <span class="p-float-label">
+            <input id="float-input" type="text" pInputText [(ngModel)]="lastname"> 
+            <label for="float-input">Прізвище</label>
+        </span>
+    </div>
+</div>
+
+<div class="p-grid p-mt-2">
+    <div class=" p-col-4">
+        <span class="p-float-label">
+            <input id="float-input" type="text" pInputText [(ngModel)]="position"> 
+            <label for="float-input">Посада</label>
+        </span>
+    </div>
+    <div class=" p-col-4">
+        <span class="p-float-label">
+            <input id="float-input" type="text" pInputText [(ngModel)]="rank"> 
+            <label for="float-input">Ранг</label>
+        </span>
+    </div>
+    <div class=" p-col-4">
+        <span class>
+            <p-dropdown [options]="divisions" [(ngModel)]="selected_division" placeholder="Частина" [showClear]="true"></p-dropdown>
+        </span>
+    </div> 
+</div>
+<div class=" p-col-4">
+    <p-button label="Завершити"></p-button>
+</div> 
