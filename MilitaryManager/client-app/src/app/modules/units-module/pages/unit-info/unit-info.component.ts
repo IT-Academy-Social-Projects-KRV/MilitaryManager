@@ -28,23 +28,19 @@ export class UnitInfoComponent implements OnInit {
     this.loading = false;
   }
 
-  pushTheButton(): void {
+  public pushTheButton(): void {
     let nameInput = document.querySelector('#inputFirstName');
 
     // @ts-ignore
     nameInput.value = '';
 
-    this.unitsService.GetUnitUser(9)
+    this.unitsService.single.getById(9)
       .subscribe((u) => {
         this.unit = u;
 
         // @ts-ignore
         nameInput.value = this.unit.firstName;
       });
-
-    // .map((u) => {
-    //   let unit = new UnitModel(u.id);
-    //   return unit});
   }
 
   getSelectedUnitData(): void {
@@ -62,4 +58,22 @@ export class UnitInfoComponent implements OnInit {
     // @ts-ignore
     // this.nameInput.value = aaa;
   }
+
+  getSelectedUnitDataById(id: number): void {
+
+    let nameInput = document.querySelector('#inputFirstName');
+
+    // @ts-ignore
+    nameInput.value = '2';
+
+
+
+
+
+
+
+
+
+  }
+
 }

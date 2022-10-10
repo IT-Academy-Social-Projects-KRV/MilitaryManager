@@ -1,7 +1,12 @@
 <p>unit-list works!</p>
 <div class="content-section implementation p-d-flex" id="container">
   <div class="card" id="tree">
-    <p-tree [value]="units" (onNodeExpand)="nodeExpand($event)" [loading]="loading"></p-tree>
+    <p-tree
+      [value]="units" selectionMode="single"
+ 
+      (onNodeExpand)="nodeExpand($event)"
+      [loading]="loading">
+    </p-tree>
 
   </div>
   <div class="card" id="unit_info">
