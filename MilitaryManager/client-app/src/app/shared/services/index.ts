@@ -4,6 +4,7 @@ import { UnitsService } from "./api/unit.service";
 import { HttpService } from "./core/http.service";
 import { ClientConfigurationService } from "./core/client-configuration.service";
 import { ApiService } from "./api/api.service";
+import { UnitUserService } from "./api/unit-user.service.service";
 
 export const services = [
     HttpService,
@@ -11,5 +12,6 @@ export const services = [
     ConfigService,
     AttachmentsService,
     UnitsService,
-    ApiService
+    ApiService,
+    UnitUserService
 ]

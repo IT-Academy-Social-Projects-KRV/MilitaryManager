@@ -1,4 +1,5 @@
-﻿using MilitaryManager.Core.Entities.UnitEntity;
+﻿using MilitaryManager.Core.DTO.Units;
+using MilitaryManager.Core.Entities.UnitEntity;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,5 +10,6 @@ namespace MilitaryManager.Core.Interfaces.Services
     public interface IUnitUserService
     {
         Task<UnitUser> GetUnitUserByKeyAsync(int id);
+        Task<UnitUser> CreateUnitUserAsync(UnitDTO unit);
     }
 }
