@@ -7,7 +7,6 @@ import {ClientConfigurationService} from "../../../../shared/services/core/clien
 import {TreeNode} from "primeng/api";
 import {BaseService} from "../../../../shared/services/core/base.service";
 import {UnitInfoComponent} from "../unit-info/unit-info.component";
-import {concatWith} from "rxjs";
 
 
 @Component({
@@ -21,17 +20,13 @@ export class UnitsListComponent implements OnInit {
 
   loading: boolean = false;
 
-
-  //do something with selectedNode
-
-
   constructor(private unitsService: UnitsService,
-              private clientConfigService: ClientConfigurationService,
-              private unitInfoComponent: UnitInfoComponent
-              ) {
+              private clientConfigService: ClientConfigurationService
+  ) {
   }
 
   ngOnInit() {
+    console.log('ngOnInit')
     this.loading = true;
     setTimeout(() => {
       this.unitsService.collection.getAll()
@@ -49,8 +44,15 @@ export class UnitsListComponent implements OnInit {
   }
 
   nodeExpand(event: any) {
+    // console.log('nodeExpand');
+
     if (event.node) {
-      console.log(event.node.id);
+      // console.log('if (event.node){}')
+      console.log(event.node);
+      console.log('asking for data...');
+      let a = new UnitInfoComponent(this.unitsService);
+      a.getSelectedUnitDataById(event.node.id)
+      console.log('')
 
       this.unitsService.collection.getListById(event.node.id).subscribe((units) => {
         units.forEach((unit) => {

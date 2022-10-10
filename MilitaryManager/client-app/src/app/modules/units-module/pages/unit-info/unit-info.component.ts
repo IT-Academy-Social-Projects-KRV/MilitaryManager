@@ -11,8 +11,7 @@ import {map, Observable, pipe} from "rxjs";
 })
 export class UnitInfoComponent implements OnInit {
 
-  constructor(private unitsService: UnitsService,
-              private clientConfigService: ClientConfigurationService) {
+  constructor(private unitsService: UnitsService) {
   }
 
   // private nameInput = document.querySelector('#inputFirstName');
@@ -64,16 +63,14 @@ export class UnitInfoComponent implements OnInit {
     let nameInput = document.querySelector('#inputFirstName');
 
     // @ts-ignore
-    nameInput.value = '2';
+    nameInput.value = '';
 
+    this.unitsService.single.getById(id)
+      .subscribe((u) => {
+        this.unit = u;
 
-
-
-
-
-
-
-
+        // @ts-ignore
+        nameInput.value = this.unit.firstName;
+      });
   }
-
 }
