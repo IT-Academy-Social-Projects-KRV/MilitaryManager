@@ -11,6 +11,5 @@ namespace MilitaryManager.Core.Interfaces.Services
         Task<UnitDTO> CreateUnitAsync(UnitDTO query);
         Task<UnitDTO> UpdateUnitAsync(UnitDTO query);
         Task<UnitDTO> DeleteUnitAsync(int id);
-        Task<UnitUser> GetUnitUserByKeyAsync(int id);
     }
 }

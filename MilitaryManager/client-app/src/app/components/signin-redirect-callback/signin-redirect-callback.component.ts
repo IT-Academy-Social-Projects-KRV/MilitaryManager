@@ -15,7 +15,7 @@ export class SigninRedirectCallbackComponent implements OnInit {
   ngOnInit(): void {
     this._authService.finishLogin()
       .then(user => {
-        this._apiService.units.GetUnitUser(user.profile.sub)
+        this._apiService.unitUser.GetUnitUser(user.profile.sub)
           .subscribe(res => {
             if(res){
               this._router.navigate(['/'], { replaceUrl: true });

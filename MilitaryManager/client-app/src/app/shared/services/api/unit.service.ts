@@ -17,9 +17,5 @@ export class UnitsService extends BaseService<any> {
     configService: ClientConfigurationService) {
     super(httpService, 'unit', configService, UnitModel, ServiceType.units);
   }
-
-  GetUnitUser(id:string) {
-    return this.httpService.get(`${this.single.baseUrl}UnitUser/${id}`);
-  }
 }
 
