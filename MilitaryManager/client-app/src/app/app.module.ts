@@ -28,11 +28,11 @@ import { AddCommanderComponent } from './components/add-commander/add-commander.
     BrowserModule,
     AppRoutingModule,
     PrimeNgComponentsModule,
-    AppLayoutModule
+    AppLayoutModule,
   ],
   providers: [
     services,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
   ],
   bootstrap: [AppComponent]
 })

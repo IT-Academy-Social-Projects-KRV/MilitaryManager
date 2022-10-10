@@ -70,7 +70,7 @@ namespace IdentityServer
         {
 			return new List<ApiScope> 
 			{ 
-				new ApiScope("unitsAPI", "Units API") 
+				new ApiScope("unitsAPI", "Units API")
 			};
 		}
 	}

@@ -49,6 +49,7 @@ namespace MilitaryManager.IdentityServer
                 .AddInMemoryApiScopes(IdentityConfig.GetApiScopes())
                 .AddInMemoryClients(IdentityConfig.GetClients("https://localhost:5001"))
                 .AddAspNetIdentity<ApplicationUser>();
+            services.AddLocalApiAuthentication();
             // services.AddRazorPages();
 
             //services.AddIdentity<ApplicationUser, IdentityRole>()
