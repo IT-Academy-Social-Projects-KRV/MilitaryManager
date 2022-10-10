@@ -1,3 +1,37 @@
 td{
 word-break:break-all
 }
+
+.decree-badge {
+    border-radius: 2px;
+    padding: 0.25em 0.5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .3px;
+}
+
+.status-created {
+    background-color: #b3e5fc;
+    color: #23547b;
+}
+
+.status-downloaded {
+    background-color: #feedaf;
+    color: #8a5340;
+}
+
+.status-signed {
+    background-color: #c8e6c9;
+    color: #256029;
+}
+
+.status-completed {
+    background-color: #eccfff;
+    color: #694382;
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+}

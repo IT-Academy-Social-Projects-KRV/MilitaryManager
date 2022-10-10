@@ -5,7 +5,7 @@ import { ClientConfigurationService } from "../core/client-configuration.service
 import { ServiceType } from "../core/serviceType";
 import { DecreeModel } from "../../models/decree.model";
 import { Observable } from "rxjs";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable()
 export class DecreeService extends BaseService<any> {
@@ -14,26 +14,6 @@ export class DecreeService extends BaseService<any> {
     private httpClient: HttpClient,
     configService: ClientConfigurationService) {
     super(httpService, 'decrees', configService, DecreeModel, ServiceType.attachments);
-  }
-
-  uploadSign(id: number, formData: FormData): Observable<any> {
-    return this.httpClient.put(`${this.single.baseUrl}pdfs`, formData, { reportProgress: true, observe: 'events' }) 
-  }
-
-  public download(id: number): Observable<any> { 
-    return this.httpClient.get(`${this.single.baseUrl}pdfs/${id}`, {
-      reportProgress: true,
-      observe: 'events',
-      responseType: 'blob'
-    }); 
-  }
-
-  public downloadSigned(id: number): Observable<any> { 
-    return this.httpClient.get(`${this.single.baseUrl}pdfs/signed/${id}`, {
-      reportProgress: true,
-      observe: 'events',
-      responseType: 'blob'
-    }); 
   }
 
   public completeDecree(id: number): Observable<any> { 

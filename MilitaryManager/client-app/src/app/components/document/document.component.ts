@@ -3,6 +3,7 @@ import { AfterViewChecked, AfterViewInit, Component, ComponentFactoryResolver, C
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { Table } from 'primeng/table';
 import { DecreeModel } from 'src/app/shared/models/decree.model';
 import { TemplateModel } from 'src/app/shared/models/template.model';
 import { ApiService } from 'src/app/shared/services/api/api.service';
@@ -35,6 +36,8 @@ export class DocumentComponent implements OnInit {
   //@ts-ignore
   @ViewChildren('tabDoc', {static : false, read : ViewContainerRef}) targets: QueryList<any>;
   //@ts-ignore
+  @ViewChild('dt') table: Table;
+  //@ts-ignore
   private componentRef: ComponentRef<any>;
 
   constructor(public apiService: ApiService, 
@@ -47,31 +50,18 @@ export class DocumentComponent implements OnInit {
     this.apiService.templates.collection.getAll().subscribe(res => { this.templates = res })
 
     this.cols = [
-      //{ field: 'id', header: 'Id', width: '5%' },
       { field: 'name', header: 'Name' },
       { field: 'path', header: 'Path' },
       { field: 'pathSigned', header: 'Path Signed' },
-      //{ field: 'createdBy', header: 'Created By' },
       { field: 'timeStamp', header: 'Time Stamp', date: true, format: 'dd.MM.yyyy HH:mm' },
       { field: 'template', header: 'Template' },
       { field: 'status', header: 'Status' },
       { field: 'buttons', header: '', width: '5%'}
-
-  ];
+    ];
   }
 
   addNewDocument() {
     this.router.navigate(['/attachments/add'], { replaceUrl: true });
-    // this.tabs.push('Новий документ ' + (this.tabs.length + 1));
-
-    // setTimeout(() => {
-    //   this.currentTab = this.tabs.length + 1
-    //   if(this.targets.length > 0)
-    //   {
-    //     const target: ViewContainerRef = this.targets.toArray()[this.tabs.length - 1];
-    //     this.componentRef = target.createComponent(Test1Component);
-    //   }
-    // }, 1)
     
   }
 
@@ -92,7 +82,7 @@ export class DocumentComponent implements OnInit {
     formData.append('id', id);
     formData.append('file', fileToUpload, fileToUpload.name);
 
-    this.apiService.decree.uploadSign(id, formData)
+    this.apiService.pdfs.uploadSign(formData)
       .subscribe({
         next: (event) => {
         if (event.type === HttpEventType.UploadProgress)
@@ -110,12 +100,10 @@ export class DocumentComponent implements OnInit {
 
   //@ts-ignore
   download = (id, filePath) => {
-    this.apiService.decree.download(id).subscribe((event) => {
+    this.apiService.pdfs.download(id).subscribe((event) => {
         if (event.type === HttpEventType.UploadProgress)
-            //this.progress = Math.round((100 * event.loaded) / event.total);
           this.isDownloading = event.loaded != event.total;
         else if (event.type === HttpEventType.Response) {
-            //this.message = 'Download success.';
             this.downloadFile(event, filePath);
             this.apiService.decree.collection.getAll().subscribe(res => { this.decrees = res })
         }
@@ -124,12 +112,10 @@ export class DocumentComponent implements OnInit {
 
   //@ts-ignore
   downloadSigned = (id, filePath) => {
-    this.apiService.decree.downloadSigned(id).subscribe((event) => {
+    this.apiService.pdfs.downloadSigned(id).subscribe((event) => {
         if (event.type === HttpEventType.UploadProgress)
-            //this.progress = Math.round((100 * event.loaded) / event.total);
           this.isDownloading = event.loaded != event.total;
         else if (event.type === HttpEventType.Response) {
-            //this.message = 'Download success.';
             this.downloadFile(event, filePath);
         }
     });
@@ -166,6 +152,10 @@ export class DocumentComponent implements OnInit {
           this.messageService.add({severity:'error', summary:'Rejected', detail:'You have rejected'});
       }
   });
+  }
+
+  applyFilterGlobal($event: Event, stringVal: string) {
+    this.table.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 
 }
