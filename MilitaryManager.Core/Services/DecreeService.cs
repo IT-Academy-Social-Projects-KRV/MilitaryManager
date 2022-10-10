@@ -50,7 +50,7 @@ namespace MilitaryManager.Core.Services
 
         public async Task<DecreeDTO> GenerateDecreeAsync(string wwwroot, int templateId, string name, string jsonData)
         {
-            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+           // var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var template = await _templateRepository.GetByKeyAsync(templateId);
 
             string templateData = null;
@@ -74,7 +74,7 @@ namespace MilitaryManager.Core.Services
             {
                 Name = name,
                 Path = path,
-                CreatedBy = userId,
+                CreatedBy = "testId",
                 TimeStamp = DateTime.Now,
                 TemplateId = templateId,
                 StatusId = (int)DecreeStatus.CREATED
@@ -105,7 +105,7 @@ namespace MilitaryManager.Core.Services
             var decree = await _decreeRepository.GetByKeyAsync(id);
             if (decree.StatusId == (int)DecreeStatus.CREATED)
             {
-                decree.StatusId = (int)DecreeStatus.SIGNED;
+                decree.StatusId = (int)DecreeStatus.DOWNLOADED;
                 await _decreeRepository.SaveChangesAcync();
             }
             return await _storeService.RetrieveDataAsync(decree.Path);
@@ -139,7 +139,7 @@ namespace MilitaryManager.Core.Services
 
             signedPdf.Path = path;
 
-            decree.StatusId = (int)DecreeStatus.DOWNLOADED;
+            decree.StatusId = (int)DecreeStatus.SIGNED;
             await _signedPdfRepository.SaveChangesAcync();
             await _decreeRepository.SaveChangesAcync();
         }

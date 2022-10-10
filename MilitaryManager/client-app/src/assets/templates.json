@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "name": "Відрядження",
+        "path": "data/document_templates/template_01.xml",
+        "typeId": 1
+    },
+    {
+        "id": 2,
+        "name": "Призначення посади",
+        "path": "data/document_templates/template_02.xml",
+        "typeId": 1
+    }
+]

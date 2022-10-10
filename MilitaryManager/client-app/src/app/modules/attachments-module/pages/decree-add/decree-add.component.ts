@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AttachmentModel } from '../../../../shared/models/attachment.model'
 import { UnitModel } from 'src/app/shared/models/unit.model';
-import { AttachmentsService} from '../../../../shared/services/api/attachment.service'
 import { MessageService } from 'primeng/api';
+import { DecreeService } from 'src/app/shared/services/api/decree.service';
+import { ApiService } from 'src/app/shared/services/api/api.service';
+import { UnitsService } from 'src/app/shared/services/api/unit.service';
 
 @Component({
   selector: 'app-decree-add',
@@ -13,12 +15,30 @@ import { MessageService } from 'primeng/api';
 export class DecreeAddComponent implements OnInit {
 
   decrees: AttachmentModel[]=[];
-  units: UnitModel[]= Units;
+  units: UnitModel[]= [];
   selectedUnit: UnitModel = new UnitModel(null);
+  templateId: number|null=null;
+  templateType: string | null = null;
 
     clonedDecrees: { [s: string]: AttachmentModel; } = {};
 
-    constructor(private attachmentsService: AttachmentsService, private messageService: MessageService) {
+    constructor(private decreeService: DecreeService, private unitsService: UnitsService, private messageService: MessageService) {
+    }
+
+    addDecree(attachment: AttachmentModel[]) {
+      let decreeInformation;
+      for(const element of attachment)
+      {
+        decreeInformation = 
+        { templateId: this.templateId, 
+          decreeName: `${this.templateType} від ${element.currentDate?.toLocaleDateString("ro-Ro")}`,
+          lastName: element.soldier?.lastName,
+          firstName: element.soldier?.firstName,
+          currentDate: element.currentDate,
+          unitNumber: element.soldier?.divisionId
+        };
+      }
+      this.decreeService.single.create(decreeInformation).subscribe({});
     }
 
     addSoldier(soldier: UnitModel) {
@@ -27,17 +47,18 @@ export class DecreeAddComponent implements OnInit {
         let newDecree = new AttachmentModel(soldier.id);
         newDecree.soldier = soldier;
         newDecree.payOff = false;
-        newDecree.action = "";
-        newDecree.date = new Date();
+        newDecree.action = this.templateType;
+        newDecree.currentDate = new Date();
+        console.log(newDecree);
         this.decrees.push(newDecree);
       }
   }
 
     onRowEditInit(attachment: AttachmentModel) {
       let editAttachment = new AttachmentModel(attachment.id)
-      editAttachment.soldier= attachment.soldier
+      editAttachment.soldier = attachment.soldier
       editAttachment.action = attachment.action
-      editAttachment.date = attachment.date
+      editAttachment.currentDate = attachment.currentDate
       editAttachment.payOff= attachment.payOff;
       if(editAttachment.id!=null)
       {
@@ -69,20 +90,19 @@ export class DecreeAddComponent implements OnInit {
     }
 
     ngOnInit() {
+      setTimeout(() => {
+        this.unitsService.collection.getAll()
+          .subscribe((units) => {
+            this.units = units;
+        });
+      });
       this.units = this.units.map((unit: any) => {
         return {
           ...unit,
-          displayLabel: unit.surname + ' ' + unit.name + ' ' + unit.middlename,
+          displayLabel: unit.lastName + ' ' + unit.firstName + ' ' + unit.secondName,
         };
       });
     }
 
 }
 
-export const Units: UnitModel[]=[
-  /*{id:1, _id: 1, name: "Петро", surname: "Петренко", middlename: "Петрович"},
-  {id:2, name: "Іван", surname: "Іваненко", middlename: "Іванович"},
-  {id:3, name: "Андрій", surname: "Островський", middlename: "Михайлович"},
-  {id:4, name: "Степан", surname: "Панас", middlename: "Іванович"},
-  {id:5, name: "Мирослав", surname: "Загакайло", middlename: "Павлович"},*/
-];

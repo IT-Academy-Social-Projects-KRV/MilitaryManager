@@ -10,7 +10,7 @@
     optionLabel="displayLabel"
     placeholder="Виберіть бійця">
      <ng-template let-unit pTemplate="item">
-                     {{unit.surname}} {{unit.name}} {{unit.middlename}}
+         {{unit.lastName}} {{unit.firstName}} {{unit.secondName}}
         </ng-template>
     </p-dropdown>
 <button pButton type="button" label="Додати" class="p-button-raised p-button-rounded" class="p-button" (click)="addSoldier(selectedUnit)"></button>
@@ -30,12 +30,12 @@
                     <td style='width:30%'>
                         <p-cellEditor>
                             <ng-template pTemplate="input">
-                                <input pInputText type="text" [(ngModel)]="decree.soldier.surname">
-                                <input pInputText type="text" [(ngModel)]="decree.soldier.name">
-                                <input pInputText type="text" [(ngModel)]="decree.soldier.middlename">
+                                <input pInputText type="text" [(ngModel)]="decree.soldier.lastName">
+                                <input pInputText type="text" [(ngModel)]="decree.soldier.firstName">
+                                <input pInputText type="text" [(ngModel)]="decree.soldier.secondName">
                             </ng-template>
                             <ng-template pTemplate="output">
-                                 {{decree.soldier.surname}} {{decree.soldier.name}} {{decree.soldier.middlename}}
+                                 {{decree.soldier.lastName}} {{decree.soldier.firstName}} {{decree.soldier.secondName}}
                             </ng-template>
                         </p-cellEditor>
                     </td>
@@ -52,10 +52,10 @@
                     <td style='width:20%'>
                         <p-cellEditor>
                             <ng-template pTemplate="input">
-                                <input pInputText type='date' name="date" [(ngModel)]="decree.date">
+                                <input pInputText type='date' name="date" [(ngModel)]="decree.currentDate">
                             </ng-template>
                             <ng-template pTemplate="output">
-                                {{decree.date | date:'dd.MM.yyyy'}}
+                                {{decree.currentDate | date:'dd.MM.yyyy'}}
                             </ng-template>
                         </p-cellEditor>
                     </td>
@@ -71,5 +71,5 @@
                 </tr>
             </ng-template>
         </p-table>
-    <button pButton type="button" label="Створити наказ" class="p-button-raised p-button-rounded" class="p-button-lg"></button>
+   <button pButton type="button" label="Створити наказ" class="p-button-raised p-button-rounded" class="p-button-lg" (click)="addDecree(decrees)"></button>
 </div> 

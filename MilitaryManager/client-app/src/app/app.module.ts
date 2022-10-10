@@ -13,6 +13,7 @@ import { SignoutRedirectCallbackComponent } from './components/signout-redirect-
 import { HomeComponent } from './components/home/home.component';
 import { AppLayoutModule } from './layout/app.layout.module';
 import { AddCommanderComponent } from './components/add-commander/add-commander.component';
+import { DocumentComponent } from './components/document/document.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { AddCommanderComponent } from './components/add-commander/add-commander.
     SignoutRedirectCallbackComponent,
     HomeComponent,
     AddCommanderComponent,
+    DocumentComponent
   ],
   imports: [
     BrowserModule,
