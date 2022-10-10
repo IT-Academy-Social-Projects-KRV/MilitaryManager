@@ -39,6 +39,7 @@ namespace MilitaryManager.IdentityServer
 
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddHttpContextAccessor();
 
             // Adds IdentityServer
             services.AddIdentityServer()
@@ -50,6 +51,7 @@ namespace MilitaryManager.IdentityServer
                 .AddInMemoryClients(IdentityConfig.GetClients("https://localhost:5001"))
                 .AddAspNetIdentity<ApplicationUser>();
             services.AddLocalApiAuthentication();
+            services.AddAuthorization();
             // services.AddRazorPages();
 
             //services.AddIdentity<ApplicationUser, IdentityRole>()

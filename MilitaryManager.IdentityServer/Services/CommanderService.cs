@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System;
 using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
 using System.Collections.Generic;
 
 namespace MilitaryManager.IdentityServer.Services
@@ -49,9 +48,9 @@ namespace MilitaryManager.IdentityServer.Services
 
         public async Task<IEnumerable<string>> GetRoleAsync()
         {
-             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst("sub").Value;
 
-           // var userId = "5c0670e2-ab50-4a51-8de1-20eab251217c";
+            // var userId = "5c0670e2-ab50-4a51-8de1-20eab251217c";
 
             var existingUser = await _userManager.FindByIdAsync(userId);
 

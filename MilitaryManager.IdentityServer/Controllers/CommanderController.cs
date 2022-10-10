@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using MilitaryManager.IdentityServer.Models;
 using MilitaryManager.IdentityServer.Services;
 using System.Threading.Tasks;
+using static IdentityServer4.IdentityServerConstants;
 
 namespace MilitaryManager.IdentityServer.Controllers
 {
@@ -35,7 +36,7 @@ namespace MilitaryManager.IdentityServer.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize(LocalApi.PolicyName)]
         public async Task<IActionResult> GetRole()
         {
             var role = await _commanderService.GetRoleAsync();
