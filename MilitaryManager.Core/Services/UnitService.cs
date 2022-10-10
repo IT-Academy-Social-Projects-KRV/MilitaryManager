@@ -17,8 +17,7 @@ namespace MilitaryManager.Core.Services
         protected readonly IRepository<Unit, int> _unitRepository;
         protected readonly IMapper _mapper;
 
-        public UnitService(IRepository<Unit, int> unitRepository,
-        IMapper mapper)
+        public UnitService(IRepository<Unit, int> unitRepository, IMapper mapper)
         {
             _unitRepository = unitRepository;
             _mapper = mapper;
