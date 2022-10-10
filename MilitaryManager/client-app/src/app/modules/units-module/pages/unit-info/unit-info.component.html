@@ -1,6 +1,6 @@
 <hr>
 <div class="p-float-label">
-  <input type="text" pInputText id="inputFirstName" [value]=unit.firstName>
+  <input type="text" pInputText id="inputFirstName" [value]=unit.firstName readonly>
   <label for="inputFirstName">First Name</label>
 </div>
 <hr>
@@ -42,3 +42,5 @@
   <p-button id="get_unit_info" (onClick)="getSelectedUnitData()">get full selected unit info</p-button>
 </div>
 
+<textarea id="subUnits">
+</textarea>

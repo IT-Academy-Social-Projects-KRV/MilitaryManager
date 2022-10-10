@@ -26,7 +26,6 @@ export class UnitsListComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('ngOnInit')
     this.loading = true;
     setTimeout(() => {
       this.unitsService.collection.getAll()

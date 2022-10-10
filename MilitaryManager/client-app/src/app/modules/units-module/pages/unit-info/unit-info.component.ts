@@ -16,6 +16,7 @@ export class UnitInfoComponent implements OnInit {
 
   // private nameInput = document.querySelector('#inputFirstName');
   public unit: UnitModel = new UnitModel(0);
+
   loading: boolean = false;
 
   // nameInput = document.querySelector('#inputFirstName');
@@ -62,15 +63,26 @@ export class UnitInfoComponent implements OnInit {
 
     let nameInput = document.querySelector('#inputFirstName');
 
+
     // @ts-ignore
     nameInput.value = '';
 
     this.unitsService.single.getById(id)
       .subscribe((u) => {
         this.unit = u;
+        console.log(u.children)
+        // this.unit.subUnits = u.children;
 
         // @ts-ignore
         nameInput.value = this.unit.firstName;
+        console.log(this.unit)
+        // console.log(this.unit.subUnits)
       });
+  }
+
+  allocateData(unit: UnitModel): void {
+    let subUnits = document.querySelector('#subUnits');
+    // @ts-ignore
+    subUnits.innerHTML= "333";
   }
 }
