@@ -7,7 +7,7 @@ using System;
 
 namespace MilitaryManager.IdentityServer.Services
 {
-    public class CommanderService
+    public class CommanderService: ICommanderService
     {
         private readonly UserManager<ApplicationUser> _userManager;
 
