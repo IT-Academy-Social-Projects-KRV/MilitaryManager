@@ -11,4 +11,16 @@ export class UnitModel extends BaseModel {
   public parent: UnitModel | null = null;
 
   public subUnits: UnitModel[] | null = null;
+
+  constructor(Id:number|null=null ,
+     lastName:string | null=null,
+     firstName: string| null=null,
+     divisionId:number|null=null,
+     rankId: number | null = null,
+     positionId: number | null = null,
+     parentId: number | null = null
+    ){
+    super(Id);
+}
+
 }

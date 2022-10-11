@@ -2,19 +2,19 @@
 <div class="p-grid p-mt-4">
     <div class=" p-col-4">
         <span class="p-float-label">
-            <input id="float-input" type="text" pInputText [(ngModel)]="firstname"> 
+            <input id="float-input" type="text" pInputText [(ngModel)]="firstname" [ngClass]="{'ng-invalid ng-dirty': useRedClass}"> 
             <label for="float-input">Ім'я</label>
         </span>
     </div>
     <div class=" p-col-4">
         <span class="p-float-label">
-            <input id="float-input" type="text" pInputText [(ngModel)]="middlename"> 
+            <input id="float-input" type="text" pInputText [(ngModel)]="middlename" [ngClass]="{'ng-invalid ng-dirty': useRedClass}"> 
             <label for="float-input">По батькові</label>
         </span>
     </div>
     <div class=" p-col-4">
         <span class="p-float-label">
-            <input id="float-input" type="text" pInputText [(ngModel)]="lastname"> 
+            <input id="float-input" type="text" pInputText [(ngModel)]="lastname" [ngClass]="{'ng-invalid ng-dirty': useRedClass}"> 
             <label for="float-input">Прізвище</label>
         </span>
     </div>
@@ -22,20 +22,18 @@
 
 <div class="p-grid p-mt-2">
     <div class=" p-col-4">
-        <span class="p-float-label">
-            <input id="float-input" type="text" pInputText [(ngModel)]="position"> 
-            <label for="float-input">Посада</label>
+        <span class>
+            <p-dropdown [options]="ranks" [(ngModel)]="selected_rank" placeholder="Ранг" optionLabel="name" [showClear]="true" [ngClass]="{'ng-invalid ng-dirty': useRedClass}"></p-dropdown>
         </span>
-    </div>
-    <div class=" p-col-4">
-        <span class="p-float-label">
-            <input id="float-input" type="text" pInputText [(ngModel)]="rank"> 
-            <label for="float-input">Ранг</label>
-        </span>
-    </div>
+    </div> 
     <div class=" p-col-4">
         <span class>
-            <p-dropdown [options]="divisions" [(ngModel)]="selected_division" placeholder="Частина" optionLabel="name" [showClear]="true"></p-dropdown>
+            <p-dropdown [options]="positions" [(ngModel)]="selected_position" placeholder="Посада" optionLabel="name" [showClear]="true" [ngClass]="{'ng-invalid ng-dirty': useRedClass}"></p-dropdown>
+        </span>
+    </div> 
+    <div class=" p-col-4">
+        <span class>
+            <p-dropdown [options]="divisions" [(ngModel)]="selected_division" placeholder="Частина" optionLabel="name" [showClear]="true" [ngClass]="{'ng-invalid ng-dirty': useRedClass}"></p-dropdown>
         </span>
     </div> 
 </div>
