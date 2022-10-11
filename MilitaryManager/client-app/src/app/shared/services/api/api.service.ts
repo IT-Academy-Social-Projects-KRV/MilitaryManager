@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { AttachmentsService } from "./attachment.service";
-import { UnitUserService } from "./unit-user.service.service";
+import { UnitUserService } from "./unit-user.service";
 import { UnitsService } from "./unit.service";
 
 @Injectable()

@@ -8,6 +8,10 @@ using MilitaryManager.Core.Entities.UnitEntity;
 using MilitaryManager.Core.Entities.DivisionEntity;
 using MilitaryManager.Core.DTO.Audit;
 using MilitaryManager.Core.Entities.AuditEntities.ChangeEntity;
+using MilitaryManager.Core.Entities.RankEntity;
+using MilitaryManager.Core.DTO.Ranks;
+using MilitaryManager.Core.Entities.PositionEntity;
+using MilitaryManager.Core.DTO.Positions;
 
 namespace MilitaryManager.Core.Helpers
 {
@@ -22,6 +26,8 @@ namespace MilitaryManager.Core.Helpers
                 .ForMember(dest => dest.PathSigned, opt => opt.MapFrom(src => src.SignedPdf.Path));
             CreateMap<Template, TemplateDTO>().ReverseMap();
             CreateMap<DivisionDTO, Division>().ReverseMap();
+            CreateMap<Rank, RankDTO>().ReverseMap();
+            CreateMap<Position, PositionDTO>().ReverseMap();
             CreateMap<Change, AuditDTO>()
                 .BeforeMap((src, dest) =>
                 {

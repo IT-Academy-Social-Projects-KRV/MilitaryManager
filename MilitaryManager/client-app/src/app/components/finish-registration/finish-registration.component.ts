@@ -3,7 +3,7 @@ import { DivisionModel } from 'src/app/shared/models/division.model';
 import { UnitUserModel } from 'src/app/shared/models/unit-user.model';
 import { UnitModel } from 'src/app/shared/models/unit.model';
 import { DivisionsService } from 'src/app/shared/services/api/division.service';
-import { UnitUserService } from 'src/app/shared/services/api/unit-user.service.service';
+import { UnitUserService } from 'src/app/shared/services/api/unit-user.service';
 
 @Component({
   selector: 'app-finish-registration',

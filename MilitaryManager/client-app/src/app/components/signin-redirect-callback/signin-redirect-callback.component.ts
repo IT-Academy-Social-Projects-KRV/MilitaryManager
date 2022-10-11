@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/shared/services/api/api.service';
-import { UnitUserService } from 'src/app/shared/services/api/unit-user.service.service';
+import { UnitUserService } from 'src/app/shared/services/api/unit-user.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
