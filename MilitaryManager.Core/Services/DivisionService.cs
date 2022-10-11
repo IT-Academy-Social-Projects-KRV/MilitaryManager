@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static MilitaryManager.Core.Entities.DivivsionEntity.Divisions;
 
 namespace MilitaryManager.Core.Services
 {
@@ -28,6 +29,13 @@ namespace MilitaryManager.Core.Services
             var getDivisions = divisions.Where(x => x.ParentId == null);
 
             return _mapper.Map<IEnumerable<DivisionDTO>>(getDivisions);
+        }
+
+        public async Task<IEnumerable<DivisionDTO>> GetAllDivisionsListAsync()
+        {
+            var divisions = await _divisionRepository.GetAllAsync();
+
+            return _mapper.Map<IEnumerable<DivisionDTO>>(divisions);
         }
 
         public async Task<DivisionDTO> GetDivisionByKeyAsync(int id)

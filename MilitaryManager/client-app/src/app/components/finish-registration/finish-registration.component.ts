@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { DivisionModel } from 'src/app/shared/models/division.model';
 import { UnitUserModel } from 'src/app/shared/models/unit-user.model';
 import { UnitModel } from 'src/app/shared/models/unit.model';
+import { DivisionsService } from 'src/app/shared/services/api/division.service';
 import { UnitUserService } from 'src/app/shared/services/api/unit-user.service.service';
 
 @Component({
@@ -16,28 +18,25 @@ export class FinishRegistrationComponent implements OnInit {
   position?: string;
   rank?: string;
 
-  divisions: string[] = [
-    'division1',
-    'division2',
-    'division3'
-  ];
+  divisions: DivisionModel[] = [];
 
-  selected_division?: string;
+  selected_division?: DivisionModel;
 
-  constructor(private _unitUserService : UnitUserService) { }
+  constructor(private _unitUserService : UnitUserService, private _divisionsService: DivisionsService) { }
 
   ngOnInit(): void {
+    this._divisionsService.GetAllDivisions().subscribe((divisions)=>{this.divisions = divisions});
   }
 
   EndRegistrationBtn(){
-    let unit, user;
+    let unit;
     unit = {
-      firstname: this.firstname,
-      lastname: this.lastname,
-      middlename: this.middlename,
+      firstName: this.firstname,
+      lastName: this.lastname,
+      //middlename: this.middlename,
       position: this.position,
       rank: this.rank,
-      selected_division: this.selected_division
+      selected_division: this.selected_division?._id
     };
 
     this._unitUserService.single.create(unit).subscribe({});
