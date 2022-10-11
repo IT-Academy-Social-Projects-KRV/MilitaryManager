@@ -21,8 +21,7 @@ export class UnitsListComponent implements OnInit {
   loading: boolean = false;
 
   constructor(private unitsService: UnitsService,
-              private clientConfigService: ClientConfigurationService
-  ) {
+              private clientConfigService: ClientConfigurationService) {
   }
 
   ngOnInit() {
@@ -43,41 +42,23 @@ export class UnitsListComponent implements OnInit {
   }
 
   nodeExpand(event: any) {
-    console.log('nodeExpand');
-
     if (event.node) {
-      console.log('if (event.node){}')
-      // console.log(event.node.id);
-      // console.log(event.node);
-      // console.log('asking for data...');
-      // let a = new UnitInfoComponent(this.unitsService);
-      // a.getSelectedUnitDataById(event.node.id)
-      console.log('')
-
       this.unitsService.collection.getListById(event.node.id).subscribe((units) => {
         units.forEach((unit) => {
           unit.label = `${unit.lastName} ${unit.firstName}`;
           unit.expandedIcon = "pi pi-user-minus";
           unit.collapsedIcon = "pi pi-user-plus";
           unit.leaf = false;
-
-          // let uic = new UnitInfoComponent();
-          // uic.pushTheButton()
         })
         event.node.children = units;
       });
     }
   }
 
-
   nodeSelect(event: any) {
-    console.log('hello1');
     if (event.node) {
-      console.log('hello2');
-
-      let a = new UnitInfoComponent(this.unitsService);
-      a.getSelectedUnitDataById(event.node.id)
-
+      let unitInfo = new UnitInfoComponent(this.unitsService);
+      unitInfo.getSelectedUnitDataById(event.node.id)
     }
   }
 }

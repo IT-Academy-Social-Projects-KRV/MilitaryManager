@@ -1,6 +1,6 @@
 import { BaseModel } from "./base.model";
 
-export class UnitToEquipment extends BaseModel {
+export class UnitToEquipmentModel extends BaseModel {
 
 
 }

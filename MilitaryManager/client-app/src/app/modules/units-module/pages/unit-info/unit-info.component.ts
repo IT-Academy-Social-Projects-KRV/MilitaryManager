@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UnitModel} from "../../../../shared/models/unit.model";
 import {UnitsService} from "../../../../shared/services/api/unit.service";
-import {ClientConfigurationService} from "../../../../shared/services/core/client-configuration.service";
-import {concatWith, map, Observable, pipe} from "rxjs";
+
 
 @Component({
   selector: 'app-unit-info',
@@ -14,74 +13,51 @@ export class UnitInfoComponent implements OnInit {
   constructor(private unitsService: UnitsService) {
   }
 
-  // private nameInput = document.querySelector('#inputFirstName');
+  public lastNameInput = document.querySelector('#inputLastName');
+  public firstNameInput = document.querySelector('#inputFirstName');
+  public secondNameInput = document.querySelector('#inputSecondName');
+
   public unit: UnitModel = new UnitModel(0);
 
-  loading: boolean = false;
-
-  // nameInput = document.querySelector('#inputFirstName');
-
   ngOnInit(): void {
-    this.loading = true;
-
-
-    this.loading = false;
   }
 
-  public pushTheButton(): void {
-    let nameInput = document.querySelector('#inputFirstName');
-
-    // @ts-ignore
-    nameInput.value = '';
-
-    this.unitsService.single.getById(9)
-      .subscribe((u) => {
-        this.unit = u;
-
-        // @ts-ignore
-        nameInput.value = this.unit.firstName;
-      });
-  }
-
-  getSelectedUnitData(): void {
-    console.log(this.unit.id);
-
-    let nameInput = document.querySelector('#inputFirstName');
-
-    // @ts-ignore
-    let aaa = document.activeElement.innerHTML;
-    //
-    console.log(aaa)
-
-    // @ts-ignore
-    nameInput.value = '2';
-    // @ts-ignore
-    // this.nameInput.value = aaa;
-  }
 
   getSelectedUnitDataById(id: number): void {
+    // let firstNameInput = document.querySelector('#inputFirstName');
+    // let nameInput = document.querySelector('#inputFirstName');
 
-    let nameInput = document.querySelector('#inputFirstName');
-
-
-    // @ts-ignore
-    nameInput.value = '';
 
     this.unitsService.single.getById(id)
       .subscribe((u) => {
         this.unit = u;
-        console.log('single.getById')
-        console.log(this.unit.profiles)
-        console.log(this.unit.equipments)
-        console.log('')
-        // this.unit.subUnits = u.children;
 
         // @ts-ignore
-        nameInput.value = this.unit.firstName;
+        this.lastNameInput.value = this.unit.lastName;
         // @ts-ignore
-        nameInput.value = this.unit.firstName;
-        // console.log(this.unit)
-        // console.log(this.unit.subUnits)
+        this.firstNameInput.value = this.unit.firstName;
+        // @ts-ignore
+        this.secondNameInput.value = this.unit.secondName;
+        // @ts-ignore
+        this.firstNameInput.value = this.unit.firstName;
+        // @ts-ignore
+        this.firstNameInput.value = this.unit.firstName;
+        // @ts-ignore
+        this.firstNameInput.value = this.unit.firstName;
+        // @ts-ignore
+        this.firstNameInput.value = this.unit.firstName;
       });
+  }
+
+  clearFields(): void {
+    let lastNameInput = document.querySelector('#inputLastName');
+    let firstNameInput = document.querySelector('#inputFirstName');
+    let secondNameInput = document.querySelector('#inputSecondName');
+    // @ts-ignore
+    lastNameInput.value = '';
+    // @ts-ignore
+    firstNameInput.value = '';
+    // @ts-ignore
+    secondNameInput.value = '';
   }
 }

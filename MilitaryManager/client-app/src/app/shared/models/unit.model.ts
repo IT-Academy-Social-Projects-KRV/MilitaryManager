@@ -1,7 +1,6 @@
 import { BaseModel } from "./base.model";
 import {ProfileModel} from "./profile.model";
-import {EquipmentModel} from "./equipment.model";
-import {UnitToEquipment} from "./unitToEquipment";
+import {UnitToEquipmentModel} from "./unitToEquipment.model";
 
 export class UnitModel extends BaseModel {
   public lastName: string | null = null;
@@ -18,5 +17,5 @@ export class UnitModel extends BaseModel {
   public subUnits: UnitModel[] | null = null;
 
   public profiles: ProfileModel[] | null = null;
-  public гnitToEquipments: UnitToEquipment[] | null = null;
+  public unitToEquipments: UnitToEquipmentModel[] | null = null;
 }

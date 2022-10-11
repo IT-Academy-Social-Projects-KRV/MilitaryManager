@@ -1,43 +1,41 @@
-<hr>
-<div class="p-float-label">
-  <input type="text" pInputText id="inputFirstName" [value]=unit.firstName readonly>
-  <label for="inputFirstName">First Name</label>
-</div>
-<hr>
+<div class="content-section implementation p-d-flex" id="container">
+<div class="card">
 
-<div class="p-float-label">
-  <input type="text" pInputText id="inputtext">
-  <label for="inputtext">Middle Name</label>
-</div>
-<hr>
+  <p>Інформація про бійця</p>
+  <hr>
+  <div class="p-float-label">
+    <input type="text" pInputText id="inputLastName" [value]=unit.lastName readonly>
+    <label for="inputLastName">Прізвище</label>
+  </div>
+  <hr>
 
-<div class="p-float-label">
-  <input type="text" pInputText>
-  <label for="inputtext">Last Name</label>
-</div>
-<hr>
+  <hr>
+  <div class="p-float-label">
+    <input type="text" pInputText id="inputFirstName" [value]=unit.firstName readonly>
+    <label for="inputFirstName">Ім'я</label>
+  </div>
+  <hr>
 
-<div class="p-float-label">
-  <input type="text" pInputText>
-  <label for="inputtext">Rank</label>
-</div>
-<hr>
+  <hr>
+  <div class="p-float-label">
+    <input type="text" pInputText id="inputSecondName" [value]=unit.secondName readonly>
+    <label for="inputSecondName">По батькові</label>
+  </div>
+  <hr>
 
-<div class="p-float-label">
-  <input type="text" pInputText>
-  <label for="inputtext">Position</label>
-</div>
-<hr>
 
-<div class="p-float-label">
-  <input type="text" pInputText>
-  <label for="inputtext">Division</label>
+  <!--<hr>-->
+  <!--<div class="p-float-label">-->
+  <!--  <input type="text" pInputText id="123" [value]=unit.lastName readonly>-->
+  <!--  <label for="">Прізвище</label>-->
+  <!--</div>-->
+  <!--<hr>-->
+
+
+  <br>
+  <div>
+    <p-button (onClick)="clearFields()">Очистити поля</p-button>
+  </div>
+
 </div>
-<hr>
-<div>
-  <p-button id="" (onClick)="pushTheButton()">push the button</p-button>
-</div>
-<br>
-<div>
-  <p-button id="get_unit_info" (onClick)="getSelectedUnitData()">get full selected unit info</p-button>
 </div>
