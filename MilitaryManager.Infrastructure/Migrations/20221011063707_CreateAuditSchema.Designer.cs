@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MilitaryManager.Infrastructure.Data;
 
 namespace MilitaryManager.Infrastructure.Migrations
 {
     [DbContext(typeof(MilitaryManagerDbContext))]
-    partial class MilitaryManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221011063707_CreateAuditSchema")]
+    partial class CreateAuditSchema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -562,22 +564,6 @@ namespace MilitaryManager.Infrastructure.Migrations
                             Id = 1,
                             Path = "data/document_templates/template_01.xml",
                             Type = "Протокол"
-                        });
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 2,
-                            Path = "data/document_templates/template_02.xml",
-                            Type = "Виплата"
-                        });
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 3,
-                            Path = "data/document_templates/template_03.xml",
-                            Type = "Переведення"
                         });
                 });
 
