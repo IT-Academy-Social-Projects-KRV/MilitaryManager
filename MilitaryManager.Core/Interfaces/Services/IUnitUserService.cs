@@ -9,7 +9,7 @@ namespace MilitaryManager.Core.Interfaces.Services
 {
     public interface IUnitUserService
     {
-        Task<UnitUser> GetUnitUserByKeyAsync(int id);
+        Task<UnitUser> GetUnitUserAsync(string id);
         Task<UnitUser> CreateUnitUserAsync(UnitDTO unit);
     }
 }

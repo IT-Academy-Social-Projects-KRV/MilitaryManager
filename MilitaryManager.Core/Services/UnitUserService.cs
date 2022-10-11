@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MilitaryManager.Core.DTO.Units;
 using MilitaryManager.Core.Entities.UnitEntity;
+using MilitaryManager.Core.Entities.UnitUserEntity;
 using MilitaryManager.Core.Interfaces.Repositories;
 using MilitaryManager.Core.Interfaces.Services;
 using System;
@@ -25,9 +26,10 @@ namespace MilitaryManager.Core.Services
             _unitService = unitService;
         }
 
-        public async Task<UnitUser> GetUnitUserByKeyAsync(int id)
+        public async Task<UnitUser> GetUnitUserAsync(string id)
         {
-            return await _unitUserRepository.GetByKeyAsync(id);
+            var specification = new UnitUsers.UnitUserByUserId(id);
+            return await _unitUserRepository.GetFirstBySpecAsync(specification);
         }
 
         public async Task<UnitUser> CreateUnitUserAsync(UnitDTO unit)

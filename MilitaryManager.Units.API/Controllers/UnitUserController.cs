@@ -20,9 +20,9 @@ namespace MilitaryManager.Units.API.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> GetUnitUser([FromRoute] int id)
+        public async Task<IActionResult> GetUnitUser([FromRoute] string id)
         {
-            return Ok(await _unitUserService.GetUnitUserByKeyAsync(id));
+            return Ok(await _unitUserService.GetUnitUserAsync(id));
         }
 
         [HttpPost]
