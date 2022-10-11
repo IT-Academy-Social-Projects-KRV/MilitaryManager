@@ -1,5 +1,6 @@
 ﻿using MilitaryManager.Core.DTO.Entities;
 using MilitaryManager.Core.DTO.Units;
+using MilitaryManager.Core.Entities.UnitEntity;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
