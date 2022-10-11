@@ -8,7 +8,7 @@ namespace MilitaryManager.Core.Interfaces.Services
 {
     public interface IDecreeService
     {
-        Task<DecreeDTO> GenerateDecreeAsync(string wwwroot, int templateId, string name, string jsonData);
+        Task<DecreeDTO> GenerateDecreeAsync(string wwwroot, int templateId, string name, string number, string jsonData);
         Task<IEnumerable<DecreeDTO>> GetDecreesAsync();
         Task<DecreeDTO> GetDecreeByIdAsync(int id);
         Task<FileStream> GetDecreePdfAsync(int id);
