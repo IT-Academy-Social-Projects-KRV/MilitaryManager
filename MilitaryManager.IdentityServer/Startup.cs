@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MilitaryManager.IdentityServer.Services;
 
 namespace MilitaryManager.IdentityServer
 {
@@ -39,6 +40,7 @@ namespace MilitaryManager.IdentityServer
 
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddTransient<ICommanderService, CommanderService>();
 
             // Adds IdentityServer
             services.AddIdentityServer()
