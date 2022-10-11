@@ -6,6 +6,7 @@ import { ClientConfigurationService } from "./core/client-configuration.service"
 import { ApiService } from "./api/api.service";
 import { DecreeService } from "./api/decree.service";
 import { TemplateService } from "./api/template.service";
+import { PdfService } from "./api/pdf.service";
 
 export const services = [
     HttpService,
@@ -15,5 +16,6 @@ export const services = [
     UnitsService,
     DecreeService,
     TemplateService,
+    PdfService,
     ApiService
 ]

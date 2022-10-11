@@ -23,8 +23,7 @@ import { DocumentComponent } from './components/document/document.component';
     SigninRedirectCallbackComponent,
     SignoutRedirectCallbackComponent,
     HomeComponent,
-    AddCommanderComponent,
-    DocumentComponent
+    AddCommanderComponent
   ],
   imports: [
     BrowserModule,
