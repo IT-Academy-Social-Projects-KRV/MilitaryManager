@@ -17,6 +17,7 @@ const routes: Routes = [
     { path: 'test2', component: Test2Component },
     { path: 'addCommander', component: AddCommanderComponent },
     { path: 'units', loadChildren: () => import("./modules/units-module/units.module").then(m => m.UnitsModule) },
+    { path: 'divisions', loadChildren: () => import("./modules/division-module/division.module").then(m => m.DivisionModule) },
     { path: 'SignInCallback', component: SigninRedirectCallbackComponent },
     { path: 'SignOutCallback', component: SignoutRedirectCallbackComponent },
     { path: '**', redirectTo: 'home' }
