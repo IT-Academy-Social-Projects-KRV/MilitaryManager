@@ -155,10 +155,10 @@ namespace MilitaryManager.Infrastructure.Migrations
                     { "Address", "Divisions" },
                     { "DivisionParentId", "Divisions" },
                     { "UnitParentId", "Units" },
-                    { "DivisionsId", "Units" },
+                    { "DivisionId", "Units" },
                     { "FirstName", "Units" },
                     { "LastName", "Units" },
-                    { "PositionsId", "Units" },
+                    { "PositionId", "Units" },
                     { "RankId", "Units" }
                 });
 
