@@ -54,10 +54,10 @@ BEGIN
 	IF((SELECT FirstName FROM inserted) != (SELECT FirstName FROM deleted))
 	BEGIN
 		INSERT INTO audit.ChangeValue
-		SELECT t.ChangeId, d.FirstName, i.FirstName, 'FirstName'
-		FROM inserted as i
-			JOIN deleted as d ON i.Id = d.Id
-			JOIN @Temp as t ON t.RowId = d.Id
+			SELECT t.ChangeId, d.FirstName, i.FirstName, 'FirstName'
+			FROM inserted as i
+				JOIN deleted as d ON i.Id = d.Id
+				JOIN @Temp as t ON t.RowId = d.Id
 	END;
 	IF((SELECT LastName FROM inserted) != (SELECT LastName FROM deleted))
 	BEGIN
