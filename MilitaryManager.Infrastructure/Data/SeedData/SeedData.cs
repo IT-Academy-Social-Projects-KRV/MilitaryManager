@@ -93,10 +93,10 @@ namespace MilitaryManager.Infrastructure.Data.SeedData
                 new Column[]
                 {
                     new Column { Name = "UnitParentId", TableName = "Units"},
-                    new Column { Name = "DivisionsId", TableName = "Units"},
+                    new Column { Name = "DivisionId", TableName = "Units"},
                     new Column { Name = "FirstName", TableName = "Units"},
                     new Column { Name = "LastName", TableName = "Units"},
-                    new Column { Name = "PositionsId", TableName = "Units"},
+                    new Column { Name = "PositionId", TableName = "Units"},
                     new Column { Name = "RankId", TableName = "Units"},
                     new Column { Name = "Name", TableName = "Divisions"},
                     new Column { Name = "Address", TableName = "Divisions"},

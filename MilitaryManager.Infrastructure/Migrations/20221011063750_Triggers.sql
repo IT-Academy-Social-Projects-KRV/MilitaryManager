@@ -70,7 +70,7 @@ BEGIN
 	IF(UPDATE(ParentId))
 	BEGIN
 		INSERT INTO audit.ChangeValue
-			SELECT t.ChangeId, d.ParentId, i.ParentId, 'ParentId'
+			SELECT t.ChangeId, d.ParentId, i.ParentId, 'UnitParentId'
 			FROM inserted as i
 				JOIN deleted as d ON i.Id = d.Id
 				JOIN @Temp as t ON t.RowId = d.Id		
@@ -171,7 +171,7 @@ BEGIN
 	IF(UPDATE(ParentId))
 	BEGIN
 		INSERT INTO audit.ChangeValue
-			SELECT t.ChangeId, d.ParentId, i.ParentId, 'ParentId'
+			SELECT t.ChangeId, d.ParentId, i.ParentId, 'UnitParentId'
 			FROM inserted as i
 				JOIN deleted as d ON i.Id = d.Id
 				JOIN @Temp as t ON t.RowId = d.Id		

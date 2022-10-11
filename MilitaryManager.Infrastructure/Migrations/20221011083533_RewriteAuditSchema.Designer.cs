@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MilitaryManager.Infrastructure.Data;
 
 namespace MilitaryManager.Infrastructure.Migrations
 {
     [DbContext(typeof(MilitaryManagerDbContext))]
-    partial class MilitaryManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221011083533_RewriteAuditSchema")]
+    partial class RewriteAuditSchema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,7 +157,7 @@ namespace MilitaryManager.Infrastructure.Migrations
                         },
                         new
                         {
-                            Name = "DivisionId",
+                            Name = "DivisionsId",
                             TableName = "Units"
                         },
                         new
@@ -170,7 +172,7 @@ namespace MilitaryManager.Infrastructure.Migrations
                         },
                         new
                         {
-                            Name = "PositionId",
+                            Name = "PositionsId",
                             TableName = "Units"
                         },
                         new

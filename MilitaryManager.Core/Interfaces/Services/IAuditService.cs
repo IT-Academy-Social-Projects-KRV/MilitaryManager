@@ -8,7 +8,7 @@ namespace MilitaryManager.Core.Interfaces.Services
 {
     public interface IAuditService
     {
-        Task<IEnumerable<AuditDTO>> GetChangesListAsync();
-        Task<AuditDTO> GetFullChangeInfoByKeyAsync(int id);
+        Task<IEnumerable<ChangeDTO>> GetChangesListAsync();
+        Task<ChangeDTO> GetFullChangeInfoByKeyAsync(int id);
     }
 }
