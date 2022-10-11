@@ -10,7 +10,7 @@ using MilitaryManager.Infrastructure.Data;
 namespace MilitaryManager.Infrastructure.Migrations
 {
     [DbContext(typeof(MilitaryManagerDbContext))]
-    [Migration("20221009144215_AddUnitUser")]
+    [Migration("20221011142244_Add-UnitUser")]
     partial class AddUnitUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,6 +36,219 @@ namespace MilitaryManager.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Attributes","Unit");
+                });
+
+            modelBuilder.Entity("MilitaryManager.Core.Entities.AuditEntities.ChangeEntity.Change", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ChangeTypeCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RowId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TableName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChangeTypeCode");
+
+                    b.HasIndex("TableName");
+
+                    b.ToTable("Change","audit");
+                });
+
+            modelBuilder.Entity("MilitaryManager.Core.Entities.AuditEntities.ChangeTypeEntity.ChangeType", b =>
+                {
+                    b.Property<string>("Code")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Code");
+
+                    b.ToTable("ChangeType","audit");
+
+                    b.HasData(
+                        new
+                        {
+                            Code = "I",
+                            Name = "Insert"
+                        },
+                        new
+                        {
+                            Code = "U",
+                            Name = "Update"
+                        },
+                        new
+                        {
+                            Code = "D",
+                            Name = "Delete"
+                        });
+                });
+
+            modelBuilder.Entity("MilitaryManager.Core.Entities.AuditEntities.ChangeValueEntity.ChangeValue", b =>
+                {
+                    b.Property<int>("ChangeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ColumnName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<object>("NewValue")
+                        .HasColumnType("sql_variant");
+
+                    b.Property<object>("OldValue")
+                        .HasColumnType("sql_variant");
+
+                    b.HasKey("ChangeId");
+
+                    b.HasIndex("ColumnName");
+
+                    b.ToTable("ChangeValue","audit");
+                });
+
+            modelBuilder.Entity("MilitaryManager.Core.Entities.AuditEntities.ColumnEntity.Column", b =>
+                {
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("TableName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Name");
+
+                    b.HasAlternateKey("Name", "TableName");
+
+                    b.HasIndex("TableName");
+
+                    b.ToTable("Column","audit");
+
+                    b.HasData(
+                        new
+                        {
+                            Name = "UnitParentId",
+                            TableName = "Units"
+                        },
+                        new
+                        {
+                            Name = "DivisionsId",
+                            TableName = "Units"
+                        },
+                        new
+                        {
+                            Name = "FirstName",
+                            TableName = "Units"
+                        },
+                        new
+                        {
+                            Name = "LastName",
+                            TableName = "Units"
+                        },
+                        new
+                        {
+                            Name = "PositionsId",
+                            TableName = "Units"
+                        },
+                        new
+                        {
+                            Name = "RankId",
+                            TableName = "Units"
+                        },
+                        new
+                        {
+                            Name = "Name",
+                            TableName = "Divisions"
+                        },
+                        new
+                        {
+                            Name = "Address",
+                            TableName = "Divisions"
+                        },
+                        new
+                        {
+                            Name = "DivisionParentId",
+                            TableName = "Divisions"
+                        });
+                });
+
+            modelBuilder.Entity("MilitaryManager.Core.Entities.AuditEntities.TableEntity.Table", b =>
+                {
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Name");
+
+                    b.ToTable("Table","audit");
+
+                    b.HasData(
+                        new
+                        {
+                            Name = "Attributes",
+                            Description = "Attributes for units and divisions"
+                        },
+                        new
+                        {
+                            Name = "Divisions",
+                            Description = "Information about divisions"
+                        },
+                        new
+                        {
+                            Name = "Entities",
+                            Description = "List of equipments"
+                        },
+                        new
+                        {
+                            Name = "EntityToAttributes",
+                            Description = "Decoupling table for the connection between equipment and its attributes"
+                        },
+                        new
+                        {
+                            Name = "Positions",
+                            Description = "List of unit positions"
+                        },
+                        new
+                        {
+                            Name = "Profiles",
+                            Description = "Decoupling table for the connection between unit and its attributes"
+                        },
+                        new
+                        {
+                            Name = "Ranks",
+                            Description = "List of unit ranks"
+                        },
+                        new
+                        {
+                            Name = "Units",
+                            Description = "Information about unit"
+                        },
+                        new
+                        {
+                            Name = "UnitToEquipments",
+                            Description = "Decoupling table for the connection between unit and its equipment"
+                        });
                 });
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.DecreeEntity.Decree", b =>
@@ -402,11 +615,52 @@ namespace MilitaryManager.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
 
                     b.HasKey("Id");
 
                     b.ToTable("UnitUsers","Unit");
+                });
+
+            modelBuilder.Entity("MilitaryManager.Core.Entities.AuditEntities.ChangeEntity.Change", b =>
+                {
+                    b.HasOne("MilitaryManager.Core.Entities.AuditEntities.ChangeTypeEntity.ChangeType", "ChangeType")
+                        .WithMany("Changes")
+                        .HasForeignKey("ChangeTypeCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MilitaryManager.Core.Entities.AuditEntities.TableEntity.Table", "Table")
+                        .WithMany("Changes")
+                        .HasForeignKey("TableName")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MilitaryManager.Core.Entities.AuditEntities.ChangeValueEntity.ChangeValue", b =>
+                {
+                    b.HasOne("MilitaryManager.Core.Entities.AuditEntities.ChangeEntity.Change", "Change")
+                        .WithOne("ChangeValue")
+                        .HasForeignKey("MilitaryManager.Core.Entities.AuditEntities.ChangeValueEntity.ChangeValue", "ChangeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MilitaryManager.Core.Entities.AuditEntities.ColumnEntity.Column", "Column")
+                        .WithMany("ChangeValues")
+                        .HasForeignKey("ColumnName")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MilitaryManager.Core.Entities.AuditEntities.ColumnEntity.Column", b =>
+                {
+                    b.HasOne("MilitaryManager.Core.Entities.AuditEntities.TableEntity.Table", "Table")
+                        .WithMany("Columns")
+                        .HasForeignKey("TableName")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.DecreeEntity.Decree", b =>

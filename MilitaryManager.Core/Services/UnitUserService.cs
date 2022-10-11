@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using MilitaryManager.Core.DTO.Units;
 using MilitaryManager.Core.Entities.UnitEntity;
 using MilitaryManager.Core.Interfaces.Repositories;
@@ -17,10 +18,11 @@ namespace MilitaryManager.Core.Services
         protected readonly IUnitService _unitService;
         protected readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UnitUserService(IRepository<UnitUser, int> unitUserRepository, IHttpContextAccessor httpContextAccessor)
+        public UnitUserService(IRepository<UnitUser, int> unitUserRepository, IHttpContextAccessor httpContextAccessor, IUnitService unitService)
         {
             _unitUserRepository = unitUserRepository;
             _httpContextAccessor = httpContextAccessor;
+            _unitService = unitService;
         }
 
         public async Task<UnitUser> GetUnitUserByKeyAsync(int id)

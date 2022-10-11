@@ -607,6 +607,21 @@ namespace MilitaryManager.Infrastructure.Migrations
                     b.ToTable("Units","Unit");
                 });
 
+            modelBuilder.Entity("MilitaryManager.Core.Entities.UnitEntity.UnitUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UnitUsers","Unit");
+                });
+
             modelBuilder.Entity("MilitaryManager.Core.Entities.AuditEntities.ChangeEntity.Change", b =>
                 {
                     b.HasOne("MilitaryManager.Core.Entities.AuditEntities.ChangeTypeEntity.ChangeType", "ChangeType")
@@ -644,19 +659,6 @@ namespace MilitaryManager.Infrastructure.Migrations
                         .HasForeignKey("TableName")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("MilitaryManager.Core.Entities.UnitEntity.UnitUser", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UnitUsers","Unit");
                 });
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.DecreeEntity.Decree", b =>
