@@ -17,6 +17,7 @@ export class UnitUserService extends BaseService<any>{
   }
 
   GetUnitUser(id:string) {
-    return this.httpService.get(`${this.single.baseUrl}/${id}`);
+    console.log(`${this.single.baseUrl}${id}`);
+    return this.httpService.get(`${this.single.baseUrl}UnitUser/${id}`);
   }
 }
