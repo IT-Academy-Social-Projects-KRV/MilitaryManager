@@ -8,6 +8,8 @@ import { HomeComponent } from './components/home/home.component';
 import { AppLayoutComponent } from './layout/app.layout.component';
 import { AddCommanderComponent } from './components/add-commander/add-commander.component';
 import  { AdminGuard } from './guards/AdminGuard'
+import { UnitCommanderGuard } from './guards/UnitCommanderGuard'
+import { SubUnitCommanderGuard } from './guards/SubUnitCommanderGuard'
 
 const routes: Routes = [
     {path:'', component:AppLayoutComponent,
@@ -26,6 +28,6 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule],
-    providers: [AdminGuard]
+    providers: [AdminGuard, UnitCommanderGuard, SubUnitCommanderGuard]
 })
 export class AppRoutingModule { }
