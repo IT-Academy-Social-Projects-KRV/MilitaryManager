@@ -1,28 +1,19 @@
-import { HttpClient, HttpErrorResponse, HttpEventType, HttpRequest, HttpResponse } from '@angular/common/http';
-import { AfterViewChecked, AfterViewInit, Component, ComponentFactoryResolver, ComponentRef, OnInit, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { HttpErrorResponse, HttpEventType, HttpResponse } from '@angular/common/http';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Table } from 'primeng/table';
-import { DecreeModel } from 'src/app/shared/models/decree.model';
-import { TemplateModel } from 'src/app/shared/models/template.model';
 import { ApiService } from 'src/app/shared/services/api/api.service';
-import { Test1Component } from '../test1/test1.component';
 
 @Component({
-  selector: 'app-document',
-  templateUrl: './document.component.html',
-  styleUrls: ['./document.component.scss'],
-  providers: [ConfirmationService, MessageService]
+  selector: 'app-decree-list',
+  templateUrl: './decree-list.component.html',
+  styleUrls: ['./decree-list.component.scss']
 })
-export class DocumentComponent implements OnInit {
+export class DecreeListComponent implements OnInit {
 
   //@ts-ignore
   decrees: DecreeModel[];
   //@ts-ignore
   decree: DecreeModel;
-  //@ts-ignore
-  templates: TemplateModel[];
   //@ts-ignore
   tabs: string[] = []
   currentTab: number = 0;
@@ -32,9 +23,9 @@ export class DocumentComponent implements OnInit {
 
   //@ts-ignore
   cols: any[];
-
   //@ts-ignore
-  @ViewChildren('tabDoc', {static : false, read : ViewContainerRef}) targets: QueryList<any>;
+  statuses: any[];
+
   //@ts-ignore
   @ViewChild('dt') table: Table;
   //@ts-ignore
@@ -42,27 +33,27 @@ export class DocumentComponent implements OnInit {
 
   constructor(public apiService: ApiService, 
               private confirmationService: ConfirmationService, 
-              private messageService: MessageService,
-              private router: Router) { }
+              private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.apiService.decree.collection.getAll().subscribe(res => { this.decrees = res })
-    this.apiService.templates.collection.getAll().subscribe(res => { this.templates = res })
 
     this.cols = [
-      { field: 'name', header: 'Name' },
-      { field: 'path', header: 'Path' },
-      { field: 'pathSigned', header: 'Path Signed' },
-      { field: 'timeStamp', header: 'Time Stamp', date: true, format: 'dd.MM.yyyy HH:mm' },
-      { field: 'template', header: 'Template' },
-      { field: 'status', header: 'Status' },
+      { field: 'name', header: 'Назва' },
+      { field: 'path', header: 'Файл' },
+      { field: 'pathSigned', header: 'Файл підписаний' },
+      { field: 'timeStamp', header: 'Час', date: true, format: 'dd.MM.yyyy HH:mm' },
+      { field: 'template', header: 'Шаблон' },
+      { field: 'status', header: 'Статус' },
       { field: 'buttons', header: '', width: '5%'}
     ];
-  }
 
-  addNewDocument() {
-    this.router.navigate(['/attachments/add'], { replaceUrl: true });
-    
+    this.statuses = [
+      { status: 'Created', name: 'Створено' },
+      { status: 'Downloaded', name: 'Завантажено' },
+      { status: 'Signed', name: 'Підписано' },
+      { status: 'Completed', name: 'Завершено' }
+    ]
   }
 
   //@ts-ignore
