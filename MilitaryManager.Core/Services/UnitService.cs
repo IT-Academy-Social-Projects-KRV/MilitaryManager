@@ -41,6 +41,15 @@ namespace MilitaryManager.Core.Services
 
             return _mapper.Map<IEnumerable<UnitDTO>>(unitsTree);
         }
+        
+        public async Task<UnitDTO> GetUnitAsync(int id)
+        {
+            
+            var unit = await _unitRepository.GetByKeyAsync(id);
+
+            return _mapper.Map<UnitDTO>(unit);
+        }
+
         public async Task<IEnumerable<UnitDTO>> GetUnitsAsync()
         {
             var units = await _unitRepository.GetListBySpecAsync(new Units.UnitsList());

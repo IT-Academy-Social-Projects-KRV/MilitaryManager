@@ -17,6 +17,9 @@ using MilitaryManager.Core.DTO.Entities;
 using MilitaryManager.Core.DTO.Positions;
 using MilitaryManager.Core.DTO.Profiles;
 using MilitaryManager.Core.DTO.Ranks;
+using MilitaryManager.Core.DTO.Audit;
+using MilitaryManager.Core.Entities.AuditEntities.ChangeEntity;
+using MilitaryManager.Core.Entities.AuditEntities.ChangeValueEntity;
 
 namespace MilitaryManager.Core.Helpers
 {
@@ -40,6 +43,8 @@ namespace MilitaryManager.Core.Helpers
             CreateMap<PositionDTO, Position>().ReverseMap();
             CreateMap<UnitToEquipmentDTO, UnitToEquipment>().ReverseMap();
             CreateMap<ProfileDTO, Entities.ProfileEntity.Profile>().ReverseMap();
+            CreateMap<Change, ChangeDTO>();
+            CreateMap<ChangeValue, ChangeValuesDTO>();
         }
     }
 }
