@@ -7,6 +7,8 @@ using System;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using MilitaryManager.Core.Interfaces.Services;
+using Newtonsoft.Json;
 
 namespace MilitaryManager.Attachments.API.Controllers
 {
@@ -19,21 +21,26 @@ namespace MilitaryManager.Attachments.API.Controllers
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly string _documentExportFolder;
 
-        public AttachmentsController(
-            IWebHostEnvironment hostingEnvironment,
+        private readonly IUnitService _unitService;
+
+        public AttachmentsController(IWebHostEnvironment hostingEnvironment,
             IDocumentGenerationService service,
-            ILogger<WeatherForecastController> logger)
+            ILogger<WeatherForecastController> logger,
+            IUnitService unitService)
         {
             _documentGenerationService = service;
             _webRootPath = hostingEnvironment.WebRootPath;
             _logger = logger;
             _documentExportFolder = "documents";
+
+            _unitService = unitService;
         }
 
         [HttpGet(Name="find")]
         public FileStreamResult GetDocument([FromQuery] string name)
         {
-            FileStream fileStream = new FileStream($"{_webRootPath}\\{_documentExportFolder}\\{name}", FileMode.Open);
+            string path = Path.Combine(_webRootPath, _documentExportFolder, name);
+            FileStream fileStream = new FileStream(path, FileMode.Open);
 
             return new FileStreamResult(fileStream, "application/pdf");
         }
@@ -62,6 +69,37 @@ namespace MilitaryManager.Attachments.API.Controllers
 
             return CreatedAtRoute("find", new { name = docName }, docName);
         }
+
+        [HttpGet]
+        [Route("generate")]
+        public string GenerateNewDocument()
+        {
+            var documentTemplatesPath = Path.Combine(_webRootPath, "data", "document_templates");
+
+            var templateName = "template_02";
+            string templateData = null;
+            try
+            {
+                string path = Path.Combine(documentTemplatesPath, $"{templateName}.xml");
+                templateData = System.IO.File.ReadAllText(path);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Template for {templateName} document is not available");
+            }
+
+            var unit = _unitService.GetUnitAsync(5).Result;
+            var obj = new { lastName = unit.LastName, firstName = unit.FirstName };
+            var jsonData = JsonConvert.SerializeObject(obj);
+
+            _documentGenerationService.ApplyFontResolver("/wwwroot"); //_webRootPath);
+
+            string docPath = Path.Combine(_webRootPath, _documentExportFolder);
+
+            var docName = _documentGenerationService.GeneratePdfDocument(docPath,
+                templateName, templateData, jsonData);
+
+            return $"https://{Request.Host}/api/attachments/find?name={docName}";
+        }
     }
 }
-

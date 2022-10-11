@@ -46,3 +46,9 @@ Desktop.ini
 # macOS junk
 .DS_Store
 .idea
+
+# documents
+MilitaryManager.Attachments.API/wwwroot/documents/*.pdf
+
+# .\MilitaryManager.Attachments.API\wwwroot\fonts\.uuid
+.uuid
