@@ -1,4 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MilitaryManager.Core.Entities.AuditEntities.ChangeTypeEntity;
+using MilitaryManager.Core.Entities.AuditEntities.ColumnEntity;
+using MilitaryManager.Core.Entities.AuditEntities.TableEntity;
 using MilitaryManager.Core.Entities.StatusEntity;
 using MilitaryManager.Core.Entities.TemplateEntity;
 using MilitaryManager.Core.Enums;
@@ -14,6 +17,9 @@ namespace MilitaryManager.Infrastructure.Data.SeedData
         {
             SeedDecreeStatuses(builder);
             SeedTemplates(builder);
+            SeedChangeTypes(builder);
+            SeedTables(builder);
+            SeedColumns(builder);
         }
 
         public static void SeedDecreeStatuses(ModelBuilder builder)
@@ -51,6 +57,51 @@ namespace MilitaryManager.Infrastructure.Data.SeedData
                     Path = "data/document_templates/template_01.xml"
                 }
                 );
+        }
+
+        public static void SeedChangeTypes(ModelBuilder builder)
+        {
+            builder.Entity<ChangeType>().HasData(
+                new ChangeType[]
+                {
+                    new ChangeType { Code = 'I', Name = "Insert"},
+                    new ChangeType { Code = 'U', Name = "Update"},
+                    new ChangeType { Code = 'D', Name = "Delete"}
+                });
+        }
+
+        public static void SeedTables(ModelBuilder builder)
+        {
+            builder.Entity<Table>().HasData(
+                new Table[]
+                {
+                    new Table { Name = "Attributes", Description = "Attributes for units and divisions"},
+                    new Table { Name = "Divisions", Description = "Information about divisions"},
+                    new Table { Name = "Entities", Description = "List of equipments"},
+                    new Table { Name = "EntityToAttributes", Description = "Decoupling table for the connection between equipment and its attributes"},
+                    new Table { Name = "Positions", Description = "List of unit positions"},
+                    new Table { Name = "Profiles", Description = "Decoupling table for the connection between unit and its attributes"},
+                    new Table { Name = "Ranks", Description = "List of unit ranks"},
+                    new Table { Name = "Units", Description = "Information about unit"},
+                    new Table { Name = "UnitToEquipments", Description = "Decoupling table for the connection between unit and its equipment"}
+                });
+        }
+
+        public static void SeedColumns(ModelBuilder builder)
+        {
+            builder.Entity<Column>().HasData(
+                new Column[]
+                {
+                    new Column { Name = "UnitParentId", TableName = "Units"},
+                    new Column { Name = "DivisionId", TableName = "Units"},
+                    new Column { Name = "FirstName", TableName = "Units"},
+                    new Column { Name = "LastName", TableName = "Units"},
+                    new Column { Name = "PositionId", TableName = "Units"},
+                    new Column { Name = "RankId", TableName = "Units"},
+                    new Column { Name = "Name", TableName = "Divisions"},
+                    new Column { Name = "Address", TableName = "Divisions"},
+                    new Column { Name = "DivisionParentId", TableName = "Divisions"}
+                });
         }
     }
 }

@@ -7,6 +7,9 @@ using MilitaryManager.Core.DTO.Divisions;
 using MilitaryManager.Core.Entities.UnitEntity;
 using MilitaryManager.Core.Entities.DivisionEntity;
 using System.IO;
+using MilitaryManager.Core.DTO.Audit;
+using MilitaryManager.Core.Entities.AuditEntities.ChangeEntity;
+using MilitaryManager.Core.Entities.AuditEntities.ChangeValueEntity;
 
 namespace MilitaryManager.Core.Helpers
 {
@@ -22,6 +25,8 @@ namespace MilitaryManager.Core.Helpers
                 .ForMember(dest => dest.PathSigned, opt => opt.MapFrom(src => Path.GetFileName(src.SignedPdf.Path)));
             CreateMap<Template, TemplateDTO>().ReverseMap();
             CreateMap<DivisionDTO, Division>().ReverseMap();
+            CreateMap<Change, ChangeDTO>();
+            CreateMap<ChangeValue, ChangeValuesDTO>();
         }
     }
 }

@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UnitModel } from 'src/app/shared/models/unit.model';
-import { UnitStateService } from 'src/app/shared/services/unit-state.service';
 import { UnitsService } from 'src/app/shared/services/api/unit.service';
-import {ConfigModel} from "../../../../shared/models/config.model";
 import {ClientConfigurationService} from "../../../../shared/services/core/client-configuration.service";
 import {TreeNode} from "primeng/api";
-import {BaseService} from "../../../../shared/services/core/base.service";
 
 
 @Component({
