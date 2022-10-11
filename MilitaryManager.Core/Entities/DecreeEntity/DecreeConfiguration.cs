@@ -11,6 +11,10 @@ namespace MilitaryManager.Core.Entities.DecreeEntity
                    .HasMaxLength(256)
                    .IsRequired();
 
+            builder.Property(decree => decree.DecreeNumber)
+                   .HasMaxLength(20)
+                   .IsRequired();
+
             builder.Property(decree => decree.Path)
                    .IsRequired();
 
