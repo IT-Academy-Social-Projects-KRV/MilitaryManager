@@ -36,45 +36,6 @@ namespace MilitaryManager.Infrastructure.Migrations
                     b.ToTable("Attributes","Unit");
                 });
 
-            modelBuilder.Entity("MilitaryManager.Core.Entities.DecreeEntity.Decree", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)")
-                        .HasMaxLength(450);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("Path")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StatusId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TemplateId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("TimeStamp")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StatusId");
-
-                    b.HasIndex("TemplateId");
-
-                    b.ToTable("Decrees");
-                });
-
             modelBuilder.Entity("MilitaryManager.Core.Entities.AuditEntities.ChangeEntity.Change", b =>
                 {
                     b.Property<int>("Id")
@@ -286,6 +247,45 @@ namespace MilitaryManager.Infrastructure.Migrations
                             Name = "UnitToEquipments",
                             Description = "Decoupling table for the connection between unit and its equipment"
                         });
+                });
+
+            modelBuilder.Entity("MilitaryManager.Core.Entities.DecreeEntity.Decree", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TemplateId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StatusId");
+
+                    b.HasIndex("TemplateId");
+
+                    b.ToTable("Decrees");
                 });
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.DivisionEntity.Division", b =>
@@ -607,21 +607,6 @@ namespace MilitaryManager.Infrastructure.Migrations
                     b.ToTable("Units","Unit");
                 });
 
-            modelBuilder.Entity("MilitaryManager.Core.Entities.DecreeEntity.Decree", b =>
-                {
-                    b.HasOne("MilitaryManager.Core.Entities.StatusEntity.Status", "Status")
-                        .WithMany("Decrees")
-                        .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MilitaryManager.Core.Entities.TemplateEntity.Template", "Template")
-                        .WithMany("Decrees")
-                        .HasForeignKey("TemplateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("MilitaryManager.Core.Entities.AuditEntities.ChangeEntity.Change", b =>
                 {
                     b.HasOne("MilitaryManager.Core.Entities.AuditEntities.ChangeTypeEntity.ChangeType", "ChangeType")
@@ -657,6 +642,21 @@ namespace MilitaryManager.Infrastructure.Migrations
                     b.HasOne("MilitaryManager.Core.Entities.AuditEntities.TableEntity.Table", "Table")
                         .WithMany("Columns")
                         .HasForeignKey("TableName")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MilitaryManager.Core.Entities.DecreeEntity.Decree", b =>
+                {
+                    b.HasOne("MilitaryManager.Core.Entities.StatusEntity.Status", "Status")
+                        .WithMany("Decrees")
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MilitaryManager.Core.Entities.TemplateEntity.Template", "Template")
+                        .WithMany("Decrees")
+                        .HasForeignKey("TemplateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

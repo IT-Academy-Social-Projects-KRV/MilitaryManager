@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\20221007202507_Triggers.sql" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Ardalis.Specification" Version="4.2.0" />
     <PackageReference Include="Ardalis.Specification.EntityFrameworkCore" Version="4.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.28" />

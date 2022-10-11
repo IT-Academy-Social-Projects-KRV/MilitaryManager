@@ -117,6 +117,51 @@ namespace MilitaryManager.Infrastructure.Migrations
                         principalColumn: "Name");
                 });
 
+            migrationBuilder.InsertData(
+                schema: "audit",
+                table: "ChangeType",
+                columns: new[] { "Code", "Name" },
+                values: new object[,]
+                {
+                    { "I", "Insert" },
+                    { "U", "Update" },
+                    { "D", "Delete" }
+                });
+
+            migrationBuilder.InsertData(
+                schema: "audit",
+                table: "Table",
+                columns: new[] { "Name", "Description" },
+                values: new object[,]
+                {
+                    { "Attributes", "Attributes for units and divisions" },
+                    { "Divisions", "Information about divisions" },
+                    { "Entities", "List of equipments" },
+                    { "EntityToAttributes", "Decoupling table for the connection between equipment and its attributes" },
+                    { "Positions", "List of unit positions" },
+                    { "Profiles", "Decoupling table for the connection between unit and its attributes" },
+                    { "Ranks", "List of unit ranks" },
+                    { "Units", "Information about unit" },
+                    { "UnitToEquipments", "Decoupling table for the connection between unit and its equipment" }
+                });
+
+            migrationBuilder.InsertData(
+                schema: "audit",
+                table: "Column",
+                columns: new[] { "Name", "TableName" },
+                values: new object[,]
+                {
+                    { "Name", "Divisions" },
+                    { "Address", "Divisions" },
+                    { "DivisionParentId", "Divisions" },
+                    { "UnitParentId", "Units" },
+                    { "DivisionsId", "Units" },
+                    { "FirstName", "Units" },
+                    { "LastName", "Units" },
+                    { "PositionsId", "Units" },
+                    { "RankId", "Units" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Change_ChangeTypeCode",
                 schema: "audit",
