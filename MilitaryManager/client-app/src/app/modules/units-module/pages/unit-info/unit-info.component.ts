@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UnitModel} from "../../../../shared/models/unit.model";
 import {UnitsService} from "../../../../shared/services/api/unit.service";
 import {ClientConfigurationService} from "../../../../shared/services/core/client-configuration.service";
-import {map, Observable, pipe} from "rxjs";
+import {concatWith, map, Observable, pipe} from "rxjs";
 
 @Component({
   selector: 'app-unit-info',
@@ -70,19 +70,18 @@ export class UnitInfoComponent implements OnInit {
     this.unitsService.single.getById(id)
       .subscribe((u) => {
         this.unit = u;
-        console.log(u.children)
+        console.log('single.getById')
+        console.log(this.unit.profiles)
+        console.log(this.unit.equipments)
+        console.log('')
         // this.unit.subUnits = u.children;
 
         // @ts-ignore
         nameInput.value = this.unit.firstName;
-        console.log(this.unit)
+        // @ts-ignore
+        nameInput.value = this.unit.firstName;
+        // console.log(this.unit)
         // console.log(this.unit.subUnits)
       });
-  }
-
-  allocateData(unit: UnitModel): void {
-    let subUnits = document.querySelector('#subUnits');
-    // @ts-ignore
-    subUnits.innerHTML= "333";
   }
 }
