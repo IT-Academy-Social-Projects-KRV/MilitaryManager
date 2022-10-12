@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {UnitModel} from "../../../../shared/models/unit.model";
 import {UnitsService} from "../../../../shared/services/api/unit.service";
+import {PositionService} from "../../../../shared/services/api/position.service";
+import {RankService} from "../../../../shared/services/api/rank.service";
+import {DivisionsService} from "../../../../shared/services/api/division.service";
 
 
 @Component({
@@ -10,7 +13,11 @@ import {UnitsService} from "../../../../shared/services/api/unit.service";
 })
 export class UnitInfoComponent implements OnInit {
 
-  constructor(private unitsService: UnitsService) {
+  constructor(private unitsService: UnitsService,
+              private positionService: PositionService,
+              private rankService: RankService,
+              private divisionsService: DivisionsService
+              ) {
   }
 
   public lastNameInput = document.querySelector('#inputLastName');
@@ -46,18 +53,33 @@ export class UnitInfoComponent implements OnInit {
         this.firstNameInput.value = this.unit.firstName;
         // @ts-ignore
         this.firstNameInput.value = this.unit.firstName;
+
+        console.log('clearFields() begin');
+        console.log(this.unit.id);
+        console.log(this.unit.firstName);
+        console.log(this.unit.rankId);;
+        console.log();
+        console.log('');
+
+        console.log(this.unit.divisionId);
+        console.log(this.unit.positionId);
+
+        console.log('clearFields() end');
+        console.log('');
       });
   }
 
   clearFields(): void {
-    let lastNameInput = document.querySelector('#inputLastName');
-    let firstNameInput = document.querySelector('#inputFirstName');
-    let secondNameInput = document.querySelector('#inputSecondName');
-    // @ts-ignore
-    lastNameInput.value = '';
-    // @ts-ignore
-    firstNameInput.value = '';
-    // @ts-ignore
-    secondNameInput.value = '';
+
+
+    // let lastNameInput = document.querySelector('#inputLastName');
+    // let firstNameInput = document.querySelector('#inputFirstName');
+    // let secondNameInput = document.querySelector('#inputSecondName');
+    // // @ts-ignore
+    // lastNameInput.value = '';
+    // // @ts-ignore
+    // firstNameInput.value = '';
+    // // @ts-ignore
+    // secondNameInput.value = '';
   }
 }

@@ -23,5 +23,12 @@ namespace MilitaryManager.Units.API.Controllers
         {
             return Ok(await _positionService.GetAllPositionsAsync());
         }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetRank([FromRoute] int id)
+        {
+            return Ok(await _positionService.GetUnitsByIdAsync(id));
+        }
     }
 }

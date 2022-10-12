@@ -40,11 +40,10 @@ namespace MilitaryManager.Core.Services
 
         public async Task<DivisionDTO> GetDivisionByKeyAsync(int id)
         {
-            Specification<Division> specification = new Divisions.DivisionsList();
-            var division = await _divisionRepository.GetListBySpecAsync(specification);
-            var getDivision = division.FirstOrDefault(x => x.Id == id);
+            Specification<Division> specification = new Divisions.DivisionById(id);
+            var division = await _divisionRepository.GetFirstBySpecAsync(specification);
 
-            return _mapper.Map<DivisionDTO>(getDivision);
+            return _mapper.Map<DivisionDTO>(division);
         }
 
         public async Task<DivisionDTO> CreateDivisionAsync(DivisionDTO dto)

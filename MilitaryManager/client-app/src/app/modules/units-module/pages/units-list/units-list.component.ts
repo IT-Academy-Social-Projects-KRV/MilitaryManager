@@ -7,6 +7,9 @@ import {ClientConfigurationService} from "../../../../shared/services/core/clien
 import {TreeNode} from "primeng/api";
 import {BaseService} from "../../../../shared/services/core/base.service";
 import {UnitInfoComponent} from "../unit-info/unit-info.component";
+import {PositionService} from "../../../../shared/services/api/position.service";
+import {RankService} from "../../../../shared/services/api/rank.service";
+import {DivisionsService} from "../../../../shared/services/api/division.service";
 
 
 @Component({
@@ -20,7 +23,12 @@ export class UnitsListComponent implements OnInit {
 
   loading: boolean = false;
 
-  constructor(private unitsService: UnitsService,
+  constructor(
+    private unitsService: UnitsService,
+    private positionService: PositionService,
+    private rankService: RankService,
+    private divisionsService: DivisionsService,
+
               private clientConfigService: ClientConfigurationService) {
   }
 
@@ -57,7 +65,7 @@ export class UnitsListComponent implements OnInit {
 
   nodeSelect(event: any) {
     if (event.node) {
-      let unitInfo = new UnitInfoComponent(this.unitsService);
+      let unitInfo = new UnitInfoComponent(this.unitsService, this.positionService, this.rankService, this.divisionsService);
       unitInfo.getSelectedUnitDataById(event.node.id)
     }
   }

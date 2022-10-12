@@ -39,13 +39,10 @@ namespace MilitaryManager.Core.Helpers
                 .ForMember(dest => dest.PathSigned, opt => opt.MapFrom(src => src.SignedPdf.Path));
             CreateMap<Template, TemplateDTO>().ReverseMap();
             CreateMap<DivisionDTO, Division>().ReverseMap();
-            CreateMap<RankDTO, Rank>().ReverseMap();
             CreateMap<AttributeDTO, Attribute>().ReverseMap();
             CreateMap<EntityDTO, Entity>().ReverseMap();
             CreateMap<EntityToAttributeDTO, EntityToAttribute>().ReverseMap();
-            CreateMap<PositionDTO, Position>().ReverseMap();
             CreateMap<UnitToEquipmentDTO, UnitToEquipment>().ReverseMap();
-            CreateMap<ProfileDTO, Entities.ProfileEntity.Profile>().ReverseMap();
             CreateMap<Rank, RankDTO>().ReverseMap();
             CreateMap<Position, PositionDTO>().ReverseMap();
             CreateMap<Change, AuditDTO>()
