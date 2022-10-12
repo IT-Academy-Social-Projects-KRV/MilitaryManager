@@ -13,7 +13,7 @@ namespace MilitaryManager.Core.Entities.AuditEntities.ChangeEntity
             {
                 Query
                     .Where(x => x.Id == id)
-                    .Include(x => x.ChangeValue);
+                    .Include(x => x.ChangeValues);
             }
         }
     }

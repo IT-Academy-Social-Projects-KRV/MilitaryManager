@@ -15,6 +15,7 @@ namespace MilitaryManager.Core.Entities.UnitEntity
         public int Id { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
+        public string SecondName { get; set; }  
         public int? DivisionId { get; set; }
         public int RankId { get; set; }
         public int? ParentId { get; set; }
