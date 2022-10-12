@@ -49,7 +49,7 @@ export class FinishRegistrationComponent implements OnInit {
 
       this.useRedClass = false;
 
-      let unit: UnitModel = new UnitModel(0, this.lastname, this.firstname, this.selected_division._id,
+      let unit: UnitModel = new UnitModel(0, this.lastname, this.firstname, this.selected_division.id,
         this.selected_rank._id, this.selected_position._id,null);
       // unit = {
       //   firstName: this.firstname,
@@ -66,7 +66,6 @@ export class FinishRegistrationComponent implements OnInit {
           this.useRedClass = true;
         });
     }
-    
     else {
       this.useRedClass = true;
     }

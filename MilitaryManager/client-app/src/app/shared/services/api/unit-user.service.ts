@@ -13,7 +13,7 @@ export class UnitUserService extends BaseService<any>{
   constructor(
     private httpService : HttpService,
     configService : ClientConfigurationService) {
-    super(httpService, 'unitUser', configService, UnitUserModel, ServiceType.units);
+    super(httpService, 'UnitUser', configService, UnitUserModel, ServiceType.units);
   }
 
   GetUnitUser(id:string) {
