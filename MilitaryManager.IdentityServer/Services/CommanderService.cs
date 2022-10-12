@@ -50,8 +50,6 @@ namespace MilitaryManager.IdentityServer.Services
         {
             var userId = _httpContextAccessor.HttpContext.User.FindFirst("sub").Value;
 
-            // var userId = "5c0670e2-ab50-4a51-8de1-20eab251217c";
-
             var existingUser = await _userManager.FindByIdAsync(userId);
 
             if(existingUser != null)
