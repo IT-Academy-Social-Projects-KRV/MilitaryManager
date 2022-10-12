@@ -22,18 +22,18 @@ namespace MilitaryManager.Core.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<AuditDTO>> GetChangesListAsync()
+        public async Task<IEnumerable<ChangeDTO>> GetChangesListAsync()
         {
             var changes = await _auditRepository.GetAllAsync();
             
-            return _mapper.Map<IEnumerable<AuditDTO>>(changes);
+            return _mapper.Map<IEnumerable<ChangeDTO>>(changes);
         }
 
-        public async Task<AuditDTO> GetFullChangeInfoByKeyAsync(int id)
+        public async Task<ChangeDTO> GetFullChangeInfoByKeyAsync(int id)
         {
             var change = await _auditRepository.GetFirstBySpecAsync(new Changes.ChangeFullInfoById(id));
 
-            return _mapper.Map<AuditDTO>(change);
+            return _mapper.Map<ChangeDTO>(change);
         }
     }
 }

@@ -52,7 +52,7 @@ namespace MilitaryManager.Core.Services
             _documentExportFolder = "documents";
         }
 
-        public async Task<DecreeDTO> GenerateDecreeAsync(string wwwroot, int templateId, string name, string jsonData)
+        public async Task<DecreeDTO> GenerateDecreeAsync(string wwwroot, int templateId, string name, string number, string jsonData)
         {
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var template = await _templateRepository.GetByKeyAsync(templateId);
@@ -79,6 +79,7 @@ namespace MilitaryManager.Core.Services
             {
                 Name = name,
                 Path = path,
+                DecreeNumber = number,
                 CreatedBy = userId,
                 TimeStamp = DateTime.Now,
                 TemplateId = templateId,

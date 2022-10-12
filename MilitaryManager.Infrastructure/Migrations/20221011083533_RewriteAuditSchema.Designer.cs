@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MilitaryManager.Infrastructure.Data;
 
 namespace MilitaryManager.Infrastructure.Migrations
 {
     [DbContext(typeof(MilitaryManagerDbContext))]
-    partial class MilitaryManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221011083533_RewriteAuditSchema")]
+    partial class RewriteAuditSchema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,7 +157,7 @@ namespace MilitaryManager.Infrastructure.Migrations
                         },
                         new
                         {
-                            Name = "DivisionId",
+                            Name = "DivisionsId",
                             TableName = "Units"
                         },
                         new
@@ -170,7 +172,7 @@ namespace MilitaryManager.Infrastructure.Migrations
                         },
                         new
                         {
-                            Name = "PositionId",
+                            Name = "PositionsId",
                             TableName = "Units"
                         },
                         new
@@ -268,11 +270,6 @@ namespace MilitaryManager.Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)")
                         .HasMaxLength(450);
 
-                    b.Property<string>("DecreeNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(256)")
@@ -311,11 +308,6 @@ namespace MilitaryManager.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
-
-                    b.Property<string>("DivisionNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -580,22 +572,6 @@ namespace MilitaryManager.Infrastructure.Migrations
                             Path = "data/document_templates/template_01.xml",
                             Type = "Протокол"
                         });
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 2,
-                            Path = "data/document_templates/template_02.xml",
-                            Type = "Виплата"
-                        });
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 3,
-                            Path = "data/document_templates/template_03.xml",
-                            Type = "Переведення"
-                        });
                 });
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.UnitEntity.Unit", b =>
@@ -626,11 +602,6 @@ namespace MilitaryManager.Infrastructure.Migrations
 
                     b.Property<int>("RankId")
                         .HasColumnType("int");
-
-                    b.Property<string>("SecondName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 

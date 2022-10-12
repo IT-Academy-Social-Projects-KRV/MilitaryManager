@@ -19,7 +19,7 @@ namespace MilitaryManager.Core.Entities.AuditEntities.ChangeEntity
         public DateTime Date { get; set; }
         public char ChangeTypeCode { get; set; }
 
-        public ChangeValue ChangeValue { get; set; }
+        public ICollection<ChangeValue> ChangeValues { get; set; }
         public Table Table { get; set; }
         public ChangeType ChangeType { get; set; }
     }
