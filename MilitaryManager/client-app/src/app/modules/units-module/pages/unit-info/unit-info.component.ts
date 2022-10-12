@@ -56,13 +56,23 @@ export class UnitInfoComponent implements OnInit {
 
         console.log('clearFields() begin');
         console.log(this.unit.id);
-        console.log(this.unit.firstName);
-        console.log(this.unit.rankId);;
-        console.log();
-        console.log('');
+        // console.log(this.unit.firstName);
+        // console.log(this.unit.rankId);;
+        // console.log();
+        // console.log('');
+        //
+        // console.log(this.unit.divisionId);
+        // console.log(this.unit.positionId);
 
-        console.log(this.unit.divisionId);
-        console.log(this.unit.positionId);
+
+        console.log(this.unit.division);
+        console.log(this.unit.rank);
+        console.log(this.unit.position);
+        console.log(this.unit.parent)
+
+
+        console.log(this.unit.profiles);
+        console.log(this.unit.unitToEquipments);
 
         console.log('clearFields() end');
         console.log('');

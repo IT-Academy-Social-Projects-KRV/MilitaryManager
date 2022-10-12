@@ -1,8 +1,12 @@
-import { BaseModel } from "./base.model";
+import {BaseModel} from "./base.model";
+import {AttributeModel} from "./attribute.model";
+import {UnitModel} from "./unit.model";
 
 export class ProfileModel extends BaseModel {
-  public  UnitId: number | null = null;
-  public  GivenById: number | null = null;
-  public  DivisionId: number | null = null;
-  public  GivenDate: Date  | null = null;
+  public AttributeId: number | null = null;
+  public UnitId: number | null = null;
+  public Value: string | null = null;
+
+  public Attribute: AttributeModel;
+  public Unit: UnitModel;
 }
