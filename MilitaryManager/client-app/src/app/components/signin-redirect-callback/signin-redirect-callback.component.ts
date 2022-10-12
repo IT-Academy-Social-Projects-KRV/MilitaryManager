@@ -22,7 +22,9 @@ export class SigninRedirectCallbackComponent implements OnInit {
               console.log("home");
               this._router.navigate(['/'], { replaceUrl: true });
             }
-            this._router.navigateByUrl('finishRegistration');
+            else{
+              this._router.navigateByUrl('finishRegistration');
+            }
           }
           )
       })

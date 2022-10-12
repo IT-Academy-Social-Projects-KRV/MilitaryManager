@@ -48,14 +48,7 @@ export class FinishRegistrationComponent implements OnInit {
       || this.selected_rank == null || this.selected_division == null)) {
 
       this.useRedClass = false;
-      // unit = {
-      //   firstName: this.firstname,
-      //   lastName: this.lastname,
-      //   //middlename: this.middlename,
-      //   positionId: this.selected_position?.id,
-      //   rankId: this.selected_rank?.id,
-      //   divisionId: this.selected_division?._id
-      // };
+
       this._unitUserService.single.create(
         new UnitModel(0, this.lastname, this.firstname, this.middlename, this.selected_division.id,
         this.selected_rank._id, this.selected_position._id,null))

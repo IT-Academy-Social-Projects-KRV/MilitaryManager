@@ -37,6 +37,7 @@ namespace MilitaryManager.Core.Services
             var newUnit = await _unitService.CreateUnitAsync(unit);
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var newUnitUser = await _unitUserRepository.AddAsync(new UnitUser { Id = newUnit.Id, UserId = userId });
+            await _unitUserRepository.SaveChangesAcync();
 
             return newUnitUser;
         }
