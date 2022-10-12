@@ -1,14 +1,12 @@
 ﻿using MilitaryManager.Core.Entities.AuditEntities.ChangeEntity;
 using MilitaryManager.Core.Entities.AuditEntities.ColumnEntity;
-using System;
-using System.Collections.Generic;
+using MilitaryManager.Core.Interfaces;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace MilitaryManager.Core.Entities.AuditEntities.ChangeValueEntity
 {
     [Table("ChangeValue", Schema = "audit")]
-    public class ChangeValue
+    public class ChangeValue : IBaseEntity<int>
     {
         public int Id { get; set; }
         public int ChangeId { get; set; }

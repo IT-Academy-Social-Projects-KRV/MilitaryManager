@@ -21,4 +21,12 @@ export class LogComponent implements OnInit {
       this.logService.collection.getAll().subscribe(logs => this.logs = logs);
     });
   }
+
+  onClick(event: any) {
+    if (event.id) {
+      this.logService.collection.getListById(event.id).subscribe((logValues) => {
+        event.changeValues = logValues;
+      });
+    }
+  }
 }
