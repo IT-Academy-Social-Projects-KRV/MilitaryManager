@@ -19,11 +19,11 @@ namespace MilitaryManager.IdentityServer.Controllers
         private readonly CommanderService _commanderService;
 
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public CommanderController(UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor)
+        public CommanderController(UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor, CommanderService commanderService)
         {
             _userManager = userManager;
             _httpContextAccessor = httpContextAccessor;
-            _commanderService = new CommanderService(_userManager, _httpContextAccessor);
+            _commanderService = commanderService;
         }
 
         [HttpPost]

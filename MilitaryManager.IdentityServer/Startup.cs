@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MilitaryManager.IdentityServer.Services;
 
 namespace MilitaryManager.IdentityServer
 {
@@ -52,6 +53,7 @@ namespace MilitaryManager.IdentityServer
                 .AddAspNetIdentity<ApplicationUser>();
             services.AddLocalApiAuthentication();
             services.AddAuthorization();
+            services.AddTransient<CommanderService>();
             // services.AddRazorPages();
 
             //services.AddIdentity<ApplicationUser, IdentityRole>()

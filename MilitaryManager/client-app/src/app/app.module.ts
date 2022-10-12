@@ -28,7 +28,7 @@ import { AddCommanderComponent } from './components/add-commander/add-commander.
     BrowserModule,
     AppRoutingModule,
     PrimeNgComponentsModule,
-    AppLayoutModule,
+    AppLayoutModule
   ],
   providers: [
     services,

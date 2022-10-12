@@ -7,9 +7,9 @@ export class SubUnitCommanderGuard implements CanActivate {
   constructor(private _identityService : IdentityService) {
   }
   canActivate() {
-    return this.getRole();
+    return this.isSubUnitCommander();
   }
-  getRole() : Promise<boolean> {
+  isSubUnitCommander() : Promise<boolean> {
     return new Promise((resolve, reject) =>
     {
       this._identityService.single.get().subscribe( (data:any) => {
@@ -17,6 +17,7 @@ export class SubUnitCommanderGuard implements CanActivate {
           resolve(true);
         } else {
           alert("Немає прав");
+          resolve(false);
         }
       });
     });

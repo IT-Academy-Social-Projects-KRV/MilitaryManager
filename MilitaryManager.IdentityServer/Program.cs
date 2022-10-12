@@ -40,7 +40,7 @@ namespace MilitaryManager.IdentityServer
                     var result = userManager.CreateAsync(user, PASSWORD).Result;
                     if (result.Succeeded)
                     {
-                       var creatingResult =  userManager.AddToRoleAsync(user, "Admin").Result;
+                       userManager.AddToRoleAsync(user, "Admin").Wait();
                     }
                 }
             }
