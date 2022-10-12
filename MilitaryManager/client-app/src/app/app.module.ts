@@ -22,7 +22,7 @@ import { AddCommanderComponent } from './components/add-commander/add-commander.
     SigninRedirectCallbackComponent,
     SignoutRedirectCallbackComponent,
     HomeComponent,
-    AddCommanderComponent,
+    AddCommanderComponent
   ],
   imports: [
     BrowserModule,
