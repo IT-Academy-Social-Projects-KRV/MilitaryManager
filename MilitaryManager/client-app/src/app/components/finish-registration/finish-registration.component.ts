@@ -9,6 +9,8 @@ import { RankService } from 'src/app/shared/services/api/rank.service';
 import { MessageService } from 'primeng/api';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UnitModel } from 'src/app/shared/models/unit.model';
+import { delay, timeout } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-finish-registration',
@@ -34,7 +36,8 @@ export class FinishRegistrationComponent implements OnInit {
     private _divisionsService: DivisionsService,
     private _positionService: PositionService,
     private _rankService: RankService,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private _router: Router) { }
 
   ngOnInit(): void {
     console.log(this._divisionsService.GetAllDivisions())
@@ -53,7 +56,10 @@ export class FinishRegistrationComponent implements OnInit {
         new UnitModel(0, this.lastname, this.firstname, this.middlename, this.selected_division.id,
         this.selected_rank._id, this.selected_position._id,null))
         .subscribe(
-        data => this.messageService.add({ severity: 'success', summary: 'Дані оновлено!'}),
+        data => {
+          this.messageService.add({ severity: 'success', summary: 'Дані оновлено!'});
+          setTimeout(() => {this._router.navigate(['/'], { replaceUrl: true })}, 2000);
+        },
         error => {
           this.messageService.add({ severity: 'error', summary: 'Помилка оновлення даних!',detail: String((error as HttpErrorResponse).error).split('\n')[0] });
           this.useRedClass = true;
