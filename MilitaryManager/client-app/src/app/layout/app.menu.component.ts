@@ -34,6 +34,13 @@ export class AppMenuComponent implements OnInit {
                 ]
             },
             {
+              label: 'Підрозділи',
+              items: [
+                { label: 'Підрозділи', icon: 'pi pi-fw pi-users', routerLink: ['/divisions/list'] },
+                { label: 'Додати підрозділ', icon: 'pi pi-fw pi-user-plus', routerLink: ['/divisions/edit'] }
+              ]
+            },
+            {
                 label: 'Накази',
                 items: [
                     { label: 'Накази', icon: 'pi pi-fw pi-book', routerLink: ['/']},

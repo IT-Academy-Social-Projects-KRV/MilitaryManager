@@ -4,16 +4,20 @@ using MilitaryManager.IdentityServer.Models;
 using System.Linq;
 using System.Threading.Tasks;
 using System;
+using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 
 namespace MilitaryManager.IdentityServer.Services
 {
     public class CommanderService
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public CommanderService(UserManager<ApplicationUser> userManager)
+        public CommanderService(UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
+            _httpContextAccessor = httpContextAccessor;
         }
         public async Task<ApplicationUser> RegisterCommander(CreateUserData userData )
         {
@@ -40,6 +44,22 @@ namespace MilitaryManager.IdentityServer.Services
             await _userManager.AddToRoleAsync(user, userData.Role);
 
             return user;
+        }
+
+        public async Task<IEnumerable<string>> GetRoleAsync()
+        {
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst("sub").Value;
+
+            var existingUser = await _userManager.FindByIdAsync(userId);
+
+            if(existingUser != null)
+            {
+                var role = await _userManager.GetRolesAsync(existingUser);
+
+                return role;
+            }
+
+            return null;
         }
     }
 }

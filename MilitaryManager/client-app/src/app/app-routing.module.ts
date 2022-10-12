@@ -7,7 +7,10 @@ import { Test2Component } from './components/test2/test2.component';
 import { HomeComponent } from './components/home/home.component';
 import { AppLayoutComponent } from './layout/app.layout.component';
 import { AddCommanderComponent } from './components/add-commander/add-commander.component';
-import {ProfileComponent} from "./components/profile/profile/profile.component";
+import  { AdminGuard } from './guards/AdminGuard'
+import { UnitCommanderGuard } from './guards/UnitCommanderGuard'
+import { SubUnitCommanderGuard } from './guards/SubUnitCommanderGuard'
+import { ProfileComponent } from "./components/profile/profile/profile.component";
 
 const routes: Routes = [
     {path:'', component:AppLayoutComponent,
@@ -16,8 +19,9 @@ const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'test1', component: Test1Component },
     { path: 'test2', component: Test2Component },
-    { path: 'addCommander', component: AddCommanderComponent },
+    { path: 'addCommander', component: AddCommanderComponent, canActivate: [AdminGuard] },
     { path: 'units', loadChildren: () => import("./modules/units-module/units.module").then(m => m.UnitsModule) },
+    { path: 'divisions', loadChildren: () => import("./modules/division-module/division.module").then(m => m.DivisionModule) },
     { path: 'SignInCallback', component: SigninRedirectCallbackComponent },
     { path: 'SignOutCallback', component: SignoutRedirectCallbackComponent },
     { path: 'profile', component: ProfileComponent },
@@ -26,6 +30,7 @@ const routes: Routes = [
   ];
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
+    providers: [AdminGuard, UnitCommanderGuard, SubUnitCommanderGuard]
 })
 export class AppRoutingModule { }

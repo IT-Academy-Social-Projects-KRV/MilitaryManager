@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MilitaryManager.Core.Services
+namespace MilitaryManager.Core.Services.StoreService
 {
     public interface IStoreService
     {

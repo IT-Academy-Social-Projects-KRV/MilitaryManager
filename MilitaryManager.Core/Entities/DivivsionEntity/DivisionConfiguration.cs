@@ -16,6 +16,11 @@ namespace MilitaryManager.Core.Entities.DivisionEntity
                 .IsRequired();
 
             builder
+                .Property(x => x.DivisionNumber)
+                .HasMaxLength(20)
+                .IsRequired();
+
+            builder
                 .Property(x => x.Address)
                 .HasMaxLength(50)
                 .IsRequired();
