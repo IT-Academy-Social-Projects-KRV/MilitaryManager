@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {LogModel} from 'src/app/shared/models/log.model';
-import {UnitsService} from "../../shared/services/api/unit.service";
-import {ClientConfigurationService} from "../../shared/services/core/client-configuration.service";
+import {ChangeModel} from 'src/app/shared/models/change.model';
 import {LogService} from "../../shared/services/api/log.service";
 
 @Component({
@@ -11,7 +9,7 @@ import {LogService} from "../../shared/services/api/log.service";
 })
 export class LogComponent implements OnInit {
 
-  logs: LogModel[] = [];
+  logs: ChangeModel[] = [];
 
   loading: boolean = false;
 
@@ -23,20 +21,4 @@ export class LogComponent implements OnInit {
       this.logService.collection.getAll().subscribe(logs => this.logs = logs);
     });
   }
-
-/*
-  nodeExpand(event: any) {
-    if (event.node) {
-      this.logService.collection.getListById(event.node.id).subscribe((units) => {
-        units.forEach( (unit) => {
-          unit.label = `${unit.lastName} ${unit.firstName}`;
-          unit.expandedIcon = "pi pi-user-minus";
-          unit.collapsedIcon = "pi pi-user-plus";
-          unit.leaf = false;
-        })
-        event.node.children = units;
-      });
-    }
-  }
-  */
 }

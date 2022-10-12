@@ -4,24 +4,38 @@
     <ng-template pTemplate="header">
       <tr>
         <th>Id</th>
-        <th>UserId</th>
         <th>TableName</th>
         <th>ColumnName</th>
+        <th>Date</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-logs>
       <tr>
         <td>{{logs.id}}</td>
-        <td>{{logs.userId}}</td>
         <td>{{logs.tableName}}</td>
         <td>{{logs.columnName}}</td>
+        <td>{{logs.date}}</td>
       </tr>
     </ng-template>
-    <ng-template pTemplate="paginatorleft">
-      <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
-    </ng-template>
-    <ng-template pTemplate="paginatorright">
-      <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+    <ng-template pTemplate="rowexpansion" let-logsValue>
+      <p-table [value]="logsValue.changeValues" dataKey="id">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Id</th>
+            <th>OldValue</th>
+            <th>NewValue</th>
+            <th>ColumnName</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-changeValue>
+          <tr>
+            <td>{{changeValue.id}}</td>
+            <td>{{changeValue.oldValue}}</td>
+            <td>{{changeValue.newValue}}</td>
+            <td>{{changeValue.columnName}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
     </ng-template>
   </p-table>
 </div>
