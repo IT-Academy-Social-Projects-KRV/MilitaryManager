@@ -38,7 +38,7 @@ export class DecreeAddComponent implements OnInit {
           firstName: element.soldier?.firstName,
           secondName: element.soldier?.secondName,
           currentDate: dateFormatter.format(new Date(element.currentDate!)),
-          //unitNumber: element.soldier?.division?.divisionNumber,
+          unitNumber: element.soldier?.division?.divisionNumber,
           decreeNumber: element.decreeNumber
         };
         this.decreeService.single.create(decreeInformation).subscribe({});
@@ -52,7 +52,7 @@ export class DecreeAddComponent implements OnInit {
         newDecree.soldier = soldier;
         newDecree.payOff = false;
         newDecree.action = this.templateType;
-        newDecree.decreeNumber = "";
+        newDecree.decreeNumber = null;
         newDecree.currentDate = new Date();
         this.decrees.push(newDecree);
       }
@@ -74,10 +74,10 @@ export class DecreeAddComponent implements OnInit {
 
     onRowEditSave(attachment: AttachmentModel, index: number) {
         if (attachment.id!=null) {
-          if(attachment.decreeNumber!=null)
+          if(attachment.decreeNumber == null)
             {
               this.onRowEditCancel(attachment, index);
-              this.messageService.add({severity:'error', summary: 'Виникла помилка', detail:'Зміни не внесено'});
+              this.messageService.add({severity:'error', summary: 'Виникла помилка', detail:'Введіть номер наказу'});
             }
             else
             {
@@ -97,7 +97,7 @@ export class DecreeAddComponent implements OnInit {
 
     ngOnInit() {
       setTimeout(() => {
-        this.unitsService.collection.getAll()
+        this.unitsService.getAll()
           .subscribe((units) => {
             this.units = units.map((unit: any) => {
               return {
