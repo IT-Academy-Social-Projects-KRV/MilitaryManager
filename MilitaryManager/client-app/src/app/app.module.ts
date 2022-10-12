@@ -22,7 +22,7 @@ import { AddCommanderComponent } from './components/add-commander/add-commander.
     SigninRedirectCallbackComponent,
     SignoutRedirectCallbackComponent,
     HomeComponent,
-    AddCommanderComponent,
+    AddCommanderComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +32,7 @@ import { AddCommanderComponent } from './components/add-commander/add-commander.
   ],
   providers: [
     services,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })
