@@ -20,7 +20,7 @@ export class FinishRegistrationComponent implements OnInit {
   useRedClass: boolean = false;
   firstname: string | null = null;
   lastname: string | null = null;
-  middlename?: string;
+  middlename?: string | null = null;
 
   divisions: DivisionModel[] = [];
   positions: PositionModel[] = [];
@@ -48,9 +48,6 @@ export class FinishRegistrationComponent implements OnInit {
       || this.selected_rank == null || this.selected_division == null)) {
 
       this.useRedClass = false;
-
-      let unit: UnitModel = new UnitModel(0, this.lastname, this.firstname, this.selected_division.id,
-        this.selected_rank._id, this.selected_position._id,null);
       // unit = {
       //   firstName: this.firstname,
       //   lastName: this.lastname,
@@ -59,7 +56,10 @@ export class FinishRegistrationComponent implements OnInit {
       //   rankId: this.selected_rank?.id,
       //   divisionId: this.selected_division?._id
       // };
-      this._unitUserService.single.create(unit).subscribe(
+      this._unitUserService.single.create(
+        new UnitModel(0, this.lastname, this.firstname, this.middlename, this.selected_division.id,
+        this.selected_rank._id, this.selected_position._id,null))
+        .subscribe(
         data => this.messageService.add({ severity: 'success', summary: 'Дані оновлено!'}),
         error => {
           this.messageService.add({ severity: 'error', summary: 'Командира не створено!', detail: String((error as HttpErrorResponse).error)});
