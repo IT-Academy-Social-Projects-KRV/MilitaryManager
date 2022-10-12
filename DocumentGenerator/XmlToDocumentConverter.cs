@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Xml;
 using DocumentGenerator.DataObjects;
 using DocumentGenerator.Interfaces;
@@ -59,22 +60,25 @@ namespace DocumentGenerator
         {
             var trimMargins = new TrimMargins
             {
-                Bottom = 80,
-                Left = 80,
-                Top = 20,
-                Right = 20
+                Bottom = 56.6929, // 20mm (= 56.6929pt)
+                Left = 85.0394, // 30mm
+                Top = 56.6929, // 20mm
+                Right = 42.5197 // 15mm
             };
 
-            var docNode = xmlDoc.FirstChild.Name == "documnet" ? xmlDoc.FirstChild : null;
+            var docNode = xmlDoc.FirstChild.Name == "document" ? xmlDoc.FirstChild : null;
             var attributes = docNode?.Attributes;
             if (attributes != null)
             {
                 var bottomAttribute = docNode.Attributes?["bottom"];
                 if (bottomAttribute != null) trimMargins.Bottom = Convert.ToInt32(bottomAttribute.Value);
+
                 var leftAttribute = docNode.Attributes?["left"];
                 if (leftAttribute != null) trimMargins.Left = Convert.ToInt32(leftAttribute.Value);
+
                 var topAttribute = docNode.Attributes?["top"];
                 if (topAttribute != null) trimMargins.Top = Convert.ToInt32(topAttribute.Value);
+
                 var rightAttribute = docNode.Attributes?["right"];
                 if (rightAttribute != null) trimMargins.Right = Convert.ToInt32(rightAttribute.Value);
             }
@@ -100,8 +104,10 @@ namespace DocumentGenerator
         {
             var docName = DateTime.Now.Ticks.ToString();
             var xml = GetXmlTemplate(data.Template);
+
+            var docPath = Path.Combine(path, docName);
             var documentGenerator =
-                _documentGeneratorFactory.CreateDocumentGenerator(type, $"{path}\\{docName}",
+                _documentGeneratorFactory.CreateDocumentGenerator(type, docPath,
                     GetDocumentParameters(xml));
 
             var nodeParser = _nodeParserFactory.CreateNodeParser(data.JsonData);
@@ -111,6 +117,24 @@ namespace DocumentGenerator
             documentGenerator.SaveDocument();
             return $"{docName}.pdf";
         }
+
+		public byte[] CreateDocumentFile(DocumentType type, string path, IDocumentData data)
+		{
+			var docName = DateTime.Now.Ticks.ToString();
+			var xml = GetXmlTemplate(data.Template);
+			var documentGenerator =
+				_documentGeneratorFactory.CreateDocumentGenerator(type, $"{path}\\{docName}",
+					GetDocumentParameters(xml));
+
+			var nodeParser = _nodeParserFactory.CreateNodeParser(data.JsonData);
+
+			foreach (XmlNode node in xml.FirstChild.ChildNodes)
+			{
+				nodeParser.ParseNode(documentGenerator, node);
+			}
+
+			return documentGenerator.SaveDocumentFile();
+		}
 
         #endregion
     }

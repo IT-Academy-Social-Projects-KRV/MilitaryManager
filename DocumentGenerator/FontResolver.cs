@@ -62,11 +62,9 @@ namespace DocumentGenerator
             {
                 case "Times#":
                     return LoadFontData("times.ttf");
-                    ;
 
                 case "Times#b":
                     return LoadFontData("timesbd.ttf");
-                    ;
 
                 case "Times#i":
                     return LoadFontData("timesi.ttf");
@@ -89,7 +87,8 @@ namespace DocumentGenerator
         {
             try
             {
-                using (var stream = new FileStream($"{_rootPath}\\fonts\\{name}", FileMode.Open, FileAccess.Read))
+                var path = Path.Combine(_rootPath, "fonts", name);
+                using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
                 {
                     var count = (int)stream.Length;
                     var data = new byte[count];

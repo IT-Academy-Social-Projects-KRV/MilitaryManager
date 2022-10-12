@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using DocumentGenerator.DataObjects;
 using DocumentGenerator.Interfaces;
 using PdfSharpCore.Drawing;
@@ -84,7 +85,7 @@ namespace DocumentGenerator
 
         public void AddTitle(string text)
         {
-            AddTextBlock(text, fontStyle: XFontStyle.Bold);
+            AddTextBlock(text);
         }
 
         public void AddTextBlock(string text, int fontSize = 14, XFontStyle fontStyle = XFontStyle.Regular,
@@ -105,11 +106,20 @@ namespace DocumentGenerator
             _activeTopPosition += height;
         }
 
-        public void SaveDocument()
-        {
-            _document.Save($"{_path}.pdf");
-        }
+		public void SaveDocument()
+		{
+			_document.Save($"{_path}.pdf");
+		}
 
-        #endregion
-    }
+		public byte[] SaveDocumentFile()
+		{
+			using (var ms = new MemoryStream())
+			{
+				_document.Save(ms);
+				return ms.ToArray();
+			}
+		}
+
+		#endregion
+	}
 }

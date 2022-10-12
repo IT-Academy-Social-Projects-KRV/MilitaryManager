@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using MilitaryManager.Core.Services;
+using MilitaryManager.Core.Services.StoreService;
 using System;
 using System.Collections.Generic;
 using System.IO;
