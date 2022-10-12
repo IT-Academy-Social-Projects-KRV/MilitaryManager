@@ -131,6 +131,16 @@ namespace MilitaryManager.Infrastructure.Migrations
                 columns: new[] { "Id", "Path", "Type" },
                 values: new object[] { 1, "data/document_templates/template_01.xml", "Протокол" });
 
+            migrationBuilder.InsertData(
+                table: "Templates",
+                columns: new[] { "Id", "Path", "Type" },
+                values: new object[] { 2, "data/document_templates/template_02.xml", "Виплата" });
+
+            migrationBuilder.InsertData(
+                table: "Templates",
+                columns: new[] { "Id", "Path", "Type" },
+                values: new object[] { 3, "data/document_templates/template_03.xml", "Переведення" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Decrees_StatusId",
                 table: "Decrees",

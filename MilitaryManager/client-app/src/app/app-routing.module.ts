@@ -19,6 +19,7 @@ const routes: Routes = [
     { path: 'test1', component: Test1Component },
     { path: 'test2', component: Test2Component },
     { path: 'addCommander', component: AddCommanderComponent, canActivate: [AdminGuard] },
+    { path: 'decree', loadChildren: () => import("./modules/attachments-module/attachments.module").then(m => m.AttachmentsModule) },
     { path: 'units', loadChildren: () => import("./modules/units-module/units.module").then(m => m.UnitsModule) },
     { path: 'divisions', loadChildren: () => import("./modules/division-module/division.module").then(m => m.DivisionModule) },
     { path: 'SignInCallback', component: SigninRedirectCallbackComponent },
