@@ -8,9 +8,9 @@ namespace MilitaryManager.Core.DTO.Divisions
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string DivisionNumber { get; set; }
         public string Address { get; set; }
         public int? ParentId { get; set; }
-
         public DivisionDTO Parent { get; set; }
 
         public List<DivisionDTO> SubDivisions { get; set; }

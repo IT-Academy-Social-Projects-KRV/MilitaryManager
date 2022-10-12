@@ -51,7 +51,7 @@ BEGIN
 		SELECT @tablename, i.Id, CURRENT_TIMESTAMP, 'U'
 		FROM inserted as i;
 
-	IF(UPDATE(FirstName))
+	IF((SELECT FirstName FROM inserted) != (SELECT FirstName FROM deleted))
 	BEGIN
 		INSERT INTO audit.ChangeValue
 			SELECT t.ChangeId, d.FirstName, i.FirstName, 'FirstName'
@@ -59,7 +59,7 @@ BEGIN
 				JOIN deleted as d ON i.Id = d.Id
 				JOIN @Temp as t ON t.RowId = d.Id
 	END;
-	IF(UPDATE(LastName))
+	IF((SELECT LastName FROM inserted) != (SELECT LastName FROM deleted))
 	BEGIN
 		INSERT INTO audit.ChangeValue
 			SELECT t.ChangeId, d.LastName, i.LastName, 'LastName'
@@ -67,15 +67,15 @@ BEGIN
 				JOIN deleted as d ON i.Id = d.Id
 				JOIN @Temp as t ON t.RowId = d.Id
 	END;
-	IF(UPDATE(ParentId))
+	IF((SELECT ParentId FROM inserted) != (SELECT ParentId FROM deleted))
 	BEGIN
 		INSERT INTO audit.ChangeValue
-			SELECT t.ChangeId, d.ParentId, i.ParentId, 'ParentId'
+			SELECT t.ChangeId, d.ParentId, i.ParentId, 'UnitParentId'
 			FROM inserted as i
 				JOIN deleted as d ON i.Id = d.Id
 				JOIN @Temp as t ON t.RowId = d.Id		
 	END;
-	IF(UPDATE(DivisionId))
+	IF((SELECT DivisionId FROM inserted) != (SELECT DivisionId FROM deleted))
 	BEGIN
 		INSERT INTO audit.ChangeValue
 			SELECT t.ChangeId, d.DivisionId, i.DivisionId, 'DivisionId'
@@ -83,7 +83,7 @@ BEGIN
 				JOIN deleted as d ON i.Id = d.Id
 				JOIN @Temp as t ON t.RowId = d.Id
 	END;
-	IF(UPDATE(RankId))
+	IF((SELECT RankId FROM inserted) != (SELECT RankId FROM deleted))
 	BEGIN
 		INSERT INTO audit.ChangeValue
 			SELECT t.ChangeId, d.RankId, i.RankId, 'RankId'
@@ -91,7 +91,7 @@ BEGIN
 				JOIN deleted as d ON i.Id = d.Id
 				JOIN @Temp as t ON t.RowId = d.Id
 	END;
-	IF(UPDATE(PositionId))
+	IF((SELECT PositionId FROM inserted) != (SELECT PositionId FROM deleted))
 	BEGIN
 		INSERT INTO audit.ChangeValue
 			SELECT t.ChangeId, d.PositionId, i.PositionId, 'PositionId'
@@ -152,7 +152,7 @@ BEGIN
 		SELECT @tablename, i.Id, CURRENT_TIMESTAMP, 'U'
 		FROM inserted as i;
 
-	IF(UPDATE([Name]))
+	IF((SELECT [Name] FROM inserted) != (SELECT [Name] FROM deleted))
 	BEGIN
 		INSERT INTO audit.ChangeValue
 			SELECT t.ChangeId, d.[Name], i.[Name], 'Name'
@@ -160,7 +160,7 @@ BEGIN
 				JOIN deleted as d ON i.Id = d.Id
 				JOIN @Temp as t ON t.RowId = d.Id
 	END;
-	IF(UPDATE([Address]))
+	IF((SELECT [Address] FROM inserted) != (SELECT [Address] FROM deleted))
 	BEGIN
 		INSERT INTO audit.ChangeValue
 			SELECT t.ChangeId, d.[Address], i.[Address], 'Address'
@@ -168,10 +168,10 @@ BEGIN
 				JOIN deleted as d ON i.Id = d.Id
 				JOIN @Temp as t ON t.RowId = d.Id
 	END;
-	IF(UPDATE(ParentId))
+	IF((SELECT ParentId FROM inserted) != (SELECT ParentId FROM deleted))
 	BEGIN
 		INSERT INTO audit.ChangeValue
-			SELECT t.ChangeId, d.ParentId, i.ParentId, 'ParentId'
+			SELECT t.ChangeId, d.ParentId, i.ParentId, 'UnitParentId'
 			FROM inserted as i
 				JOIN deleted as d ON i.Id = d.Id
 				JOIN @Temp as t ON t.RowId = d.Id		

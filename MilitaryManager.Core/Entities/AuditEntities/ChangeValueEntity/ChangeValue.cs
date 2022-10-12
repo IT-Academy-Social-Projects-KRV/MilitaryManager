@@ -10,6 +10,7 @@ namespace MilitaryManager.Core.Entities.AuditEntities.ChangeValueEntity
     [Table("ChangeValue", Schema = "audit")]
     public class ChangeValue
     {
+        public int Id { get; set; }
         public int ChangeId { get; set; }
         public object OldValue { get; set; }
         public object NewValue { get; set; }
