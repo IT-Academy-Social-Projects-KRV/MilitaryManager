@@ -51,7 +51,8 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Адміністратор',
                 items: [
-                    { label: 'Додати командира', icon: 'pi pi-user-plus', routerLink: ['/addCommander'] }
+                    { label: 'Додати командира', icon: 'pi pi-user-plus', routerLink: ['/addCommander'] },
+                    { label: 'Історія змін', icon: 'pi pi-fw pi-users', routerLink: ['/logs'] }
                 ]
             }
         ];

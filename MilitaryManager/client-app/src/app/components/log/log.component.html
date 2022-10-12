@@ -1,0 +1,27 @@
+<div class="card">
+  <p-table [value]="logs" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
+           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Id</th>
+        <th>UserId</th>
+        <th>TableName</th>
+        <th>ColumnName</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-logs>
+      <tr>
+        <td>{{logs.id}}</td>
+        <td>{{logs.userId}}</td>
+        <td>{{logs.tableName}}</td>
+        <td>{{logs.columnName}}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="paginatorleft">
+      <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+    </ng-template>
+    <ng-template pTemplate="paginatorright">
+      <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+    </ng-template>
+  </p-table>
+</div>

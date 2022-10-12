@@ -7,6 +7,7 @@ import { Test2Component } from './components/test2/test2.component';
 import { HomeComponent } from './components/home/home.component';
 import { AppLayoutComponent } from './layout/app.layout.component';
 import { AddCommanderComponent } from './components/add-commander/add-commander.component';
+import {LogComponent} from "./components/log/log.component";
 
 const routes: Routes = [
     {path:'', component:AppLayoutComponent,
@@ -16,6 +17,7 @@ const routes: Routes = [
     { path: 'test1', component: Test1Component },
     { path: 'test2', component: Test2Component },
     { path: 'addCommander', component: AddCommanderComponent },
+    { path: 'logs', component: LogComponent },
     { path: 'units', loadChildren: () => import("./modules/units-module/units.module").then(m => m.UnitsModule) },
     { path: 'divisions', loadChildren: () => import("./modules/division-module/division.module").then(m => m.DivisionModule) },
     { path: 'SignInCallback', component: SigninRedirectCallbackComponent },
