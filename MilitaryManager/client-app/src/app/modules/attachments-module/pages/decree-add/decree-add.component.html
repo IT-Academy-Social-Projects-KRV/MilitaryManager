@@ -19,10 +19,11 @@
             <ng-template pTemplate="header">
                 <tr>
                     <th scope="col" style='width:30%'>Боєць</th>
-                    <th scope="col" style='width:30%'>Підстава</th> 
+                    <th scope="col" style='width:20%'>Підстава</th> 
                     <th scope="col" style='width:20%'>Дата</th>
+                    <th scope="col" style='width:20%'>Номер наказу</th>
                     <th scope="col" style='width:20%'>Виплата</th>
-                    <th scope="col" style="width:8rem"></th>
+                    <th scope="col" style="width:4rem"></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-decree let-editing="editing" let-ri="rowIndex">
@@ -39,7 +40,7 @@
                             </ng-template>
                         </p-cellEditor>
                     </td>
-                    <td style='width:30%'>
+                    <td style='width:20%'>
                         <p-cellEditor>
                             <ng-template pTemplate="input">
                                 <input pInputText type="text" [(ngModel)]="decree.action">
@@ -60,10 +61,20 @@
                         </p-cellEditor>
                     </td>
                     <td style='width:20%'>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" [(ngModel)]="decree.decreeNumber">
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{decree.decreeNumber}}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td style='width:20%'>
                         <ng-template pTemplate="input"></ng-template>
                         <input p-tableCheckbox type="checkbox"  [(ngModel)]="decree.payOff">
                     </td>
-                    <td style="width:8rem">
+                    <td style="width:4rem">
                         <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(decree)" class="p-button-rounded p-button-text"></button>
                         <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(decree, ri)" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
                         <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(decree, ri)" class="p-button-rounded p-button-text p-button-danger"></button>

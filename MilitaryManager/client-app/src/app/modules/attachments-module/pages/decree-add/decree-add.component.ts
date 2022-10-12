@@ -16,7 +16,7 @@ export class DecreeAddComponent implements OnInit {
   decrees: AttachmentModel[]=[];
   units: UnitModel[]= [];
   selectedUnit: UnitModel = new UnitModel(null);
-  templateId: number|null=null;
+  templateId: number | null = null;
   templateType: string | null = null;
 
     clonedDecrees: { [s: string]: AttachmentModel; } = {};
@@ -36,8 +36,10 @@ export class DecreeAddComponent implements OnInit {
           decreeName: `${this.templateType} від ${dateFormatter.format(new Date(element.currentDate!))}`,
           lastName: element.soldier?.lastName,
           firstName: element.soldier?.firstName,
+          secondName: element.soldier?.secondName,
           currentDate: dateFormatter.format(new Date(element.currentDate!)),
-          unitNumber: element.soldier?.divisionId
+          //unitNumber: element.soldier?.division?.divisionNumber,
+          decreeNumber: element.decreeNumber
         };
         this.decreeService.single.create(decreeInformation).subscribe({});
       }
@@ -50,6 +52,7 @@ export class DecreeAddComponent implements OnInit {
         newDecree.soldier = soldier;
         newDecree.payOff = false;
         newDecree.action = this.templateType;
+        newDecree.decreeNumber = "";
         newDecree.currentDate = new Date();
         this.decrees.push(newDecree);
       }
@@ -59,8 +62,9 @@ export class DecreeAddComponent implements OnInit {
       let editAttachment = new AttachmentModel(attachment.id)
       editAttachment.soldier = attachment.soldier
       editAttachment.action = attachment.action
+      editAttachment.decreeNumber = attachment.decreeNumber
       editAttachment.currentDate = attachment.currentDate
-      editAttachment.payOff= attachment.payOff;
+      editAttachment.payOff = attachment.payOff;
 
       if(editAttachment.id!=null)
       {
@@ -70,7 +74,7 @@ export class DecreeAddComponent implements OnInit {
 
     onRowEditSave(attachment: AttachmentModel, index: number) {
         if (attachment.id!=null) {
-          if(attachment.action=="")
+          if(attachment.decreeNumber!=null)
             {
               this.onRowEditCancel(attachment, index);
               this.messageService.add({severity:'error', summary: 'Виникла помилка', detail:'Зміни не внесено'});
@@ -98,7 +102,7 @@ export class DecreeAddComponent implements OnInit {
             this.units = units.map((unit: any) => {
               return {
                 ...unit,
-                displayLabel: unit.lastName + ' ' + unit.firstName + ' ' ,
+                displayLabel: unit.lastName + ' ' + unit.firstName + ' ' + unit.secondName,
               };
             });
       });

@@ -35,6 +35,8 @@ export class DecreeNewComponent implements OnInit {
       {
         const target: ViewContainerRef = this.targets.toArray()[this.tabs.length - 1];
         this.componentRef = target.createComponent(DecreeAddComponent);
+        this.componentRef.instance.templateId=id;
+        this.componentRef.instance.templateType=type;
       }
     }, 1)    
   }
