@@ -1,6 +1,8 @@
 import { HttpErrorResponse, HttpEventType, HttpResponse } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ComponentRef, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { Table } from 'primeng/table';
+import { DecreeModel } from 'src/app/shared/models/decree.model';
 import { ApiService } from 'src/app/shared/services/api/api.service';
 
 @Component({
@@ -10,26 +12,18 @@ import { ApiService } from 'src/app/shared/services/api/api.service';
 })
 export class DecreeListComponent implements OnInit {
 
-  //@ts-ignore
-  decrees: DecreeModel[];
-  //@ts-ignore
-  decree: DecreeModel;
-  //@ts-ignore
-  tabs: string[] = []
-  currentTab: number = 0;
+  decrees: DecreeModel[] = [];
+  decree!: DecreeModel;
   isUploading: boolean = false;
   uploadingId: number = 0;
   isDownloading: boolean = false;
 
-  //@ts-ignore
-  cols: any[];
-  //@ts-ignore
-  statuses: any[];
+  cols: any[] = [];
+  statuses: any[] = [];
 
-  //@ts-ignore
-  @ViewChild('dt') table: Table;
-  //@ts-ignore
-  private componentRef: ComponentRef<any>;
+  @ViewChild('dt') 
+  table!: Table;
+  private componentRef!: ComponentRef<any>;
 
   constructor(public apiService: ApiService, 
               private confirmationService: ConfirmationService, 
@@ -56,21 +50,13 @@ export class DecreeListComponent implements OnInit {
     ]
   }
 
-  //@ts-ignore
-  handleClose(e) {
-    this.tabs.splice(e.index - 2, 1);
-    if(this.currentTab == e.index)
-      this.currentTab = e.index - 1;
-  }
-
-  //@ts-ignore
-  uploadFile = (id, files) => {
-    if (files.length === 0) {
+  uploadFile = (id: number, files: FileList | null) => {
+    if (files!.length === 0) {
       return;
     }
-    let fileToUpload = <File>files[0];
+    let fileToUpload = <File>files![0];
     const formData = new FormData();
-    formData.append('id', id);
+    formData.append('id', id.toString());
     formData.append('file', fileToUpload, fileToUpload.name);
 
     this.apiService.pdfs.uploadSign(formData)
@@ -89,8 +75,7 @@ export class DecreeListComponent implements OnInit {
     });
   }
 
-  //@ts-ignore
-  download = (id, filePath) => {
+  download = (id: number, filePath: string) => {
     this.apiService.pdfs.download(id).subscribe((event) => {
         if (event.type === HttpEventType.UploadProgress)
           this.isDownloading = event.loaded != event.total;
@@ -101,8 +86,7 @@ export class DecreeListComponent implements OnInit {
     });
   }
 
-  //@ts-ignore
-  downloadSigned = (id, filePath) => {
+  downloadSigned = (id: number, filePath: string) => {
     this.apiService.pdfs.downloadSigned(id).subscribe((event) => {
         if (event.type === HttpEventType.UploadProgress)
           this.isDownloading = event.loaded != event.total;
@@ -129,8 +113,7 @@ export class DecreeListComponent implements OnInit {
   completeDecree = (event: Event, id: number) => {
     console.log("clicked on complete " + id)
     this.confirmationService.confirm({
-      //@ts-ignore
-      target: event.target,
+      target: event.target as HTMLButtonElement,
       message: 'This action will change decree status to Comleted. Continue?',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
