@@ -47,7 +47,7 @@ namespace MilitaryManager.Core.Entities.UnitEntity
                     .Include(x=> x.Rank)
                     .Include(x => x.Position)
                     .Include(x => x.Parent)
-                    .Include(x => x.Profiles).ThenInclude(x=> x.Attribute)
+                    .Include(x => x.Profiles)
                     .Include(x => x.UnitToEquipments)
                     .Include(x => x.EquipmentToWarehouseMan)
                     .Include(x => x.Division)

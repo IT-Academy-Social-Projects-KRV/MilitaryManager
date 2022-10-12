@@ -13,16 +13,18 @@ import {DivisionsService} from "../../../../shared/services/api/division.service
 })
 export class UnitInfoComponent implements OnInit {
 
-  constructor(private unitsService: UnitsService,
-              private positionService: PositionService,
-              private rankService: RankService,
-              private divisionsService: DivisionsService
-              ) {
+  constructor(private unitsService: UnitsService) {
   }
 
   public lastNameInput = document.querySelector('#inputLastName');
-  public firstNameInput = document.querySelector('#inputFirstName');
-  public secondNameInput = document.querySelector('#inputSecondName');
+  public firstNameInput = document.querySelector('#firstNameInput');
+  public secondNameInput = document.querySelector('#secondNameInput');
+  //
+  // public divisionNameInput = document.querySelector('#divisionNameInput');
+  // public aaa = document.querySelector('#inputSecondName');
+  // public bbb = document.querySelector('#inputSecondName');
+  // public ccc = document.querySelector('#inputSecondName');
+
 
   public unit: UnitModel = new UnitModel(0);
 
@@ -33,7 +35,7 @@ export class UnitInfoComponent implements OnInit {
   getSelectedUnitDataById(id: number): void {
     // let firstNameInput = document.querySelector('#inputFirstName');
     // let nameInput = document.querySelector('#inputFirstName');
-
+    //  let divisionNameInput = document.querySelector('#divisionNameInput');
 
     this.unitsService.single.getById(id)
       .subscribe((u) => {
@@ -45,51 +47,29 @@ export class UnitInfoComponent implements OnInit {
         this.firstNameInput.value = this.unit.firstName;
         // @ts-ignore
         this.secondNameInput.value = this.unit.secondName;
-        // @ts-ignore
-        this.firstNameInput.value = this.unit.firstName;
-        // @ts-ignore
-        this.firstNameInput.value = this.unit.firstName;
-        // @ts-ignore
-        this.firstNameInput.value = this.unit.firstName;
-        // @ts-ignore
-        this.firstNameInput.value = this.unit.firstName;
 
-        console.log('clearFields() begin');
-        console.log(this.unit.id);
-        // console.log(this.unit.firstName);
-        // console.log(this.unit.rankId);;
-        // console.log();
-        // console.log('');
-        //
-        // console.log(this.unit.divisionId);
-        // console.log(this.unit.positionId);
+        // // @ts-ignore
+        // this.divisionNameInput.value = this.unit.division.name;
+        // // @ts-ignore
+        // this.firstNameInput.value = this.unit.firstName;
+        // // @ts-ignore
+        // this.firstNameInput.value = this.unit.firstName;
+        // // @ts-ignore
+        // this.firstNameInput.value = this.unit.firstName;
 
 
-        console.log(this.unit.division);
-        console.log(this.unit.rank);
-        console.log(this.unit.position);
-        console.log(this.unit.parent)
-
-
-        console.log(this.unit.profiles);
-        console.log(this.unit.unitToEquipments);
-
-        console.log('clearFields() end');
-        console.log('');
       });
   }
 
   clearFields(): void {
-
-
-    // let lastNameInput = document.querySelector('#inputLastName');
-    // let firstNameInput = document.querySelector('#inputFirstName');
-    // let secondNameInput = document.querySelector('#inputSecondName');
-    // // @ts-ignore
-    // lastNameInput.value = '';
-    // // @ts-ignore
-    // firstNameInput.value = '';
-    // // @ts-ignore
-    // secondNameInput.value = '';
+    let lastNameInput = document.querySelector('#inputLastName');
+    let firstNameInput = document.querySelector('#inputFirstName');
+    let secondNameInput = document.querySelector('#inputSecondName');
+    // @ts-ignore
+    lastNameInput.value = '';
+    // @ts-ignore
+    firstNameInput.value = '';
+    // @ts-ignore
+    secondNameInput.value = '';
   }
 }

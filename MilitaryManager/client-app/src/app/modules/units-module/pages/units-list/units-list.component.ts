@@ -65,7 +65,7 @@ export class UnitsListComponent implements OnInit {
 
   nodeSelect(event: any) {
     if (event.node) {
-      let unitInfo = new UnitInfoComponent(this.unitsService, this.positionService, this.rankService, this.divisionsService);
+      let unitInfo = new UnitInfoComponent(this.unitsService);
       unitInfo.getSelectedUnitDataById(event.node.id)
     }
   }
