@@ -54,7 +54,7 @@ namespace MilitaryManager.Core.Services
 
         public async Task<DecreeDTO> GenerateDecreeAsync(string wwwroot, int templateId, string name, string number, string jsonData)
         {
-           // var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var template = await _templateRepository.GetByKeyAsync(templateId);
             var status = await _statusRepository.GetByKeyAsync((int)DecreeStatus.CREATED);
 
@@ -80,7 +80,7 @@ namespace MilitaryManager.Core.Services
                 Name = name,
                 Path = path,
                 DecreeNumber = number,
-                CreatedBy = "testId",
+                CreatedBy = userId,
                 TimeStamp = DateTime.Now,
                 TemplateId = templateId,
                 StatusId = (int)DecreeStatus.CREATED

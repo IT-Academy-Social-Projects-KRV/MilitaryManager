@@ -5,12 +5,6 @@ import { RouterModule } from '@angular/router';
 import { DecreeListComponent } from './pages/decree-list/decree-list.component';
 import { DecreeNewComponent } from './pages/decree-new/decree-new.component';
 import { DecreeAddComponent } from './pages/decree-add/decree-add.component';
-import { TableModule } from 'primeng/table';
-import {ButtonModule } from 'primeng/button';
-import { DropdownModule } from 'primeng/dropdown';
-import { InputTextModule } from 'primeng/inputtext';
-import { FormsModule } from '@angular/forms';
-import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -26,17 +20,9 @@ import { ToastModule } from 'primeng/toast';
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: 'list', component: DecreeListComponent },
       { path: 'new', component: DecreeNewComponent },
+      { path: 'add', component: DecreeAddComponent },
       { path: '**', redirectTo: 'list' }
     ]),
-    TableModule,
-		DropdownModule,
-    ButtonModule,
-    InputTextModule,
-    FormsModule,
-    ToastModule,
-    RouterModule.forChild([
-      { path: 'add', component: DecreeAddComponent },
-    ])
   ]
 })
 export class AttachmentsModule { }
