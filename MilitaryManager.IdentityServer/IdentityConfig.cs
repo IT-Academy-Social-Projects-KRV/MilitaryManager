@@ -42,7 +42,7 @@ namespace IdentityServer
 						IdentityServerConstants.StandardScopes.Profile,
 						IdentityServerConstants.StandardScopes.Email,
 						JwtClaimTypes.Role,
-						IdentityServerConstants.LocalApi.ScopeName
+						IdentityServerConstants.LocalApi.ScopeName,
 						"unitsAPI",
 						"attachmentsAPI"
 					}
@@ -92,7 +92,7 @@ namespace IdentityServer
         {
 			return new List<ApiScope> 
 			{ 
-				new ApiScope("attachmentsAPI", "Attachments API")
+				new ApiScope("attachmentsAPI", "Attachments API"),
 				new ApiScope("unitsAPI", "Units API"),
 				new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
 			};
