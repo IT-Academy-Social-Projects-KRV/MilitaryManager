@@ -19,6 +19,13 @@ export class UnitInfoComponent implements OnInit {
   public lastNameInput = document.querySelector('#lastNameInput');
   public firstNameInput = document.querySelector('#firstNameInput');
   public secondNameInput = document.querySelector('#secondNameInput');
+
+  public divisionInput = document.querySelector('#divisionInput');
+  public commanderInput = document.querySelector('#commanderInput');
+  public rankInput = document.querySelector('#rankInput');
+  public positionInput = document.querySelector('#positionInput');
+
+
   //
   // public divisionNameInput = document.querySelector('#divisionNameInput');
   // public aaa = document.querySelector('#inputSecondName');
@@ -41,6 +48,10 @@ export class UnitInfoComponent implements OnInit {
       .subscribe((u) => {
         this.unit = u;
 
+        console.log(this.unit.rank)
+        console.log(this.unit.position)
+
+
         // @ts-ignore
         this.lastNameInput.value = this.unit.lastName;
         // @ts-ignore
@@ -48,14 +59,21 @@ export class UnitInfoComponent implements OnInit {
         // @ts-ignore
         this.secondNameInput.value = this.unit.secondName;
 
-        // // @ts-ignore
-        // this.divisionNameInput.value = this.unit.division.name;
-        // // @ts-ignore
-        // this.firstNameInput.value = this.unit.firstName;
-        // // @ts-ignore
-        // this.firstNameInput.value = this.unit.firstName;
-        // // @ts-ignore
-        // this.firstNameInput.value = this.unit.firstName;
+        // @ts-ignore
+        this.divisionInput.value = this.unit.division.name;
+
+
+        if (this.unit.parent == null) {
+          // @ts-ignore
+          this.commanderInput.value = 'Немає'
+        } else {
+          // @ts-ignore
+          this.commanderInput.value = this.unit.parent.lastName + ' ' + this.unit.parent.firstName + ' ' + this.unit.parent.secondName;
+        }
+        // @ts-ignore
+        this.rankInput.value = this.unit.rank;
+        // @ts-ignore
+        this.positionInput.value = this.unit.position;
 
 
       });
@@ -65,11 +83,25 @@ export class UnitInfoComponent implements OnInit {
     let lastNameInput = document.querySelector('#lastNameInput');
     let firstNameInput = document.querySelector('#firstNameInput');
     let secondNameInput = document.querySelector('#secondNameInput');
+    let divisionInput = document.querySelector('#divisionInput');
+    let commanderInput = document.querySelector('#commanderInput');
+    let rankInput = document.querySelector('#rankInput');
+    let positionInput = document.querySelector('#positionInput');
+
     // @ts-ignore
     lastNameInput.value = '';
     // @ts-ignore
     firstNameInput.value = '';
     // @ts-ignore
     secondNameInput.value = '';
+
+    // @ts-ignore
+    divisionInput.value = '';
+    // @ts-ignore
+    commanderInput.value = '';
+    // @ts-ignore
+    rankInput.value = '';
+    // @ts-ignore
+    positionInput.value = '';
   }
 }
