@@ -26,13 +26,6 @@ export class UnitInfoComponent implements OnInit {
   public positionInput = document.querySelector('#positionInput');
 
 
-  //
-  // public divisionNameInput = document.querySelector('#divisionNameInput');
-  // public aaa = document.querySelector('#inputSecondName');
-  // public bbb = document.querySelector('#inputSecondName');
-  // public ccc = document.querySelector('#inputSecondName');
-
-
   public unit: UnitModel = new UnitModel(0);
 
   ngOnInit(): void {
@@ -48,10 +41,6 @@ export class UnitInfoComponent implements OnInit {
       .subscribe((u) => {
         this.unit = u;
 
-        console.log(this.unit.rank)
-        console.log(this.unit.position)
-
-
         // @ts-ignore
         this.lastNameInput.value = this.unit.lastName;
         // @ts-ignore
@@ -59,10 +48,11 @@ export class UnitInfoComponent implements OnInit {
         // @ts-ignore
         this.secondNameInput.value = this.unit.secondName;
 
+        // division
         // @ts-ignore
         this.divisionInput.value = this.unit.division.name;
 
-
+        // parent
         if (this.unit.parent == null) {
           // @ts-ignore
           this.commanderInput.value = 'Немає'
@@ -70,12 +60,14 @@ export class UnitInfoComponent implements OnInit {
           // @ts-ignore
           this.commanderInput.value = this.unit.parent.lastName + ' ' + this.unit.parent.firstName + ' ' + this.unit.parent.secondName;
         }
+
+        // rank
         // @ts-ignore
         this.rankInput.value = this.unit.rank;
+
+        // position
         // @ts-ignore
         this.positionInput.value = this.unit.position;
-
-
       });
   }
 
