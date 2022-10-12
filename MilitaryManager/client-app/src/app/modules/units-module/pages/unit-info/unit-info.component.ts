@@ -16,7 +16,7 @@ export class UnitInfoComponent implements OnInit {
   constructor(private unitsService: UnitsService) {
   }
 
-  public lastNameInput = document.querySelector('#inputLastName');
+  public lastNameInput = document.querySelector('#lastNameInput');
   public firstNameInput = document.querySelector('#firstNameInput');
   public secondNameInput = document.querySelector('#secondNameInput');
   //
@@ -62,9 +62,9 @@ export class UnitInfoComponent implements OnInit {
   }
 
   clearFields(): void {
-    let lastNameInput = document.querySelector('#inputLastName');
-    let firstNameInput = document.querySelector('#inputFirstName');
-    let secondNameInput = document.querySelector('#inputSecondName');
+    let lastNameInput = document.querySelector('#lastNameInput');
+    let firstNameInput = document.querySelector('#firstNameInput');
+    let secondNameInput = document.querySelector('#secondNameInput');
     // @ts-ignore
     lastNameInput.value = '';
     // @ts-ignore
