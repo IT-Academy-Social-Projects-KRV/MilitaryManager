@@ -62,7 +62,7 @@ export class FinishRegistrationComponent implements OnInit {
         .subscribe(
         data => this.messageService.add({ severity: 'success', summary: 'Дані оновлено!'}),
         error => {
-          this.messageService.add({ severity: 'error', summary: 'Командира не створено!', detail: String((error as HttpErrorResponse).error)});
+          this.messageService.add({ severity: 'error', summary: 'Помилка оновлення даних!',detail: String((error as HttpErrorResponse).error).split('\n')[0] });
           this.useRedClass = true;
         });
     }
