@@ -41,6 +41,10 @@ export class UnitInfoComponent implements OnInit {
       .subscribe((u) => {
         this.unit = u;
 
+        console.log(this.unit)
+        console.log(this.unit.profiles)
+        console.log(this.unit.unitToEquipments)
+
         // @ts-ignore
         this.lastNameInput.value = this.unit.lastName;
         // @ts-ignore

@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿// using AutoMapper;
 using MilitaryManager.Core.DTO.Attachments;
 using MilitaryManager.Core.DTO.Units;
 using MilitaryManager.Core.Entities.DecreeEntity;
@@ -23,10 +23,11 @@ using MilitaryManager.Core.Entities.RankEntity;
 using MilitaryManager.Core.DTO.Ranks;
 using MilitaryManager.Core.Entities.PositionEntity;
 using MilitaryManager.Core.DTO.Positions;
+using MilitaryManager.Core.Entities.ProfileEntity;
 
 namespace MilitaryManager.Core.Helpers
 {
-    public class ApplicationProfile : Profile
+    public class ApplicationProfile : AutoMapper.Profile
     {
         public ApplicationProfile()
         {
