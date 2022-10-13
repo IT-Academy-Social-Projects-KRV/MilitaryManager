@@ -10,11 +10,11 @@ namespace MilitaryManager.Core.Interfaces.Services
     public interface IPositionService
     {
         Task<IEnumerable<PositionDTO>> GetAllPositionsAsync();
-        Task<PositionDTO> CreateUnitAsync(PositionDTO query);
-        Task<PositionDTO> UpdateUnitAsync(PositionDTO query);
-        Task<PositionDTO> DeleteUnitAsync(int id);
-        Task<IEnumerable<PositionDTO>> GetUnitsAsync();
-        Task<PositionDTO> GetUnitsByIdAsync(int id);
+        Task<PositionDTO> CreatePositionAsync(PositionDTO query);
+        Task<PositionDTO> UpdatePositionAsync(PositionDTO query);
+        Task<PositionDTO> DeletePositionAsync(int id);
+        Task<IEnumerable<PositionDTO>>GetPositionsAsync();
+        Task<PositionDTO> GetPositionByIdAsync(int id);
 
     }
 }

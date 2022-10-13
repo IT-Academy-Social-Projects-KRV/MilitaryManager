@@ -26,9 +26,9 @@ namespace MilitaryManager.Units.API.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> GetRank([FromRoute] int id)
+        public async Task<IActionResult> GetPosition([FromRoute] int id)
         {
-            return Ok(await _positionService.GetUnitsByIdAsync(id));
+            return Ok(await _positionService.GetPositionByIdAsync(id));
         }
     }
 }

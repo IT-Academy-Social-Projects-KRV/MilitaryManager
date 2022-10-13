@@ -30,27 +30,28 @@ namespace MilitaryManager.Core.Services
             return _mapper.Map<IEnumerable<PositionDTO>>(positions);
         }
 
-        public Task<PositionDTO> CreateUnitAsync(PositionDTO query)
+        public Task<PositionDTO> CreatePositionAsync(PositionDTO query)
         {
             throw new NotImplementedException();
         }
 
-        public Task<PositionDTO> UpdateUnitAsync(PositionDTO query)
+        public Task<PositionDTO> UpdatePositionAsync(PositionDTO query)
         {
             throw new NotImplementedException();
         }
 
-        public Task<PositionDTO> DeleteUnitAsync(int id)
+        public Task<PositionDTO> DeletePositionAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<PositionDTO>> GetUnitsAsync()
+        public Task<IEnumerable<PositionDTO>> GetPositionsAsync()
         {
             throw new NotImplementedException();
         }
 
-        public async Task<PositionDTO> GetUnitsByIdAsync(int id)
+
+        public async Task<PositionDTO> GetPositionByIdAsync(int id)
         {
             var units = await _positionRepository.GetByKeyAsync(id);
 

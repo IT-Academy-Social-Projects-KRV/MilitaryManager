@@ -10,10 +10,10 @@ namespace MilitaryManager.Core.Interfaces.Services
     public interface IRankService
     {
         Task<IEnumerable<RankDTO>> GetAllRanksAsync();
-        Task<RankDTO> CreateUnitAsync(RankDTO query);
-        Task<RankDTO> UpdateUnitAsync(RankDTO query);
-        Task<RankDTO> DeleteUnitAsync(int id);
+        Task<RankDTO> CreateRankAsync(RankDTO query);
+        Task<RankDTO> UpdateRankAsync(RankDTO query);
+        Task<RankDTO> DeleteRankAsync(int id);
         Task<IEnumerable<RankDTO>> GetUnitsAsync();
-        Task<RankDTO> GetUnitsByIdAsync(int id);
+        Task<RankDTO> GetRankByIdAsync(int id);
     }
 }

@@ -29,17 +29,17 @@ namespace MilitaryManager.Core.Services
             return _mapper.Map<IEnumerable<RankDTO>>(ranks);
         }
 
-        public Task<RankDTO> CreateUnitAsync(RankDTO query)
+        public Task<RankDTO> CreateRankAsync(RankDTO query)
         {
             throw new NotImplementedException();
         }
 
-        public Task<RankDTO> UpdateUnitAsync(RankDTO query)
+        public Task<RankDTO> UpdateRankAsync(RankDTO query)
         {
             throw new NotImplementedException();
         }
 
-        public Task<RankDTO> DeleteUnitAsync(int id)
+        public Task<RankDTO> DeleteRankAsync(int id)
         {
             throw new NotImplementedException();
         }
@@ -49,7 +49,8 @@ namespace MilitaryManager.Core.Services
             throw new NotImplementedException();
         }
 
-        public async Task<RankDTO> GetUnitsByIdAsync(int id)
+
+        public async Task<RankDTO> GetRankByIdAsync(int id)
         {
             var units = await _rankRepository.GetByKeyAsync(id);
 
