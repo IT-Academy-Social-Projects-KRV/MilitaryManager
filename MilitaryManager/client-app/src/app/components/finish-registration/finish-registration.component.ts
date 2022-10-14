@@ -40,14 +40,13 @@ export class FinishRegistrationComponent implements OnInit {
     private _router: Router) { }
 
   ngOnInit(): void {
-    console.log(this._divisionsService.GetAllDivisions())
     this._divisionsService.GetAllDivisions().subscribe((divisions)=>{this.divisions = divisions});
     this._positionService.collection.getAll().subscribe((positions)=>{this.positions = positions});
     this._rankService.collection.getAll().subscribe((ranks)=>{this.ranks = ranks});
   }
 
   EndRegistrationBtn(){
-    if (!(this.firstname == '' || this.lastname == '' || this.selected_position == null
+    if (!(this.firstname == '' || this.lastname == '' || this.middlename =='' || this.selected_position == null
       || this.selected_rank == null || this.selected_division == null)) {
 
       this.useRedClass = false;

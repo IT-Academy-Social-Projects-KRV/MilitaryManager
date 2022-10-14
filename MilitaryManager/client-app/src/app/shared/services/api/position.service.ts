@@ -14,6 +14,5 @@ export class PositionService extends BaseService<any>{
     private httpService: HttpService,
     configService: ClientConfigurationService) {
     super(httpService, 'position', configService, PositionModel, ServiceType.units);
-    console.log(this.collection.baseUrl);
   }
 }

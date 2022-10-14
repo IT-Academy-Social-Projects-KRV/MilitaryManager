@@ -71,7 +71,6 @@ class BaseCollectionService<TModel extends BaseModel> extends CoreHttpService {
   }
 
   getAll(): Observable<TModel[]> {
-      console.log(`${this.baseUrl}${this.controllerName}`);
       return this.httpService.get(`${this.baseUrl}${this.controllerName}`)
           .pipe(
               map((payloads: any) => payloads.map((payload: any) => this.mapModel(payload))),
