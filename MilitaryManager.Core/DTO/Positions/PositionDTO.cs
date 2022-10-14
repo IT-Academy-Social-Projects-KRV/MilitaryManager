@@ -1,4 +1,5 @@
-﻿using MilitaryManager.Core.Entities.UnitEntity;
+﻿using MilitaryManager.Core.DTO.Units;
+using MilitaryManager.Core.Entities.UnitEntity;
 using System;
 using System.Collections.Generic;
 using System.Text;
