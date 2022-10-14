@@ -23,14 +23,21 @@ export class FinishRegistrationComponent implements OnInit {
   firstname: string | null = null;
   lastname: string | null = null;
   middlename?: string | null = null;
+  foot_size?: string | null = null;
+  head_size?: string | null = null;
+  gas_mask_size?: string | null = null;
 
   divisions: DivisionModel[] = [];
   positions: PositionModel[] = [];
   ranks: RankModel[] = [];
+  uniforms: string[] = [];
+  blood_types: string[] = [];
 
   selected_division?: DivisionModel;
   selected_position?: PositionModel;
   selected_rank?: RankModel;
+  selected_uniform?: string;
+  selected_blood_type?: string;
 
   constructor(private _unitUserService : UnitUserService,
     private _divisionsService: DivisionsService,
@@ -43,6 +50,9 @@ export class FinishRegistrationComponent implements OnInit {
     this._divisionsService.GetAllDivisions().subscribe((divisions)=>{this.divisions = divisions});
     this._positionService.collection.getAll().subscribe((positions)=>{this.positions = positions});
     this._rankService.collection.getAll().subscribe((ranks)=>{this.ranks = ranks});
+    this.blood_types = ['I', 'II', 'III', 'IV'];
+    this.uniforms = ["A Tacs AU", "A Tacs FG Folliage Camo", "ACU PAT",
+     "3 Color Desert", "6 Color Desert", "CCE", "Marpat Desert"]
   }
 
   EndRegistrationBtn(){
