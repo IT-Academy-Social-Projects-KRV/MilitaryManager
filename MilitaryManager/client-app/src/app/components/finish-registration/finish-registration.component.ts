@@ -57,7 +57,8 @@ export class FinishRegistrationComponent implements OnInit {
 
   EndRegistrationBtn(){
     if (!(this.firstname == '' || this.lastname == '' || this.middlename =='' || this.selected_position == null
-      || this.selected_rank == null || this.selected_division == null)) {
+      || this.selected_rank == null || this.selected_division == null || this.selected_blood_type==null
+      || this.selected_uniform == null || this.foot_size == '' || this.head_size == '' || this.gas_mask_size == '')) {
 
       this.useRedClass = false;
 
