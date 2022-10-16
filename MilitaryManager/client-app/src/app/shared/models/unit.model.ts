@@ -1,4 +1,5 @@
 import { BaseModel } from "./base.model";
+import { ProfileModel } from "./profile.model";
 
 export class UnitModel extends BaseModel {
   public parent: UnitModel | null = null;
@@ -12,7 +13,8 @@ export class UnitModel extends BaseModel {
     public divisionId:number|null=null,
     public rankId: number | null = null,
     public positionId: number | null = null,
-    public parentId: number | null = null
+    public parentId: number | null = null,
+    public profiles: ProfileModel[]|null = null,
     ){
     super(Id);
 }
