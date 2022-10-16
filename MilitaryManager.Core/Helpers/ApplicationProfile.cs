@@ -19,10 +19,6 @@ using MilitaryManager.Core.DTO.Profiles;
 using MilitaryManager.Core.DTO.Ranks;
 using MilitaryManager.Core.DTO.Audit;
 using MilitaryManager.Core.Entities.AuditEntities.ChangeEntity;
-using MilitaryManager.Core.Entities.RankEntity;
-using MilitaryManager.Core.DTO.Ranks;
-using MilitaryManager.Core.Entities.PositionEntity;
-using MilitaryManager.Core.DTO.Positions;
 using MilitaryManager.Core.Entities.AuditEntities.ChangeValueEntity;
 using System.IO;
 
