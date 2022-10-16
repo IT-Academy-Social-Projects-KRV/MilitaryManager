@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using MilitaryManager.Core.DTO.Attachments;
 using MilitaryManager.Core.Entities.DecreeEntity;
 using MilitaryManager.Core.Entities.SignedPdfEntity;
+using MilitaryManager.Core.Entities.StatusEntity;
 using MilitaryManager.Core.Entities.TemplateEntity;
 using MilitaryManager.Core.Enums;
 using MilitaryManager.Core.Exceptions;
@@ -23,6 +24,7 @@ namespace MilitaryManager.Core.Services
     {
         protected readonly IRepository<Decree, int> _decreeRepository;
         protected readonly IRepository<Template, int> _templateRepository;
+        protected readonly IRepository<Status, int> _statusRepository;
         protected readonly IRepository<SignedPdf, int> _signedPdfRepository;
         protected readonly IDocumentGenerationService _documentGenerationService;
         protected readonly IMapper _mapper;
@@ -32,6 +34,7 @@ namespace MilitaryManager.Core.Services
 
         public DecreeService(IRepository<Decree, int> decreeRepository,
                              IRepository<Template, int> templateRepository,
+                             IRepository<Status, int> statusRepository,
                              IRepository<SignedPdf, int> signedPdfRepository,
                              IDocumentGenerationService documentGenerationService,
                              IMapper mapper,
@@ -40,6 +43,7 @@ namespace MilitaryManager.Core.Services
         {
             _decreeRepository = decreeRepository;
             _templateRepository = templateRepository;
+            _statusRepository = statusRepository;
             _signedPdfRepository = signedPdfRepository;
             _documentGenerationService = documentGenerationService;
             _mapper = mapper;
@@ -52,6 +56,7 @@ namespace MilitaryManager.Core.Services
         {
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var template = await _templateRepository.GetByKeyAsync(templateId);
+            var status = await _statusRepository.GetByKeyAsync((int)DecreeStatus.CREATED);
 
             string templateData = null;
             using (StreamReader reader = new StreamReader(await _storeService.RetrieveDataAsync(template.Path)))
@@ -106,7 +111,7 @@ namespace MilitaryManager.Core.Services
             var decree = await _decreeRepository.GetByKeyAsync(id);
             if (decree.StatusId == (int)DecreeStatus.CREATED)
             {
-                decree.StatusId = (int)DecreeStatus.SIGNED;
+                decree.StatusId = (int)DecreeStatus.DOWNLOADED;
                 await _decreeRepository.SaveChangesAcync();
             }
             return await _storeService.RetrieveDataAsync(decree.Path);
@@ -140,7 +145,7 @@ namespace MilitaryManager.Core.Services
 
             signedPdf.Path = path;
 
-            decree.StatusId = (int)DecreeStatus.DOWNLOADED;
+            decree.StatusId = (int)DecreeStatus.SIGNED;
             await _signedPdfRepository.SaveChangesAcync();
             await _decreeRepository.SaveChangesAcync();
         }

@@ -24,7 +24,7 @@ import {LogComponent} from "./components/log/log.component";
     SignoutRedirectCallbackComponent,
     LogComponent,
     HomeComponent,
-    AddCommanderComponent,
+    AddCommanderComponent
   ],
   imports: [
     BrowserModule,

@@ -20,6 +20,7 @@ using MilitaryManager.Core.DTO.Ranks;
 using MilitaryManager.Core.DTO.Audit;
 using MilitaryManager.Core.Entities.AuditEntities.ChangeEntity;
 using MilitaryManager.Core.Entities.AuditEntities.ChangeValueEntity;
+using System.IO;
 
 namespace MilitaryManager.Core.Helpers
 {
@@ -33,7 +34,8 @@ namespace MilitaryManager.Core.Helpers
             CreateMap<Decree, DecreeDTO>()
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.Name))
                 .ForMember(dest => dest.Template, opt => opt.MapFrom(src => src.Template.Type))
-                .ForMember(dest => dest.PathSigned, opt => opt.MapFrom(src => src.SignedPdf.Path));
+                .ForMember(dest => dest.Path, opt => opt.MapFrom(src => Path.GetFileName(src.Path)))
+                .ForMember(dest => dest.PathSigned, opt => opt.MapFrom(src => Path.GetFileName(src.SignedPdf.Path)));
             CreateMap<Template, TemplateDTO>().ReverseMap();
             CreateMap<DivisionDTO, Division>().ReverseMap();
             CreateMap<RankDTO, Rank>().ReverseMap();
