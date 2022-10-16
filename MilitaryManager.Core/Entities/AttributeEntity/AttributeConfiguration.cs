@@ -14,6 +14,16 @@ namespace MilitaryManager.Core.Entities.AttributeEntity
                 .Property(x => x.Name)
                 .HasMaxLength(50)
                 .IsRequired();
+
+            builder
+                .Property(x => x.Type)
+                .HasMaxLength(50)
+                .IsRequired();
+
+            builder
+                .HasOne(x => x.AttributeType)
+                .WithMany(x => x.Attributes)
+                .HasForeignKey(x => x.Type);
         }
     }
 }
