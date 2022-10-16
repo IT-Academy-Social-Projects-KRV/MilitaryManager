@@ -9,6 +9,7 @@ import { RankService } from 'src/app/shared/services/api/rank.service';
 import { MessageService } from 'primeng/api';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UnitModel } from 'src/app/shared/models/unit.model';
+import { delay, timeout } from 'rxjs';
 import { Router } from '@angular/router';
 import { AttributeModel } from 'src/app/shared/models/attribute.model';
 import { AttributeService } from 'src/app/shared/services/api/attribute.service';
@@ -62,15 +63,18 @@ export class FinishRegistrationComponent implements OnInit {
   }
 
   EndRegistrationBtn(){
-    console.log(this.attributes)//remove
     if (!(this.firstname == '' || this.lastname == '' || this.middlename =='' || this.selected_position == null
       || this.selected_rank == null || this.selected_division == null || this.selected_blood_type==null
       || this.selected_uniform == null || this.foot_size == '' || this.head_size == '' || this.gas_mask_size == '')) {
 
       this.useRedClass = false;
 
-      this.profiles.push(new ProfileModel(0, this.attributes[1].id, null, this.selected_uniform))
-
+      this.profiles.push(new ProfileModel(0, this.attributes.filter(x=>x.name?.includes("Розмір ноги"))[0].id, 0, this.foot_size));
+      this.profiles.push(new ProfileModel(0, this.attributes.filter(x=>x.name?.includes("Розмір голови"))[0].id, 0, this.head_size));
+      this.profiles.push(new ProfileModel(0, this.attributes.filter(x=>x.name?.includes("Розмір протигазу"))[0].id, 0, this.gas_mask_size));
+      this.profiles.push(new ProfileModel(0, this.attributes.filter(x=>x.name?.includes("Тип форми"))[0].id, 0, this.selected_uniform));
+      this.profiles.push(new ProfileModel(0, this.attributes.filter(x=>x.name?.includes("Група крові"))[0].id, 0, this.selected_blood_type));
+     
       this._unitUserService.single.create(
         new UnitModel(0, this.lastname, this.firstname, this.middlename, this.selected_division.id,
         this.selected_rank._id, this.selected_position._id,null, this.profiles))
@@ -83,6 +87,7 @@ export class FinishRegistrationComponent implements OnInit {
           this.messageService.add({ severity: 'error', summary: 'Помилка оновлення даних!',detail: String((error as HttpErrorResponse).error).split('\n')[0] });
           this.useRedClass = true;
         });
+        this.profiles = [];
     }
     else {
       this.useRedClass = true;

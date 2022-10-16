@@ -19,7 +19,6 @@ using MilitaryManager.Core.Entities.ProfileEntity;
 using MilitaryManager.Core.Entities.RankEntity;
 using MilitaryManager.Core.Entities.UnitEntity;
 using MilitaryManager.Infrastructure.Data.SeedData;
-//using MilitaryManager.Core.Entities.AttributeTypeEntity;
 
 namespace MilitaryManager.Infrastructure.Data
 {
@@ -53,7 +52,6 @@ namespace MilitaryManager.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new ChangeValueConfiguration());
             modelBuilder.ApplyConfiguration(new ColumnConfiguration());
             modelBuilder.ApplyConfiguration(new TableConfiguration());
-            //modelBuilder.ApplyConfiguration(new AttributeTypeConfiguration());
 
             modelBuilder.Entity<ChangeValue>(entity =>
             {
@@ -85,6 +83,5 @@ namespace MilitaryManager.Infrastructure.Data
         public DbSet<ChangeValue> ChangeValue { get; set; }
         public DbSet<Column> Column { get; set; }
         public DbSet<Table> Table { get; set; }
-        //public DbSet<AttributeType> AttributeType { get; set; }
     }
 }
