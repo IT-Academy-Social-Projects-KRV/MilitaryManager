@@ -11,6 +11,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { UnitModel } from 'src/app/shared/models/unit.model';
 import { delay, timeout } from 'rxjs';
 import { Router } from '@angular/router';
+import { AttributeModel } from 'src/app/shared/models/attribute.model';
+import { AttributeService } from 'src/app/shared/services/api/attribute.service';
 
 @Component({
   selector: 'app-finish-registration',
@@ -29,6 +31,7 @@ export class FinishRegistrationComponent implements OnInit {
 
   divisions: DivisionModel[] = [];
   positions: PositionModel[] = [];
+  attributes: AttributeModel[] = [];
   ranks: RankModel[] = [];
   uniforms: string[] = [];
   blood_types: string[] = [];
@@ -43,6 +46,7 @@ export class FinishRegistrationComponent implements OnInit {
     private _divisionsService: DivisionsService,
     private _positionService: PositionService,
     private _rankService: RankService,
+    private _attributeService: AttributeService,
     private messageService: MessageService,
     private _router: Router) { }
 
@@ -50,6 +54,7 @@ export class FinishRegistrationComponent implements OnInit {
     this._divisionsService.GetAllDivisions().subscribe((divisions)=>{this.divisions = divisions});
     this._positionService.collection.getAll().subscribe((positions)=>{this.positions = positions});
     this._rankService.collection.getAll().subscribe((ranks)=>{this.ranks = ranks});
+    this._attributeService.collection.getAll().subscribe((attributes)=>{this.attributes = attributes});
     this.blood_types = ['I', 'II', 'III', 'IV'];
     this.uniforms = ["A Tacs AU", "A Tacs FG Folliage Camo", "ACU PAT",
      "3 Color Desert", "6 Color Desert", "CCE", "Marpat Desert"]
