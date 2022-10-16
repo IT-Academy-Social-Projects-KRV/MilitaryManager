@@ -8,5 +8,5 @@ export class ChangeModel extends BaseModel {
   public date: Date  | null = null;
   public changeTypeCode: string | null = null;
 
-  public changeValues: ChangeValuesModel[] | null = null;
+  public changeValues: ChangeValuesModel[] | null = [];
 }
