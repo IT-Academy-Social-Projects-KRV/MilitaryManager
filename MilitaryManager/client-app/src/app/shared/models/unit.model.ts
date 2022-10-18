@@ -25,4 +25,14 @@ export class UnitModel extends BaseModel {
 
   public profiles: ProfileModel[] | null = null;
   public unitToEquipments: UnitToEquipmentModel[] | null = null;
+
+  // constructor(u: UnitModel) {
+  //   // @ts-ignore
+  //   super(u.id);
+  //
+  //   this.firstName = u.firstName
+  //   this.lastName = u.lastName;
+  //   this.profiles = u.profiles;
+  //
+  // }
 }

@@ -1,3 +1,11 @@
+<!--<hr>-->
+<!--<ul *ngFor="let p of unitProfiles">-->
+<!--  <li>-->
+<!--    {{p.name}} : {{p.value}}-->
+<!--  </li>-->
+<!--</ul>-->
+<!--<hr>-->
+
 <div class="content-section implementation p-d-flex" id="container">
   <div class="card">
 
@@ -52,13 +60,25 @@
     <div>
       <p-button (onClick)="clearFields()">Очистити поля</p-button>
     </div>
+    <br>
+    <div>
+      <p-button (onClick)="profiles_id()">profiles_id</p-button>
+    </div>
 
   </div>
   <div class="card">
     <div class="p-float-label">
-      <input type="text" pInputText id="" readonly>
-      <label for="">Додаткова інформація</label>
-    </div>
+      Додаткова інформація
+      <hr>
+      <input type="text" pInputText id="profiles_id">
+      <ul>
+        <li *ngFor="let p of this.unitProfiles">
+<!--          {{p.name}} -->
+          : {{p.value}}
+        </li>
+      </ul>
 
     </div>
+
+  </div>
 </div>

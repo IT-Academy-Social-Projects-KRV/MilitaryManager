@@ -4,6 +4,10 @@ import {UnitsService} from "../../../../shared/services/api/unit.service";
 import {PositionService} from "../../../../shared/services/api/position.service";
 import {RankService} from "../../../../shared/services/api/rank.service";
 import {DivisionsService} from "../../../../shared/services/api/division.service";
+import {ProfileModel} from "../../../../shared/models/profile.model";
+import {
+  logExperimentalWarnings
+} from "@angular-devkit/build-angular/src/builders/browser-esbuild/experimental-warnings";
 
 
 @Component({
@@ -25,8 +29,13 @@ export class UnitInfoComponent implements OnInit {
   public rankInput = document.querySelector('#rankInput');
   public positionInput = document.querySelector('#positionInput');
 
+  public profile1 = document.querySelector('#profile1');
 
-  public unit: UnitModel = new UnitModel(0);
+  // @ts-ignore
+  public unitProfiles: ProfileModel[] = [];
+
+  // public static unit: UnitModel = new UnitModel(0);
+  public  unit: UnitModel = new UnitModel(0);
 
   ngOnInit(): void {
   }
@@ -39,11 +48,8 @@ export class UnitInfoComponent implements OnInit {
 
     this.unitsService.single.getById(id)
       .subscribe((u) => {
-        this.unit = u;
+        this.unit = new UnitModel(u);
 
-        console.log(this.unit)
-        console.log(this.unit.profiles)
-        console.log(this.unit.unitToEquipments)
 
         // @ts-ignore
         this.lastNameInput.value = this.unit.lastName;
@@ -72,6 +78,25 @@ export class UnitInfoComponent implements OnInit {
         // position
         // @ts-ignore
         this.positionInput.value = this.unit.position;
+
+        // @ts-ignore
+        this.unitProfiles = [this.unit.profiles];
+
+        console.log(this.unitProfiles[0])
+        console.log('')
+
+        for (let p of this.unitProfiles) {
+          // console.log(p.attribute.name)
+          console.log(p.name)
+          console.log(p.value)
+        }
+
+        let profiles_id = document.querySelector('#profiles_id');
+        // @ts-ignore
+        profiles_id.value = this.unitProfiles[0];
+
+        // {{p.attribute.name}} : {{p.value}}
+
       });
   }
 
@@ -99,5 +124,19 @@ export class UnitInfoComponent implements OnInit {
     rankInput.value = '';
     // @ts-ignore
     positionInput.value = '';
+  }
+
+  profiles_id() {
+    let profiles_id = document.querySelector('#profiles_id');
+
+
+    // @ts-ignore
+    console.log(this.unit);
+
+    console.log(this.unitProfiles);
+    // @ts-ignore
+    console.log(this.unit.profiles);
+    // @ts-ignore
+    // profiles_id.value = this.unit.profiles[0].value;
   }
 }

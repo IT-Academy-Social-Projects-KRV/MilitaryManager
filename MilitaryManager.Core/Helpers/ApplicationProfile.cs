@@ -47,6 +47,12 @@ namespace MilitaryManager.Core.Helpers
             CreateMap<Rank, RankDTO>().ReverseMap();
             CreateMap<Position, PositionDTO>().ReverseMap();
             CreateMap<Profile, ProfileDTO>().ReverseMap();
+
+            CreateMap<Profile, AttributeWithValueDTO>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Attribute.Name));
+
+
+
             CreateMap<Change, AuditDTO>()
                 .BeforeMap((src, dest) =>
                 {
