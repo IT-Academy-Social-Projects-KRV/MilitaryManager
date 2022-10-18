@@ -41,9 +41,13 @@ export class DecreeAddComponent implements OnInit {
           unitNumber: element.soldier?.division?.divisionNumber,
           decreeNumber: element.decreeNumber
         };
-        this.decreeService.single.create(decreeInformation).subscribe({});
+        this.decreeService.single.create(decreeInformation).subscribe(
+          () =>  this.messageService.add({ severity: 'success', summary: 'Наказ успішно створено' }),
+          () => this.messageService.add({ severity: 'error', summary: 'Наказ не створено!'})
+        );
       }
     }
+    
 
     addSoldier(soldier: UnitModel) {
       if (soldier.id!=null)
@@ -74,7 +78,7 @@ export class DecreeAddComponent implements OnInit {
 
     onRowEditSave(attachment: AttachmentModel, index: number) {
         if (attachment.id!=null) {
-          if(attachment.decreeNumber == null)
+          if(attachment.decreeNumber == "" || attachment.decreeNumber == null)
             {
               this.onRowEditCancel(attachment, index);
               this.messageService.add({severity:'error', summary: 'Виникла помилка', detail:'Введіть номер наказу'});
