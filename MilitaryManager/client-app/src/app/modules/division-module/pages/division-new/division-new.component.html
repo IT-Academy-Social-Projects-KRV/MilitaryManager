@@ -1,0 +1,32 @@
+<div class="surface-card p-4 shadow-2 border-round w-full lg:w-12">
+    <h2>Додати частину</h2>
+    <div class="p-grid p-mt-4">
+        <div class=" p-col-3">
+            <span class="p-float-label">
+                <input type="text" id="inputtext" pInputText [(ngModel)]="name" [ngClass]="{'ng-invalid ng-dirty': useRedClass}">
+                <label for="inputtext">Назва</label>
+            </span>
+        </div>
+        <div class=" p-col-3">
+            <span class="p-float-label">
+                <input type="text" id="inputtext" pInputText [(ngModel)]="divisionNumber" [ngClass]="{'ng-invalid ng-dirty': useRedClass}">
+                <label for="inputtext">Номер частини</label>
+            </span>
+        </div>
+        <div class=" p-col-3">
+            <span class="p-float-label">
+                <input type="text" id="inputtext" pInputText [(ngModel)]="address" [ngClass]="{'ng-invalid ng-dirty': useRedClass}">
+                <label for="inputtext">Адреса</label>
+            </span>
+        </div>
+        <div class=" p-col-3">
+            <span class>
+                <p-dropdown [options]="divisions" placeholder="Підпорядковується частині" [(ngModel)]="selected_division" optionLabel="name" [showClear]="true" [ngClass]="{'ng-invalid ng-dirty': useRedClass}"></p-dropdown>
+            </span>
+        </div> 
+        <div class=" p-col-4">
+            <p-button label="Створити" (onClick)="addDivision()"></p-button>
+            <p-messages></p-messages>
+        </div> 
+    </div>
+</div>

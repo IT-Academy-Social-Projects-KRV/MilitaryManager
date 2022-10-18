@@ -4,11 +4,13 @@ import { DivisionListComponent } from './pages/division-list/division-list.compo
 import { DivisionEditComponent } from './pages/division-edit/division-edit.component';
 import { RouterModule } from '@angular/router';
 import { PrimeNgComponentsModule } from '../primeng-components-module/primeng-components.module';
+import { DivisionNewComponent } from './pages/division-new/division-new.component';
 
 @NgModule({
   declarations: [
     DivisionListComponent,
-    DivisionEditComponent
+    DivisionEditComponent,
+    DivisionNewComponent
   ],
   imports: [
     CommonModule,
@@ -17,6 +19,7 @@ import { PrimeNgComponentsModule } from '../primeng-components-module/primeng-co
         { path: '', redirectTo: 'list', pathMatch: 'full' },
         { path: 'list', component: DivisionListComponent },
         { path: 'edit', component: DivisionEditComponent },
+        { path: 'new', component: DivisionNewComponent},
         { path: '**', redirectTo: 'list' }
       ])
   ]
