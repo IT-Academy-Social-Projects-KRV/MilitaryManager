@@ -9,5 +9,6 @@ namespace MilitaryManager.Core.Interfaces.Services
     public interface IAttributeService
     {
         Task<IEnumerable<AttributeDTO>> GetAllAttributesAsync();
+        Task<IEnumerable<string>> GetAttributeValuesByKeyAsync(int id);
     }
 }

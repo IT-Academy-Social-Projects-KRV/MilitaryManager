@@ -56,10 +56,12 @@ export class FinishRegistrationComponent implements OnInit {
     this._divisionsService.GetAllDivisions().subscribe((divisions)=>{this.divisions = divisions});
     this._positionService.collection.getAll().subscribe((positions)=>{this.positions = positions});
     this._rankService.collection.getAll().subscribe((ranks)=>{this.ranks = ranks});
-    this._attributeService.collection.getAll().subscribe((attributes)=>{this.attributes = attributes});
-    this.blood_types = ['I', 'II', 'III', 'IV'];
-    this.uniforms = ["A Tacs AU", "A Tacs FG Folliage Camo", "ACU PAT",
-     "3 Color Desert", "6 Color Desert", "CCE", "Marpat Desert"]
+    this._attributeService.collection.getAll().subscribe((attributes)=>
+    {
+      this.attributes = attributes
+      this._attributeService.GetAttributeValues(this.attributes.filter(x=>x.name?.includes("Група крові"))[0].id).subscribe((blood_types) => {this.blood_types = blood_types});
+      this._attributeService.GetAttributeValues(this.attributes.filter(x=>x.name?.includes("Тип форми"))[0].id).subscribe((uniforms) => {this.uniforms = uniforms});
+    });
   }
 
   EndRegistrationBtn(){
@@ -74,7 +76,7 @@ export class FinishRegistrationComponent implements OnInit {
       this.profiles.push(new ProfileModel(0, this.attributes.filter(x=>x.name?.includes("Розмір протигазу"))[0].id, 0, this.gas_mask_size));
       this.profiles.push(new ProfileModel(0, this.attributes.filter(x=>x.name?.includes("Тип форми"))[0].id, 0, this.selected_uniform));
       this.profiles.push(new ProfileModel(0, this.attributes.filter(x=>x.name?.includes("Група крові"))[0].id, 0, this.selected_blood_type));
-     
+    
       this._unitUserService.single.create(
         new UnitModel(0, this.lastname, this.firstname, this.middlename, this.selected_division.id,
         this.selected_rank._id, this.selected_position._id,null, this.profiles))

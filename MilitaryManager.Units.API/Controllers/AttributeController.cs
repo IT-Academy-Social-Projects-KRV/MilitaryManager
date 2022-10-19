@@ -22,5 +22,11 @@ namespace MilitaryManager.Units.API.Controllers
             return Ok(await _attributeService.GetAllAttributesAsync());
         }
 
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetValues([FromRoute] int id)
+        {
+            return Ok(await _attributeService.GetAttributeValuesByKeyAsync(id));
+        }
     }
 }

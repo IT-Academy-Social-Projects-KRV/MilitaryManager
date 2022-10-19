@@ -15,4 +15,8 @@ export class AttributeService extends BaseService<any>{
     configService: ClientConfigurationService) {
     super(httpService, 'attribute', configService, AttributeModel, ServiceType.units);
   }
+
+  GetAttributeValues(id:number|null) {
+    return this.httpService.get(`${this.collection.baseUrl}attribute/${id}`);
+  }
 }
