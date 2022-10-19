@@ -16,7 +16,6 @@ namespace MilitaryManager.Core.Services
     public class UnitUserService : IUnitUserService
     {
         protected readonly IRepository<UnitUser, int> _unitUserRepository;
-        protected readonly IProfileService _profileService;
         protected readonly IUnitService _unitService;
         protected readonly IHttpContextAccessor _httpContextAccessor;
 
@@ -39,12 +38,7 @@ namespace MilitaryManager.Core.Services
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var newUnitUser = await _unitUserRepository.AddAsync(new UnitUser { Id = newUnit.Id, UserId = userId });
             await _unitUserRepository.SaveChangesAcync();
-            foreach (var profile in unit.Profiles)
-            {
-                profile.UnitId = newUnit.Id;
-                await _profileService.CreateProfileAsync(profile);
-            }
-
+            
             return newUnitUser;
         }
     }

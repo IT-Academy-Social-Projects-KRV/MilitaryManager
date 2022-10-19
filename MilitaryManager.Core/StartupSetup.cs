@@ -17,7 +17,6 @@ namespace MilitaryManager.Core
             services.AddScoped<IUnitUserService, UnitUserService>();
             services.AddScoped<IAuditService, AuditService>();
             services.AddScoped<IAttributeService, AttributeService>();
-            services.AddScoped<IProfileService, ProfileService>();
         }
         public static void AddCustomAttachmentsServices(this IServiceCollection services)
         {
