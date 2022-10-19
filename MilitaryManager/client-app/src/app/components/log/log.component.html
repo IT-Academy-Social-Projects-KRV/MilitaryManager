@@ -1,57 +1,59 @@
-<div class="card">
-  <p-table [value]="logs" [paginator]="true" [rows]="10"
-    [showCurrentPageReport]="true" responsiveLayout="scroll"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords}
-    entries" [rowsPerPageOptions]="[10,25,50]">
-    <ng-template pTemplate="header">
-      <tr>
-        <th style="width: 3rem"></th>
-        <th>Id</th>
-        <th>TableName</th>
-        <th>RowId</th>
-        <th>ChangeTypeCode</th>
-        <th>Date</th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-log let-expanded="expanded">
-      <tr>
-        <td>
-          <button (click)="onClick(log)" type="button" pButton pRipple
-            [pRowToggler]="log" class="p-button-text p-button-rounded
-            p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
-        </td>
-        <td>{{log.id}}</td>
-        <td>{{log.tableName}}</td>
-        <td>{{log.rowId}}</td>
-        <td>{{log.changeTypeCode}}</td>
-        <td>{{log.date}}</td>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="rowexpansion" let-log>
-      <tr>
-        <td colspan="7">
-          <div class="p-3">
-            <p-table [value]="log.changeValues" dataKey="id">
-              <ng-template pTemplate="header">
-                <tr>
-                  <th>Id</th>
-                  <th>OldValue</th>
-                  <th>NewValue</th>
-                  <th>ColumnName</th>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-changeValue>
-                <tr>
-                  <td>{{changeValue.id}}</td>
-                  <td>{{changeValue.oldValue}}</td>
-                  <td>{{changeValue.newValue}}</td>
-                  <td>{{changeValue.columnName}}</td>
-                </tr>
-              </ng-template>
-            </p-table>
-          </div>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
+<div class="content-section implementation">
+  <div class="card">
+    <p-table [value]="logs" [paginator]="true" [rows]="10"
+      [showCurrentPageReport]="true" responsiveLayout="scroll"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords}
+      entries" [rowsPerPageOptions]="[10,25,50]">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 3rem"></th>
+          <th>Id</th>
+          <th>TableName</th>
+          <th>RowId</th>
+          <th>ChangeTypeCode</th>
+          <th>Date</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-log let-expanded="expanded">
+        <tr>
+          <td>
+            <button (click)="onClick(log)" type="button" pButton pRipple
+              [pRowToggler]="log" class="p-button-text p-button-rounded
+              p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+          </td>
+          <td>{{log.id}}</td>
+          <td>{{log.tableName}}</td>
+          <td>{{log.rowId}}</td>
+          <td>{{log.changeTypeCode}}</td>
+          <td>{{log.date}}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="rowexpansion" let-log>
+        <tr>
+          <td colspan="7">
+            <div class="p-p-3">
+              <p-table [value]="log.changeValues" dataKey="id">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>Id</th>
+                    <th>OldValue</th>
+                    <th>NewValue</th>
+                    <th>ColumnName</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-changeValue>
+                  <tr>
+                    <td>{{changeValue.id}}</td>
+                    <td>{{changeValue.oldValue}}</td>
+                    <td>{{changeValue.newValue}}</td>
+                    <td>{{changeValue.columnName}}</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
 </div>
