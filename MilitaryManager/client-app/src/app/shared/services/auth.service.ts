@@ -18,14 +18,14 @@ export class AuthService {
       authority: "https://localhost:5007",
       client_id: "angular",
       redirect_uri: `${location.origin}/SignInCallback`,
-      scope: "openid profile unitsAPI attachmentsAPI",
+      scope: "openid profile unitsAPI IdentityServerApi",
       response_type: "code",
       post_logout_redirect_uri: `${location.origin}/SignOutCallback`,
       stateStore: new WebStorageStateStore({ store: new CookieStorage() }),
       userStore: new WebStorageStateStore({ store: new CookieStorage() })
     }
   }
-  constructor() { 
+  constructor() {
     this._userManager = new UserManager(this.idpSettings);
   }
 
@@ -74,7 +74,7 @@ export class AuthService {
       return false;
     })
   }
-  
+
   private checkUser = (user : User): boolean => {
     return !!user && !user.expired;
   }

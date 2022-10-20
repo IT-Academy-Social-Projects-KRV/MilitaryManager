@@ -19,6 +19,7 @@ using MilitaryManager.Core.Entities.ProfileEntity;
 using MilitaryManager.Core.Entities.RankEntity;
 using MilitaryManager.Core.Entities.UnitEntity;
 using MilitaryManager.Infrastructure.Data.SeedData;
+using MilitaryManager.Core.Entities.AttributeValueEntity;
 
 namespace MilitaryManager.Infrastructure.Data
 {
@@ -41,6 +42,7 @@ namespace MilitaryManager.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new ProfileConfiguration());
             modelBuilder.ApplyConfiguration(new RankConfiguration());
             modelBuilder.ApplyConfiguration(new UnitConfiguration());
+            modelBuilder.ApplyConfiguration(new UnitUserConfiguration());
             modelBuilder.ApplyConfiguration(new DecreeConfiguration());
             modelBuilder.ApplyConfiguration(new StatusConfiguration());
             modelBuilder.ApplyConfiguration(new StatusHistoryConfiguration());
@@ -51,6 +53,7 @@ namespace MilitaryManager.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new ChangeValueConfiguration());
             modelBuilder.ApplyConfiguration(new ColumnConfiguration());
             modelBuilder.ApplyConfiguration(new TableConfiguration());
+            modelBuilder.ApplyConfiguration(new AttributeValueConfiguration());
 
             modelBuilder.Entity<ChangeValue>(entity =>
             {
@@ -71,6 +74,7 @@ namespace MilitaryManager.Infrastructure.Data
         public DbSet<Rank> Ranks { get; set; }
         public DbSet<Division> Divisions { get; set; }
         public DbSet<Unit> Units { get; set; }
+        public DbSet<UnitUser> UnitUsers { get; set; }
         public DbSet<Decree> Decrees { get; set; }
         public DbSet<Status> Statuses { get; set; }
         public DbSet<StatusHistory> StatusHistories { get; set; }
@@ -81,5 +85,6 @@ namespace MilitaryManager.Infrastructure.Data
         public DbSet<ChangeValue> ChangeValue { get; set; }
         public DbSet<Column> Column { get; set; }
         public DbSet<Table> Table { get; set; }
+        public DbSet<AttributeValue> AttributeValue { get; set; }
     }
 }

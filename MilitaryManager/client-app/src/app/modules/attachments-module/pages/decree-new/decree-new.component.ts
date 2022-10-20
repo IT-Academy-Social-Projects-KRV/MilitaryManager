@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChildren, ViewContainerRef } from '@angular/core';
-import { Test1Component } from 'src/app/components/test1/test1.component';
+import { Component, ComponentRef, OnInit, QueryList, ViewChildren, ViewContainerRef } from '@angular/core';
+import { TemplateModel } from 'src/app/shared/models/template.model';
 import { ApiService } from 'src/app/shared/services/api/api.service';
 import { DecreeAddComponent } from '../decree-add/decree-add.component';
 
@@ -10,15 +10,12 @@ import { DecreeAddComponent } from '../decree-add/decree-add.component';
 })
 export class DecreeNewComponent implements OnInit {
   
-  //@ts-ignore
-  templates: TemplateModel[];
-  //@ts-ignore
+  templates: TemplateModel[] = [];
   tabs: string[] = []
   currentTab: number = 0;
-  //@ts-ignore
-  @ViewChildren('tabDoc', {static : false, read : ViewContainerRef}) targets: QueryList<any>;
-  //@ts-ignore
-  private componentRef: ComponentRef<any>;
+  @ViewChildren('tabDoc', { read: ViewContainerRef })
+  targets!: QueryList<any>;
+  private componentRef!: ComponentRef<any>;
 
   constructor(public apiService: ApiService) { }
 
@@ -41,8 +38,7 @@ export class DecreeNewComponent implements OnInit {
     }, 1)    
   }
 
-  //@ts-ignore
-  handleClose(e) {
+  handleClose(e: any) {
     this.tabs.splice(e.index - 2, 1);
     if(this.currentTab == e.index)
       this.currentTab = e.index - 1;

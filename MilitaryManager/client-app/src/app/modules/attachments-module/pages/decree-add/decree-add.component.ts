@@ -38,7 +38,7 @@ export class DecreeAddComponent implements OnInit {
           firstName: element.soldier?.firstName,
           secondName: element.soldier?.secondName,
           currentDate: dateFormatter.format(new Date(element.currentDate!)),
-          unitNumber: element.soldier?.division?.divisionNumber,
+          //unitNumber: element.soldier?.division?.divisionNumber,
           decreeNumber: element.decreeNumber
         };
         this.decreeService.single.create(decreeInformation).subscribe(
