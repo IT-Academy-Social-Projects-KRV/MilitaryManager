@@ -38,10 +38,13 @@ export class ProfileComponent implements OnInit {
         .subscribe(result => {
           this._unitService.single.getById(result["id"])
             .subscribe(result => {
+              console.log(result)
               this.unitModel = result;
               this.userName = this.unitModel?.lastName?.concat(" " + <string>this.unitModel?.firstName + " ").concat(<string>this.unitModel?.secondName);
-              //this.height = this.unitModel
-              //this.weight = this.unitModel
+              // @ts-ignore
+              this.height = this.unitModel?.profiles["6"].value
+              // @ts-ignore
+              this.weight = this.unitModel?.profiles["5"].value
               this.rank = this.unitModel?.rank
               this.position = this.unitModel?.position
               // @ts-ignore

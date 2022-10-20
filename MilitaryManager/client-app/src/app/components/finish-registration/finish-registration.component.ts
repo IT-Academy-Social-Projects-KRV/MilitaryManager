@@ -36,7 +36,9 @@ export class FinishRegistrationComponent implements OnInit {
     headSize: ["", Validators.required],
     gasMaskSize: ["", Validators.required],
     uniform: ["", Validators.required],
-    bloodType: ["", Validators.required]
+    bloodType: ["", Validators.required],
+    weight: ["", Validators.required],
+    height: ["", Validators.required]
   })
 
   divisions: DivisionModel[] = [];
@@ -45,7 +47,7 @@ export class FinishRegistrationComponent implements OnInit {
   ranks: RankModel[] = [];
   uniforms: string[] = [];
   blood_types: string[] = [];
-  
+
   constructor(private _unitUserService : UnitUserService,
     private _divisionsService: DivisionsService,
     private _positionService: PositionService,
@@ -78,6 +80,8 @@ export class FinishRegistrationComponent implements OnInit {
       newUnit.profiles.push(new ProfileModel(0, this.attributes.find(x => x.name=="Розмір протигазу")?.id, 0, this.commanderForm.get("gasMaskSize")?.value));
       newUnit.profiles.push(new ProfileModel(0, this.attributes.find(x => x.name=="Тип форми")?.id, 0, this.commanderForm.get("uniform")?.value));
       newUnit.profiles.push(new ProfileModel(0, this.attributes.find(x => x.name=="Група крові")?.id, 0, this.commanderForm.get("bloodType")?.value));
+      newUnit.profiles.push(new ProfileModel(0, this.attributes.find(x => x.name=="Вага")?.id, 0, this.commanderForm.get("weight")?.value));
+      newUnit.profiles.push(new ProfileModel(0, this.attributes.find(x => x.name=="Зріст")?.id, 0, this.commanderForm.get("height")?.value));
 
       this._unitUserService.single.create(newUnit)
         .subscribe(
