@@ -52,3 +52,6 @@ MilitaryManager.Attachments.API/wwwroot/documents/*.pdf
 
 # .\MilitaryManager.Attachments.API\wwwroot\fonts\.uuid
 .uuid
+
+# Identity Server wwwroot libs
+!MilitaryManager.IdentityServer/wwwroot/lib/*
