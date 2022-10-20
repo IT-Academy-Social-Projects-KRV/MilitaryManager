@@ -26,7 +26,7 @@ namespace MilitaryManager.Units.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] UnitDTO unit)
+        public async Task<IActionResult> Create([FromBody] UnitRequestDTO unit)
         {
             return Ok(await _unitUserService.CreateUnitUserAsync(unit));
         }
