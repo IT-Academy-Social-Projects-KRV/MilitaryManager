@@ -40,6 +40,7 @@ namespace MilitaryManager.IdentityServer
 
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddTransient<ICommanderService, CommanderService>();
             services.AddHttpContextAccessor();
 
             // Adds IdentityServer

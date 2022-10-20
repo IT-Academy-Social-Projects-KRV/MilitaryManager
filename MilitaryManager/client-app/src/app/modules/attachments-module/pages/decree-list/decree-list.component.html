@@ -1,0 +1,59 @@
+<div>
+    <p-toast></p-toast>
+    <p-confirmPopup></p-confirmPopup>
+    <p-table #dt [value]="decrees" [scrollable]="true" [globalFilterFields]="['name']" scrollHeight="50vh">
+        <ng-template pTemplate="caption">
+            <div class="table-header">
+                <div>
+                    <button pButton pRipple [routerLink]="['/decree/new']" type="button" label="Створити наказ" icon="pi pi-plus" iconPos="left" class="p-button p-mr-2"></button>
+                </div>              
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Назва" />
+                </span>  
+            </div> 
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th *ngFor="let col of cols" [ngStyle]="{'width': col.width}">
+                    {{col.header}}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-decree>
+            <tr>
+                <td>
+                    {{decree.name}}
+                </td>
+                <td>
+                    {{decree.path}}
+                    <i class="pi pi-download" (click)="download(decree.id, decree.path)" [ngStyle]="{color:'var(--primary-color)'}" style="cursor: pointer"></i>
+                </td>
+                <td>
+                    {{decree.pathSigned}}
+                    <input type="file" accept="application/pdf" #file placeholder="Choose file" (change)="uploadFile(decree.id,file.files)" style="display:none;">   
+                    <i *ngIf="!isUploading && decree.pathSigned != null" class="pi pi-download" (click)="downloadSigned(decree.id, decree.pathSigned)" [ngStyle]="{color:'var(--primary-color)'}" style="cursor: pointer;"></i>
+                    <i *ngIf="!isUploading && decree.pathSigned != null && decree.statusId != 4" class="pi pi-upload p-pl-1" (click)="file.click()" [ngStyle]="{color:'var(--primary-color)'}" style="cursor: pointer;"></i>      
+                    <i *ngIf="!isUploading && decree.pathSigned == null" class="pi pi-upload" (click)="file.click()" [ngStyle]="{color:'var(--primary-color)'}" style="cursor: pointer; display: flex; justify-content: center;"></i>  
+                </td>
+                <td>
+                    {{decree.timeStamp| date : 'dd.MM.yyyy HH:mm'}}
+                </td>
+                <td>
+                    {{decree.template}}
+                </td>
+                <td>
+                    <span [class]="'decree-badge status-' + decree.status.toLowerCase()">{{ statuses[decree.statusId - 1].name}}</span>
+                </td>
+                <td [ngStyle]="{'width': '5%'}">
+                    <button [disabled]="decree.statusId != 3" pButton pRipple type="button" icon="pi pi-check" (click)="completeDecree($event, decree.id)" [class]="'p-button-rounded p-button-text p-mr-2 ' + (decree.statusId != 3 ?'p-button-secondary' : 'p-button-success')"></button>
+                </td>
+            </tr>
+        </ng-template>        
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="5">Накази не знайдено.</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

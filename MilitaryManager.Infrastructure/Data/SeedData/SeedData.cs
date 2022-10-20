@@ -55,8 +55,19 @@ namespace MilitaryManager.Infrastructure.Data.SeedData
                     Id = 1,
                     Type = "Протокол",
                     Path = "data/document_templates/template_01.xml"
-                }
-                );
+                },
+                new Template()
+                {
+                    Id = 2,
+                    Type = "Виплата",
+                    Path = "data/document_templates/template_02.xml"
+                },
+                new Template()
+                {
+                    Id = 3,
+                    Type = "Переведення",
+                    Path = "data/document_templates/template_03.xml"
+                });
         }
 
         public static void SeedChangeTypes(ModelBuilder builder)
