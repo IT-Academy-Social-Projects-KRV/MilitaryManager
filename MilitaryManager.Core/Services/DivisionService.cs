@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace MilitaryManager.Core.Services
 {
-    public class DivisionService: IDivisionService
+    public class DivisionService : IDivisionService
     {
         protected readonly IRepository<Division, int> _divisionRepository;
         protected readonly IMapper _mapper;
@@ -39,7 +39,7 @@ namespace MilitaryManager.Core.Services
             return _mapper.Map<DivisionDTO>(getDivision);
         }
 
-        public async Task<DivisionDTO> CreateDivisionAsync(DivisionDTO dto)
+        public async Task<DivisionDTO> CreateDivisionAsync(DivisionRequestDTO dto)
         {
             var division = _mapper.Map<Division>(dto);
             var newDivision = await _divisionRepository.AddAsync(division);
@@ -48,7 +48,7 @@ namespace MilitaryManager.Core.Services
             return _mapper.Map<DivisionDTO>(newDivision);
         }
 
-        public async Task<DivisionDTO> UpdateDivisionAsync(DivisionDTO dto)
+        public async Task<DivisionDTO> UpdateDivisionAsync(DivisionRequestDTO dto)
         {
             var division = _mapper.Map<Division>(dto);
             var updateDivision = await _divisionRepository.UpdateAsync(division);
