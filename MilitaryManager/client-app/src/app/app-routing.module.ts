@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SigninRedirectCallbackComponent } from './components/signin-redirect-callback/signin-redirect-callback.component';
 import { SignoutRedirectCallbackComponent } from './components/signout-redirect-callback/signout-redirect-callback.component';
@@ -10,6 +10,7 @@ import { AddCommanderComponent } from './components/add-commander/add-commander.
 import  { AdminGuard } from './guards/AdminGuard'
 import { UnitCommanderGuard } from './guards/UnitCommanderGuard'
 import { SubUnitCommanderGuard } from './guards/SubUnitCommanderGuard'
+import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
 
 const routes: Routes = [
     {path:'', component:AppLayoutComponent,
@@ -19,6 +20,8 @@ const routes: Routes = [
     { path: 'test1', component: Test1Component },
     { path: 'test2', component: Test2Component },
     { path: 'addCommander', component: AddCommanderComponent, canActivate: [AdminGuard] },
+    { path: 'decree', loadChildren: () => import("./modules/attachments-module/attachments.module").then(m => m.AttachmentsModule) },
+    { path: 'finishRegistration', component: FinishRegistrationComponent},
     { path: 'units', loadChildren: () => import("./modules/units-module/units.module").then(m => m.UnitsModule) },
     { path: 'divisions', loadChildren: () => import("./modules/division-module/division.module").then(m => m.DivisionModule) },
     { path: 'SignInCallback', component: SigninRedirectCallbackComponent },

@@ -1,4 +1,5 @@
-﻿using MilitaryManager.Core.Entities.EntityToAttributeEntity;
+﻿using MilitaryManager.Core.Entities.AttributeValueEntity;
+using MilitaryManager.Core.Entities.EntityToAttributeEntity;
 using MilitaryManager.Core.Entities.ProfileEntity;
 using MilitaryManager.Core.Interfaces;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace MilitaryManager.Core.Entities.AttributeEntity
         public int Id { get; set; }
         public string Name { get; set; }
 
+        public ICollection<AttributeValue> AttributeValues { get; set; }
         public ICollection<Profile> Profiles { get; set; }
         public ICollection<EntityToAttribute> EntityToAttributes { get; set; }
     }
