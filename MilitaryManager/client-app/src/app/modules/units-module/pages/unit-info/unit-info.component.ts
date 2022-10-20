@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {UnitModel} from "../../../../shared/models/unit.model";
 import {UnitsService} from "../../../../shared/services/api/unit.service";
 import {PositionService} from "../../../../shared/services/api/position.service";
@@ -21,7 +21,7 @@ export class UnitInfoComponent implements OnInit {
   }
 
   public lastNameInput = document.querySelector('#lastNameInput');
-  public firstNameInput = document.querySelector('#firstNameInput');
+  // public firstNameInput = document.querySelector('#firstNameInput');
   public secondNameInput = document.querySelector('#secondNameInput');
 
   public divisionInput = document.querySelector('#divisionInput');
@@ -35,67 +35,78 @@ export class UnitInfoComponent implements OnInit {
   public unitProfiles: ProfileModel[] = [];
 
   // public static unit: UnitModel = new UnitModel(0);
-  public  unit: UnitModel = new UnitModel(0);
+  public unit: UnitModel = new UnitModel();
+
+  public propName = "123";
+  @Input() id: number;
+
+  public loading: boolean = false;
 
   ngOnInit(): void {
+    // this.unit = new UnitModel();
   }
 
 
-  getSelectedUnitDataById(id: number): void {
+  getSelectedUnitDataById(): void {
     // let firstNameInput = document.querySelector('#inputFirstName');
     // let nameInput = document.querySelector('#inputFirstName');
     //  let divisionNameInput = document.querySelector('#divisionNameInput');
-
-    this.unitsService.single.getById(id)
+    this.loading = true;
+    this.unitsService.single.getById(this.id)
       .subscribe((u) => {
-        this.unit = new UnitModel(u);
+        this.unit = u;
+        // this.unit.firstName = u.firstName;
+        // console.log(this.unit.firstName);
 
 
-        // @ts-ignore
-        this.lastNameInput.value = this.unit.lastName;
-        // @ts-ignore
-        this.firstNameInput.value = this.unit.firstName;
-        // @ts-ignore
-        this.secondNameInput.value = this.unit.secondName;
+        // // @ts-ignore
+        // this.lastNameInput.value = this.unit.lastName;
+        // // @ts-ignore
+        // // this.firstNameInput.value = this.unit.firstName;
+        // // @ts-ignore
+        // this.secondNameInput.value = this.unit.secondName;
+        //
+        // // division
+        // // @ts-ignore
+        // this.divisionInput.value = this.unit.division.name;
+        //
+        // // parent
+        // if (this.unit.parent == null) {
+        //   // @ts-ignore
+        //   this.commanderInput.value = 'Немає'
+        // } else {
+        //   // @ts-ignore
+        //   this.commanderInput.value = this.unit.parent.lastName + ' ' + this.unit.parent.firstName + ' ' + this.unit.parent.secondName;
+        // }
+        //
+        // // rank
+        // // @ts-ignore
+        // this.rankInput.value = this.unit.rank;
+        //
+        // // position
+        // // @ts-ignore
+        // this.positionInput.value = this.unit.position;
+        //
+        // // @ts-ignore
+        // this.unitProfiles = this.unit.profiles;
+        //
+        // // console.log(this.unitProfiles[0])
+        // // console.log('')
+        //
+        // for (let p of this.unitProfiles) {
+        //   // console.log(p.attribute.name)
+        //   console.log(p.name)
+        //   console.log(p.value)
+        // }
+        //
+        // let profiles_id = document.querySelector('#profiles_id');
+        // // @ts-ignore
+        // profiles_id.value = this.unitProfiles[0].name;
+        //
+        // let profiles_id2 = document.querySelector('#profiles_id2');
+        // // @ts-ignore
+        // profiles_id2.value = this.unitProfiles[0].value;
 
-        // division
-        // @ts-ignore
-        this.divisionInput.value = this.unit.division.name;
-
-        // parent
-        if (this.unit.parent == null) {
-          // @ts-ignore
-          this.commanderInput.value = 'Немає'
-        } else {
-          // @ts-ignore
-          this.commanderInput.value = this.unit.parent.lastName + ' ' + this.unit.parent.firstName + ' ' + this.unit.parent.secondName;
-        }
-
-        // rank
-        // @ts-ignore
-        this.rankInput.value = this.unit.rank;
-
-        // position
-        // @ts-ignore
-        this.positionInput.value = this.unit.position;
-
-        // @ts-ignore
-        this.unitProfiles = [this.unit.profiles];
-
-        console.log(this.unitProfiles[0])
-        console.log('')
-
-        for (let p of this.unitProfiles) {
-          // console.log(p.attribute.name)
-          console.log(p.name)
-          console.log(p.value)
-        }
-
-        let profiles_id = document.querySelector('#profiles_id');
-        // @ts-ignore
-        profiles_id.value = this.unitProfiles[0];
-
-        // {{p.attribute.name}} : {{p.value}}
 
       });
   }
@@ -131,11 +142,12 @@ export class UnitInfoComponent implements OnInit {
 
 
     // @ts-ignore
+    console.log("unit info");
     console.log(this.unit);
 
-    console.log(this.unitProfiles);
-    // @ts-ignore
-    console.log(this.unit.profiles);
+    // console.log(this.unitProfiles);
+    // // @ts-ignore
+    // console.log(this.unit.profiles);
     // @ts-ignore
     // profiles_id.value = this.unit.profiles[0].value;
   }

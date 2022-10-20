@@ -20,13 +20,20 @@
     <hr>
 
     <div class="p-float-label">
-      <input type="text" pInputText id="firstNameInput" [value]=unit.firstName readonly>
+<!--      <span>{{propName}}</span>-->
+<!--      <input [(ngModel)]="propName">-->
+<!--      <select [(ngModel)]="unit.firstName">-->
+
+      <input type="text" pInputText id="firstNameInput" [(ngModel)]="unit.firstName" readonly>
       <label for="firstNameInput">Ім'я</label>
+
+      <input [(ngModel)]="unit.firstName">
+
     </div>
     <hr>
-
-    <div class="p-float-label">
-      <input type="text" pInputText id="secondNameInput" [value]=unit.secondName readonly>
+<!--    [loading]="loading"-->
+    <div class="p-float-label" >
+      <input type="text" pInputText id="secondNameInput" [value]=unit.secondName readonly >
       <label for="secondNameInput">По батькові</label>
     </div>
     <hr>
@@ -72,13 +79,23 @@
       <hr>
       <input type="text" pInputText id="profiles_id">
       <ul>
-        <li *ngFor="let p of this.unitProfiles">
-<!--          {{p.name}} -->
-          : {{p.value}}
+        <li *ngFor="let p of unitProfiles">
+          {{p.name}} : {{p.value}}
         </li>
       </ul>
+      <input type="text" pInputText id="profiles_id2">
 
     </div>
 
   </div>
+  <div class="card">
+    <div class="p-float-label">
+      Обладнання
+      <hr>
+      <input type="text" pInputText >
+    </div>
+  </div>
 </div>
+
+
+

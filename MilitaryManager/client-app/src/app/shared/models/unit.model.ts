@@ -9,7 +9,7 @@ export class UnitModel extends BaseModel {
   public lastName: string | null = null;
   public secondName: string | null = null;
   public label: string | null = null;
-  public firstName: string | null = null;
+  public firstName: string = 'this is firstname';
   public divisionId: number | null = null;
   public rankId: number | null = null;
   public positionId: number | null = null;
@@ -26,13 +26,7 @@ export class UnitModel extends BaseModel {
   public profiles: ProfileModel[] | null = null;
   public unitToEquipments: UnitToEquipmentModel[] | null = null;
 
-  // constructor(u: UnitModel) {
-  //   // @ts-ignore
-  //   super(u.id);
-  //
-  //   this.firstName = u.firstName
-  //   this.lastName = u.lastName;
-  //   this.profiles = u.profiles;
-  //
-  // }
+  constructor() {
+    super(0);
+  }
 }
