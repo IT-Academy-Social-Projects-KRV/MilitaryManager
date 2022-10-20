@@ -10,6 +10,6 @@ namespace MilitaryManager.Core.Interfaces.Services
     public interface IUnitUserService
     {
         Task<UnitUser> GetUnitUserAsync(string id);
-        Task<UnitUser> CreateUnitUserAsync(UnitDTO unit);
+        Task<UnitUser> CreateUnitUserAsync(UnitRequestDTO unit);
     }
 }
