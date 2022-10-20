@@ -1,87 +1,83 @@
 <div class="surface-card p-4 shadow-2 border-round w-full lg:w-10">
     <h2>Будь ласка завершіть реєстрацію</h2>
-    <div class="p-grid p-mt-4">
-        <div class=" p-col-4">
-            <span class="p-float-label">
-                <input id="float-input" type="text" pInputText [(ngModel)]="firstname"
-                    [ngClass]="{'ng-invalid ng-dirty': useRedClass}">
-                <label for="float-input">Ім'я</label>
-            </span>
+    <form (submit)="EndRegistrationBtn()" [formGroup]="commanderForm">
+        <div class="p-grid p-mt-4">
+            <div class=" p-col-4">
+                <span class="p-float-label">
+                    <input id="float-input" type="text" pInputText formControlName="firstName">
+                    <label for="float-input">Ім'я</label>
+                </span>
+            </div>
+            <div class=" p-col-4">
+                <span class="p-float-label">
+                    <input id="float-input" type="text" pInputText formControlName="secondName">
+                    <label for="float-input">По батькові</label>
+                </span>
+            </div>
+            <div class=" p-col-4">
+                <span class="p-float-label">
+                    <input id="float-input" type="text" pInputText formControlName="lastName">
+                    <label for="float-input">Прізвище</label>
+                </span>
+            </div>
+        </div>
+        <div class="p-grid p-mt-2">
+            <div class=" p-col-4">
+                <span class>
+                    <p-dropdown [options]="ranks" formControlName="rankId" placeholder="Ранг" optionLabel="name" optionValue="id"
+                        [showClear]="true" ></p-dropdown>
+                </span>
+            </div>
+            <div class=" p-col-4">
+                <span class>
+                    <p-dropdown [options]="positions"formControlName="positionId" placeholder="Посада"
+                        optionLabel="name" optionValue="id" [showClear]="true"></p-dropdown>
+                </span>
+            </div>
+            <div class=" p-col-4">
+                <span class>
+                    <p-dropdown [options]="divisions" formControlName="divisionId" placeholder="Частина"
+                        optionLabel="name" optionValue="id" [showClear]="true"></p-dropdown>
+                </span>
+            </div>
+        </div>
+        <div class="p-grid p-mt-2">
+            <div class=" p-col-4">
+                <span class="p-float-label">
+                    <input id="float-input" type="text" pInputText formControlName="footSize">
+                    <label for="float-input">Розмір ноги</label>
+                </span>
+            </div>
+            <div class=" p-col-4">
+                <span class="p-float-label">
+                    <input id="float-input" type="text" pInputText formControlName="headSize">
+                    <label for="float-input">Розмір голови</label>
+                </span>
+            </div>
+            <div class=" p-col-4">
+                <span class="p-float-label">
+                    <input id="float-input" type="text" pInputText formControlName="gasMaskSize">
+                    <label for="float-input">Розмір противогазу</label>
+                </span>
+            </div>
+        </div>
+        <div class="p-grid p-mt-2">
+            <div class=" p-col-4">
+                <span class>
+                    <p-dropdown [options]="uniforms" formControlName="uniform" placeholder="Тип форми" 
+                        [showClear]="true"></p-dropdown>
+                </span>
+            </div>
+            <div class=" p-col-6">
+                <span class>
+                    <p-dropdown [options]="blood_types" formControlName="bloodType" placeholder="Група крові"
+                        [showClear]="true"></p-dropdown>
+                </span>
+            </div>
         </div>
         <div class=" p-col-4">
-            <span class="p-float-label">
-                <input id="float-input" type="text" pInputText [(ngModel)]="middlename"
-                    [ngClass]="{'ng-invalid ng-dirty': useRedClass}">
-                <label for="float-input">По батькові</label>
-            </span>
+            <p-button type="submit" label="Завершити"></p-button>
+            <p-messages></p-messages>
         </div>
-        <div class=" p-col-4">
-            <span class="p-float-label">
-                <input id="float-input" type="text" pInputText [(ngModel)]="lastname"
-                    [ngClass]="{'ng-invalid ng-dirty': useRedClass}">
-                <label for="float-input">Прізвище</label>
-            </span>
-        </div>
-    </div>
-
-    <div class="p-grid p-mt-2">
-        <div class=" p-col-4">
-            <span class>
-                <p-dropdown [options]="ranks" [(ngModel)]="selected_rank" placeholder="Ранг" optionLabel="name"
-                    [showClear]="true" [ngClass]="{'ng-invalid ng-dirty': useRedClass}"></p-dropdown>
-            </span>
-        </div>
-        <div class=" p-col-4">
-            <span class>
-                <p-dropdown [options]="positions" [(ngModel)]="selected_position" placeholder="Посада"
-                    optionLabel="name" [showClear]="true" [ngClass]="{'ng-invalid ng-dirty': useRedClass}"></p-dropdown>
-            </span>
-        </div>
-        <div class=" p-col-4">
-            <span class>
-                <p-dropdown [options]="divisions" [(ngModel)]="selected_division" placeholder="Частина"
-                    optionLabel="name" [showClear]="true" [ngClass]="{'ng-invalid ng-dirty': useRedClass}"></p-dropdown>
-            </span>
-        </div>
-    </div>
-    <div class="p-grid p-mt-2">
-        <div class=" p-col-4">
-            <span class="p-float-label">
-                <input id="float-input" type="text" pInputText [(ngModel)]="foot_size"
-                    [ngClass]="{'ng-invalid ng-dirty': useRedClass}">
-                <label for="float-input">Розмір ноги</label>
-            </span>
-        </div>
-        <div class=" p-col-4">
-            <span class="p-float-label">
-                <input id="float-input" type="text" pInputText [(ngModel)]="head_size"
-                    [ngClass]="{'ng-invalid ng-dirty': useRedClass}">
-                <label for="float-input">Розмір голови</label>
-            </span>
-        </div>
-        <div class=" p-col-4">
-            <span class="p-float-label">
-                <input id="float-input" type="text" pInputText [(ngModel)]="gas_mask_size"
-                    [ngClass]="{'ng-invalid ng-dirty': useRedClass}">
-                <label for="float-input">Розмір противогазу</label>
-            </span>
-        </div>
-    </div>
-    <div class="p-grid p-mt-2">
-        <div class=" p-col-4">
-            <span class>
-                <p-dropdown [options]="uniforms" [(ngModel)]="selected_uniform" placeholder="Тип форми" 
-                    [showClear]="true" [ngClass]="{'ng-invalid ng-dirty': useRedClass}"></p-dropdown>
-            </span>
-        </div>
-        <div class=" p-col-6">
-            <span class>
-                <p-dropdown [options]="blood_types" [(ngModel)]="selected_blood_type" placeholder="Група крові"
-                    [showClear]="true" [ngClass]="{'ng-invalid ng-dirty': useRedClass}"></p-dropdown>
-            </span>
-        </div>
-    <div class=" p-col-4">
-        <p-button (click)="EndRegistrationBtn()" label="Завершити"></p-button>
-        <p-messages></p-messages>
-    </div>
+    </form>
 </div>

@@ -8,12 +8,13 @@ import { PositionService } from 'src/app/shared/services/api/position.service';
 import { RankService } from 'src/app/shared/services/api/rank.service';
 import { MessageService } from 'primeng/api';
 import { HttpErrorResponse } from '@angular/common/http';
-import { UnitModel } from 'src/app/shared/models/unit.model';
 import { delay, timeout } from 'rxjs';
 import { Router } from '@angular/router';
 import { AttributeModel } from 'src/app/shared/models/attribute.model';
 import { AttributeService } from 'src/app/shared/services/api/attribute.service';
 import { ProfileModel } from 'src/app/shared/models/profile.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UnitModel } from 'src/app/shared/models/unit.model';
 
 @Component({
   selector: 'app-finish-registration',
@@ -23,34 +24,36 @@ import { ProfileModel } from 'src/app/shared/models/profile.model';
 export class FinishRegistrationComponent implements OnInit {
 
   useRedClass: boolean = false;
-  firstname: string | null = null;
-  lastname: string | null = null;
-  middlename?: string | null = null;
-  foot_size?: string | null = null;
-  head_size?: string | null = null;
-  gas_mask_size?: string | null = null;
+
+  commanderForm: FormGroup = this._fb.group({
+    firstName: ["", Validators.required],
+    lastName: ["", Validators.required],
+    secondName: ["", Validators.required],
+    divisionId: [0, Validators.required],
+    positionId: [0, Validators.required],
+    rankId: [0, Validators.required],
+    footSize: ["", Validators.required],
+    headSize: ["", Validators.required],
+    gasMaskSize: ["", Validators.required],
+    uniform: ["", Validators.required],
+    bloodType: ["", Validators.required]
+  })
 
   divisions: DivisionModel[] = [];
   positions: PositionModel[] = [];
   attributes: AttributeModel[] = [];
-  profiles: ProfileModel[] = [];
   ranks: RankModel[] = [];
   uniforms: string[] = [];
   blood_types: string[] = [];
-
-  selected_division?: DivisionModel;
-  selected_position?: PositionModel;
-  selected_rank?: RankModel;
-  selected_uniform?: string;
-  selected_blood_type?: string;
-
+  
   constructor(private _unitUserService : UnitUserService,
     private _divisionsService: DivisionsService,
     private _positionService: PositionService,
     private _rankService: RankService,
     private _attributeService: AttributeService,
     private messageService: MessageService,
-    private _router: Router) { }
+    private _router: Router,
+    private _fb: FormBuilder) { }
 
   ngOnInit(): void {
     this._divisionsService.GetAllDivisions().subscribe((divisions)=>{this.divisions = divisions});
@@ -65,21 +68,18 @@ export class FinishRegistrationComponent implements OnInit {
   }
 
   EndRegistrationBtn(){
-    if (!(this.firstname == '' || this.lastname == '' || this.middlename =='' || this.selected_position == null
-      || this.selected_rank == null || this.selected_division == null || this.selected_blood_type==null
-      || this.selected_uniform == null || this.foot_size == '' || this.head_size == '' || this.gas_mask_size == '')) {
+      if(this.commanderForm.valid){
 
-      this.useRedClass = false;
+      let newUnit: UnitModel = this.commanderForm.value;
+      newUnit.profiles = [];
 
-      this.profiles.push(new ProfileModel(0, this.attributes.filter(x=>x.name?.includes("Розмір ноги"))[0].id, 0, this.foot_size));
-      this.profiles.push(new ProfileModel(0, this.attributes.filter(x=>x.name?.includes("Розмір голови"))[0].id, 0, this.head_size));
-      this.profiles.push(new ProfileModel(0, this.attributes.filter(x=>x.name?.includes("Розмір протигазу"))[0].id, 0, this.gas_mask_size));
-      this.profiles.push(new ProfileModel(0, this.attributes.filter(x=>x.name?.includes("Тип форми"))[0].id, 0, this.selected_uniform));
-      this.profiles.push(new ProfileModel(0, this.attributes.filter(x=>x.name?.includes("Група крові"))[0].id, 0, this.selected_blood_type));
-    
-      this._unitUserService.single.create(
-        new UnitModel(0, this.lastname, this.firstname, this.middlename, this.selected_division.id,
-        this.selected_rank._id, this.selected_position._id,null, this.profiles))
+      newUnit.profiles.push(new ProfileModel(0, this.attributes.find(x => x.name=="Розмір ноги")?.id, 0, this.commanderForm.get("footSize")?.value));
+      newUnit.profiles.push(new ProfileModel(0, this.attributes.find(x => x.name=="Розмір голови")?.id, 0, this.commanderForm.get("headSize")?.value));
+      newUnit.profiles.push(new ProfileModel(0, this.attributes.find(x => x.name=="Розмір протигазу")?.id, 0, this.commanderForm.get("gasMaskSize")?.value));
+      newUnit.profiles.push(new ProfileModel(0, this.attributes.find(x => x.name=="Тип форми")?.id, 0, this.commanderForm.get("uniform")?.value));
+      newUnit.profiles.push(new ProfileModel(0, this.attributes.find(x => x.name=="Група крові")?.id, 0, this.commanderForm.get("bloodType")?.value));
+
+      this._unitUserService.single.create(newUnit)
         .subscribe(
         data => {
           this.messageService.add({ severity: 'success', summary: 'Дані оновлено!'});
@@ -87,12 +87,7 @@ export class FinishRegistrationComponent implements OnInit {
         },
         error => {
           this.messageService.add({ severity: 'error', summary: 'Помилка оновлення даних!',detail: String((error as HttpErrorResponse).error).split('\n')[0] });
-          this.useRedClass = true;
         });
-        this.profiles = [];
-    }
-    else {
-      this.useRedClass = true;
     }
   }
 }
