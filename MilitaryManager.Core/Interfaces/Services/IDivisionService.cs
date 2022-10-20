@@ -11,5 +11,6 @@ namespace MilitaryManager.Core.Interfaces.Services
         Task<DivisionDTO> CreateDivisionAsync(DivisionRequestDTO dto);
         Task<DivisionDTO> UpdateDivisionAsync(DivisionRequestDTO dto);
         Task<DivisionDTO> DeleteDivisionAsync(int id);
+        Task<IEnumerable<DivisionDTO>> GetAllDivisionsListAsync();
     }
 }

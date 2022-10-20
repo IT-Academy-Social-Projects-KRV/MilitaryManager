@@ -26,6 +26,13 @@ namespace MilitaryManager.Units.API.Controllers
         }
 
         [HttpGet]
+        [Route("list")]
+        public async Task<IActionResult> GetAllDivisions()
+        {
+            return Ok(await _divisionService.GetAllDivisionsListAsync());
+        }
+
+        [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> GetDivision([FromRoute] int id)
         {

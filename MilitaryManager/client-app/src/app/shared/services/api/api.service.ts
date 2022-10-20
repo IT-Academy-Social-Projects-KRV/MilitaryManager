@@ -3,6 +3,7 @@ import { AttachmentsService } from "./attachment.service";
 import { DecreeService } from "./decree.service";
 import { PdfService } from "./pdf.service";
 import { TemplateService } from "./template.service";
+import { UnitUserService } from "./unit-user.service";
 import { UnitsService } from "./unit.service";
 
 @Injectable()
@@ -12,7 +13,8 @@ export class ApiService {
         public units: UnitsService,
         public decree: DecreeService,
         public templates: TemplateService,
-        public pdfs: PdfService
+        public pdfs: PdfService,
+        public unitUser: UnitUserService
     ) {
     }
 }

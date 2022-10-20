@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace MilitaryManager.IdentityServer.Services
 {
-    public class CommanderService
+    public class CommanderService: ICommanderService
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;

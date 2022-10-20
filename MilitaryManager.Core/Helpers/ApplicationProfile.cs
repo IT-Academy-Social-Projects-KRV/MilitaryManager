@@ -41,10 +41,10 @@ namespace MilitaryManager.Core.Helpers
             CreateMap<DivisionDTO, Division>().ReverseMap();
             CreateMap<DivisionRequestDTO, Division>().ReverseMap();
             CreateMap<RankDTO, Rank>().ReverseMap();
+            CreateMap<Position, PositionDTO>().ReverseMap();
             CreateMap<AttributeDTO, Attribute>().ReverseMap();
             CreateMap<EntityDTO, Entity>().ReverseMap();
             CreateMap<EntityToAttributeDTO, EntityToAttribute>().ReverseMap();
-            CreateMap<PositionDTO, Position>().ReverseMap();
             CreateMap<UnitToEquipmentDTO, UnitToEquipment>().ReverseMap();
             CreateMap<UnitToEquipmentRequestDTO, UnitToEquipment>().ReverseMap();
             CreateMap<ProfileDTO, Entities.ProfileEntity.Profile>().ReverseMap();

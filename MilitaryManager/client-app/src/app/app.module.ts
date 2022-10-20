@@ -13,6 +13,8 @@ import { SignoutRedirectCallbackComponent } from './components/signout-redirect-
 import { HomeComponent } from './components/home/home.component';
 import { AppLayoutModule } from './layout/app.layout.module';
 import { AddCommanderComponent } from './components/add-commander/add-commander.component';
+import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,13 +24,15 @@ import { AddCommanderComponent } from './components/add-commander/add-commander.
     SigninRedirectCallbackComponent,
     SignoutRedirectCallbackComponent,
     HomeComponent,
-    AddCommanderComponent
+    AddCommanderComponent,
+    FinishRegistrationComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     PrimeNgComponentsModule,
-    AppLayoutModule
+    AppLayoutModule,
+    ReactiveFormsModule
   ],
   providers: [
     services,
