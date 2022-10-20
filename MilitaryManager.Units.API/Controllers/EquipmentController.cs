@@ -30,12 +30,12 @@ namespace MilitaryManager.Units.API.Controllers
             return Ok(await _equipmentService.GetEquipmentAsync());
         }
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] EntityDTO entityDTO)
+        public async Task<IActionResult> Create([FromBody] EntityRequestDTO entityDTO)
         {
             return Ok(await _equipmentService.CreateEntityAsync(entityDTO));
         }
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] EntityDTO entityDTO)
+        public async Task<IActionResult> Update([FromBody] EntityRequestDTO entityDTO)
         {
             return Ok(await _equipmentService.UpdateEntityAsync(entityDTO));
         }

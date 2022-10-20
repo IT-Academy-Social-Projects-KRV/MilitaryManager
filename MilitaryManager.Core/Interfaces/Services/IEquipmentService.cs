@@ -6,10 +6,10 @@ namespace MilitaryManager.Core.Interfaces.Services
 {
     public interface IEquipmentService
     {
-        Task<EntityDTO> CreateEntityAsync(EntityDTO dto);
-        Task<EntityDTO> GetEquipmentByIdAsync(int id);
-        Task<IEnumerable<EntityDTO>> GetEquipmentAsync();
-        Task<EntityDTO> UpdateEntityAsync(EntityDTO dto);
-        Task<EntityDTO> DeleteEntityAsync(int id);
+        Task<EntityRequestDTO> CreateEntityAsync(EntityRequestDTO dto);
+        Task<EntityRequestDTO> GetEquipmentByIdAsync(int id);
+        Task<IEnumerable<EntityRequestDTO>> GetEquipmentAsync();
+        Task<EntityRequestDTO> UpdateEntityAsync(EntityRequestDTO dto);
+        Task<EntityRequestDTO> DeleteEntityAsync(int id);
     }
 }

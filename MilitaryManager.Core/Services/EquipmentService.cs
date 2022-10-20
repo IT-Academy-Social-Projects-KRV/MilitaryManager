@@ -26,7 +26,7 @@ namespace MilitaryManager.Core.Services
             _mapper = mapper;
             _entityToAttributeRepository = entityToAttributeRepository; 
         }
-        public async Task<EntityDTO> CreateEntityAsync(EntityDTO dto)
+        public async Task<EntityRequestDTO> CreateEntityAsync(EntityRequestDTO dto)
         {
             var entity = _mapper.Map<Entity>(dto);
             var newEntity = await _entityRepository.AddAsync(entity);
@@ -40,21 +40,21 @@ namespace MilitaryManager.Core.Services
                 await _entityToAttributeRepository.SaveChangesAcync();
             }
 
-            return _mapper.Map<EntityDTO>(newEntity);
+            return _mapper.Map<EntityRequestDTO>(newEntity);
         }
-        public async Task<IEnumerable<EntityDTO>> GetEquipmentAsync()
+        public async Task<IEnumerable<EntityRequestDTO>> GetEquipmentAsync()
         {
             var equipment = await _entityRepository.GetListBySpecAsync(new EntitiesSpec.GetEntities());
 
-            return _mapper.Map<IEnumerable<EntityDTO>>(equipment);
+            return _mapper.Map<IEnumerable<EntityRequestDTO>>(equipment);
         }
-        public async Task<EntityDTO> GetEquipmentByIdAsync(int id)
+        public async Task<EntityRequestDTO> GetEquipmentByIdAsync(int id)
         {
             var equipment = await _entityRepository.GetFirstBySpecAsync(new EntitiesSpec.EntityById(id));
 
-            return _mapper.Map<EntityDTO>(equipment);
+            return _mapper.Map<EntityRequestDTO>(equipment);
         }
-        public async Task<EntityDTO> UpdateEntityAsync(EntityDTO dto)
+        public async Task<EntityRequestDTO> UpdateEntityAsync(EntityRequestDTO dto)
         {
             var entity = _mapper.Map<Entity>(dto);
             foreach (var value in dto.EntityToAttributes)
@@ -66,9 +66,9 @@ namespace MilitaryManager.Core.Services
             var updateEntity = await _entityRepository.UpdateAsync(entity);
             await _entityRepository.SaveChangesAcync();
 
-            return _mapper.Map<EntityDTO>(updateEntity);
+            return _mapper.Map<EntityRequestDTO>(updateEntity);
         }
-        public async Task<EntityDTO> DeleteEntityAsync(int id)
+        public async Task<EntityRequestDTO> DeleteEntityAsync(int id)
         {
             var entity = await _entityRepository.GetByKeyAsync(id);
             if (entity == null)
@@ -78,7 +78,7 @@ namespace MilitaryManager.Core.Services
             var deleteEntity = await _entityRepository.DeleteAsync(entity);
             await _entityRepository.SaveChangesAcync();
 
-            return _mapper.Map<EntityDTO>(deleteEntity);
+            return _mapper.Map<EntityRequestDTO>(deleteEntity);
         }
     }
 }
