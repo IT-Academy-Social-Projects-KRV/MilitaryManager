@@ -10,7 +10,7 @@ namespace MilitaryManager.Core.Entities.EntityEntity
             {
                 Query
                     .Include(x => x.EntityToAttributes)
-                .Where(x => x.Id == id);
+                    .Where(x => x.Id == id);
             }
         }
         internal class GetEntities : Specification<Entity>
