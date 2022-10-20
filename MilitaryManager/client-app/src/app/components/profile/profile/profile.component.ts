@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ISize } from './interfaces';
-import { IName } from './interfaces';
-import { IStringSize } from './interfaces';
+import {UnitUserService} from "../../../shared/services/api/unit-user.service";
+import {AuthService} from "../../../shared/services/auth.service";
+import {UnitsService} from "../../../shared/services/api/unit.service";
+import {UnitModel} from "../../../shared/models/unit.model";
+
 
 
 
@@ -13,84 +15,47 @@ import { IStringSize } from './interfaces';
 
 export class ProfileComponent implements OnInit {
 
-  userName: string = '';
+  userName: string | null | undefined = '';
   weight: number = 0;
   height: number = 0;
-  ranks: IName[];
-  position: string = '';
-  footSizes: ISize[];
-  headSizes: ISize[];
-  gasMaskSizes: IStringSize[];
-  uniforms: IName[];
-  bloodTypes: IName[];
-  selectedRank: string = '';
-  selectedFootSize: number = -1;
-  selectedHeadSize: number = -1;
-  selectedGasMaskSize: number = -1;
-  selectedUniform: string = '';
-  selectedBloodType: string = '';
+  rank: string | null | undefined = '';
+  position: string | null | undefined = '';
+  footSize: string | null | undefined = '';
+  headSize: string | null | undefined = '';
+  gasMaskSize: string | null | undefined = '';
+  uniform: string = '';
+  bloodType: string = '';
+  userId: Promise<string> =  this._authService.getUserId();
+  unitModel: UnitModel | undefined;
 
-  constructor() {
-    this.footSizes = [
-      {size: 38},
-      {size: 39},
-      {size: 40},
-      {size: 41},
-      {size: 42},
-      {size: 43},
-      {size: 44},
-      {size: 45}
-    ],
-    this.headSizes = [
-      {size: 54},
-      {size: 55},
-      {size: 56},
-      {size: 57},
-      {size: 58},
-      {size: 59},
-      {size: 60},
-      {size: 61},
-      {size: 62},
-      {size: 63},
-      {size: 64}
-    ],
-    this.gasMaskSizes = [
-      {size: '0'},
-      {size: '1'},
-      {size: '2'},
-      {size: '3'},
-      {size: '4'}
-    ],
-    this.ranks = [
-      {name: 'Молодший лейтенант'},
-      {name: 'Лейтенант'},
-      {name: 'Старший лейтенант'},
-      {name: 'Капітан'},
-      {name: 'Майор'},
-      {name: 'Підполковник'},
-      {name: 'Бригадний генерал'},
-      {name: 'Генерал-майор'},
-      {name: 'Генерал-лейтенант'},
-      {name: 'Генерал'}
-    ],
-    this.uniforms = [
-      {name: 'Стандарт НАТО'},
-      {name: 'Український стандарт'}
-    ]
-    this.bloodTypes = [
-      {name: ' I+'},
-      {name: 'І-'},
-      {name: 'ІІ+'},
-      {name: 'ІІ-'},
-      {name: 'ІІІ+'},
-      {name: 'ІІІ-'},
-      {name: 'ІV+'},
-      {name: 'ІV-'}
-    ]
+  constructor(private _unitUserService : UnitUserService, private _authService: AuthService, private _unitService: UnitsService) {
   }
 
   ngOnInit(): void {
-
+    const userId = Promise.resolve(this.userId);
+    userId.then((value) => {
+      this._unitUserService.GetUnitUser(value)
+        .subscribe(result => {
+          this._unitService.single.getById(result["id"])
+            .subscribe(result => {
+              this.unitModel = result;
+              this.userName = this.unitModel?.lastName?.concat(" " + <string>this.unitModel?.firstName + " ").concat(<string>this.unitModel?.secondName);
+              //this.height = this.unitModel
+              //this.weight = this.unitModel
+              this.rank = this.unitModel?.rank
+              this.position = this.unitModel?.position
+              // @ts-ignore
+              this.footSize = this.unitModel?.profiles["0"].value
+              // @ts-ignore
+              this.headSize = this.unitModel?.profiles["1"].value
+              // @ts-ignore
+              this.gasMaskSize = this.unitModel?.profiles["2"].value
+              // @ts-ignore
+              this.uniform = this.unitModel?.profiles["3"].value
+              // @ts-ignore
+              this.bloodType = this.unitModel?.profiles["4"].value
+            })
+        })
+    })
   }
-
 }

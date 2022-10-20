@@ -1,21 +1,21 @@
 <h5>ПІБ</h5>
-<input type="text" pInputText [(ngModel)]="userName" size="50px">
+<input type="text" pInputText [(ngModel)]="userName" size="50px" readonly>
 <h5>Зріст</h5>
-<input type="number" pInputText [(ngModel)]="height" size="50px">
+<input type="number" pInputText [(ngModel)]="height" size="50px" readonly>
 <h5>Вага</h5>
-<input type="number" pInputText [(ngModel)]="weight" size="50px">
+<input type="number" pInputText [(ngModel)]="weight" size="50px" readonly>
 <h5>Звання</h5>
-<p-dropdown [options]="ranks" [(ngModel)]="selectedRank" optionLabel="name"></p-dropdown>
+<input type="text" pInputText [(ngModel)]="rank" size="50px" readonly>
 <h5>Посада</h5>
-<input type="text" pInputText [(ngModel)]="position" size="50px">
+<input type="text" pInputText [(ngModel)]="position" size="50px" readonly>
 <h5>Розмір ноги</h5>
-<p-dropdown [options]="footSizes" [(ngModel)]="selectedFootSize" optionLabel="size"></p-dropdown>
+<input type="text" pInputText [(ngModel)]="footSize" size="50px" readonly>
 <h5>Розмір голови</h5>
-<p-dropdown [options]="headSizes" [(ngModel)]="selectedHeadSize" optionLabel="size"></p-dropdown>
+<input type="text" pInputText [(ngModel)]="headSize" size="50px" readonly>
 <h5>Розмір противогаза</h5>
-<p-dropdown [options]="gasMaskSizes" [(ngModel)]="selectedGasMaskSize" optionLabel="size"></p-dropdown>
+<input type="text" pInputText [(ngModel)]="gasMaskSize" size="50px" readonly>
 <h5>Уніформа</h5>
-<p-dropdown [options]="uniforms" [(ngModel)]="selectedUniform" optionLabel="name"></p-dropdown>
+<input type="text" pInputText [(ngModel)]="uniform" size="50px" readonly>
 <h5>Група крові</h5>
-<p-dropdown [options]="bloodTypes" [(ngModel)]="selectedBloodType" optionLabel="name"></p-dropdown>
+<input type="text" pInputText [(ngModel)]="bloodType" size="50px" readonly>
 
