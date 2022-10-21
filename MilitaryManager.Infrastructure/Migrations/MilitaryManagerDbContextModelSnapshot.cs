@@ -144,13 +144,13 @@ namespace MilitaryManager.Infrastructure.Migrations
                         {
                             Id = 1,
                             AttributeId = 4,
-                            Value = "Стандар NATO"
+                            Value = "Стандарт NATO"
                         },
                         new
                         {
                             Id = 2,
                             AttributeId = 4,
-                            Value = "Стандар України"
+                            Value = "Стандарт України"
                         },
                         new
                         {

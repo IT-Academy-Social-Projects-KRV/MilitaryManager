@@ -121,8 +121,8 @@ namespace MilitaryManager.Infrastructure.Migrations
                 columns: new[] { "Id", "AttributeId", "Value" },
                 values: new object[,]
                 {
-                    { 1, 4, "Стандар NATO" },
-                    { 2, 4, "Стандар України" },
+                    { 1, 4, "Стандарт NATO" },
+                    { 2, 4, "Стандарт України" },
                     { 3, 5, "I+" },
                     { 4, 5, "I-" },
                     { 5, 5, "II+" },

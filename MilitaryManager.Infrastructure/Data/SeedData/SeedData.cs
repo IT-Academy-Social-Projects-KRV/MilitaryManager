@@ -236,8 +236,8 @@ namespace MilitaryManager.Infrastructure.Data.SeedData
             builder.Entity<AttributeValue>().HasData(
                 new AttributeValue[]
                 {
-                    new AttributeValue { Id = 1, AttributeId = 4, Value = "Стандар NATO"},
-                    new AttributeValue { Id = 2, AttributeId = 4, Value = "Стандар України"},
+                    new AttributeValue { Id = 1, AttributeId = 4, Value = "Стандарт NATO"},
+                    new AttributeValue { Id = 2, AttributeId = 4, Value = "Стандарт України"},
                     new AttributeValue { Id = 3, AttributeId = 5, Value = "I+"},
                     new AttributeValue { Id = 4, AttributeId = 5, Value = "I-"},
                     new AttributeValue { Id = 5, AttributeId = 5, Value = "II+"},
