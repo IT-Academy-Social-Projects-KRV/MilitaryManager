@@ -75,13 +75,13 @@ export class FinishRegistrationComponent implements OnInit {
       let newUnit: UnitModel = this.commanderForm.value;
       newUnit.profiles = [];
 
-      newUnit.profiles.push(new ProfileModel(0, this.attributes.find(x => x.name=="Розмір ноги")?.id, 0, this.commanderForm.get("footSize")?.value));
-      newUnit.profiles.push(new ProfileModel(0, this.attributes.find(x => x.name=="Розмір голови")?.id, 0, this.commanderForm.get("headSize")?.value));
-      newUnit.profiles.push(new ProfileModel(0, this.attributes.find(x => x.name=="Розмір протигазу")?.id, 0, this.commanderForm.get("gasMaskSize")?.value));
-      newUnit.profiles.push(new ProfileModel(0, this.attributes.find(x => x.name=="Тип форми")?.id, 0, this.commanderForm.get("uniform")?.value));
-      newUnit.profiles.push(new ProfileModel(0, this.attributes.find(x => x.name=="Група крові")?.id, 0, this.commanderForm.get("bloodType")?.value));
-      newUnit.profiles.push(new ProfileModel(0, this.attributes.find(x => x.name=="Вага")?.id, 0, this.commanderForm.get("weight")?.value));
-      newUnit.profiles.push(new ProfileModel(0, this.attributes.find(x => x.name=="Зріст")?.id, 0, this.commanderForm.get("height")?.value));
+      newUnit.profiles.push(new ProfileModel(0, this.attributes.find(x => x.name=="Розмір ноги")?.id, 0, this.commanderForm.get("footSize")?.value, null));
+      newUnit.profiles.push(new ProfileModel(0, this.attributes.find(x => x.name=="Розмір голови")?.id, 0, this.commanderForm.get("headSize")?.value, null));
+      newUnit.profiles.push(new ProfileModel(0, this.attributes.find(x => x.name=="Розмір протигазу")?.id, 0, this.commanderForm.get("gasMaskSize")?.value, null));
+      newUnit.profiles.push(new ProfileModel(0, this.attributes.find(x => x.name=="Тип форми")?.id, 0, this.commanderForm.get("uniform")?.value, null));
+      newUnit.profiles.push(new ProfileModel(0, this.attributes.find(x => x.name=="Група крові")?.id, 0, this.commanderForm.get("bloodType")?.value, null));
+      newUnit.profiles.push(new ProfileModel(0, this.attributes.find(x => x.name=="Вага")?.id, 0, this.commanderForm.get("weight")?.value, null));
+      newUnit.profiles.push(new ProfileModel(0, this.attributes.find(x => x.name=="Зріст")?.id, 0, this.commanderForm.get("height")?.value, null));
 
       this._unitUserService.single.create(newUnit)
         .subscribe(

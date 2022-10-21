@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using MilitaryManager.Core.DTO.Attachments;
+﻿using MilitaryManager.Core.DTO.Attachments;
 using MilitaryManager.Core.DTO.Attributes;
 using MilitaryManager.Core.DTO.Audit;
 using MilitaryManager.Core.DTO.Divisions;
@@ -17,6 +16,7 @@ using MilitaryManager.Core.Entities.EntityEntity;
 using MilitaryManager.Core.Entities.EntityToAttributeEntity;
 using MilitaryManager.Core.Entities.EquipmentToUnitEntity;
 using MilitaryManager.Core.Entities.PositionEntity;
+using MilitaryManager.Core.Entities.ProfileEntity;
 using MilitaryManager.Core.Entities.RankEntity;
 using MilitaryManager.Core.Entities.TemplateEntity;
 using MilitaryManager.Core.Entities.UnitEntity;
@@ -24,7 +24,7 @@ using System.IO;
 
 namespace MilitaryManager.Core.Helpers
 {
-    public class ApplicationProfile : Profile
+    public class ApplicationProfile : AutoMapper.Profile
     {
         public ApplicationProfile()
         {
@@ -51,6 +51,8 @@ namespace MilitaryManager.Core.Helpers
             CreateMap<ProfileRequestDTO, Entities.ProfileEntity.Profile>().ReverseMap();
             CreateMap<Change, ChangeDTO>();
             CreateMap<ChangeValue, ChangeValuesDTO>();
+            CreateMap<Profile, AttributeWithValueDTO>()
+               .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Attribute.Name));
         }
     }
 }

@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from '../shared/services/auth.service';
 import { LayoutService } from "./service/app.layout.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-topbar',
@@ -21,11 +22,12 @@ export class AppTopBarComponent {
 
     constructor(
         public layoutService: LayoutService,
-        public authService: AuthService) {                    
+        public authService: AuthService,
+        private _router: Router) {
         this.authService.loginChanged.subscribe(userAuthenticated => {
             this.isUserAuthenticated = userAuthenticated;
         })
-    }    
+    }
 
     ngOnInit(): void {
         this.authService.isAuthenticated().then(userAuthenticated => {
@@ -43,5 +45,8 @@ export class AppTopBarComponent {
 
     onConfigButtonClick() {
         this.layoutService.showConfigSidebar();
+    }
+     navigateToProfile() {
+      this._router.navigate(['/profile'])
     }
 }

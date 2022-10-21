@@ -16,8 +16,8 @@ import {UnitModel} from "../../../shared/models/unit.model";
 export class ProfileComponent implements OnInit {
 
   userName: string | null | undefined = '';
-  weight: number = 0;
-  height: number = 0;
+  weight: string | null | undefined = '';
+  height: string | null | undefined = '';
   rank: string | null | undefined = '';
   position: string | null | undefined = '';
   footSize: string | null | undefined = '';
@@ -26,7 +26,7 @@ export class ProfileComponent implements OnInit {
   uniform: string = '';
   bloodType: string = '';
   userId: Promise<string> =  this._authService.getUserId();
-  unitModel: UnitModel | undefined;
+  unitModel: UnitModel;
 
   constructor(private _unitUserService : UnitUserService, private _authService: AuthService, private _unitService: UnitsService) {
   }
@@ -41,22 +41,8 @@ export class ProfileComponent implements OnInit {
               console.log(result)
               this.unitModel = result;
               this.userName = this.unitModel?.lastName?.concat(" " + <string>this.unitModel?.firstName + " ").concat(<string>this.unitModel?.secondName);
-              // @ts-ignore
-              this.height = this.unitModel?.profiles["6"].value
-              // @ts-ignore
-              this.weight = this.unitModel?.profiles["5"].value
               this.rank = this.unitModel?.rank
               this.position = this.unitModel?.position
-              // @ts-ignore
-              this.footSize = this.unitModel?.profiles["0"].value
-              // @ts-ignore
-              this.headSize = this.unitModel?.profiles["1"].value
-              // @ts-ignore
-              this.gasMaskSize = this.unitModel?.profiles["2"].value
-              // @ts-ignore
-              this.uniform = this.unitModel?.profiles["3"].value
-              // @ts-ignore
-              this.bloodType = this.unitModel?.profiles["4"].value
             })
         })
     })
