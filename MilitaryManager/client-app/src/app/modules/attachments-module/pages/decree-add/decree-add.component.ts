@@ -7,6 +7,7 @@ import { UnitsService } from 'src/app/shared/services/api/unit.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UnitUserService } from 'src/app/shared/services/api/unit-user.service';
 import { UnitUserModel } from 'src/app/shared/models/unit-user.model';
+import { UnitsInfoService } from 'src/app/shared/services/api/unitInfo.service';
 
 @Component({
   selector: 'app-decree-add',
@@ -26,7 +27,7 @@ export class DecreeAddComponent implements OnInit {
 
   clonedDecrees: { [s: string]: AttachmentModel; } = {};
 
-    constructor(private decreeService: DecreeService, private unitsService: UnitsService, 
+    constructor(private decreeService: DecreeService, private unitsService: UnitsService, private unitsInfoService: UnitsInfoService,
       private messageService: MessageService, private authService: AuthService, private unitUser: UnitUserService) {
     }
 
@@ -122,7 +123,7 @@ export class DecreeAddComponent implements OnInit {
 
     ngOnInit() {
       setTimeout(() => {
-        this.unitsService.getAll()
+        this.unitsInfoService.collection.getAll()
           .subscribe((units) => {
             this.units = units.map((unit: any) => {
               return {
