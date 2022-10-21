@@ -23,7 +23,7 @@ export class DecreeNewComponent implements OnInit {
     this.apiService.templates.collection.getAll().subscribe(res => { this.templates = res })
   }  
 
-  addNewDocument(id: number|null, type: string|null) {
+  addNewDocument(id: number | null, type: string | null) {
     this.tabs.push('Новий документ ' + (this.tabs.length + 1));
 
     setTimeout(() => {
