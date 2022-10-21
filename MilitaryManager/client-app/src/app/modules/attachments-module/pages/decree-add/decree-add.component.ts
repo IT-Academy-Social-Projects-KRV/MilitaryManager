@@ -4,6 +4,9 @@ import { UnitModel } from 'src/app/shared/models/unit.model';
 import { MessageService } from 'primeng/api';
 import { DecreeService } from 'src/app/shared/services/api/decree.service';
 import { UnitsService } from 'src/app/shared/services/api/unit.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { UnitUserService } from 'src/app/shared/services/api/unit-user.service';
+import { UnitUserModel } from 'src/app/shared/models/unit-user';
 
 @Component({
   selector: 'app-decree-add',
@@ -15,19 +18,31 @@ export class DecreeAddComponent implements OnInit {
 
   decrees: AttachmentModel[]=[];
   units: UnitModel[]= [];
+  user: UnitUserModel = new UnitUserModel(null);
+  commander: UnitModel = new UnitModel(null);
   selectedUnit: UnitModel = new UnitModel(null);
   templateId: number | null = null;
   templateType: string | null = null;
 
-    clonedDecrees: { [s: string]: AttachmentModel; } = {};
+  clonedDecrees: { [s: string]: AttachmentModel; } = {};
 
-    constructor(private decreeService: DecreeService, private unitsService: UnitsService, private messageService: MessageService) {
+    constructor(private decreeService: DecreeService, private unitsService: UnitsService, 
+      private messageService: MessageService, private authService: AuthService, private unitUser: UnitUserService) {
     }
 
     addDecree(attachment: AttachmentModel[]) {
       let decreeInformation;
       let dateFormatter = new Intl.DateTimeFormat('uk-UA');
 
+      let id = this.authService.getCurrentUser().profile.sub;
+
+      this.unitUser.GetUnitUser(id).subscribe(user => { this.user = user });
+
+      if(this.user.id!= null)
+      {
+        this.unitsService.single.getById(this.user.id).subscribe(commander => { this.commander = commander });
+      }
+     
       for(const element of attachment)
       {
         decreeInformation = 
@@ -38,10 +53,15 @@ export class DecreeAddComponent implements OnInit {
           firstName: element.soldier?.firstName,
           secondName: element.soldier?.secondName,
           currentDate: dateFormatter.format(new Date(element.currentDate!)),
-          //unitNumber: element.soldier?.division?.divisionNumber,
+          commanderLastName: this.commander.lastName,
+          commanderFirstName: this.commander.firstName,
+          commanderSecondName: this.commander.secondName,
+          divisionNumber: element.soldier?.division?.divisionNumber,
+          commanderDivisison: this.commander.division?.divisionNumber,
           decreeNumber: element.decreeNumber
-        };
-        this.decreeService.single.create(decreeInformation).subscribe(
+        }
+        
+          this.decreeService.single.create(decreeInformation).subscribe(
           () =>  this.messageService.add({ severity: 'success', summary: 'Наказ успішно створено' }),
           () => this.messageService.add({ severity: 'error', summary: 'Наказ не створено!'})
         );
@@ -113,4 +133,3 @@ export class DecreeAddComponent implements OnInit {
       });
   }
 }
-

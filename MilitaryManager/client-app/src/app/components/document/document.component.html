@@ -16,7 +16,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Adjust scroll height -->
             <p-table [value]="decrees" [scrollable]="true" scrollHeight="50vh">
                 <ng-template pTemplate="header">
                     <tr>
@@ -28,7 +27,6 @@
                 <ng-template pTemplate="body" let-decree>
                     <tr>
                         <td *ngFor="let col of cols; let index = index" [ngStyle]="{'width': col.width}">
-                            <!-- {{decree[col.field]}} -->
                             {{ col.date ? (decree[col.field]| date : col.format) : decree[col.field] }}
                             <i *ngIf="col.field =='path'" class="pi pi-download" (click)="download(decree.id, decree.path)" [ngStyle]="{color:'var(--primary-color)'}" style="cursor: pointer"></i>
                             <input type="file" accept="application/pdf" #file placeholder="Choose file" (change)="uploadFile(decree.id,file.files)" style="display:none;">   
