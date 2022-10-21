@@ -6,7 +6,6 @@ import { DecreeListComponent } from './pages/decree-list/decree-list.component';
 import { DecreeNewComponent } from './pages/decree-new/decree-new.component';
 import { DecreeAddComponent } from './pages/decree-add/decree-add.component';
 
-
 @NgModule({
   declarations: [
     DecreeListComponent,
