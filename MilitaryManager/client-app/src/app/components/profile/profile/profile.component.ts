@@ -16,15 +16,9 @@ import {UnitModel} from "../../../shared/models/unit.model";
 export class ProfileComponent implements OnInit {
 
   userName: string | null | undefined = '';
-  weight: string | null | undefined = '';
-  height: string | null | undefined = '';
   rank: string | null | undefined = '';
   position: string | null | undefined = '';
-  footSize: string | null | undefined = '';
-  headSize: string | null | undefined = '';
-  gasMaskSize: string | null | undefined = '';
-  uniform: string = '';
-  bloodType: string = '';
+
   userId: Promise<string> =  this._authService.getUserId();
   unitModel: UnitModel;
 
