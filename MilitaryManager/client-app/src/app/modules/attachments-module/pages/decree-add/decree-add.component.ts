@@ -35,38 +35,39 @@ export class DecreeAddComponent implements OnInit {
       let dateFormatter = new Intl.DateTimeFormat('uk-UA');
 
       let id = this.authService.getCurrentUser().profile.sub;
-      this.unitUser.GetUnitUser(id).subscribe(user => { this.user = user });
+      this.unitUser.GetUnitUser(id).subscribe(user => { this.user = user 
 
       if(this.user.id!= null)
       {
-        this.unitsService.single.getById(this.user.id).subscribe(commander => { this.commander = commander });
-      }
-     
-      for(const element of attachment)
-      {
-        decreeInformation = 
-        { 
-          templateId: this.templateId, 
-          decreeName: `${this.templateType} від ${dateFormatter.format(new Date(element.currentDate!))}`,
-          lastName: element.soldier?.lastName,
-          firstName: element.soldier?.firstName,
-          secondName: element.soldier?.secondName,
-          currentDate: dateFormatter.format(new Date(element.currentDate!)),
-          commanderLastName: this.commander.lastName,
-          commanderFirstName: this.commander.firstName,
-          commanderSecondName: this.commander.secondName,
-          divisionNumber: element.soldier?.division?.divisionNumber,
-          commanderDivisison: this.commander.division?.divisionNumber,
-          decreeNumber: element.decreeNumber
+        this.unitsService.single.getById(this.user.id).subscribe(commander => { this.commander = commander 
+      
+        for(const element of attachment)
+        {
+          decreeInformation = 
+          { 
+            templateId: this.templateId, 
+            decreeName: `${this.templateType} від ${dateFormatter.format(new Date(element.currentDate!))}`,
+            lastName: element.soldier?.lastName,
+            firstName: element.soldier?.firstName,
+            secondName: element.soldier?.secondName,
+            currentDate: dateFormatter.format(new Date(element.currentDate!)),
+            commanderLastName: this.commander.lastName,
+            commanderFirstName: this.commander.firstName,
+            commanderSecondName: this.commander.secondName,
+            divisionNumber: element.soldier?.division?.divisionNumber,
+            commanderDivisison: this.commander.division?.divisionNumber,
+            decreeNumber: element.decreeNumber
+          }
+          
+            this.decreeService.single.create(decreeInformation).subscribe(
+            () =>  this.messageService.add({ severity: 'success', summary: 'Наказ успішно створено' }),
+            () => this.messageService.add({ severity: 'error', summary: 'Наказ не створено!'})
+          );
         }
-        
-          this.decreeService.single.create(decreeInformation).subscribe(
-          () =>  this.messageService.add({ severity: 'success', summary: 'Наказ успішно створено' }),
-          () => this.messageService.add({ severity: 'error', summary: 'Наказ не створено!'})
-        );
+        });
       }
+      });
     }
-    
 
     addSoldier(soldier: UnitModel) {
       if (soldier.id!=null)
