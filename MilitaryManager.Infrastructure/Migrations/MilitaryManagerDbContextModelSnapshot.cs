@@ -36,6 +36,28 @@ namespace MilitaryManager.Infrastructure.Migrations
                     b.ToTable("Attributes","Unit");
                 });
 
+            modelBuilder.Entity("MilitaryManager.Core.Entities.AttributeValueEntity.AttributeValue", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AttributeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AttributeId");
+
+                    b.ToTable("AttributeValues","Unit");
+                });
+
             modelBuilder.Entity("MilitaryManager.Core.Entities.AuditEntities.ChangeEntity.Change", b =>
                 {
                     b.Property<int>("Id")
@@ -579,17 +601,13 @@ namespace MilitaryManager.Infrastructure.Migrations
                             Id = 1,
                             Path = "data/document_templates/template_01.xml",
                             Type = "Протокол"
-                        });
-
-                    b.HasData(
+                        },
                         new
                         {
                             Id = 2,
                             Path = "data/document_templates/template_02.xml",
                             Type = "Виплата"
-                        });
-
-                    b.HasData(
+                        },
                         new
                         {
                             Id = 3,
@@ -643,6 +661,30 @@ namespace MilitaryManager.Infrastructure.Migrations
                     b.HasIndex("RankId");
 
                     b.ToTable("Units","Unit");
+                });
+
+            modelBuilder.Entity("MilitaryManager.Core.Entities.UnitEntity.UnitUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UnitUsers","Unit");
+                });
+
+            modelBuilder.Entity("MilitaryManager.Core.Entities.AttributeValueEntity.AttributeValue", b =>
+                {
+                    b.HasOne("MilitaryManager.Core.Entities.AttributeEntity.Attribute", "Attribute")
+                        .WithMany("AttributeValues")
+                        .HasForeignKey("AttributeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.AuditEntities.ChangeEntity.Change", b =>
@@ -810,6 +852,15 @@ namespace MilitaryManager.Infrastructure.Migrations
                     b.HasOne("MilitaryManager.Core.Entities.RankEntity.Rank", "Rank")
                         .WithMany("Units")
                         .HasForeignKey("RankId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MilitaryManager.Core.Entities.UnitEntity.UnitUser", b =>
+                {
+                    b.HasOne("MilitaryManager.Core.Entities.UnitEntity.Unit", "Unit")
+                        .WithOne("UnitUser")
+                        .HasForeignKey("MilitaryManager.Core.Entities.UnitEntity.UnitUser", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
