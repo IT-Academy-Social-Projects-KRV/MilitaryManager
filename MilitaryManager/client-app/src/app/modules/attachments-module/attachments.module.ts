@@ -22,7 +22,7 @@ import { DecreeAddComponent } from './pages/decree-add/decree-add.component';
       { path: 'new', component: DecreeNewComponent },
       { path: 'add', component: DecreeAddComponent },
       { path: '**', redirectTo: 'list' }
-    ]),
+    ])
   ]
 })
 export class AttachmentsModule { }

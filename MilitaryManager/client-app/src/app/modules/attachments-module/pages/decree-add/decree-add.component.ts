@@ -6,7 +6,7 @@ import { DecreeService } from 'src/app/shared/services/api/decree.service';
 import { UnitsService } from 'src/app/shared/services/api/unit.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UnitUserService } from 'src/app/shared/services/api/unit-user.service';
-import { UnitUserModel } from 'src/app/shared/models/unit-user';
+import { UnitUserModel } from 'src/app/shared/models/unit-user.model';
 
 @Component({
   selector: 'app-decree-add',
