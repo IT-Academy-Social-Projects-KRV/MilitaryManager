@@ -35,7 +35,6 @@ export class DecreeAddComponent implements OnInit {
       let dateFormatter = new Intl.DateTimeFormat('uk-UA');
 
       let id = this.authService.getCurrentUser().profile.sub;
-
       this.unitUser.GetUnitUser(id).subscribe(user => { this.user = user });
 
       if(this.user.id!= null)
