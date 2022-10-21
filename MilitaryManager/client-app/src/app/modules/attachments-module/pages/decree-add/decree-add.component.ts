@@ -55,7 +55,8 @@ export class DecreeAddComponent implements OnInit {
             commanderFirstName: this.commander.firstName,
             commanderSecondName: this.commander.secondName,
             divisionNumber: element.soldier?.division?.divisionNumber,
-            commanderDivisison: this.commander.division?.divisionNumber,
+            commanderDivision: this.commander.division?.divisionNumber,
+            commanderRank: this.commander.rank,
             decreeNumber: element.decreeNumber
           }
           

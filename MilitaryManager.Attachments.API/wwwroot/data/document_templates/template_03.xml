@@ -23,7 +23,7 @@
   <p>Зняти з котлового забезпечення при ___________ зі сніданку    __ вересня 2022 року.</p>
   <p>      Підстава: витяг із наказу Командувача Сухопутних військ Збройних Сил України (по особовому складу) від __ вересня ____ року №____, рапорт старшого солдата ___________________. від __.__._________ року.</p>
   <ret>40</ret>
-  <p>   Командир військової частини [commanderDivisison] </p>
-  <p>   підполковник [commanderLastName] [commanderFirstName] [commanderSecondName] </p>
+  <p>   Командир військової частини [commanderDivision] </p>
+  <p>   [commanderRank] [commanderLastName] [commanderFirstName] [commanderSecondName] </p>
   <p>   М.П.</p>  
 </document>

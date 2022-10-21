@@ -1,6 +1,7 @@
 import { BaseModel } from "./base.model";
 import { DivisionModel } from "./division.model";
 import { ProfileModel } from "./profile.model";
+import { RankModel } from "./rank.model";
 
 export class UnitModel extends BaseModel {
   public parent: UnitModel | null = null;
@@ -8,6 +9,8 @@ export class UnitModel extends BaseModel {
   public subUnits: UnitModel[] | null = null;
 
   public division: DivisionModel | null = null;
+  
+  public rank: string | null = null;
 
   constructor(Id:number|null=null ,
     public lastName:string | null=null,
