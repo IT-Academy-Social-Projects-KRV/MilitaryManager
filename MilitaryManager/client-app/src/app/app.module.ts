@@ -14,6 +14,9 @@ import { HomeComponent } from './components/home/home.component';
 import { AppLayoutModule } from './layout/app.layout.module';
 import { AddCommanderComponent } from './components/add-commander/add-commander.component';
 import {LogComponent} from "./components/log/log.component";
+import { TableModule } from 'primeng/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TabViewModule } from 'primeng/tabview';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import {LogComponent} from "./components/log/log.component";
     BrowserModule,
     AppRoutingModule,
     PrimeNgComponentsModule,
-    AppLayoutModule
+    AppLayoutModule,
+    TableModule,
+    TabViewModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     services,
