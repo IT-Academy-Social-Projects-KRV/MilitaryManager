@@ -22,12 +22,5 @@ namespace MilitaryManager.Units.API.Controllers
         {
             return Ok(await _auditService.GetChangesListAsync());
         }
-
-        [HttpGet]
-        [Route("collection/{id}")]
-        public async Task<IActionResult> GetFullChangeInfo([FromRoute] int id)
-        {
-            return Ok(await _auditService.GetFullChangeInfoByKeyAsync(id));
-        }
     }
 }
