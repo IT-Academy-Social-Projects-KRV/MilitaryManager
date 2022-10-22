@@ -44,6 +44,7 @@ namespace MilitaryManager.Core.Helpers
             CreateMap<Position, PositionDTO>().ReverseMap();
             CreateMap<AttributeDTO, Attribute>().ReverseMap();
             CreateMap<EntityDTO, Entity>().ReverseMap();
+            CreateMap<EntityRequestDTO, Entity>().ReverseMap();
             CreateMap<EntityToAttributeDTO, EntityToAttribute>().ReverseMap();
             CreateMap<UnitToEquipmentDTO, UnitToEquipment>().ReverseMap();
             CreateMap<UnitToEquipmentRequestDTO, UnitToEquipment>().ReverseMap();
