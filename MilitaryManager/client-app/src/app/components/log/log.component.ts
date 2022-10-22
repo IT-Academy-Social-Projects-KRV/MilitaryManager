@@ -4,7 +4,7 @@ import {LogService} from "../../shared/services/api/log.service";
 import {LogDetalesService} from "../../shared/services/api/logDetales.service";
 
 @Component({
-  selector: 'app-signin-redirect-callback',
+  selector: 'app-log-callback',
   templateUrl: './log.component.html',
   styleUrls: ['./log.component.scss']
 })

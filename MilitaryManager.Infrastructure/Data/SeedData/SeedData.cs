@@ -2,7 +2,6 @@
 using MilitaryManager.Core.Entities.AuditEntities.ChangeTypeEntity;
 using MilitaryManager.Core.Entities.AuditEntities.ColumnEntity;
 using MilitaryManager.Core.Entities.AuditEntities.TableEntity;
-using MilitaryManager.Core.Entities.RankEntity;
 using MilitaryManager.Core.Entities.StatusEntity;
 using MilitaryManager.Core.Entities.TemplateEntity;
 using MilitaryManager.Core.Enums;
@@ -42,61 +41,6 @@ namespace MilitaryManager.Infrastructure.Data.SeedData
                 {
                     Id = (int)DecreeStatus.COMPLETED,
                     Name = "Completed"
-                });
-        }
-
-        public static void SeedRanks(ModelBuilder builder)
-        {
-            builder.Entity<Rank>().HasData(
-                new Rank[]
-                {
-                    new Rank { Name = "Курсант" },
-                    new Rank { Name = "Молодший лейтенант" },
-                    new Rank { Name = "Лейтенант" },
-                    new Rank { Name = "Старший лейтенант" },
-                    new Rank { Name = "Капітан" },
-                    new Rank { Name = "Майор" },
-                    new Rank { Name = "Підполковник" },
-                    new Rank { Name = "Полковник" },
-                    new Rank { Name = "Бригадний генерал" },
-                    new Rank { Name = "Генерал-майор" },
-                    new Rank { Name = "Генерал-лейтенант" },
-                    new Rank { Name = "Генерал" },
-                    new Rank { Name = "Рекрут" },
-                    new Rank { Name = "Солдат" },
-                    new Rank { Name = "Старший солдат" },
-                    new Rank { Name = "Молодший сержант" },
-                    new Rank { Name = "Сержант" },
-                    new Rank { Name = "Старший сержант" },
-                    new Rank { Name = "Головний сержант" },
-                    new Rank { Name = "Штаб-сержант" },
-                    new Rank { Name = "Майстер-сержант" },
-                    new Rank { Name = "Старший майстер-сержант" },
-                    new Rank { Name = "Головний майстер-сержант" }
-                });
-        }
-
-        public static void SeedAttributes(ModelBuilder builder)
-        {
-            builder.Entity<Core.Entities.AttributeEntity.Attribute>().HasData(
-                new Core.Entities.AttributeEntity.Attribute[]
-                {
-                    new Core.Entities.AttributeEntity.Attribute { Name = "Розмір ноги"},
-                    new Core.Entities.AttributeEntity.Attribute { Name = "Розмір голови"},
-                    new Core.Entities.AttributeEntity.Attribute { Name = "Розмір протигазу"},
-                    new Core.Entities.AttributeEntity.Attribute { Name = "Тип форми"},
-                    new Core.Entities.AttributeEntity.Attribute { Name = "Група крові"},
-                    new Core.Entities.AttributeEntity.Attribute { Name = "Нагорода"},
-                    new Core.Entities.AttributeEntity.Attribute { Name = "Клас захисту"},
-                    new Core.Entities.AttributeEntity.Attribute { Name = "Назва"},
-                    new Core.Entities.AttributeEntity.Attribute { Name = "Виробник"},
-                    new Core.Entities.AttributeEntity.Attribute { Name = "Калібр"},
-                    new Core.Entities.AttributeEntity.Attribute { Name = "Вид стрілецької зброї"},
-                    new Core.Entities.AttributeEntity.Attribute { Name = "Тип калібру"},
-                    new Core.Entities.AttributeEntity.Attribute { Name = "Спосіб дії"},
-                    new Core.Entities.AttributeEntity.Attribute { Name = "Спосіб впливу"},
-                    new Core.Entities.AttributeEntity.Attribute { Name = "Тип прицілу"},
-                    new Core.Entities.AttributeEntity.Attribute { Name = "Тип ПНБ"}
                 });
         }
 
