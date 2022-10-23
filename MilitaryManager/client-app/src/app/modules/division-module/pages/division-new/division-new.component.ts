@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DivisionModel } from 'src/app/shared/models/division.model';
 import { DivisionsService } from 'src/app/shared/services/api/division.service';
@@ -10,27 +11,34 @@ import { DivisionsService } from 'src/app/shared/services/api/division.service';
   styleUrls: ['./division-new.component.scss']
 })
 export class DivisionNewComponent implements OnInit {
-  divisions: DivisionModel[] = [];
-
-  name: string = '';
-  divisionNumber: string = '';
-  address: string = '';
-  selected_division?: DivisionModel;
 
   useRedClass: boolean = false;
 
-  constructor(private messageService: MessageService, private _divisionsService: DivisionsService) {
+  addDivisionForm: FormGroup = this._fb.group({
+    name: ["", Validators.required],
+    divisionNumber: ["", Validators.required],
+    address: ["", Validators.required],
+    divisionId: [0]
+  })
+
+  divisions: DivisionModel[] = [];
+
+  constructor(private messageService: MessageService,
+    private _divisionsService: DivisionsService,
+    private _fb: FormBuilder) { }
+
+  ngOnInit(): void { 
     this._divisionsService.GetAllDivisions().subscribe((divisions)=>{this.divisions = divisions});
   }
 
-  ngOnInit(): void { 
-
-  }
-
   addDivision() {
-    if(!(this.name == '' || this.divisionNumber == '' || this.address == '')) {
+    if(this.addDivisionForm.valid) {
+
       this.useRedClass = false;
-      this._divisionsService.single.create(new DivisionModel(0, this.name, this.divisionNumber, this.address, this.selected_division?._id))
+      
+      let newDivision: DivisionModel = this.addDivisionForm.value;
+
+      this._divisionsService.single.create(newDivision)
         .subscribe(
           data => this.messageService.add({ severity: 'success', summary: 'Підрозділ створено', detail: 'division created' }),
           error => {
