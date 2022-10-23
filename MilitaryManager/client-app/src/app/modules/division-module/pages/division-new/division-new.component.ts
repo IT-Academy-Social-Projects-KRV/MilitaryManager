@@ -20,7 +20,7 @@ export class DivisionNewComponent implements OnInit {
   useRedClass: boolean = false;
 
   constructor(private messageService: MessageService, private _divisionsService: DivisionsService) {
-    this._divisionsService.collection.getAll().subscribe((divisions)=>{this.divisions = divisions});
+    this._divisionsService.GetAllDivisions().subscribe((divisions)=>{this.divisions = divisions});
   }
 
   ngOnInit(): void { 
