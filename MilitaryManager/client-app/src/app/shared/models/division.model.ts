@@ -4,6 +4,7 @@ export class DivisionModel extends BaseModel {
   public name: string | null = null;
   public address: string | null = null;
   public parentId: number | null = null;
+  public divisionNumber: string | null = null;
 
   public parent: DivisionModel | null = null;
 
