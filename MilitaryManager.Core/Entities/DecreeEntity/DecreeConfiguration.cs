@@ -25,6 +25,9 @@ namespace MilitaryManager.Core.Entities.DecreeEntity
             builder.Property(decree => decree.TimeStamp)
                    .HasColumnType("datetime2")
                    .IsRequired();
+
+            builder.Property(decree => decree.RowVersion)
+               .IsRowVersion();
         }
     }
 }

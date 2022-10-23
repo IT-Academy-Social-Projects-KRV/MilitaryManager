@@ -22,5 +22,6 @@ namespace MilitaryManager.Core.Entities.DecreeEntity
         public Status Status { get; set; }
         public SignedPdf SignedPdf { get; set; }
         public ICollection<StatusHistory> StatusHistories { get; set; }
+        public byte[] RowVersion { get; set; }
     }
 }
