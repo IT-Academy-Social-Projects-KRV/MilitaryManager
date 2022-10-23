@@ -147,8 +147,24 @@ namespace MilitaryManager.Core.Services
             signedPdf.Path = path;
 
             decree.StatusId = (int)DecreeStatus.SIGNED;
-            await _signedPdfRepository.SaveChangesAcync();
-            await _decreeRepository.SaveChangesAcync();
+
+            try
+            {
+                await _signedPdfRepository.SaveChangesAcync();
+                await _decreeRepository.SaveChangesAcync();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                var exceptionEntry = ex.Entries.Single();
+                var databaseEntry = exceptionEntry.GetDatabaseValues();
+                if (databaseEntry == null)
+                {
+                    throw new NotFoundException($"Decree with id {id} not found");
+                }
+                exceptionEntry.OriginalValues.SetValues(databaseEntry);
+                await _signedPdfRepository.SaveChangesAcync();
+                await _decreeRepository.SaveChangesAcync();
+            }  
         }
 
         public async Task<DecreeDTO> UpdateDecreeAsync(UpdateDecreeDTO decreeDTO)
@@ -171,7 +187,6 @@ namespace MilitaryManager.Core.Services
 
                 await _decreeRepository.SaveChangesAcync();
             }
-            
              return _mapper.Map<DecreeDTO>(decree);
         }
 
