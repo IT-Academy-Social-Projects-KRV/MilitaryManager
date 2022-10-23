@@ -614,22 +614,6 @@ namespace MilitaryManager.Infrastructure.Migrations
                             Path = "data/document_templates/template_03.xml",
                             Type = "Переведення"
                         });
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 2,
-                            Path = "data/document_templates/template_02.xml",
-                            Type = "Виплата"
-                        });
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 3,
-                            Path = "data/document_templates/template_03.xml",
-                            Type = "Переведення"
-                        });
                 });
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.UnitEntity.Unit", b =>
