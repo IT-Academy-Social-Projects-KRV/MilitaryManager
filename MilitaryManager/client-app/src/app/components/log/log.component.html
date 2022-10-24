@@ -1,64 +1,62 @@
-<div class="content-section implementation">
-  <div class="card">
-    <p-table [value]="logs" [paginator]="true" [rows]="10"
-      [showCurrentPageReport]="true" responsiveLayout="scroll"
-      currentPageReportTemplate="Показати з {first} по {last} із {totalRecords}
-      entries" [rowsPerPageOptions]="[10,25,50]" dataKey="id">
-      <ng-template pTemplate="header">
-        <tr>
-          <th style="width: 3rem"></th>
-          <th>ІД</th>
-          <th>Сутність</th>
-          <th>ІД сутності</th>
-          <th>Код дії</th>
-          <th>Дата</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-log let-expanded="expanded">
-        <tr>
-          <td>
-            <button (click)="onClick(log)" type="button" pButton pRipple
-              [pRowToggler]="log" class="p-button-text p-button-rounded
-              p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
-          </td>
-          <td>{{log.id}}</td>
-          <td>{{log.tableName}}</td>
-          <td>{{log.rowId}}</td>
-          <td>{{log.changeTypeCode}}</td>
-          <td>{{log.date}}</td>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="rowexpansion" let-log>
-        <tr>
-          <td colspan="7">
-            <div class="p-p-3">
-              <p-table [value]="log.changeValues" dataKey="id">
-                <ng-template pTemplate="header">
-                  <tr>
-                    <th>ІД</th>
-                    <th>Початкове значення</th>
-                    <th>Фактичне значення</th>
-                    <th>Властивість</th>
-                  </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-changeValue>
-                  <tr>
-                    <td>{{changeValue.id}}</td>
-                    <td>{{changeValue.oldValue}}</td>
-                    <td>{{changeValue.newValue}}</td>
-                    <td>{{changeValue.columnName}}</td>
-                  </tr>
-                </ng-template>
-                <ng-template pTemplate="emptymessage">
-                  <tr>
-                    <td colspan="6">Данні відсутні</td>
-                  </tr>
-                </ng-template>
-              </p-table>
-            </div>
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
-  </div>
+ <div class="card">
+  <p-table [value]="logs" [paginator]="true" [rows]="10"
+    [showCurrentPageReport]="true" responsiveLayout="scroll"
+    currentPageReportTemplate="Показати з {first} по {last} із {totalRecords}
+    entries" [rowsPerPageOptions]="[10,25,50]" dataKey="id">
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 3rem"></th>
+        <th>ІД</th>
+        <th>Сутність</th>
+        <th>ІД сутності</th>
+        <th>Код дії</th>
+        <th>Дата</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-log let-expanded="expanded">
+      <tr>
+        <td>
+          <button (click)="onClick(log)" type="button" pButton pRipple
+            [pRowToggler]="log" class="p-button-text p-button-rounded
+            p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+        </td>
+        <td>{{log.id}}</td>
+        <td>{{log.tableName}}</td>
+        <td>{{log.rowId}}</td>
+        <td>{{log.changeTypeCode}}</td>
+        <td>{{log.date}}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-log>
+      <tr>
+        <td colspan="6">
+          <div class="p-p-3">
+            <p-table [value]="log.changeValues" dataKey="id">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>ІД</th>
+                  <th>Початкове значення</th>
+                  <th>Фактичне значення</th>
+                  <th>Властивість</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-changeValue>
+                <tr>
+                  <td>{{changeValue.id}}</td>
+                  <td>{{changeValue.oldValue}}</td>
+                  <td>{{changeValue.newValue}}</td>
+                  <td>{{changeValue.columnName}}</td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="4" id="emptymessage">Дані відсутні</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
 </div>
