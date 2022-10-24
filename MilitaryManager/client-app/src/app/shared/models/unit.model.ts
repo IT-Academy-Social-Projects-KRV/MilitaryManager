@@ -9,7 +9,7 @@ export class UnitModel extends BaseModel {
   public lastName: string | null = null;
   public secondName: string | null = null;
   public label: string | null = null;
-  public firstName: string = 'this is firstname';
+  public firstName: string | null = null;
   public divisionId: number | null = null;
   public rankId: number | null = null;
   public positionId: number | null = null;

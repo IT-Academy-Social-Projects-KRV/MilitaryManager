@@ -5,8 +5,82 @@
     ></p-tree>
   </div>
 
-  <div class="card" id="unit_info">
-    <app-unit-info [id]="someId"></app-unit-info>
-  </div>
-</div>
+<!--  unit info-->
+  <div class="content-section implementation p-d-flex">
 
+    <div class="content-section implementation p-d-flex">
+      <div class="card">
+
+        <p>Інформація про бійця</p>
+
+        <!--  pib-->
+        <hr>
+        <div class="p-float-label">
+          <input type="text" pInputText id="lastNameInput" [(ngModel)]="unit.lastName" readonly>
+          <label for="lastNameInput">Прізвище</label>
+        </div>
+<!--        [(ngModel)]="unit.lastName"-->
+        <hr>
+
+
+        <div class="p-float-label">
+          <!--      <span>{{propName}}</span>-->
+          <!--      <input [(ngModel)]="propName">-->
+          <!--      <select [(ngModel)]="unit.firstName">-->
+
+          <input type="text" pInputText id="firstNameInput" [(ngModel)]="unit.firstName"  readonly>
+          <label for="firstNameInput">Ім'я</label>
+<!--          [(ngModel)]="unit.firstName"-->
+        </div>
+        <hr>
+      </div>
+    </div>
+
+
+<!-- profiles-->
+    <div class="content-section implementation p-d-flex">
+      <div class="card">
+
+        <p>Додаткова інформація про бійця</p>
+
+        <!--  pib-->
+        <hr>
+        <div class="p-float-label">
+          <input type="text" pInputText id="" [(ngModel)]="unit.lastName" readonly>
+          <label for="lastNameInput">Прізвище</label>
+        </div>
+        <!--        [(ngModel)]="unit.lastName"-->
+        <hr>
+
+
+
+        <hr>
+      </div>
+    </div>
+
+
+    <!-- equipment-->
+    <div class="content-section implementation p-d-flex">
+      <div class="card">
+
+        <p>Обладнання бійця</p>
+
+        <!--  pib-->
+        <hr>
+        <div class="p-float-label">
+          <input type="text" pInputText id="" [(ngModel)]="unit.lastName" readonly>
+          <label for="lastNameInput">Прізвище</label>
+        </div>
+        <!--        [(ngModel)]="unit.lastName"-->
+        <hr>
+
+
+
+        <hr>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>

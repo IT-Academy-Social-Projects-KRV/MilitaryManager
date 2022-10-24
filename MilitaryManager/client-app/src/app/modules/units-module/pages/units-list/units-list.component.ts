@@ -28,8 +28,7 @@ export class UnitsListComponent implements OnInit {
     private positionService: PositionService,
     private rankService: RankService,
     private divisionsService: DivisionsService,
-
-              private clientConfigService: ClientConfigurationService) {
+    private clientConfigService: ClientConfigurationService) {
   }
 
   ngOnInit() {
@@ -63,7 +62,8 @@ export class UnitsListComponent implements OnInit {
     }
   }
 
-   someId: number;
+  someId: number;
+  public unit: UnitModel = new UnitModel();
 
   nodeSelect(event: any) {
 
@@ -71,6 +71,11 @@ export class UnitsListComponent implements OnInit {
       this.someId = event.node.id;
       // let unitInfo = new UnitInfoComponent(this.unitsService);
       // unitInfo.getSelectedUnitDataById(event.node.id)
+
+      this.unitsService.single.getById(this.someId)
+        .subscribe((u) => {
+          this.unit = u;
+        });
     }
   }
 }
