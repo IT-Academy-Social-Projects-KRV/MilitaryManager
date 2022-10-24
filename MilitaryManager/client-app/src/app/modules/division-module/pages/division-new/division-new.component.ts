@@ -12,8 +12,6 @@ import { DivisionsService } from 'src/app/shared/services/api/division.service';
 })
 export class DivisionNewComponent implements OnInit {
 
-  useRedClass: boolean = false;
-
   addDivisionForm: FormGroup = this._fb.group({
     name: ["", Validators.required],
     divisionNumber: ["", Validators.required],
@@ -33,8 +31,6 @@ export class DivisionNewComponent implements OnInit {
 
   addDivision() {
     if(this.addDivisionForm.valid) {
-
-      this.useRedClass = false;
       
       let newDivision: DivisionModel = this.addDivisionForm.value;
 
@@ -43,11 +39,7 @@ export class DivisionNewComponent implements OnInit {
           data => this.messageService.add({ severity: 'success', summary: 'Підрозділ створено', detail: 'division created' }),
           error => {
             this.messageService.add({ severity: 'error', summary: 'Підрозділ не створено!', detail: String((error as HttpErrorResponse).error).split('\n')[0] });
-            this.useRedClass = true;
           });
-    }
-    else {
-      this.useRedClass = true;
     }
   }
 }
