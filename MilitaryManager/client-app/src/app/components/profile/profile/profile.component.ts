@@ -18,21 +18,18 @@ export class ProfileComponent implements OnInit {
   userName: string | null | undefined = '';
   rank: string | null | undefined = '';
   position: string | null | undefined = '';
-
-  userId: Promise<string> =  this._authService.getUserId();
   unitModel: UnitModel;
 
   constructor(private _unitUserService : UnitUserService, private _authService: AuthService, private _unitService: UnitsService) {
   }
 
   ngOnInit(): void {
-    const userId = Promise.resolve(this.userId);
+    const userId = this._authService.getUserId();
     userId.then((value) => {
       this._unitUserService.GetUnitUser(value)
         .subscribe(result => {
           this._unitService.single.getById(result["id"])
             .subscribe(result => {
-              console.log(result)
               this.unitModel = result;
               this.userName = this.unitModel?.lastName?.concat(" " + <string>this.unitModel?.firstName + " ").concat(<string>this.unitModel?.secondName);
               this.rank = this.unitModel?.rank
