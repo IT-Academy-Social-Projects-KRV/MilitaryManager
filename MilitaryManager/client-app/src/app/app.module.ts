@@ -16,6 +16,7 @@ import { AddCommanderComponent } from './components/add-commander/add-commander.
 import {ProfileComponent} from "./components/profile/profile/profile.component";
 import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UpdateProfileComponent } from './components/profile/update-profile/update-profile.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     AddCommanderComponent,
     ProfileComponent,
-    FinishRegistrationComponent
+    FinishRegistrationComponent,
+    UpdateProfileComponent
   ],
   imports: [
     BrowserModule,
