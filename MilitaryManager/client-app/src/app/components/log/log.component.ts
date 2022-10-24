@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ChangeModel} from 'src/app/shared/models/change.model';
 import {LogService} from "../../shared/services/api/log.service";
-import {LogDetalesService} from "../../shared/services/api/logDetales.service";
+import {LogDetailsService} from "../../shared/services/api/logDetails.service";
 
 @Component({
   selector: 'app-log-callback',
@@ -15,7 +15,7 @@ export class LogComponent implements OnInit {
   loading: boolean = false;
 
   constructor(private logService: LogService,
-    private logDetalesService: LogDetalesService) { }
+    private logDetailsService: LogDetailsService) { }
 
   ngOnInit() {
     this.loading = true;
@@ -26,7 +26,7 @@ export class LogComponent implements OnInit {
 
   onClick(event: any) {
     if (event.id) {
-      this.logDetalesService.collection.getListById(event.id).subscribe((logValues: any) => {
+      this.logDetailsService.collection.getListById(event.id).subscribe((logValues: any) => {
         event.changeValues = logValues;
       });
     }

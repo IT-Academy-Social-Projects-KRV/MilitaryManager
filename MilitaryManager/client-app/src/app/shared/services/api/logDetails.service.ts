@@ -8,12 +8,12 @@ import {ChangeValuesModel} from "../../models/changeValues.model";
 @Injectable({
   providedIn: 'root',
 })
-export class LogDetalesService extends BaseService<any> {
+export class LogDetailsService extends BaseService<any> {
 
   constructor(
     httpService: HttpService,
     configService: ClientConfigurationService) {
-    super(httpService, 'auditvaluedetales', configService, ChangeValuesModel, ServiceType.units);
+    super(httpService, 'auditvaluedetails', configService, ChangeValuesModel, ServiceType.units);
   }
 }
 

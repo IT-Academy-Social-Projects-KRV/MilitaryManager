@@ -7,11 +7,12 @@ namespace MilitaryManager.Units.API.Controllers
 
     [ApiController]
     [Route("api/[controller]")]
-    public class AuditValueDetalesController : Controller
+    [ApiExplorerSettings(GroupName = "Audit")]
+    public class AuditValueDetailsController : Controller
     {
         protected readonly IAuditService _auditService;
 
-        public AuditValueDetalesController(IAuditService auditService)
+        public AuditValueDetailsController(IAuditService auditService)
         {
             _auditService = auditService;
         }
