@@ -171,7 +171,7 @@ namespace MilitaryManager.Core.Services
         {
             var decree = await _decreeRepository.GetByKeyAsync(decreeDTO.Id);
             decree.Name = decreeDTO.Name;
-            await Concurrency_Check(decreeDTO.Id);
+            await ConcurrencyCheck(decreeDTO.Id);
             return _mapper.Map<DecreeDTO>(decree);
         }
 
@@ -179,11 +179,11 @@ namespace MilitaryManager.Core.Services
         {
             var decree = await _decreeRepository.GetByKeyAsync(id);
             decree.StatusId = (int)DecreeStatus.COMPLETED;
-            await Concurrency_Check(id);
+            await ConcurrencyCheck(id);
             return _mapper.Map<DecreeDTO>(decree);
         }
 
-        private async Task Concurrency_Check(int id)
+        private async Task ConcurrencyCheck(int id)
         {
             try
             {
