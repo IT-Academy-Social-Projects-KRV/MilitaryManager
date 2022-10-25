@@ -19,18 +19,12 @@
           <input type="text" pInputText id="lastNameInput" [(ngModel)]="unit.lastName" readonly>
           <label for="lastNameInput">Прізвище</label>
         </div>
-<!--        [(ngModel)]="unit.lastName"-->
         <hr>
 
 
         <div class="p-float-label">
-          <!--      <span>{{propName}}</span>-->
-          <!--      <input [(ngModel)]="propName">-->
-          <!--      <select [(ngModel)]="unit.firstName">-->
-
           <input type="text" pInputText id="firstNameInput" [(ngModel)]="unit.firstName"  readonly>
           <label for="firstNameInput">Ім'я</label>
-<!--          [(ngModel)]="unit.firstName"-->
         </div>
         <hr>
       </div>
@@ -45,16 +39,12 @@
 
         <!--  pib-->
         <hr>
-        <div class="p-float-label">
-          <input type="text" pInputText id="" [(ngModel)]="unit.lastName" readonly>
-          <label for="lastNameInput">Прізвище</label>
+        <div class="p-float-label" *ngFor="let profile of unit.profiles">
+          <p>{{profile.name}} : {{profile.value}}</p>
+          <input type="text" pInputText  [(ngModel)]="profile.value" readonly placeholder="value">
         </div>
-        <!--        [(ngModel)]="unit.lastName"-->
         <hr>
 
-
-
-        <hr>
       </div>
     </div>
 
@@ -64,14 +54,12 @@
       <div class="card">
 
         <p>Обладнання бійця</p>
-
-        <!--  pib-->
         <hr>
         <div class="p-float-label">
-          <input type="text" pInputText id="" [(ngModel)]="unit.lastName" readonly>
+          <input type="text" pInputText  [(ngModel)]="unit.firstName" readonly>
           <label for="lastNameInput">Прізвище</label>
         </div>
-        <!--        [(ngModel)]="unit.lastName"-->
+
         <hr>
 
 

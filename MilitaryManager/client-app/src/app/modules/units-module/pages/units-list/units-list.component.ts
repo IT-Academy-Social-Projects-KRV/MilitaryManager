@@ -63,7 +63,7 @@ export class UnitsListComponent implements OnInit {
   }
 
   someId: number;
-  public unit: UnitModel = new UnitModel();
+  public unit: UnitModel = new UnitModel(0);
 
   nodeSelect(event: any) {
 
@@ -75,6 +75,11 @@ export class UnitsListComponent implements OnInit {
       this.unitsService.single.getById(this.someId)
         .subscribe((u) => {
           this.unit = u;
+
+          console.log(this.unit)
+
+          console.log(this.unit.profiles[0].name);
+          console.log(this.unit.profiles[0].value);
         });
     }
   }

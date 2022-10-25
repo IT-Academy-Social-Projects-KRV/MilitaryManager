@@ -34,8 +34,8 @@ export class UnitInfoComponent implements OnInit {
   // @ts-ignore
   public unitProfiles: ProfileModel[] = [];
 
-  // public static unit: UnitModel = new UnitModel(0);
-  public unit: UnitModel = new UnitModel();
+  public unit: UnitModel = new UnitModel(0);
+  // public unit: UnitModel = new UnitModel();
 
   public propName = "123";
   @Input() id: number;
@@ -143,7 +143,7 @@ export class UnitInfoComponent implements OnInit {
 
     // @ts-ignore
     console.log("unit info");
-    console.log(this.unit);
+    // console.log(this.unit);
 
     // console.log(this.unitProfiles);
     // // @ts-ignore

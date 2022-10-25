@@ -25,8 +25,4 @@ export class UnitModel extends BaseModel {
 
   public profiles: ProfileModel[] | null = null;
   public unitToEquipments: UnitToEquipmentModel[] | null = null;
-
-  constructor() {
-    super(0);
-  }
 }
