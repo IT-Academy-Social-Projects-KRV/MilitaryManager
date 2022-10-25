@@ -4,9 +4,6 @@ import {AuthService} from "../../../shared/services/auth.service";
 import {UnitsService} from "../../../shared/services/api/unit.service";
 import {UnitModel} from "../../../shared/models/unit.model";
 
-
-
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -39,3 +36,4 @@ export class ProfileComponent implements OnInit {
     })
   }
 }
+
