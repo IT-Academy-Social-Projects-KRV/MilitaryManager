@@ -1,18 +1,14 @@
-.decrees::ng-deep .p-cell-editing {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+#decree .p-cell-editing {
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
-.decrees::ng-deep  td{
-    text-align: center !important;
+#decree td {
+    text-align: center;
 }
 
-.decrees::ng-deep  th{
-    text-align: center !important;
-}
-
-.add-decree{
-    table-layout: auto !important;
+#decree th {
+    text-align: center;
 }
 
 .p-button-lg {

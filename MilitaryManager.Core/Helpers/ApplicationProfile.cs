@@ -50,7 +50,8 @@ namespace MilitaryManager.Core.Helpers
             CreateMap<UnitToEquipmentRequestDTO, UnitToEquipment>().ReverseMap();
             CreateMap<ProfileDTO, Entities.ProfileEntity.Profile>().ReverseMap();
             CreateMap<ProfileRequestDTO, Entities.ProfileEntity.Profile>().ReverseMap();
-            CreateMap<Change, ChangeDTO>();
+            CreateMap<Change, ChangeDTO>().
+                AfterMap((src, dest) => dest.Date = src.Date.ToString("dd/MM/yyyy HH:mm:ss"));
             CreateMap<ChangeValue, ChangeValuesDTO>();
         }
     }

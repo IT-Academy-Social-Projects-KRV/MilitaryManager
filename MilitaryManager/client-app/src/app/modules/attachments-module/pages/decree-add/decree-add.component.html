@@ -14,7 +14,7 @@
         </ng-template>
     </p-dropdown>
 <button pButton type="button" label="Додати" class="p-button-raised p-button-rounded" class="p-button" (click)="addSoldier(selectedUnit)"></button>
-<div class="add-decree">
+<div class="add-decree" id="decree">
         <p-table [value]="decrees" dataKey="id" editMode="row" responsiveLayout="scroll" class="decrees">
             <ng-template pTemplate="header">
                 <tr>

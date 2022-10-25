@@ -8,9 +8,6 @@ using MilitaryManager.Core.Entities.RankEntity;
 using MilitaryManager.Core.Entities.StatusEntity;
 using MilitaryManager.Core.Entities.TemplateEntity;
 using MilitaryManager.Core.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MilitaryManager.Infrastructure.Data.SeedData
 {
