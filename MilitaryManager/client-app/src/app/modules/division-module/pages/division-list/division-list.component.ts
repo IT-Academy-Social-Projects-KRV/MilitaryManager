@@ -15,7 +15,6 @@ export class DivisionListComponent implements OnInit {
   divisions: TreeNode<DivisionModel>[] = [];
 
   loading: boolean = false;
-  selectedId: number = 0;
   public division: DivisionModel = new DivisionModel();
 
   constructor(private divisionsService: DivisionsService,
@@ -46,14 +45,14 @@ export class DivisionListComponent implements OnInit {
   }
 
   nodeSelect(event: any) {
-
     if (event.node) {
-      this.selectedId = event.node.id;
-
-      this.divisionsService.single.getById(this.selectedId)
-        .subscribe((division) => {
-          this.division = division;
-        });
+      this.divisions.forEach((item) => {
+        //@ts-ignore
+        if(item.id == event.node.id){
+          //@ts-ignore
+          this.division = item;
+        }
+      })
     }
   }
 }
