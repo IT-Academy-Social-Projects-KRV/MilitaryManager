@@ -15,6 +15,10 @@ import { AppLayoutModule } from './layout/app.layout.module';
 import { AddCommanderComponent } from './components/add-commander/add-commander.component';
 import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LogComponent } from "./components/log/log.component";
+import { TableModule } from 'primeng/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TabViewModule } from 'primeng/tabview';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     Test2Component,
     SigninRedirectCallbackComponent,
     SignoutRedirectCallbackComponent,
+    LogComponent,
     HomeComponent,
     AddCommanderComponent,
     FinishRegistrationComponent,
@@ -33,6 +38,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     PrimeNgComponentsModule,
     AppLayoutModule,
     ReactiveFormsModule
+    AppLayoutModule,
+    TableModule,
+    TabViewModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     services,

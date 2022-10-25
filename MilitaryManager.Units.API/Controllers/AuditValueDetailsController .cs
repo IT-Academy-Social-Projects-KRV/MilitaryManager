@@ -4,23 +4,17 @@ using System.Threading.Tasks;
 
 namespace MilitaryManager.Units.API.Controllers
 {
+
     [ApiController]
     [Route("api/[controller]")]
     [ApiExplorerSettings(GroupName = "Audit")]
-    public class AuditController : Controller
+    public class AuditValueDetailsController : Controller
     {
         protected readonly IAuditService _auditService;
 
-        public AuditController(IAuditService auditService)
+        public AuditValueDetailsController(IAuditService auditService)
         {
             _auditService = auditService;
-        }
-
-        [HttpGet]
-        [Route("collection")]
-        public async Task<IActionResult> GetChangesList()
-        {
-            return Ok(await _auditService.GetChangesListAsync());
         }
 
         [HttpGet]
