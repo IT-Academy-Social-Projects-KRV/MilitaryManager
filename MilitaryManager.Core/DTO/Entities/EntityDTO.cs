@@ -1,9 +1,4 @@
-﻿using MilitaryManager.Core.DTO.Units;
-using MilitaryManager.Core.Entities.EntityToAttributeEntity;
-using MilitaryManager.Core.Entities.EquipmentToUnitEntity;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace MilitaryManager.Core.DTO.Entities
 {

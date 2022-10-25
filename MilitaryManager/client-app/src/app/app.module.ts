@@ -13,7 +13,9 @@ import { SignoutRedirectCallbackComponent } from './components/signout-redirect-
 import { HomeComponent } from './components/home/home.component';
 import { AppLayoutModule } from './layout/app.layout.module';
 import { AddCommanderComponent } from './components/add-commander/add-commander.component';
-import {LogComponent} from "./components/log/log.component";
+import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LogComponent } from "./components/log/log.component";
 import { TableModule } from 'primeng/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TabViewModule } from 'primeng/tabview';
@@ -27,12 +29,15 @@ import { TabViewModule } from 'primeng/tabview';
     SignoutRedirectCallbackComponent,
     LogComponent,
     HomeComponent,
-    AddCommanderComponent
+    AddCommanderComponent,
+    FinishRegistrationComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     PrimeNgComponentsModule,
+    AppLayoutModule,
+    ReactiveFormsModule
     AppLayoutModule,
     TableModule,
     TabViewModule,

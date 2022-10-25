@@ -43,12 +43,17 @@ namespace MilitaryManager.Units.API
                 c.SwaggerDoc("Units", new OpenApiInfo { Title = "Unit", Version = "v1" });
                 c.SwaggerDoc("Divisions", new OpenApiInfo { Title = "Division", Version = "v1" });
                 c.SwaggerDoc("Audit", new OpenApiInfo { Title = "Audit", Version = "v1" });
+                c.SwaggerDoc("UnitUsers", new OpenApiInfo { Title = "UnitUsers", Version = "v1" });
+                c.SwaggerDoc("UnitsInfo", new OpenApiInfo { Title = "UnitInfo", Version = "v1" });
+                c.SwaggerDoc("Positions", new OpenApiInfo { Title = "Positions", Version = "v1" });
+                c.SwaggerDoc("Ranks", new OpenApiInfo { Title = "Ranks", Version = "v1" });
             });
             services.AddCustomUnitsServices();
             services.AddAutoMapper();
             services.AddRepositories();
             services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));
             services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,6 +73,10 @@ namespace MilitaryManager.Units.API
                 c.SwaggerEndpoint("/swagger/Units/swagger.json", "Unit V1");
                 c.SwaggerEndpoint("/swagger/Divisions/swagger.json", "Division V1");
                 c.SwaggerEndpoint("/swagger/Audit/swagger.json", "Audit V1");
+                c.SwaggerEndpoint("/swagger/UnitUsers/swagger.json", "UnitUser V1");
+                c.SwaggerEndpoint("/swagger/UnitsInfo/swagger.json", "UnitInfo V1");
+                c.SwaggerEndpoint("/swagger/Positions/swagger.json", "Positions V1");
+                c.SwaggerEndpoint("/swagger/Ranks/swagger.json", "Ranks V1");
             });
 
             app.UseCors(

@@ -13,9 +13,14 @@ import {BaseModel} from "../../models/base.model";
 export class DivisionsService extends BaseService<any> {
 
   constructor(
-    httpService: HttpService,
+    private httpService: HttpService,
     configService: ClientConfigurationService) {
     super(httpService, 'division', configService, UnitModel, ServiceType.units);
   }
+
+  GetAllDivisions() {
+    return this.httpService.get(`${this.collection.baseUrl}Division/list`);
+  }
+
 }
 

@@ -26,6 +26,13 @@ namespace MilitaryManager.Units.API.Controllers
         }
 
         [HttpGet]
+        [Route("list")]
+        public async Task<IActionResult> GetAllDivisions()
+        {
+            return Ok(await _divisionService.GetAllDivisionsListAsync());
+        }
+
+        [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> GetDivision([FromRoute] int id)
         {
@@ -33,13 +40,13 @@ namespace MilitaryManager.Units.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateDivision([FromBody] DivisionDTO dto)
+        public async Task<IActionResult> CreateDivision([FromBody] DivisionRequestDTO dto)
         {
             return Ok(await _divisionService.CreateDivisionAsync(dto));
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateDivision([FromBody] DivisionDTO dto)
+        public async Task<IActionResult> UpdateDivision([FromBody] DivisionRequestDTO dto)
         {
             return Ok(await _divisionService.UpdateDivisionAsync(dto));
         }
@@ -50,11 +57,11 @@ namespace MilitaryManager.Units.API.Controllers
         {
             try
             {
-               var deleteDivision = await _divisionService.DeleteDivisionAsync(id);
+                var deleteDivision = await _divisionService.DeleteDivisionAsync(id);
 
-               return Ok(deleteDivision);
+                return Ok(deleteDivision);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }

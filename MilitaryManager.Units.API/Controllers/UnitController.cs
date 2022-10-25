@@ -33,12 +33,6 @@ namespace MilitaryManager.Units.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUnits()
-        {
-            return Ok(await _unitServices.GetUnitsAsync());
-        }
-
-        [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> GetUnit([FromRoute] int id)
         {
@@ -46,13 +40,13 @@ namespace MilitaryManager.Units.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] UnitDTO query)
+        public async Task<IActionResult> Create([FromBody] UnitRequestDTO query)
         {
             return Ok(await _unitServices.CreateUnitAsync(query));
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] UnitDTO query)
+        public async Task<IActionResult> Update([FromBody] UnitRequestDTO query)
         {
             return Ok(await _unitServices.UpdateUnitAsync(query));
         }

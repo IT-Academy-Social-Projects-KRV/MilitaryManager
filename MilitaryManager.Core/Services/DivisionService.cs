@@ -9,10 +9,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static MilitaryManager.Core.Entities.DivivsionEntity.Divisions;
 
 namespace MilitaryManager.Core.Services
 {
-    public class DivisionService: IDivisionService
+    public class DivisionService : IDivisionService
     {
         protected readonly IRepository<Division, int> _divisionRepository;
         protected readonly IMapper _mapper;
@@ -30,6 +31,13 @@ namespace MilitaryManager.Core.Services
             return _mapper.Map<IEnumerable<DivisionDTO>>(getDivisions);
         }
 
+        public async Task<IEnumerable<DivisionDTO>> GetAllDivisionsListAsync()
+        {
+            var divisions = await _divisionRepository.GetAllAsync();
+
+            return _mapper.Map<IEnumerable<DivisionDTO>>(divisions);
+        }
+
         public async Task<DivisionDTO> GetDivisionByKeyAsync(int id)
         {
             Specification<Division> specification = new Divisions.DivisionsList();
@@ -39,7 +47,7 @@ namespace MilitaryManager.Core.Services
             return _mapper.Map<DivisionDTO>(getDivision);
         }
 
-        public async Task<DivisionDTO> CreateDivisionAsync(DivisionDTO dto)
+        public async Task<DivisionDTO> CreateDivisionAsync(DivisionRequestDTO dto)
         {
             var division = _mapper.Map<Division>(dto);
             var newDivision = await _divisionRepository.AddAsync(division);
@@ -48,7 +56,7 @@ namespace MilitaryManager.Core.Services
             return _mapper.Map<DivisionDTO>(newDivision);
         }
 
-        public async Task<DivisionDTO> UpdateDivisionAsync(DivisionDTO dto)
+        public async Task<DivisionDTO> UpdateDivisionAsync(DivisionRequestDTO dto)
         {
             var division = _mapper.Map<Division>(dto);
             var updateDivision = await _divisionRepository.UpdateAsync(division);

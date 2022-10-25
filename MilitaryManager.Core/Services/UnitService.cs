@@ -1,8 +1,6 @@
 ﻿using Ardalis.Specification;
 using AutoMapper;
-using MilitaryManager.Core.DTO.Entities;
 using MilitaryManager.Core.DTO.Units;
-using MilitaryManager.Core.Entities.EntityEntity;
 using MilitaryManager.Core.Entities.UnitEntity;
 using MilitaryManager.Core.Interfaces.Repositories;
 using MilitaryManager.Core.Interfaces.Services;
@@ -40,10 +38,10 @@ namespace MilitaryManager.Core.Services
 
             return _mapper.Map<IEnumerable<UnitDTO>>(unitsTree);
         }
-        
+
         public async Task<UnitDTO> GetUnitAsync(int id)
         {
-            
+
             var unit = await _unitRepository.GetByKeyAsync(id);
 
             return _mapper.Map<UnitDTO>(unit);
@@ -61,7 +59,7 @@ namespace MilitaryManager.Core.Services
 
             return _mapper.Map<UnitDTO>(units);
         }
-        public async Task<UnitDTO> CreateUnitAsync(UnitDTO dto)
+        public async Task<UnitDTO> CreateUnitAsync(UnitRequestDTO dto)
         {
             var unit = _mapper.Map<Unit>(dto);
             var newUnit = await _unitRepository.AddAsync(unit);
@@ -70,7 +68,7 @@ namespace MilitaryManager.Core.Services
             return _mapper.Map<UnitDTO>(newUnit);
         }
 
-        public async Task<UnitDTO> UpdateUnitAsync(UnitDTO query)
+        public async Task<UnitDTO> UpdateUnitAsync(UnitRequestDTO query)
         {
             var unit = _mapper.Map<Unit>(query);
             var updateUnit = await _unitRepository.UpdateAsync(unit);
