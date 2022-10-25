@@ -37,7 +37,7 @@ import { TabViewModule } from 'primeng/tabview';
     AppRoutingModule,
     PrimeNgComponentsModule,
     AppLayoutModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
     AppLayoutModule,
     TableModule,
     TabViewModule,
