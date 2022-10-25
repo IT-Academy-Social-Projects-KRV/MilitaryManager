@@ -15,6 +15,8 @@ export class DivisionListComponent implements OnInit {
   divisions: TreeNode<DivisionModel>[] = [];
 
   loading: boolean = false;
+  selectedId: number = 0;
+  public division: DivisionModel = new DivisionModel();
 
   constructor(private divisionsService: DivisionsService,
               private clientConfigService: ClientConfigurationService) { }
@@ -41,5 +43,17 @@ export class DivisionListComponent implements OnInit {
       this.recursiveTree(subDivision);
     });
     division.children = division.subDivisions;
+  }
+
+  nodeSelect(event: any) {
+
+    if (event.node) {
+      this.selectedId = event.node.id;
+
+      this.divisionsService.single.getById(this.selectedId)
+        .subscribe((division) => {
+          this.division = division;
+        });
+    }
   }
 }
