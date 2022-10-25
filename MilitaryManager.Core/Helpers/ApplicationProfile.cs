@@ -1,4 +1,28 @@
-﻿namespace MilitaryManager.Core.Helpers
+﻿using AutoMapper;
+using MilitaryManager.Core.DTO.Attachments;
+using MilitaryManager.Core.DTO.Attributes;
+using MilitaryManager.Core.DTO.Audit;
+using MilitaryManager.Core.DTO.Divisions;
+using MilitaryManager.Core.DTO.Entities;
+using MilitaryManager.Core.DTO.Positions;
+using MilitaryManager.Core.DTO.Profiles;
+using MilitaryManager.Core.DTO.Ranks;
+using MilitaryManager.Core.DTO.Units;
+using MilitaryManager.Core.Entities.AttributeEntity;
+using MilitaryManager.Core.Entities.AuditEntities.ChangeEntity;
+using MilitaryManager.Core.Entities.AuditEntities.ChangeValueEntity;
+using MilitaryManager.Core.Entities.DecreeEntity;
+using MilitaryManager.Core.Entities.DivisionEntity;
+using MilitaryManager.Core.Entities.EntityEntity;
+using MilitaryManager.Core.Entities.EntityToAttributeEntity;
+using MilitaryManager.Core.Entities.EquipmentToUnitEntity;
+using MilitaryManager.Core.Entities.PositionEntity;
+using MilitaryManager.Core.Entities.RankEntity;
+using MilitaryManager.Core.Entities.TemplateEntity;
+using MilitaryManager.Core.Entities.UnitEntity;
+using System.IO;
+
+namespace MilitaryManager.Core.Helpers
 {
     public class ApplicationProfile : Profile
     {
@@ -26,7 +50,6 @@
             CreateMap<UnitToEquipmentRequestDTO, UnitToEquipment>().ReverseMap();
             CreateMap<ProfileDTO, Entities.ProfileEntity.Profile>().ReverseMap();
             CreateMap<ProfileRequestDTO, Entities.ProfileEntity.Profile>().ReverseMap();
-            CreateMap<Change, ChangeDTO>();
             CreateMap<Change, ChangeDTO>().
                 AfterMap((src, dest) => dest.Date = src.Date.ToString("dd/MM/yyyy HH:mm:ss"));
             CreateMap<ChangeValue, ChangeValuesDTO>();
