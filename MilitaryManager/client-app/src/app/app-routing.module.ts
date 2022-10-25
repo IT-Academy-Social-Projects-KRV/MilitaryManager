@@ -12,6 +12,7 @@ import { UnitCommanderGuard } from './guards/UnitCommanderGuard'
 import { SubUnitCommanderGuard } from './guards/SubUnitCommanderGuard'
 import { ProfileComponent } from "./components/profile/profile/profile.component";
 import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
+import {UpdateProfileComponent} from "./components/profile/update-profile/update-profile.component";
 
 const routes: Routes = [
     {path:'', component:AppLayoutComponent,
@@ -28,6 +29,7 @@ const routes: Routes = [
     { path: 'SignInCallback', component: SigninRedirectCallbackComponent },
     { path: 'SignOutCallback', component: SignoutRedirectCallbackComponent },
     { path: 'profile', component: ProfileComponent },
+    { path: 'updateProfile', component: UpdateProfileComponent },
     { path: '**', redirectTo: 'home' }
   ]}
   ];
