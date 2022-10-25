@@ -8,11 +8,11 @@ import { ServiceType } from "../core/serviceType";
 @Injectable({
   providedIn: 'root',
 })
-export class UnitsService extends BaseService<any> {
+export class UnitsInfoService extends BaseService<any> {
 
   constructor(
-    private httpService: HttpService,
+    httpService: HttpService,
     configService: ClientConfigurationService) {
-    super(httpService, 'unit', configService, UnitModel, ServiceType.units);
+    super(httpService, 'unitInfo', configService, UnitModel, ServiceType.units);
   }
 }

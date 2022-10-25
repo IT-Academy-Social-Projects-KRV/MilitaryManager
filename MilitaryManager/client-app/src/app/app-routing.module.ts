@@ -26,6 +26,7 @@ const routes: Routes = [
     { path: 'divisions', loadChildren: () => import("./modules/division-module/division.module").then(m => m.DivisionModule) },
     { path: 'SignInCallback', component: SigninRedirectCallbackComponent },
     { path: 'SignOutCallback', component: SignoutRedirectCallbackComponent },
+    { path: 'attachments', loadChildren: () => import("./modules/attachments-module/attachments.module").then(m => m.AttachmentsModule) },
     { path: '**', redirectTo: 'home' }
   ]}
   ];

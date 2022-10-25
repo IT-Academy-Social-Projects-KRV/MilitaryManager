@@ -68,7 +68,7 @@ namespace MilitaryManager.Attachments.API.Controllers
             }
             catch (Exception)
             {
-                return BadRequest("Request body should include \"templateId\" , \"decreeName\" and \"decreeNumber\" fields. The rest fields for template data");
+                return BadRequest("Request body should include \"templateId\" and \"decreeName\" fields. The rest fields for template data");
             }
             jsonData = JsonConvert.SerializeObject(modelValues);
             var decree = await _decreeService.GenerateDecreeAsync(_webRootPath, templateId, decreeName, decreeNumber, jsonData);
