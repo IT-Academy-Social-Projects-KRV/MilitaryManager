@@ -11,7 +11,7 @@ import { ServiceType } from "../core/serviceType";
 export class UnitsService extends BaseService<any> {
 
   constructor(
-    httpService: HttpService,
+    private httpService: HttpService,
     configService: ClientConfigurationService) {
     super(httpService, 'unit', configService, UnitModel, ServiceType.units);
   }
