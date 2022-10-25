@@ -6,7 +6,6 @@ import {ConfigModel} from "../../../../shared/models/config.model";
 import {ClientConfigurationService} from "../../../../shared/services/core/client-configuration.service";
 import {TreeNode} from "primeng/api";
 import {BaseService} from "../../../../shared/services/core/base.service";
-import {UnitInfoComponent} from "../unit-info/unit-info.component";
 import {PositionService} from "../../../../shared/services/api/position.service";
 import {RankService} from "../../../../shared/services/api/rank.service";
 import {DivisionsService} from "../../../../shared/services/api/division.service";
@@ -24,11 +23,7 @@ export class UnitsListComponent implements OnInit {
   loading: boolean = false;
 
   constructor(
-    private unitsService: UnitsService,
-    private positionService: PositionService,
-    private rankService: RankService,
-    private divisionsService: DivisionsService,
-    private clientConfigService: ClientConfigurationService) {
+    private unitsService: UnitsService) {
   }
 
   ngOnInit() {
@@ -64,6 +59,10 @@ export class UnitsListComponent implements OnInit {
 
   someId: number;
   public unit: UnitModel = new UnitModel(0);
+  parentFullName: string = "";
+  divisionName: string = "";
+  rankName: string = "";
+  positionName: string = "";
 
   nodeSelect(event: any) {
 
@@ -76,8 +75,18 @@ export class UnitsListComponent implements OnInit {
         .subscribe((u) => {
           this.unit = u;
 
-          console.log(this.unit)
+          if (this.unit.parent != null) {
+            this.parentFullName = `${this.unit?.parent?.lastName} ${this.unit?.parent?.firstName} ${this.unit?.parent?.secondName}`;
+          } else {
+            this.parentFullName = 'Немає';
+          }
 
+          this.divisionName = this.unit?.division.name;
+          this.rankName = this.unit.rank.Name;
+          this.positionName = this.unit.position.Name;
+
+          console.log(this.unit)
+          console.log(this.parentFullName);
           console.log(this.unit.profiles[0].name);
           console.log(this.unit.profiles[0].value);
         });
