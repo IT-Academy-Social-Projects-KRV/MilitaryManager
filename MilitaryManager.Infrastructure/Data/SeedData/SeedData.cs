@@ -224,7 +224,9 @@ namespace MilitaryManager.Infrastructure.Data.SeedData
                     new Core.Entities.AttributeEntity.Attribute { Id = 13, Name = "Спосіб дії"},
                     new Core.Entities.AttributeEntity.Attribute { Id = 14, Name = "Спосіб впливу"},
                     new Core.Entities.AttributeEntity.Attribute { Id = 15, Name = "Тип прицілу"},
-                    new Core.Entities.AttributeEntity.Attribute { Id = 16, Name = "Тип ПНБ"}
+                    new Core.Entities.AttributeEntity.Attribute { Id = 16, Name = "Тип ПНБ"},
+                    new Core.Entities.AttributeEntity.Attribute { Id = 17, Name = "Зріст"},
+                    new Core.Entities.AttributeEntity.Attribute { Id = 18, Name = "Вага"}
                 });
         }
 
