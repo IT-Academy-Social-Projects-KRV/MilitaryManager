@@ -1,6 +1,8 @@
 ﻿using Ardalis.Specification;
 using AutoMapper;
 using MilitaryManager.Core.DTO.Units;
+using MilitaryManager.Core.Entities.EntityEntity;
+using MilitaryManager.Core.Entities.EntityToAttributeEntity;
 using MilitaryManager.Core.Entities.UnitEntity;
 using MilitaryManager.Core.Interfaces.Repositories;
 using MilitaryManager.Core.Interfaces.Services;
@@ -13,12 +15,14 @@ namespace MilitaryManager.Core.Services
     public class UnitService : IUnitService
     {
         protected readonly IRepository<Unit, int> _unitRepository;
+        protected readonly IRepository<Entities.ProfileEntity.Profile, int> _profileRepository;
         protected readonly IMapper _mapper;
 
-        public UnitService(IRepository<Unit, int> unitRepository, IMapper mapper)
+        public UnitService(IRepository<Unit, int> unitRepository, IRepository<Entities.ProfileEntity.Profile, int> profileRepository,  IMapper mapper)
         {
             _unitRepository = unitRepository;
             _mapper = mapper;
+            _profileRepository = profileRepository; 
         }
 
         public async Task<IEnumerable<UnitDTO>> GetUnitsTreeAsync(int? id)
@@ -71,6 +75,12 @@ namespace MilitaryManager.Core.Services
         public async Task<UnitDTO> UpdateUnitAsync(UnitRequestDTO query)
         {
             var unit = _mapper.Map<Unit>(query);
+            foreach(var value in query.Profiles)
+            {
+                var profile = _mapper.Map<Entities.ProfileEntity.Profile>(value);
+                await _profileRepository.UpdateAsync(profile);
+                await _unitRepository.SaveChangesAcync();
+            }
             var updateUnit = await _unitRepository.UpdateAsync(unit);
             await _unitRepository.SaveChangesAcync();
 
