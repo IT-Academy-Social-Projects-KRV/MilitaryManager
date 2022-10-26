@@ -20,13 +20,13 @@
                         {{entity.regNum}}
                     </td>
                     <td>
-                        {{entity.unit.firstName}} {{entity.unit.secondName}} {{entity.unit.lastName}}
+                        {{entity.unit==null?'':entity.unit.firstName}} {{entity.unit==null?'':entity.unit.secondName}} {{entity.unit==null?'':entity.unit.lastName}}
                     </td>
                     <td>
                         {{entity.divisionName}}
                     </td>
                     <td>
-                        {{entity.givenDate| date : 'dd.MM.yyyy HH:mm'}}
+                        {{entity.givenDate==null?'':entity.givenDate| date : 'dd.MM.yyyy HH:mm'}}
                     </td>
                     <td [ngStyle]="{'width': '5%'}">
                         <button pButton pRipple type="button" icon="pi pi-info-circle" (click)="showAttributesInfo(entity)" [class]="'p-button-rounded p-button-text p-mr-2'"></button>
@@ -49,29 +49,12 @@
                 </div>
                 <div class=" p-col-4">
                     <h5>Дата видачі</h5>
-                    <p-calendar [(ngModel)]="tab.givenDate" [disabled]="true" dateFormat="mm-dd-yy" inputId="dateformat"></p-calendar>
+                    <input type="text" pInputText [disabled]="true" [value]="tab.givenDate==null? empty: tab.givenDate| date : 'dd.MM.yyyy HH:mm'"/>
                 </div>
                 <div class=" p-col-4">
                     <h5>Ким надано</h5>
-                    <input type="text" pInputText [disabled]="true" [(ngModel)]="fullNames[i]"/>
-                    <!-- <p-dropdown [showClear]="true" [options]="units" [(ngModel)]="tab.warehouseman" 
-                        optionLabel="" placeholder="tab.warehouseman.lastName + ' ' + tab.warehouseman.firstName + ' ' + tab.warehouseman.secondName">
-                        <ng-template let-unit pTemplate="item">
-                            {{unit.lastName}} {{unit.firstName}} {{unit.secondName}}
-                        </ng-template>
-                    </p-dropdown> -->
-                    <!-- <input type="text" pInputText [value]="tab.warehouseman==null? empty: 
-                    tab.warehouseman?.firstName
-      ?.concat(' ',tab.warehouseman?.secondName==null?'':tab.warehouseman?.secondName)
-      ?.concat(' ',tab.warehouseman?.lastName==null?'':tab.warehouseman?.lastName)" /> -->
+                    <input type="text" pInputText [disabled]="true" [value]="tab.warehouseman==null? empty: tab.warehouseman?.firstName + ' ' + tab.warehouseman?.secondName+' ' +tab.warehouseman?.lastName"/>
                 </div>
-
-                <!-- <div class=" p-col-4 m-2">
-                    <input type="text" pInputText [(ngModel)]="tab.warehouseman==null? empty:tab.warehouseman.secondName" />
-                </div>
-                <div class=" p-col-4 m-2">
-                    <input type="text" pInputText [(ngModel)]="tab.warehouseman==null? empty:tab.warehouseman.lastName" />
-                </div> -->
             </div>
         </p-fieldset>
         <div class="mt-3">

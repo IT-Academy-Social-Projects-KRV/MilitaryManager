@@ -38,21 +38,11 @@ export class EquipmentListComponent implements OnInit {
   }
 
   showAttributesInfo(entity: EntityModel){
-    let entityWithFullInfo: EntityModel;
     this.equipmentService.single.getById(entity._id == null? 0: entity._id).subscribe(res => {
-      entityWithFullInfo = res;
-      this.tabs.push(entityWithFullInfo);
-      this.fullNames[this.tabs.length] = entityWithFullInfo.warehouseman?.lastName + ' ' + entityWithFullInfo.warehouseman?.firstName + ' ' + entityWithFullInfo.warehouseman?.secondName
+      this.tabs.push(res);
+      this.fullNames[this.tabs.length] = res.warehouseman?.lastName + ' ' + res.warehouseman?.firstName + ' ' + res.warehouseman?.secondName
     })
     this.currentTab = this.tabs.length;
-    // setTimeout(() => {
-    //   this.currentTab = this.tabs.length
-    //   if(this.targets.length > 0)
-    //   {
-    //     const target: ViewContainerRef = this.targets.toArray()[this.tabs.length - 1];
-    //     this.componentRef = target.createComponent(Test1Component);
-    //   }
-    // }, 1)
   }
 
 }
