@@ -19,6 +19,14 @@ export class HttpService {
     ) {
     }
 
+    private setHeaders(): HttpHeaders {
+        const headersConfig = {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+        };
+        return new HttpHeaders(headersConfig);
+    }
+
     private formatErrors(error: HttpErrorResponse): Observable<never> {
         // TODO: handle api service level errors
         return throwError(() => error);
@@ -30,25 +38,25 @@ export class HttpService {
 
     get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
         return this.httpClient
-            .get(`${path}`,  { params })
+            .get(`${path}`,  { headers: this.setHeaders(), params })
             .pipe(catchError((error: HttpErrorResponse) => this.formatErrors(error)));
     }
 
     put(path: string, body: any = {}): Observable<any> {
         return this.httpClient
-            .put(`${path}`, JSON.stringify(body))
+            .put(`${path}`, JSON.stringify(body), { headers: this.setHeaders() })
             .pipe(catchError((error: HttpErrorResponse) => this.formatErrors(error)));
     }
 
     post(path: string, body: any = {}): Observable<any> {
         return this.httpClient
-            .post(`${path}`, JSON.stringify(body))
+            .post(`${path}`, JSON.stringify(body), { headers: this.setHeaders() })
             .pipe(catchError((error: HttpErrorResponse) => this.formatErrors(error)));
     }
 
     delete(path: string): Observable<any> {
         return this.httpClient
-            .delete(`${path}`)
+            .delete(`${path}`, { headers: this.setHeaders() })
             .pipe(catchError((error: HttpErrorResponse) => this.formatErrors(error)));
     }
 }

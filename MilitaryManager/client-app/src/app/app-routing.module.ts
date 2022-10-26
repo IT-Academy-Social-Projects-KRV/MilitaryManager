@@ -12,6 +12,7 @@ import { UnitCommanderGuard } from './guards/UnitCommanderGuard'
 import { SubUnitCommanderGuard } from './guards/SubUnitCommanderGuard'
 import { ProfileComponent } from "./components/profile/profile/profile.component";
 import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
+import {LogComponent} from "./components/log/log.component";
 
 const routes: Routes = [
     {path:'', component:AppLayoutComponent,
@@ -23,11 +24,13 @@ const routes: Routes = [
     { path: 'addCommander', component: AddCommanderComponent, canActivate: [AdminGuard] },
     { path: 'decree', loadChildren: () => import("./modules/attachments-module/attachments.module").then(m => m.AttachmentsModule) },
     { path: 'finishRegistration', component: FinishRegistrationComponent},
+    { path: 'logs', component: LogComponent },
     { path: 'units', loadChildren: () => import("./modules/units-module/units.module").then(m => m.UnitsModule) },
     { path: 'divisions', loadChildren: () => import("./modules/division-module/division.module").then(m => m.DivisionModule) },
     { path: 'SignInCallback', component: SigninRedirectCallbackComponent },
     { path: 'SignOutCallback', component: SignoutRedirectCallbackComponent },
     { path: 'profile', component: ProfileComponent },
+    { path: 'attachments', loadChildren: () => import("./modules/attachments-module/attachments.module").then(m => m.AttachmentsModule) },
     { path: '**', redirectTo: 'home' }
   ]}
   ];
