@@ -49,13 +49,10 @@ export class DivisionListComponent implements OnInit {
 
   nodeSelect(event: any) {
     if (event.node) {
-      this.divisions.forEach((item) => {
-        //@ts-ignore
-        if(item.id == event.node.id){
-          //@ts-ignore
-          this.division = item;
-        }
-      })
+      this.divisionsService.single.getById(event.node.id)
+        .subscribe((division) => {
+          this.division = division;
+        });
     }
   }
 
