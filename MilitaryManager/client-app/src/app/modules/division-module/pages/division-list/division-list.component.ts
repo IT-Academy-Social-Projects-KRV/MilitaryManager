@@ -69,7 +69,7 @@ export class DivisionListComponent implements OnInit {
   save(){
     this.isReadOnly = true;
     this.divisionsService.single.update(this.division).subscribe(
-      () =>  this.messageService.add({ severity: 'success', summary: 'Наказ відредаговано' }),
+      () =>  this.messageService.add({ severity: 'success', summary: 'Частину відредаговано' }),
       () => this.messageService.add({ severity: 'error', summary: 'Виникла помилка!'})
     );
   }
