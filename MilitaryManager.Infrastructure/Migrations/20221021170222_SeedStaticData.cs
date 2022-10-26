@@ -27,7 +27,9 @@ namespace MilitaryManager.Infrastructure.Migrations
                     { 4, "Тип форми" },
                     { 3, "Розмір протигазу" },
                     { 2, "Розмір голови" },
-                    { 8, "Назва" }
+                    { 8, "Назва" },
+                    { 17, "Зріст" },
+                    { 18, "Вага" }
                 });
 
             migrationBuilder.InsertData(
