@@ -1,4 +1,5 @@
-﻿using MilitaryManager.Core.DTO.Profiles;
+﻿using MilitaryManager.Core.DTO.Attributes;
+using MilitaryManager.Core.DTO.Profiles;
 using System.Collections.Generic;
 
 namespace MilitaryManager.Core.DTO.Units
@@ -13,6 +14,7 @@ namespace MilitaryManager.Core.DTO.Units
         public int RankId { get; set; }
         public int? ParentId { get; set; }
         public int PositionId { get; set; }
+        //public List<AttributeWithValueDTO> Profiles { get; set; }
 
         public List<ProfileRequestDTO> Profiles { get; set; }
         public List<UnitToEquipmentRequestDTO> UnitToEquipments { get; set; }

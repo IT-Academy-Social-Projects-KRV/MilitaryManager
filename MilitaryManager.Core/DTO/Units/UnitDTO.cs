@@ -22,7 +22,7 @@ namespace MilitaryManager.Core.DTO.Units
         public string Rank { get; set; }
         public UnitDTO Parent { get; set; }
         public string Position { get; set; }
-        //public List<ProfileDTO> Profiles { get; set; }
+       // public List<ProfileDTO> Profiles { get; set; }
         public List<AttributeWithValueDTO> Profiles { get; set; }
         public List<UnitToEquipmentDTO> UnitToEquipments { get; set; }
     }

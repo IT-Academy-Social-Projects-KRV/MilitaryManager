@@ -11,6 +11,9 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../shared/services/auth.service";
 import {UnitsService} from "../../../shared/services/api/unit.service";
 import {UnitModel} from "../../../shared/models/unit.model";
+import {ProfileModel} from "../../../shared/models/profile.model";
+import {HttpErrorResponse} from "@angular/common/http";
+import {MessageService} from "primeng/api";
 
 export enum AttributesName
 {
@@ -37,9 +40,6 @@ export class UpdateProfileComponent implements OnInit {
   blood_types: string[] = [];
 
   unitModel: UnitModel;
-
-
-
   /*  readonly weightValueValidator = (control: FormControl) => {
 
       if(control.value < 40 || control.value > 150) {
@@ -78,9 +78,9 @@ export class UpdateProfileComponent implements OnInit {
 
 
   updateProfileForm: FormGroup = this._formBuilder.group({
-    Surname: ['', Validators.required],
-    Name: ['', Validators.required],
-    Patronymic: ['', Validators.required],
+    LastName: ['', Validators.required],
+    FirstName: ['', Validators.required],
+    SecondName: ['', Validators.required],
     Rank: ['', Validators.required],
     Position: ['', Validators.required],
     FootSize: ['', Validators.required], //[this.footSizeValueValidator]],
@@ -101,7 +101,8 @@ export class UpdateProfileComponent implements OnInit {
               private _router: Router,
               private _formBuilder: FormBuilder,
               private _authService: AuthService,
-              private _unitService: UnitsService) { }
+              private _unitService: UnitsService,
+              private _messageService: MessageService) { }
 
   ngOnInit(): void {
     this._positionService.collection.getAll().subscribe(pos => {this.pos = pos});
@@ -121,21 +122,63 @@ export class UpdateProfileComponent implements OnInit {
             .subscribe(result => {
               this.unitModel = result;
               console.log(result)
-              this.updateProfileForm.get("Surname").setValue(this.unitModel.lastName)
-              this.updateProfileForm.get("Name").setValue(this.unitModel.firstName)
-              this.updateProfileForm.get("Patronymic").setValue(this.unitModel.secondName)
-              this.updateProfileForm.get("Rank").setValue(this.unitModel.rank)
-              this.updateProfileForm.get("Position").setValue(this.unitModel.position)
+              this.updateProfileForm.get("LastName").setValue(this.unitModel.lastName)
+              this.updateProfileForm.get("FirstName").setValue(this.unitModel.firstName)
+              this.updateProfileForm.get("SecondName").setValue(this.unitModel.secondName)
               for(let i = 0; i < this.unitModel.profiles.length; i++) {
                 this.updateProfileForm.get(AttributesName[i]).setValue(this.unitModel.profiles[i].value)
               }
+             // let updatedUnit: UnitModel = this.updateProfileForm.value;
+/*              updatedUnit.updatedProfiles = [];
+              for(let i = 0; i < this.unitModel.profiles.length; i++) {
+                updatedUnit.updatedProfiles.push(new updatedProfileModel(this.unitModel.profiles[i].id,
+                  this.attributes.find(x => x.name==this.unitModel.profiles[i].name)?.id, this.unitModel.id,
+                  this.updateProfileForm.get(AttributesName[i])?.value));
+              }*/
+             // console.log(updatedUnit)
             })
         })
     })
   }
 
-
+  getRankId(rank: string): number {
+    let rankId = 0;
+    for(let i = 0; i < this.ranks.length; i++){
+      //@ts-ignore
+      if(rank == this.ranks[i].name){
+        rankId = this.ranks[i].id
+      }
+    }
+    return rankId;
+  }
+  getPositionId(position: string): number {
+    let posId = 0;
+    for(let i = 0; i < this.pos.length; i++){
+      //@ts-ignore
+      if(position == this.pos[i].name){
+        posId = this.ranks[i].id
+      }
+    }
+    return posId;
+  }
   update() {
-    alert("a");
+    let updatedUnit: UnitModel = this.updateProfileForm.value;
+    updatedUnit.rankId = this.getRankId(this.updateProfileForm.get("Rank").value)
+    updatedUnit.positionId = this.getPositionId(this.updateProfileForm.get("Position").value)
+    updatedUnit.id = this.unitModel.id
+    updatedUnit.profiles = [];
+    for(let i = 0; i < this.unitModel.profiles.length; i++) {
+      updatedUnit.profiles.push(new ProfileModel(this.unitModel.profiles[i].id,
+        this.attributes.find(x => x.name==this.unitModel.profiles[i].name)?.id, this.unitModel.id,
+        this.updateProfileForm.get(AttributesName[i])?.value, null));
+    }
+    this._unitService.single.update(updatedUnit).subscribe(
+      data => {
+        this._messageService.add({ severity: 'success', summary: 'Дані оновлено!'});
+        setTimeout(() => {this._router.navigate(['/profile'], { replaceUrl: true })}, 2000);
+      },
+      error => {
+        this._messageService.add({ severity: 'error', summary: 'Помилка оновлення даних!',detail: String((error as HttpErrorResponse).error).split('\n')[0] });
+      })
   }
 }
