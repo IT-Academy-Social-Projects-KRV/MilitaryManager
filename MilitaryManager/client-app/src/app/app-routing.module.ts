@@ -24,6 +24,7 @@ const routes: Routes = [
     { path: 'finishRegistration', component: FinishRegistrationComponent},
     { path: 'units', loadChildren: () => import("./modules/units-module/units.module").then(m => m.UnitsModule) },
     { path: 'divisions', loadChildren: () => import("./modules/division-module/division.module").then(m => m.DivisionModule) },
+    { path: 'equipment', loadChildren: () => import("./modules/equipment/equipment.module").then(m => m.EquipmentModule) },
     { path: 'SignInCallback', component: SigninRedirectCallbackComponent },
     { path: 'SignOutCallback', component: SignoutRedirectCallbackComponent },
     { path: '**', redirectTo: 'home' }
