@@ -59,6 +59,13 @@ export class AuthService {
          return !!user && !user.expired ? user.access_token : null;
     })
   }
+  public getUserId = (): Promise<string> => {
+    // @ts-ignore
+    return this._userManager.getUser()
+      .then(user => {
+        return user?.profile.sub;
+      })
+  }
 
   public isAuthenticated = (): Promise<boolean> => {
     return this._userManager.getUser()

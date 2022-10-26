@@ -10,6 +10,7 @@ import { AddCommanderComponent } from './components/add-commander/add-commander.
 import  { AdminGuard } from './guards/AdminGuard'
 import { UnitCommanderGuard } from './guards/UnitCommanderGuard'
 import { SubUnitCommanderGuard } from './guards/SubUnitCommanderGuard'
+import { ProfileComponent } from "./components/profile/profile/profile.component";
 import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
 import {LogComponent} from "./components/log/log.component";
 
@@ -28,6 +29,7 @@ const routes: Routes = [
     { path: 'divisions', loadChildren: () => import("./modules/division-module/division.module").then(m => m.DivisionModule) },
     { path: 'SignInCallback', component: SigninRedirectCallbackComponent },
     { path: 'SignOutCallback', component: SignoutRedirectCallbackComponent },
+    { path: 'profile', component: ProfileComponent },
     { path: 'attachments', loadChildren: () => import("./modules/attachments-module/attachments.module").then(m => m.AttachmentsModule) },
     { path: '**', redirectTo: 'home' }
   ]}

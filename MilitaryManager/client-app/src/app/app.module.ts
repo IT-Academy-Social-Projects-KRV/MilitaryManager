@@ -13,6 +13,7 @@ import { SignoutRedirectCallbackComponent } from './components/signout-redirect-
 import { HomeComponent } from './components/home/home.component';
 import { AppLayoutModule } from './layout/app.layout.module';
 import { AddCommanderComponent } from './components/add-commander/add-commander.component';
+import {ProfileComponent} from "./components/profile/profile/profile.component";
 import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LogComponent } from "./components/log/log.component";
@@ -30,7 +31,8 @@ import { TabViewModule } from 'primeng/tabview';
     LogComponent,
     HomeComponent,
     AddCommanderComponent,
-    FinishRegistrationComponent,
+    ProfileComponent,
+    FinishRegistrationComponent
   ],
   imports: [
     BrowserModule,

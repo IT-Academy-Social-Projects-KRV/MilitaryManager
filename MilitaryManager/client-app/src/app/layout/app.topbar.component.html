@@ -16,15 +16,15 @@
         <button *ngIf="!isUserAuthenticated" class="p-link layout-topbar-button" (click)="login()">
             <i class="pi pi-sign-in"></i>
             <span>Sign in</span>
-        </button>  
-        <button *ngIf="isUserAuthenticated" class="p-link layout-topbar-button">
+        </button>
+        <button *ngIf="isUserAuthenticated" class="p-link layout-topbar-button" routerLink="/profile" (click)="navigateToProfile()">
             <i class="pi pi-user"></i>
             <span>Profile</span>
-        </button>  
+        </button>
         <button *ngIf="isUserAuthenticated" class="p-link layout-topbar-button" (click)="logout()">
             <i class="pi pi-sign-out"></i>
             <span>Sign out</span>
-        </button>  
+        </button>
         <button class="p-link layout-topbar-button" (click)="onConfigButtonClick()">
             <i class="pi pi-cog"></i>
             <span>Settings</span>
