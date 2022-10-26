@@ -115,6 +115,16 @@ namespace MilitaryManager.Infrastructure.Migrations
                         {
                             Id = 16,
                             Name = "Тип ПНБ"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Name = "Зріст"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Name = "Вага"
                         });
                 });
 
