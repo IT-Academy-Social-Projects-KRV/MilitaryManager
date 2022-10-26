@@ -17,6 +17,11 @@ import {ProfileComponent} from "./components/profile/profile/profile.component";
 import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UpdateProfileComponent } from './components/profile/update-profile/update-profile.component';
+import { LogComponent } from "./components/log/log.component";
+import { TableModule } from 'primeng/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TabViewModule } from 'primeng/tabview';
+
 
 @NgModule({
   declarations: [
@@ -25,6 +30,7 @@ import { UpdateProfileComponent } from './components/profile/update-profile/upda
     Test2Component,
     SigninRedirectCallbackComponent,
     SignoutRedirectCallbackComponent,
+    LogComponent,
     HomeComponent,
     AddCommanderComponent,
     ProfileComponent,
@@ -36,7 +42,11 @@ import { UpdateProfileComponent } from './components/profile/update-profile/upda
     AppRoutingModule,
     PrimeNgComponentsModule,
     AppLayoutModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppLayoutModule,
+    TableModule,
+    TabViewModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     services,

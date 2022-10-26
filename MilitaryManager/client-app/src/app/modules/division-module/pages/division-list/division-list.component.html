@@ -1,9 +1,21 @@
 <div class="content-section implementation p-d-flex" id="container">
   <div class="card" id="tree">
-    <p-tree [value]="divisions"></p-tree>
+    <p-tree [value]="divisions" selectionMode="single" (onNodeSelect)="nodeSelect($event)"></p-tree>
   </div>
-  <div class="card" id="unit_info">
-    This block will contain complete information about the division. Name, addresses, list of soldiers
+  <div class="card" id="division_info">
+    <p>Інформація про частину</p>
+        <hr>
+        <div class="p-float-label">
+          <input type="text" pInputText id="nameInput" [(ngModel)]="division.name" readonly>
+          <label for="nameInput">Назва</label>
+        </div>
+        <div class="p-float-label">
+          <input type="text" pInputText id="divisionNumberInput" [(ngModel)]="division.divisionNumber" readonly>
+          <label for="divisionNumberInput">Номер частини</label>
+        </div>
+        <div class="p-float-label">
+          <input type="text" pInputText id="addressInput" [(ngModel)]="division.address" readonly>
+          <label for="addressInput">Адреса</label>
+        </div>
   </div>
 </div>
-

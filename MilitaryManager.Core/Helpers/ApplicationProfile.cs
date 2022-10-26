@@ -44,12 +44,14 @@ namespace MilitaryManager.Core.Helpers
             CreateMap<Position, PositionDTO>().ReverseMap();
             CreateMap<AttributeDTO, Attribute>().ReverseMap();
             CreateMap<EntityDTO, Entity>().ReverseMap();
+            CreateMap<EntityRequestDTO, Entity>().ReverseMap();
             CreateMap<EntityToAttributeDTO, EntityToAttribute>().ReverseMap();
             CreateMap<UnitToEquipmentDTO, UnitToEquipment>().ReverseMap();
             CreateMap<UnitToEquipmentRequestDTO, UnitToEquipment>().ReverseMap();
             CreateMap<ProfileDTO, Entities.ProfileEntity.Profile>().ReverseMap();
             CreateMap<ProfileRequestDTO, Entities.ProfileEntity.Profile>().ReverseMap();
-            CreateMap<Change, ChangeDTO>();
+            CreateMap<Change, ChangeDTO>().
+                AfterMap((src, dest) => dest.Date = src.Date.ToString("dd/MM/yyyy HH:mm:ss"));
             CreateMap<ChangeValue, ChangeValuesDTO>();
             CreateMap<Profile, AttributeWithValueDTO>()
                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Attribute.Name));

@@ -34,7 +34,8 @@ namespace MilitaryManager.Core.Entities.UnitEntity
                     .Include(x => x.Parent)
                     .Include(x => x.Profiles)
                     .Include(x => x.UnitToEquipments)
-                    .Include(x => x.EquipmentToWarehouseMan);
+                    .Include(x => x.EquipmentToWarehouseMan)
+                    .Include(x => x.Division); 
             }
         }
         internal class UnitById : Specification<Unit>

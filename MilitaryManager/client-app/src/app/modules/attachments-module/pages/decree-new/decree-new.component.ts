@@ -1,7 +1,7 @@
 import { Component, ComponentRef, OnInit, QueryList, ViewChildren, ViewContainerRef } from '@angular/core';
-import { Test1Component } from 'src/app/components/test1/test1.component';
 import { TemplateModel } from 'src/app/shared/models/template.model';
 import { ApiService } from 'src/app/shared/services/api/api.service';
+import { DecreeAddComponent } from '../decree-add/decree-add.component';
 
 @Component({
   selector: 'app-decree-new',
@@ -23,7 +23,7 @@ export class DecreeNewComponent implements OnInit {
     this.apiService.templates.collection.getAll().subscribe(res => { this.templates = res })
   }  
 
-  addNewDocument() {
+  addNewDocument(id: number | null, type: string | null) {
     this.tabs.push('Новий документ ' + (this.tabs.length + 1));
 
     setTimeout(() => {
@@ -31,7 +31,9 @@ export class DecreeNewComponent implements OnInit {
       if(this.targets.length > 0)
       {
         const target: ViewContainerRef = this.targets.toArray()[this.tabs.length - 1];
-        this.componentRef = target.createComponent(Test1Component);
+        this.componentRef = target.createComponent(DecreeAddComponent);
+        this.componentRef.instance.templateId=id;
+        this.componentRef.instance.templateType=type;
       }
     }, 1)    
   }
