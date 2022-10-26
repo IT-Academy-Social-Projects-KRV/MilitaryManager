@@ -26,6 +26,14 @@ namespace DocumentGenerator.Interfaces
             XParagraphAlignment textAlign = XParagraphAlignment.Center);
 
         /// <summary>
+        /// Add image block into document
+        /// </summary>
+        /// <param name="imagePath">Path in wwwroot to image</param>
+        /// <param name="width">Image block width</param>
+        /// <param name="height">Image block height</param>
+        void AddImage(string imagePath, double width, double height);
+
+        /// <summary>
         /// Add retreat
         /// </summary>
         /// <param name="height">Retreat height</param>
