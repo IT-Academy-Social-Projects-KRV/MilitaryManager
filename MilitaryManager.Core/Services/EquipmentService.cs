@@ -1,16 +1,11 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using MilitaryManager.Core.DTO.Entities;
-using MilitaryManager.Core.DTO.Units;
 using MilitaryManager.Core.Entities.EntityEntity;
 using MilitaryManager.Core.Entities.EntityToAttributeEntity;
-using MilitaryManager.Core.Entities.UnitEntity;
 using MilitaryManager.Core.Interfaces.Repositories;
 using MilitaryManager.Core.Interfaces.Services;
-using PdfSharpCore.Drawing;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MilitaryManager.Core.Services
@@ -51,7 +46,7 @@ namespace MilitaryManager.Core.Services
         public async Task<EntityRequestDTO> GetEquipmentByIdAsync(int id)
         {
             var equipment = await _entityRepository.GetFirstBySpecAsync(new EntitiesSpec.EntityById(id));
-
+         
             return _mapper.Map<EntityRequestDTO>(equipment);
         }
         public async Task<EntityRequestDTO> UpdateEntityAsync(EntityRequestDTO dto)
