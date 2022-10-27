@@ -1,4 +1,5 @@
 <p>unit-tree-and-info works!</p>
-
-<app-unit-info [idChild1]="id"></app-unit-info>
-<app-units-list (idCHANGE2)="onClick($event)"></app-units-list>
+<div class="content-section implementation" id="container">
+  <app-units-list (idCHANGE2)="onClick($event)"></app-units-list>
+  <app-unit-info [idChild1]="id"></app-unit-info>
+</div>
