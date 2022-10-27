@@ -58,18 +58,15 @@ export class UnitsListComponent implements OnInit {
   }
 
   someId: number;
-  public unit: UnitModel = new UnitModel(0);
+  unit: UnitModel = new UnitModel(0);
   parentFullName: string = "";
   divisionName: string = "";
-  rankName: string = "";
-  positionName: string = "";
+
 
   nodeSelect(event: any) {
 
     if (event.node) {
       this.someId = event.node.id;
-      // let unitInfo = new UnitInfoComponent(this.unitsService);
-      // unitInfo.getSelectedUnitDataById(event.node.id)
 
       this.unitsService.single.getById(this.someId)
         .subscribe((u) => {
@@ -82,11 +79,9 @@ export class UnitsListComponent implements OnInit {
           }
 
           this.divisionName = this.unit?.division.name;
-          this.rankName = this.unit.rank.Name;
-          this.positionName = this.unit.position.Name;
+
 
           console.log(this.unit)
-          console.log(this.parentFullName);
           console.log(this.unit.profiles[0].name);
           console.log(this.unit.profiles[0].value);
         });
