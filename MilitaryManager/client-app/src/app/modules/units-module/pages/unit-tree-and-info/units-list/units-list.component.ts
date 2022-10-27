@@ -66,38 +66,38 @@ export class UnitsListComponent implements OnInit {
 
     if (event.node) {
 
-      // this.idChild2 = event.node.id;
+      this.idChild2 = event.node.id;
       console.log(this.idChild2);
 
       // this.idCHANGE2.emit(this.idChild2);
 
-      this.unitsService.single.getById(event.node.id)
-        .subscribe((u) => {
-          this.idChild2 = u;
-
-
-          // if (this.unit.parent != null) {
-          //   this.parentFullName = `${this.unit?.parent?.lastName} ${this.unit?.parent?.firstName} ${this.unit?.parent?.secondName}`;
-          // } else {
-          //   this.parentFullName = 'Немає';
-          // }
-          //
-          // this.divisionName = this.unit?.division.name;
-
-
-          // console.log(this.unit)
-          // console.log(this.unit.profiles[0].name);
-          // console.log(this.unit.profiles[0].value);
-        });
+      // this.unitsService.single.getById(event.node.id)
+      //   .subscribe((u) => {
+      //     this.idChild2 = u;
+      //
+      //
+      //     // if (this.unit.parent != null) {
+      //     //   this.parentFullName = `${this.unit?.parent?.lastName} ${this.unit?.parent?.firstName} ${this.unit?.parent?.secondName}`;
+      //     // } else {
+      //     //   this.parentFullName = 'Немає';
+      //     // }
+      //     //
+      //     // this.divisionName = this.unit?.division.name;
+      //
+      //
+      //     // console.log(this.unit)
+      //     // console.log(this.unit.profiles[0].name);
+      //     // console.log(this.unit.profiles[0].value);
+      //   });
 
       this.idCHANGE2.emit(this.idChild2);
     }
   }
 
 
-  idChild2 : UnitModel;
+  idChild2 : number;
 
-  @Output() idCHANGE2: EventEmitter<UnitModel> = new EventEmitter();
+  @Output() idCHANGE2: EventEmitter<number> = new EventEmitter();
 
   click() {
     // this.idChild2 = this.unit.id;

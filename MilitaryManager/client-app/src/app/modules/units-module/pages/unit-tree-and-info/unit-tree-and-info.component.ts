@@ -14,9 +14,9 @@ export class UnitTreeAndInfoComponent implements OnInit {
   }
 
 
-  public id: UnitModel;
+  public id: number;
 
-  public onClick(someNumber: UnitModel): void {
+  public onClick(someNumber: number): void {
     this.id = someNumber;
   }
 }

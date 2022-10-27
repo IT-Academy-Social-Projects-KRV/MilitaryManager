@@ -17,7 +17,7 @@ export class UnitInfoComponent implements OnInit {
   constructor(private unitsService: UnitsService) {
   }
 
-  @Input() idChild1: UnitModel;
+  @Input() idChild1: number;
 
   unit: UnitModel = new UnitModel(0);
   parentFullName: string = "";
@@ -31,24 +31,24 @@ export class UnitInfoComponent implements OnInit {
   showLastName() {
 
     console.log(this.idChild1);
-    // this.unitsService.single.getById(this.idChild1)
-    //   .subscribe((u) => {
-    //     this.unit = u;
-    //
-    //
-    //     if (this.unit.parent != null) {
-    //       this.parentFullName = `${this.unit?.parent?.lastName} ${this.unit?.parent?.firstName} ${this.unit?.parent?.secondName}`;
-    //     } else {
-    //       this.parentFullName = 'Немає';
-    //     }
-    //
-    //     this.divisionName = this.unit?.division.name;
-    //
-    //
-    //     console.log(this.unit)
-    //     // console.log(this.unit.profiles[0].name);
-    //     // console.log(this.unit.profiles[0].value);
-    //   });
+    this.unitsService.single.getById(this.idChild1)
+      .subscribe((u) => {
+        this.unit = u;
+
+
+        if (this.unit.parent != null) {
+          this.parentFullName = `${this.unit?.parent?.lastName} ${this.unit?.parent?.firstName} ${this.unit?.parent?.secondName}`;
+        } else {
+          this.parentFullName = 'Немає';
+        }
+
+        this.divisionName = this.unit?.division.name;
+
+
+        console.log(this.unit)
+        // console.log(this.unit.profiles[0].name);
+        // console.log(this.unit.profiles[0].value);
+      });
   }
 
 
