@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UnitModel} from 'src/app/shared/models/unit.model';
 import {UnitStateService} from 'src/app/shared/services/unit-state.service';
 import {UnitsService} from 'src/app/shared/services/api/unit.service';
-import {ConfigModel} from "../../../../shared/models/config.model";
-import {ClientConfigurationService} from "../../../../shared/services/core/client-configuration.service";
+import {ConfigModel} from "../../../../../shared/models/config.model";
+import {ClientConfigurationService} from "../../../../../shared/services/core/client-configuration.service";
 import {TreeNode} from "primeng/api";
-import {BaseService} from "../../../../shared/services/core/base.service";
-import {PositionService} from "../../../../shared/services/api/position.service";
-import {RankService} from "../../../../shared/services/api/rank.service";
-import {DivisionsService} from "../../../../shared/services/api/division.service";
+import {BaseService} from "../../../../../shared/services/core/base.service";
+import {PositionService} from "../../../../../shared/services/api/position.service";
+import {RankService} from "../../../../../shared/services/api/rank.service";
+import {DivisionsService} from "../../../../../shared/services/api/division.service";
 
 
 @Component({
@@ -57,7 +57,6 @@ export class UnitsListComponent implements OnInit {
     }
   }
 
-  someId: number;
   unit: UnitModel = new UnitModel(0);
   parentFullName: string = "";
   divisionName: string = "";
@@ -66,25 +65,50 @@ export class UnitsListComponent implements OnInit {
   nodeSelect(event: any) {
 
     if (event.node) {
-      this.someId = event.node.id;
 
-      this.unitsService.single.getById(this.someId)
+      // this.idChild2 = event.node.id;
+      console.log(this.idChild2);
+
+      // this.idCHANGE2.emit(this.idChild2);
+
+      this.unitsService.single.getById(event.node.id)
         .subscribe((u) => {
-          this.unit = u;
-
-          if (this.unit.parent != null) {
-            this.parentFullName = `${this.unit?.parent?.lastName} ${this.unit?.parent?.firstName} ${this.unit?.parent?.secondName}`;
-          } else {
-            this.parentFullName = 'Немає';
-          }
-
-          this.divisionName = this.unit?.division.name;
+          this.idChild2 = u;
 
 
-          console.log(this.unit)
-          console.log(this.unit.profiles[0].name);
-          console.log(this.unit.profiles[0].value);
+          // if (this.unit.parent != null) {
+          //   this.parentFullName = `${this.unit?.parent?.lastName} ${this.unit?.parent?.firstName} ${this.unit?.parent?.secondName}`;
+          // } else {
+          //   this.parentFullName = 'Немає';
+          // }
+          //
+          // this.divisionName = this.unit?.division.name;
+
+
+          // console.log(this.unit)
+          // console.log(this.unit.profiles[0].name);
+          // console.log(this.unit.profiles[0].value);
         });
+
+      this.idCHANGE2.emit(this.idChild2);
     }
+  }
+
+
+  idChild2 : UnitModel;
+
+  @Output() idCHANGE2: EventEmitter<UnitModel> = new EventEmitter();
+
+  click() {
+    // this.idChild2 = this.unit.id;
+
+    console.log(this.idChild2);
+    // this.idCHANGE2.emit(this.idChild2);
+  }
+
+
+
+  sendId() {
+
   }
 }

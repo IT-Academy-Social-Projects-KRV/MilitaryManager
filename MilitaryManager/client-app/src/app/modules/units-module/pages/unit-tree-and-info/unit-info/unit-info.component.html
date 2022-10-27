@@ -1,1 +1,14 @@
+<p>unit INFO works!</p>
+<p>id = {{idChild1}}</p>
 
+<p>Інформація про бійця</p>
+
+<!--  pib-->
+<hr>
+<div class="p-float-label">
+  <input type="text" pInputText id="lastNameInput" [(ngModel)]="unit.lastName" readonly>
+  <label for="lastNameInput">Прізвище</label>
+</div>
+<hr>
+
+<button (click)="showLastName()">show last name</button>

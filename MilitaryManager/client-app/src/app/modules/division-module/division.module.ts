@@ -6,19 +6,22 @@ import { RouterModule } from '@angular/router';
 import { PrimeNgComponentsModule } from '../primeng-components-module/primeng-components.module';
 
 @NgModule({
-  declarations: [
-    DivisionListComponent,
-    DivisionEditComponent
-  ],
-  imports: [
-    CommonModule,
-    PrimeNgComponentsModule,
-    RouterModule.forChild([
-        { path: '', redirectTo: 'list', pathMatch: 'full' },
-        { path: 'list', component: DivisionListComponent },
-        { path: 'edit', component: DivisionEditComponent },
-        { path: '**', redirectTo: 'list' }
-      ])
-  ]
+    declarations: [
+        DivisionListComponent,
+        DivisionEditComponent
+    ],
+    exports: [
+        DivisionListComponent
+    ],
+    imports: [
+        CommonModule,
+        PrimeNgComponentsModule,
+        RouterModule.forChild([
+            {path: '', redirectTo: 'list', pathMatch: 'full'},
+            {path: 'list', component: DivisionListComponent},
+            {path: 'edit', component: DivisionEditComponent},
+            {path: '**', redirectTo: 'list'}
+        ])
+    ]
 })
 export class DivisionModule { }
