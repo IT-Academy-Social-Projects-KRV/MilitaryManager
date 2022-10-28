@@ -57,26 +57,33 @@ namespace MilitaryManager.Infrastructure.Migrations
                 columns: new[] { "Id", "Name", "TemplateId" },
                 values: new object[,]
                 {
-                    { 1, "decreeNumber", 1 },
-                    { 21, "newPlace", 2 },
-                    { 22, "unitNumber", 2 },
                     { 23, "percent", 2 },
-                    { 24, "anotherPercent", 2 },
-                    { 25, "first", 2 },
                     { 26, "father", 2 },
-                    { 27, "currentDate", 3 },
-                    { 28, "decreeNumber", 3 },
-                    { 29, "lastName", 3 },
-                    { 30, "firstName", 3 },
-                    { 31, "secondName", 3 },
-                    { 32, "divisionNumber", 3 },
-                    { 33, "commanderDivision", 3 },
-                    { 34, "commanderRank", 3 },
-                    { 35, "commanderLastName", 3 },
-                    { 20, "unitNumberNew", 2 },
-                    { 36, "commanderFirstName", 3 },
-                    { 19, "decreeNumber2", 2 },
-                    { 17, "month", 2 },
+                    { 27, "commanderDivisionNumber", 3 },
+                    { 28, "currentDate", 3 },
+                    { 29, "city", 3 },
+                    { 30, "decreeNumber", 3 },
+                    { 31, "lastName", 3 },
+                    { 32, "firstName", 3 },
+                    { 33, "secondName", 3 },
+                    { 34, "soldireDivisionNumber", 3 },
+                    { 35, "assignmentDate", 3 },
+                    { 36, "assignmentNumber", 3 },
+                    { 37, "assignmentDivisionNumber", 3 },
+                    { 38, "newDivisionNumber", 3 },
+                    { 39, "dismissDate", 3 },
+                    { 40, "divisionNumber", 3 },
+                    { 41, "percent", 3 },
+                    { 42, "increasePercent", 3 },
+                    { 43, "serviceDateFrom", 3 },
+                    { 44, "serviceDateTo", 3 },
+                    { 45, "commanderRank", 3 },
+                    { 46, "commanderLastName", 3 },
+                    { 25, "first", 2 },
+                    { 24, "anotherPercent", 2 },
+                    { 48, "commanderSecondName", 3 },
+                    { 22, "unitNumber", 2 },
+                    { 1, "decreeNumber", 1 },
                     { 2, "currentDate", 1 },
                     { 3, "city", 1 },
                     { 4, "street", 1 },
@@ -85,15 +92,19 @@ namespace MilitaryManager.Infrastructure.Migrations
                     { 7, "owner", 1 },
                     { 8, "flatnum", 1 },
                     { 9, "text", 1 },
+                    { 47, "commanderFirstName", 3 },
                     { 10, "currentDate", 2 },
-                    { 11, "city", 2 },
                     { 12, "decreeNumber", 2 },
                     { 13, "lastName", 2 },
                     { 14, "firstName", 2 },
                     { 15, "unitNumber", 2 },
                     { 16, "day", 2 },
+                    { 17, "month", 2 },
                     { 18, "year", 2 },
-                    { 37, "commanderSecondName", 3 }
+                    { 19, "decreeNumber2", 2 },
+                    { 20, "unitNumberNew", 2 },
+                    { 21, "newPlace", 2 },
+                    { 11, "city", 2 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -119,6 +130,18 @@ namespace MilitaryManager.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "TemplatePlaceholders");
+
+            migrationBuilder.DeleteData(
+                schema: "Unit",
+                table: "Attributes",
+                keyColumn: "Id",
+                keyValue: 17);
+
+            migrationBuilder.DeleteData(
+                schema: "Unit",
+                table: "Attributes",
+                keyColumn: "Id",
+                keyValue: 18);
         }
     }
 }

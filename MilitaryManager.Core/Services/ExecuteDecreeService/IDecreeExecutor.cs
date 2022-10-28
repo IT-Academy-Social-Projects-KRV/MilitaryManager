@@ -1,8 +1,10 @@
-﻿namespace MilitaryManager.Core.Services.ExecuteDecreeService
+﻿using System.Threading.Tasks;
+
+namespace MilitaryManager.Core.Services.ExecuteDecreeService
 {
     public interface IDecreeExecutor
     {
         public int TemplateId { get; }
-        public void ExecuteOperation(int decreeId);
+        public Task ExecuteOperation(int decreeId);
     }
 }

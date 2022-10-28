@@ -5,10 +5,12 @@ using Microsoft.EntityFrameworkCore;
 using MilitaryManager.Core.DTO.Attachments;
 using MilitaryManager.Core.Entities.DecreeDataEntity;
 using MilitaryManager.Core.Entities.DecreeEntity;
+using MilitaryManager.Core.Entities.DivisionEntity;
 using MilitaryManager.Core.Entities.SignedPdfEntity;
 using MilitaryManager.Core.Entities.StatusEntity;
 using MilitaryManager.Core.Entities.TemplateEntity;
 using MilitaryManager.Core.Entities.TemplatePlaceholderEntity;
+using MilitaryManager.Core.Entities.UnitEntity;
 using MilitaryManager.Core.Enums;
 using MilitaryManager.Core.Exceptions;
 using MilitaryManager.Core.Interfaces;
@@ -32,6 +34,8 @@ namespace MilitaryManager.Core.Services
         protected readonly IRepository<Status, int> _statusRepository;
         protected readonly IRepository<SignedPdf, int> _signedPdfRepository;
         protected readonly IRepository<DecreeData, int> _decreeDataRepository;
+        private readonly IRepository<Division, int> _divisionRepository;
+        private readonly IRepository<Unit, int> _unitRepository;
         protected readonly IDocumentGenerationService _documentGenerationService;
         protected readonly IMapper _mapper;
         protected readonly IStoreService _storeService;
@@ -43,6 +47,8 @@ namespace MilitaryManager.Core.Services
                              IRepository<Status, int> statusRepository,
                              IRepository<SignedPdf, int> signedPdfRepository,
                              IRepository<DecreeData, int> decreeDataRepository,
+                             IRepository<Division, int> divisionRepository,
+                             IRepository<Unit, int> unitRepository,
                              IDocumentGenerationService documentGenerationService,
                              IMapper mapper,
                              IStoreService storeService,
@@ -53,6 +59,8 @@ namespace MilitaryManager.Core.Services
             _statusRepository = statusRepository;
             _signedPdfRepository = signedPdfRepository;
             _decreeDataRepository = decreeDataRepository;
+            _divisionRepository = divisionRepository;
+            _unitRepository = unitRepository;
             _documentGenerationService = documentGenerationService;
             _mapper = mapper;
             _storeService = storeService;
@@ -62,7 +70,8 @@ namespace MilitaryManager.Core.Services
 
         public async Task<DecreeDTO> GenerateDecreeAsync(string wwwroot, int templateId, string name, string number, string jsonData)
         {
-            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            //var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userId = "testId";
             var template = await _templateRepository.GetByKeyAsync(templateId);
             var status = await _statusRepository.GetByKeyAsync((int)DecreeStatus.CREATED);
 
@@ -205,7 +214,7 @@ namespace MilitaryManager.Core.Services
         {
             var decree = await _decreeRepository.GetByKeyAsync(id);
             decree.StatusId = (int)DecreeStatus.COMPLETED;
-            new DecreeExecutor().ExecuteOperation(decree.TemplateId, decree.Id);
+            await new DecreeExecutor(_decreeDataRepository, _divisionRepository, _unitRepository).ExecuteOperation(decree.TemplateId, decree.Id);
             await ConcurrencyCheck(id);
             return _mapper.Map<DecreeDTO>(decree);
         }

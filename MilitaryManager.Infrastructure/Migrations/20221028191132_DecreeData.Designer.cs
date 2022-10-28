@@ -10,7 +10,7 @@ using MilitaryManager.Infrastructure.Data;
 namespace MilitaryManager.Infrastructure.Migrations
 {
     [DbContext(typeof(MilitaryManagerDbContext))]
-    [Migration("20221028171557_DecreeData")]
+    [Migration("20221028191132_DecreeData")]
     partial class DecreeData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1338,66 +1338,132 @@ namespace MilitaryManager.Infrastructure.Migrations
                         new
                         {
                             Id = 27,
-                            Name = "currentDate",
+                            Name = "commanderDivisionNumber",
                             TemplateId = 3
                         },
                         new
                         {
                             Id = 28,
-                            Name = "decreeNumber",
+                            Name = "currentDate",
                             TemplateId = 3
                         },
                         new
                         {
                             Id = 29,
-                            Name = "lastName",
+                            Name = "city",
                             TemplateId = 3
                         },
                         new
                         {
                             Id = 30,
-                            Name = "firstName",
+                            Name = "decreeNumber",
                             TemplateId = 3
                         },
                         new
                         {
                             Id = 31,
-                            Name = "secondName",
+                            Name = "lastName",
                             TemplateId = 3
                         },
                         new
                         {
                             Id = 32,
-                            Name = "divisionNumber",
+                            Name = "firstName",
                             TemplateId = 3
                         },
                         new
                         {
                             Id = 33,
-                            Name = "commanderDivision",
+                            Name = "secondName",
                             TemplateId = 3
                         },
                         new
                         {
                             Id = 34,
-                            Name = "commanderRank",
+                            Name = "soldireDivisionNumber",
                             TemplateId = 3
                         },
                         new
                         {
                             Id = 35,
-                            Name = "commanderLastName",
+                            Name = "assignmentDate",
                             TemplateId = 3
                         },
                         new
                         {
                             Id = 36,
-                            Name = "commanderFirstName",
+                            Name = "assignmentNumber",
                             TemplateId = 3
                         },
                         new
                         {
                             Id = 37,
+                            Name = "assignmentDivisionNumber",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 38,
+                            Name = "newDivisionNumber",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 39,
+                            Name = "dismissDate",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 40,
+                            Name = "divisionNumber",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 41,
+                            Name = "percent",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 42,
+                            Name = "increasePercent",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 43,
+                            Name = "serviceDateFrom",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 44,
+                            Name = "serviceDateTo",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 45,
+                            Name = "commanderRank",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 46,
+                            Name = "commanderLastName",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 47,
+                            Name = "commanderFirstName",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 48,
                             Name = "commanderSecondName",
                             TemplateId = 3
                         });
