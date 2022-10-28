@@ -3,19 +3,23 @@
     <p-tree [value]="divisions" selectionMode="single" (onNodeSelect)="nodeSelect($event)"></p-tree>
   </div>
   <div class="card" id="division_info">
+    <p-toast></p-toast>
     <p>Інформація про частину</p>
         <hr>
         <div class="p-float-label">
-          <input type="text" pInputText id="nameInput" [(ngModel)]="division.name" readonly>
+          <input type="text" pInputText id="nameInput" [(ngModel)]="division.name" [readonly]="isReadOnly">
           <label for="nameInput">Назва</label>
         </div>
         <div class="p-float-label">
-          <input type="text" pInputText id="divisionNumberInput" [(ngModel)]="division.divisionNumber" readonly>
+          <input type="text" pInputText id="divisionNumberInput" [(ngModel)]="division.divisionNumber" [readonly]="isReadOnly">
           <label for="divisionNumberInput">Номер частини</label>
         </div>
         <div class="p-float-label">
-          <input type="text" pInputText id="addressInput" [(ngModel)]="division.address" readonly>
+          <input type="text" pInputText id="addressInput" [(ngModel)]="division.address" [readonly]="isReadOnly">
           <label for="addressInput">Адреса</label>
         </div>
+        <button pButton type="button" label="Редагувати частину" *ngIf="isReadOnly" class="p-button-outlined" (click)="edit(division)"></button>
+        <button pButton type="button" label="Зберегти" *ngIf="!isReadOnly" class=" p-button-raised" icon="pi pi-check" (click)="save()"></button>
+        <button pButton type="button" label="Скасувати" *ngIf="!isReadOnly" class=" p-button-raised" class="cancelButton" icon="pi pi-times" (click)="cancel(division.id)"></button>
   </div>
 </div>
