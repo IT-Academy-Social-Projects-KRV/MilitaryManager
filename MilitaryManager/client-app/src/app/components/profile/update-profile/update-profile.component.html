@@ -1,36 +1,3 @@
-<!--
-<form [formGroup]="myForm" novalidate (ngSubmit)="update()">
-  <h5>Прізвище</h5>
-    <input type="text" formControlName="Surname" size="50px">
-  <h5>Ім'я</h5>
-    <input type="text" formControlName="Name" size="50px">
-  <h5>По батькові</h5>
-    <input type="text" formControlName="Patronymic" size="50px">
-  <h5>Звання</h5>
-    <p-dropdown formControlName="Rank" [options]="ranks"></p-dropdown>
-  <h5>Посада</h5>
-    <p-dropdown formControlName="Position" [options]="pos"></p-dropdown>
-  <h5>Розмір ноги</h5>
-    <input type="text" formControlName="FootSize" size="50px">
-  <h5>Розмір голови</h5>
-    <input type="text" formControlName="HeadSize" size="50px">
-  <h5>Розмір противогазу</h5>
-    <input type="text" formControlName="GasMaskSize" size="50px">
-  <h5>Уніформа</h5>
-    <p-dropdown formControlName="Uniform" [options]="uniforms"></p-dropdown>
-  <h5>Група крові</h5>
-    <p-dropdown formControlName="BloodType" [options]="blood_types"></p-dropdown>
-  <h5>Вага</h5>
-    <input type="text" formControlName="Weight" size="50px">
-  <h5>Зріст</h5>
-    <input type="text" formControlName="Height" size="50px">
-  <div class="form-group">
-    <button class="btn btn-default" [disabled]="myForm.invalid">
-      Оновити
-    </button>
-  </div>
-</form>
--->
 <form (submit)="update()" [formGroup]="updateProfileForm">
   <div class="card">
     <h5>Прізвище</h5>

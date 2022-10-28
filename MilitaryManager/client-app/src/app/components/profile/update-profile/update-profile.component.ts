@@ -7,7 +7,7 @@ import {PositionService} from "../../../shared/services/api/position.service";
 import {RankService} from "../../../shared/services/api/rank.service";
 import {AttributeService} from "../../../shared/services/api/attribute.service";
 import {Router} from "@angular/router";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../shared/services/auth.service";
 import {UnitsService} from "../../../shared/services/api/unit.service";
 import {UnitModel} from "../../../shared/models/unit.model";
@@ -23,9 +23,8 @@ export enum AttributesName
   Uniform,
   BloodType,
   Weight,
-  Height,
+  Height
 }
-
 @Component({
   selector: 'app-update-profile',
   templateUrl: './update-profile.component.html',
@@ -40,42 +39,37 @@ export class UpdateProfileComponent implements OnInit {
   blood_types: string[] = [];
 
   unitModel: UnitModel;
-  /*  readonly weightValueValidator = (control: FormControl) => {
+    readonly weightValueValidator = (control: FormControl) => {
 
       if(control.value < 40 || control.value > 150) {
-        return Observable<{weightValueValidator: 'Невірно введені дані, спробуйте від 40 до 150 включно'}>
+        return {weightValueValidator: 'Невірно введені дані, спробуйте від 40 до 150 включно'}
       }
-      return Observable<null>
+      return null
     }
     readonly heightValueValidator = (control: FormControl) => {
       if(control.value < 150 || control.value > 250) {
-       // return {heightValueValidator: 'Невірно введені дані, спробуйте від 150 до 250 включно'}
-        return Observable<{weightValueValidator: 'Невірно введені дані, спробуйте від 40 до 150 включно'}>
+        return {heightValueValidator: 'Невірно введені дані, спробуйте від 150 до 250 включно'}
       }
-      return Observable<null>
+      return null
     }
     readonly footSizeValueValidator = (control: FormControl) => {
       if(control.value < 38 || control.value > 47) {
-        return Observable<{weightValueValidator: 'Невірно введені дані, спробуйте від 40 до 150 включно'}>
-        // return {footSizeValueValidator: 'Невірно введені дані, спробуйте від 38 до 47 включно'}
+        return {footSizeValueValidator: 'Невірно введені дані, спробуйте від 38 до 47 включно'}
       }
-      return Observable<null>
+      return null
     }
     readonly headSizeValueValidator = (control: FormControl) => {
       if(control.value < 54 || control.value > 64) {
-        return Observable<{weightValueValidator: 'Невірно введені дані, спробуйте від 40 до 150 включно'}>
-        //return {headSizeValueValidator: 'Невірно введені дані, спробуйте від 54 до 64 включно'}
+        return {headSizeValueValidator: 'Невірно введені дані, спробуйте від 54 до 64 включно'}
       }
-      return Observable<null>
+      return null
     }
     readonly gasMaskSizeValueValidator = (control: FormControl) => {
       if(control.value < 0 || control.value > 4) {
-        return Observable<{weightValueValidator: 'Невірно введені дані, спробуйте від 40 до 150 включно'}>
-        //return {gasMaskSizeValidator: 'Невірно введені дані, спробуйте від 0 до 4 включно'}
+        return {gasMaskSizeValidator: 'Невірно введені дані, спробуйте від 0 до 4 включно'}
       }
-      return Observable<null>
-    }*/
-
+      return null
+    }
 
   updateProfileForm: FormGroup = this._formBuilder.group({
     LastName: ['', Validators.required],
@@ -83,16 +77,14 @@ export class UpdateProfileComponent implements OnInit {
     SecondName: ['', Validators.required],
     Rank: ['', Validators.required],
     Position: ['', Validators.required],
-    FootSize: ['', Validators.required], //[this.footSizeValueValidator]],
-    HeadSize: ['', Validators.required], //[this.headSizeValueValidator]],
-    GasMaskSize: ['', Validators.required],// [this.gasMaskSizeValueValidator]],
+    FootSize: ['', [Validators.required, this.footSizeValueValidator]],
+    HeadSize: ['', [Validators.required, this.headSizeValueValidator]],
+    GasMaskSize: ['', [Validators.required, this.gasMaskSizeValueValidator]],
     Uniform: ['', Validators.required],
     BloodType: ['', Validators.required],
-    Weight: ['', Validators.required],// [this.weightValueValidator]],
-    Height: ['', Validators.required], //[this.heightValueValidator]]
+    Weight: ['', [Validators.required, this.weightValueValidator]],
+    Height: ['', [Validators.required, this.heightValueValidator]]
   })
-
-
 
   constructor(private _unitUserService : UnitUserService,
               private _rankService: RankService,
@@ -128,14 +120,6 @@ export class UpdateProfileComponent implements OnInit {
               for(let i = 0; i < this.unitModel.profiles.length; i++) {
                 this.updateProfileForm.get(AttributesName[i]).setValue(this.unitModel.profiles[i].value)
               }
-             // let updatedUnit: UnitModel = this.updateProfileForm.value;
-/*              updatedUnit.updatedProfiles = [];
-              for(let i = 0; i < this.unitModel.profiles.length; i++) {
-                updatedUnit.updatedProfiles.push(new updatedProfileModel(this.unitModel.profiles[i].id,
-                  this.attributes.find(x => x.name==this.unitModel.profiles[i].name)?.id, this.unitModel.id,
-                  this.updateProfileForm.get(AttributesName[i])?.value));
-              }*/
-             // console.log(updatedUnit)
             })
         })
     })
@@ -162,6 +146,10 @@ export class UpdateProfileComponent implements OnInit {
     return posId;
   }
   update() {
+      if(this.updateProfileForm.invalid){
+        alert("Невірно введені дані")
+        return;
+      }
     let updatedUnit: UnitModel = this.updateProfileForm.value;
     updatedUnit.rankId = this.getRankId(this.updateProfileForm.get("Rank").value)
     updatedUnit.positionId = this.getPositionId(this.updateProfileForm.get("Position").value)
