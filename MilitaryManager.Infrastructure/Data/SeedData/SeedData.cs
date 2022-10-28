@@ -7,6 +7,7 @@ using MilitaryManager.Core.Entities.PositionEntity;
 using MilitaryManager.Core.Entities.RankEntity;
 using MilitaryManager.Core.Entities.StatusEntity;
 using MilitaryManager.Core.Entities.TemplateEntity;
+using MilitaryManager.Core.Entities.TemplatePlaceholderEntity;
 using MilitaryManager.Core.Enums;
 
 namespace MilitaryManager.Infrastructure.Data.SeedData
@@ -24,6 +25,7 @@ namespace MilitaryManager.Infrastructure.Data.SeedData
             SeedPositions(builder);
             SeedAttributes(builder);
             SeedAttributeValues(builder);
+            SeedTemplatePlaceholders(builder);
         }
 
         public static void SeedDecreeStatuses(ModelBuilder builder)
@@ -72,6 +74,13 @@ namespace MilitaryManager.Infrastructure.Data.SeedData
                     Type = "Переведення",
                     Path = "data/document_templates/template_03.xml"
                 });
+        }
+
+        public static void SeedTemplatePlaceholders(ModelBuilder builder)
+        {
+            builder.Entity<TemplatePlaceholder>().HasData(
+                new TemplatePlaceholder().GetTemplatePlaceholders()
+                );
         }
 
         public static void SeedChangeTypes(ModelBuilder builder)

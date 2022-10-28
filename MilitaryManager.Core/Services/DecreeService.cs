@@ -3,15 +3,18 @@ using BusinessLogic.Services.Documents;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using MilitaryManager.Core.DTO.Attachments;
+using MilitaryManager.Core.Entities.DecreeDataEntity;
 using MilitaryManager.Core.Entities.DecreeEntity;
 using MilitaryManager.Core.Entities.SignedPdfEntity;
 using MilitaryManager.Core.Entities.StatusEntity;
 using MilitaryManager.Core.Entities.TemplateEntity;
+using MilitaryManager.Core.Entities.TemplatePlaceholderEntity;
 using MilitaryManager.Core.Enums;
 using MilitaryManager.Core.Exceptions;
 using MilitaryManager.Core.Interfaces;
 using MilitaryManager.Core.Interfaces.Repositories;
 using MilitaryManager.Core.Interfaces.Services;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,6 +30,7 @@ namespace MilitaryManager.Core.Services
         protected readonly IRepository<Template, int> _templateRepository;
         protected readonly IRepository<Status, int> _statusRepository;
         protected readonly IRepository<SignedPdf, int> _signedPdfRepository;
+        protected readonly IRepository<DecreeData, int> _decreeDataRepository;
         protected readonly IDocumentGenerationService _documentGenerationService;
         protected readonly IMapper _mapper;
         protected readonly IStoreService _storeService;
@@ -37,6 +41,7 @@ namespace MilitaryManager.Core.Services
                              IRepository<Template, int> templateRepository,
                              IRepository<Status, int> statusRepository,
                              IRepository<SignedPdf, int> signedPdfRepository,
+                             IRepository<DecreeData, int> decreeDataRepository,
                              IDocumentGenerationService documentGenerationService,
                              IMapper mapper,
                              IStoreService storeService,
@@ -46,6 +51,7 @@ namespace MilitaryManager.Core.Services
             _templateRepository = templateRepository;
             _statusRepository = statusRepository;
             _signedPdfRepository = signedPdfRepository;
+            _decreeDataRepository = decreeDataRepository;
             _documentGenerationService = documentGenerationService;
             _mapper = mapper;
             _storeService = storeService;
@@ -89,6 +95,25 @@ namespace MilitaryManager.Core.Services
             
             await _decreeRepository.AddAsync(decree);
             await _decreeRepository.SaveChangesAcync();
+
+            List<TemplatePlaceholder> placeholderList = new TemplatePlaceholder().GetTemplatePlaceholders()
+                .Where(x => x.TemplateId == templateId)
+                .ToList();
+
+            List<DecreeData> decreeDatas = new List<DecreeData>();
+            var modelValues = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonData);
+            foreach (var keyValuePair in modelValues)
+            {
+                var decreeData = new DecreeData()
+                {
+                    Value = keyValuePair.Value,
+                    DecreeId = decree.Id,
+                    TemplatePlaceholderId = placeholderList.FirstOrDefault(x => x.Name == keyValuePair.Key).Id
+                };
+                decreeDatas.Add(decreeData);
+            };
+            await _decreeDataRepository.AddRangeAsync(decreeDatas);
+            await _decreeDataRepository.SaveChangesAcync();
 
             return _mapper.Map<DecreeDTO>(decree);
         }
