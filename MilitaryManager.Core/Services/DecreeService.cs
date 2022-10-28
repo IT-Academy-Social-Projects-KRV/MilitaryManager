@@ -14,6 +14,7 @@ using MilitaryManager.Core.Exceptions;
 using MilitaryManager.Core.Interfaces;
 using MilitaryManager.Core.Interfaces.Repositories;
 using MilitaryManager.Core.Interfaces.Services;
+using MilitaryManager.Core.Services.ExecuteDecreeService;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -204,6 +205,7 @@ namespace MilitaryManager.Core.Services
         {
             var decree = await _decreeRepository.GetByKeyAsync(id);
             decree.StatusId = (int)DecreeStatus.COMPLETED;
+            new DecreeExecutor().ExecuteOperation(decree.TemplateId, decree.Id);
             await ConcurrencyCheck(id);
             return _mapper.Map<DecreeDTO>(decree);
         }
