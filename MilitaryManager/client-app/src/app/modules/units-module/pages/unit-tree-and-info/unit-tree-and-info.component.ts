@@ -14,9 +14,10 @@ export class UnitTreeAndInfoComponent implements OnInit {
   }
 
 
-  public id: number;
+  public id: number = 9;
 
   public onClick(someNumber: number): void {
+    console.log(this.id)
     this.id = someNumber;
   }
 }

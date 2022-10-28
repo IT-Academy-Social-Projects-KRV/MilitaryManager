@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {UnitModel} from "../../../../../shared/models/unit.model";
 import {UnitsService} from "../../../../../shared/services/api/unit.service";
 
@@ -12,21 +12,30 @@ import {
   templateUrl: './unit-info.component.html',
   styleUrls: ['./unit-info.component.scss']
 })
-export class UnitInfoComponent implements OnInit {
+export class UnitInfoComponent implements OnInit, OnChanges {
 
   constructor(private unitsService: UnitsService) {
   }
 
-  @Input() idChild1: number;
+  @Input() idChild1: number = 9;
 
   unit: UnitModel = new UnitModel(0);
   parentFullName: string = "";
   divisionName: string = "";
 
-  ngOnInit(): void {
 
+
+  ngOnInit(): void {
+    this.showLastName();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('ngOnChanges')
+    console.log(changes);
+    // console.log(changes[this.idChild1]);
+    // this.idChild1 = changes[this.idChild1];
+    this.showLastName();
+  }
 
   showLastName() {
 
@@ -50,6 +59,8 @@ export class UnitInfoComponent implements OnInit {
         // console.log(this.unit.profiles[0].value);
       });
   }
+
+
 
 
 }
