@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BusinessLogic.Services.Documents;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using MilitaryManager.Core.DTO.Attachments;
 using MilitaryManager.Core.Entities.DecreeEntity;
 using MilitaryManager.Core.Entities.SignedPdfEntity;
@@ -146,15 +147,31 @@ namespace MilitaryManager.Core.Services
             signedPdf.Path = path;
 
             decree.StatusId = (int)DecreeStatus.SIGNED;
-            await _signedPdfRepository.SaveChangesAcync();
-            await _decreeRepository.SaveChangesAcync();
+
+            try
+            {
+                await _signedPdfRepository.SaveChangesAcync();
+                await _decreeRepository.SaveChangesAcync();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                var exceptionEntry = ex.Entries.Single();
+                var databaseEntry = exceptionEntry.GetDatabaseValues();
+                if (databaseEntry == null)
+                {
+                    throw new NotFoundException($"Decree with id {id} not found");
+                }
+                exceptionEntry.OriginalValues.SetValues(databaseEntry);
+                await _signedPdfRepository.SaveChangesAcync();
+                await _decreeRepository.SaveChangesAcync();
+            }  
         }
 
         public async Task<DecreeDTO> UpdateDecreeAsync(UpdateDecreeDTO decreeDTO)
         {
             var decree = await _decreeRepository.GetByKeyAsync(decreeDTO.Id);
             decree.Name = decreeDTO.Name;
-            await _decreeRepository.SaveChangesAcync();
+            await ConcurrencyCheck(decreeDTO.Id);
             return _mapper.Map<DecreeDTO>(decree);
         }
 
@@ -162,8 +179,28 @@ namespace MilitaryManager.Core.Services
         {
             var decree = await _decreeRepository.GetByKeyAsync(id);
             decree.StatusId = (int)DecreeStatus.COMPLETED;
-            await _decreeRepository.SaveChangesAcync();
+            await ConcurrencyCheck(id);
             return _mapper.Map<DecreeDTO>(decree);
+        }
+
+        private async Task ConcurrencyCheck(int id)
+        {
+            try
+            {
+                await _decreeRepository.SaveChangesAcync();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                var exceptionEntry = ex.Entries.Single();
+                var databaseEntry = exceptionEntry.GetDatabaseValues();
+                if (databaseEntry == null)
+                {
+                    throw new NotFoundException($"Decree with id {id} not found");
+                }
+                exceptionEntry.OriginalValues.SetValues(databaseEntry);
+
+                await _decreeRepository.SaveChangesAcync();
+            }
         }
 
         public async Task<DecreeDTO> DeleteDecreeAsync(int id)
@@ -172,11 +209,11 @@ namespace MilitaryManager.Core.Services
             if (decree == null)
             {
                 throw new NotFoundException($"Decree with id {id} not found");
-            }    
+            }
             var deleteDecree = await _decreeRepository.DeleteAsync(decree);
             await _decreeRepository.SaveChangesAcync();
 
             return _mapper.Map<DecreeDTO>(deleteDecree);
         }
-    }
+    }  
 }
