@@ -58,32 +58,32 @@
                 <div class="col-12 md:col-4">
                     <div class="p-inputgroup">
                         <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-                        <input type="text" pInputText placeholder="Прізвище" formControlName="commanderLastName">         
+                        <input type="text" pInputText placeholder="Прізвище" [ngModel]="commander?.lastName" [ngModelOptions]="{standalone: true}" [readonly]="true">         
                     </div>
                 </div>
                 
                 <div class="col-12 md:col-4">
                     <div class="p-inputgroup">
-                        <input type="text" pInputText placeholder="Ім'я" formControlName="commanderFirstName">   
+                        <input type="text" pInputText placeholder="Ім'я" [ngModel]="commander?.firstName" [ngModelOptions]="{standalone: true}" [readonly]="true" >   
                     </div>
                 </div>
                         
                 <div class="col-12 md:col-4">
                     <div class="p-inputgroup">
-                        <input type="text" pInputText placeholder="По батькові" formControlName="commanderSecondName">      
+                        <input type="text" pInputText placeholder="По батькові" [ngModel]="commander?.secondName" [ngModelOptions]="{standalone: true}" [readonly]="true" >      
                     </div>
                 </div>
                         
                 <div class="col-12 md:col-6">
                     <div class="p-inputgroup">
                         <span class="p-inputgroup-addon"><i class="pi pi-shield"></i></span>
-                        <input type="text" pInputText placeholder="Звання" formControlName="commanderRank">      
+                        <input type="text" pInputText placeholder="Звання" [ngModel]="commander?.rank" [ngModelOptions]="{standalone: true}" [readonly]="true" >      
                     </div>
                 </div>
                         
                 <div class="col-12 md:col-6">
                     <div class="p-inputgroup">
-                        <input type="text" pInputText placeholder="Номер підрозділу" formControlName="commanderDivisionNumber">      
+                        <input type="text" pInputText placeholder="Номер підрозділу" [ngModel]="commander?.division?.divisionNumber" [ngModelOptions]="{standalone: true}" [readonly]="true">      
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@
                 <div class="col-12 md:col-3">
                     <div class="p-inputgroup">
                         <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
-                        <input type="text" pInputText placeholder="Дата" formControlName="currentDate">         
+                        <p-calendar placeholder="Дата" dateFormat="dd.mm.yy" dataType="string" inputId="dateformat" formControlName="currentDate"></p-calendar>
                     </div>
                 </div>
                 
@@ -119,7 +119,7 @@
                 <div class="col-12 md:col-4">
                     <div class="p-inputgroup">
                         <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
-                        <input type="text" pInputText placeholder="Дата" formControlName="assignmentDate">         
+                        <p-calendar placeholder="Дата" dateFormat="dd.mm.yy" dataType="string" inputId="dateformat" formControlName="assignmentDate"></p-calendar>
                     </div>
                 </div>
                 
@@ -140,14 +140,26 @@
                 <div class="col-12 md:col-4">
                     <div class="p-inputgroup">
                         <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
-                        <input type="text" pInputText placeholder="Дата" formControlName="dismissDate">         
+                        <p-calendar placeholder="Дата" dateFormat="dd.mm.yy" dataType="string" inputId="dateformat" formControlName="dismissDate"></p-calendar>
                     </div>
                 </div>
                 
                 <div class="col-12 md:col-4">
-                    <div class="p-inputgroup">
-                        <input type="text" pInputText placeholder="Новий підрозділ" formControlName="newDivisionNumber">   
-                    </div>
+                        <p-dropdown
+                        [showClear]="true"
+                        [options]="divisions"
+                        [(ngModel)]="selectedDivision"
+                        filterBy="displayLabel"
+                        [filter]="true"
+                        optionLabel="displayLabel"
+                        placeholder="Виберіть підрозділ"
+                        autoWidth="false"
+                        class="w-full"
+                        [ngModelOptions]="{standalone: true}">
+                        <ng-template let-division pTemplate="item">
+                            {{division.name}} {{division.divisionNumber}}
+                            </ng-template>
+                        </p-dropdown>
                 </div>
                         
                 <div class="col-12 md:col-4">
@@ -167,14 +179,14 @@
                 <div class="col-12 md:col-4">
                     <div class="p-inputgroup">
                         <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
-                        <input type="text" pInputText placeholder="Початкова дата" formControlName="serviceDateFrom">         
+                        <p-calendar placeholder="Початкова дата" dateFormat="dd.mm.yy" dataType="string" inputId="dateformat" formControlName="serviceDateFrom"></p-calendar>   
                     </div>
                 </div>
                 
                 <div class="col-12 md:col-4">
                     <div class="p-inputgroup">
                         <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
-                        <input type="text" pInputText placeholder="Кінцева дата" formControlName="serviceDateTo">         
+                        <p-calendar placeholder="Кінцева дата" dateFormat="dd.mm.yy" dataType="string" inputId="dateformat" formControlName="serviceDateTo"></p-calendar>
                     </div>
                 </div>
             </div>
@@ -183,116 +195,4 @@
             </div>
         </div>
     </form>
-
-    <!-- <div class="card">
-        <h5>Командир</h5>
-        <div class="p-grid p-fluid">
-            <div class="col-12 md:col-4">
-                <div class="p-inputgroup">
-                    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-                    <input type="text" pInputText placeholder="Прізвище">         
-                </div>
-            </div>
-            
-            <div class="col-12 md:col-4">
-                <div class="p-inputgroup">
-                    <input type="text" pInputText placeholder="Ім'я">   
-                </div>
-            </div>
-                    
-            <div class="col-12 md:col-4">
-                <div class="p-inputgroup">
-                    <input type="text" pInputText placeholder="По батькові">      
-                </div>
-            </div>
-                    
-            <div class="col-12 md:col-6">
-                <div class="p-inputgroup">
-                    <span class="p-inputgroup-addon"><i class="pi pi-shield"></i></span>
-                    <input type="text" pInputText placeholder="Звання">      
-                </div>
-            </div>
-                    
-            <div class="col-12 md:col-6">
-                <div class="p-inputgroup">
-                    <input type="text" pInputText placeholder="Номер підрозділу">      
-                </div>
-            </div>
-        </div>
-        <h5>Наказ</h5>
-        <div class="p-grid p-fluid">
-            <div class="col-12 md:col-4">
-                <div class="p-inputgroup">
-                    <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
-                    <input type="text" pInputText placeholder="Дата">         
-                </div>
-            </div>
-            
-            <div class="col-12 md:col-4">
-                <div class="p-inputgroup">
-                    <input type="text" pInputText placeholder="Місто">   
-                </div>
-            </div>
-                    
-            <div class="col-12 md:col-4">
-                <div class="p-inputgroup">
-                    <input type="text" pInputText placeholder="Номер наказу">      
-                </div>
-            </div>
-        </div>
-        <h5>Призначення бійця</h5>
-        <div class="p-grid p-fluid">
-            <div class="col-12 md:col-4">
-                <div class="p-inputgroup">
-                    <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
-                    <input type="text" pInputText placeholder="Дата">         
-                </div>
-            </div>
-            
-            <div class="col-12 md:col-4">
-                <div class="p-inputgroup">
-                    <input type="text" pInputText placeholder="Номер">   
-                </div>
-            </div>
-                    
-            <div class="col-12 md:col-4">
-                <div class="p-inputgroup">
-                    <input type="text" pInputText placeholder="Номер підрозділу">      
-                </div>
-            </div>
-        </div>
-        <h5>Нове призначення</h5>
-        <div class="p-grid p-fluid">
-            <div class="col-12 md:col-3">
-                <div class="p-inputgroup">
-                    <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
-                    <input type="text" pInputText placeholder="Дата">         
-                </div>
-            </div>
-            
-            <div class="col-12 md:col-3">
-                <div class="p-inputgroup">
-                    <input type="text" pInputText placeholder="Новий підрозділ">   
-                </div>
-            </div>
-                    
-            <div class="col-12 md:col-3">
-                <div class="p-inputgroup">
-                    <input type="text" pInputText placeholder="Відсоток премії">       
-                    <span class="p-inputgroup-addon">%</span>      
-                </div>
-            </div>
-                    
-            <div class="col-12 md:col-3">
-                <div class="p-inputgroup">
-                    <input type="text" pInputText placeholder="Надбавка">     
-                    <span class="p-inputgroup-addon">%</span>        
-                </div>
-            </div>
-        </div>
-        <div class="p-d-flex p-flex-row-reverse p-pt-3">
-            <p-button label="Створити наказ" icon="pi pi-check"></p-button>
-        </div>
-    </div> -->
-
 </div>

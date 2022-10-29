@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AttachmentsService } from "./attachment.service";
 import { DecreeService } from "./decree.service";
+import { DivisionsService } from "./division.service";
 import { PdfService } from "./pdf.service";
 import { TemplateService } from "./template.service";
 import { UnitUserService } from "./unit-user.service";
@@ -17,6 +18,7 @@ export class ApiService {
         public pdfs: PdfService,
         public unitUser: UnitUserService,
         public unitsInfoService: UnitsInfoService,
+        public divisionService: DivisionsService,
     ) {
     }
 }

@@ -6,7 +6,7 @@ import { DecreeListComponent } from './pages/decree-list/decree-list.component';
 import { DecreeNewComponent } from './pages/decree-new/decree-new.component';
 import { DecreeAddComponent } from './pages/decree-add/decree-add.component';
 import { TransferComponent } from './pages/templates/transfer/transfer.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     PrimeNgComponentsModule,
     ReactiveFormsModule,
+    FormsModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: 'list', component: DecreeListComponent },
