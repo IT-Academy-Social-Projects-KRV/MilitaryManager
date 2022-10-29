@@ -1,8 +1,9 @@
-import { Component, ComponentRef, OnInit, QueryList, ViewContainerRef } from '@angular/core';
+import { Component, ComponentRef, OnInit, QueryList, ViewChild, ViewContainerRef } from '@angular/core';
 import { EntityModel } from 'src/app/shared/models/entity.model';
 import { EquipmentService } from 'src/app/shared/services/api/equipment.service';
 import {FieldsetModule} from 'primeng/fieldset';
 import { UnitModel } from 'src/app/shared/models/unit.model';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-equipment-list',
@@ -17,6 +18,9 @@ export class EquipmentListComponent implements OnInit {
   equipment: EntityModel[]=[]
   cols: any[] = [];
   fullNames:string[] = [];
+
+  @ViewChild('dt') 
+  table!: Table;
 
   constructor(public equipmentService: EquipmentService) { }
 
@@ -43,6 +47,10 @@ export class EquipmentListComponent implements OnInit {
       this.fullNames[this.tabs.length] = res.warehouseman?.lastName + ' ' + res.warehouseman?.firstName + ' ' + res.warehouseman?.secondName
     })
     this.currentTab = this.tabs.length;
+  }
+
+  applyFilterGlobal($event: Event, stringVal: string) {
+    this.table.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 
 }

@@ -3,8 +3,11 @@
         <div class="p-d-flex p-flex-row-reverse template-header m-2">
             <span class="p-input-icon-left">
                 <i class="pi pi-search"></i>
-                <input pInputText type="text" placeholder="Назва" />
+                <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Назва" />
             </span>
+            <div>
+                <button pButton pRipple [routerLink]="['/equipment/new']" type="button" label="Додати амуніцію" icon="pi pi-plus" iconPos="left" class="p-button p-mr-2"></button>
+            </div> 
         </div>
         <p-table #dt [value]="equipment" [scrollable]="true" [globalFilterFields]="['regNum']" scrollHeight="50vh">
             <ng-template pTemplate="header">
