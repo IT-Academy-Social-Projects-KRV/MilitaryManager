@@ -26,7 +26,7 @@
                         {{entity.unit==null?'':entity.unit.firstName}} {{entity.unit==null?'':entity.unit.secondName}} {{entity.unit==null?'':entity.unit.lastName}}
                     </td>
                     <td>
-                        {{entity.divisionName}}
+                        {{entity.division == null? '': entity.division.name}}
                     </td>
                     <td>
                         {{entity.givenDate==null?'':entity.givenDate| date : 'dd.MM.yyyy HH:mm'}}

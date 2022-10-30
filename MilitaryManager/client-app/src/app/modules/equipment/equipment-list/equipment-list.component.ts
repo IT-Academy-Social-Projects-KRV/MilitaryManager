@@ -1,8 +1,6 @@
 import { Component, ComponentRef, OnInit, QueryList, ViewChild, ViewContainerRef } from '@angular/core';
 import { EntityModel } from 'src/app/shared/models/entity.model';
 import { EquipmentService } from 'src/app/shared/services/api/equipment.service';
-import {FieldsetModule} from 'primeng/fieldset';
-import { UnitModel } from 'src/app/shared/models/unit.model';
 import { Table } from 'primeng/table';
 
 @Component({

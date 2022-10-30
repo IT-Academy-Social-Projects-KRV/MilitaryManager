@@ -4,9 +4,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { AttributeModel } from 'src/app/shared/models/attribute.model';
+import { DivisionModel } from 'src/app/shared/models/division.model';
 import { EntityModel } from 'src/app/shared/models/entity.model';
 import { EntityToAttributeModel } from 'src/app/shared/models/entityToAttribute.model';
 import { AttributeService } from 'src/app/shared/services/api/attribute.service';
+import { DivisionsService } from 'src/app/shared/services/api/division.service';
 import { EquipmentService } from 'src/app/shared/services/api/equipment.service';
 
 @Component({
@@ -18,35 +20,43 @@ export class EquipmentAddComponent implements OnInit {
 
   equipmentForm: FormGroup = this._fb.group({
     regNum: ["", Validators.required],
-    //divisionId: [0, Validators.required],
+    division: [null, Validators.required],
     class: ["", Validators.required],
     name: ["", Validators.required],
     manufacturer: ["", Validators.required],
-    caliber: ["", Validators.required],
-    small_arms_type: ["", Validators.required],
-    caliber_type: ["", Validators.required],
+    caliber: [""],
+    small_arms_type: [""],
+    caliber_type: [""],
     mode_of_action: ["", Validators.required],
     mode_of_influence: ["", Validators.required],
-    sight_type: ["", Validators.required],
-    pnb_type: ["", Validators.required]
+    sight_type: [""],
+    pnb_type: [""]
   })
 
   attributes: AttributeModel[] = [];
+  divisions: DivisionModel[] = [];
+
+  redclass = false;
 
   constructor(private _fb: FormBuilder,
     private _attributeService: AttributeService,
+    private _divisionsService: DivisionsService,
     private _equipmentService: EquipmentService,
     private messageService: MessageService,
     private _router: Router) { }
 
   ngOnInit(): void {
+    this._divisionsService.GetAllDivisions().subscribe((divisions)=>{this.divisions = divisions});
     this._attributeService.collection.getAll().subscribe((attributes)=>{this.attributes = attributes});
   }
 
 
   EndRegistrationBtn(){
     if(this.equipmentForm.valid){
+      this.redclass = false;
       let newEntity: EntityModel = this.equipmentForm.value;
+
+      newEntity.division =  this.equipmentForm.get("division")?.value;
 
       newEntity.entityToAttributes = [];
       newEntity.entityToAttributes.push(new EntityToAttributeModel(0, 0, this.attributes.find(x => x.name=="Клас захисту")?.id, this.equipmentForm.get("class")?.value));
@@ -69,6 +79,10 @@ export class EquipmentAddComponent implements OnInit {
         error => {
           this.messageService.add({ severity: 'error', summary: 'Помилка додання даних!',detail: String((error as HttpErrorResponse).error).split('\n')[0] });
         });
+    }
+    else {
+      this.redclass = true;
+      this.messageService.add({ severity: 'error', summary: 'Заповність необхідні поля!' });
     }
   }
 
