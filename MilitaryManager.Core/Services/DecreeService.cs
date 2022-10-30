@@ -31,11 +31,12 @@ namespace MilitaryManager.Core.Services
     {
         protected readonly IRepository<Decree, int> _decreeRepository;
         protected readonly IRepository<Template, int> _templateRepository;
+        protected readonly IRepository<TemplatePlaceholder, int> _templatePlaceholderRepository;
         protected readonly IRepository<Status, int> _statusRepository;
         protected readonly IRepository<SignedPdf, int> _signedPdfRepository;
         protected readonly IRepository<DecreeData, int> _decreeDataRepository;
-        private readonly IRepository<Division, int> _divisionRepository;
-        private readonly IRepository<Unit, int> _unitRepository;
+        protected readonly IRepository<Division, int> _divisionRepository;
+        protected readonly IRepository<Unit, int> _unitRepository;
         protected readonly IDocumentGenerationService _documentGenerationService;
         protected readonly IMapper _mapper;
         protected readonly IStoreService _storeService;
@@ -44,6 +45,7 @@ namespace MilitaryManager.Core.Services
 
         public DecreeService(IRepository<Decree, int> decreeRepository,
                              IRepository<Template, int> templateRepository,
+                             IRepository<TemplatePlaceholder, int> templatePlaceholderRepository,
                              IRepository<Status, int> statusRepository,
                              IRepository<SignedPdf, int> signedPdfRepository,
                              IRepository<DecreeData, int> decreeDataRepository,
@@ -56,6 +58,7 @@ namespace MilitaryManager.Core.Services
         {
             _decreeRepository = decreeRepository;
             _templateRepository = templateRepository;
+            _templatePlaceholderRepository = templatePlaceholderRepository;
             _statusRepository = statusRepository;
             _signedPdfRepository = signedPdfRepository;
             _decreeDataRepository = decreeDataRepository;
@@ -105,9 +108,8 @@ namespace MilitaryManager.Core.Services
             await _decreeRepository.AddAsync(decree);
             await _decreeRepository.SaveChangesAcync();
 
-            List<TemplatePlaceholder> placeholderList = new TemplatePlaceholder().GetTemplatePlaceholders()
-                .Where(x => x.TemplateId == templateId)
-                .ToList();
+            var templatePlaceholderSpecification = new TemplatePlaceholders.TemplatePlaceholdersByTemplateId(templateId);
+            var placeholderList = await _templatePlaceholderRepository.GetListBySpecAsync(templatePlaceholderSpecification);
 
             List<DecreeData> decreeDatas = new List<DecreeData>();
             var modelValues = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonData);
@@ -213,7 +215,8 @@ namespace MilitaryManager.Core.Services
         {
             var decree = await _decreeRepository.GetByKeyAsync(id);
             decree.StatusId = (int)DecreeStatus.COMPLETED;
-            await new DecreeExecutor(_decreeDataRepository, _divisionRepository, _unitRepository).ExecuteOperation(decree.TemplateId, decree.Id);
+            await new DecreeExecutor(_decreeDataRepository, _divisionRepository, _unitRepository, _templatePlaceholderRepository)
+                .ExecuteOperation(decree.TemplateId, decree.Id);
             await ConcurrencyCheck(id);
             return _mapper.Map<DecreeDTO>(decree);
         }

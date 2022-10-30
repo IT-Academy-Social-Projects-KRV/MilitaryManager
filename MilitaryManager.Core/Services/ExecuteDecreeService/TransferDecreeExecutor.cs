@@ -14,28 +14,30 @@ namespace MilitaryManager.Core.Services.ExecuteDecreeService
         private readonly IRepository<DecreeData, int> _decreeDataRepository;
         private readonly IRepository<Division, int> _divisionRepository;
         private readonly IRepository<Unit, int> _unitRepository;
-        private readonly List<TemplatePlaceholder> _placeholderList;
+        private readonly IRepository<TemplatePlaceholder, int> _templatePlaceholderRepository;
 
         public int TemplateId => 3;
 
         public TransferDecreeExecutor(IRepository<DecreeData, int> decreeDataRepository,
                                       IRepository<Division, int> divisionRepository,
-                                      IRepository<Unit, int> unitRepository)
+                                      IRepository<Unit, int> unitRepository,
+                                      IRepository<TemplatePlaceholder, int> templatePlaceholderRepository)
         {
             _decreeDataRepository = decreeDataRepository;
             _divisionRepository = divisionRepository;
             _unitRepository = unitRepository;
-            _placeholderList = new TemplatePlaceholder().GetTemplatePlaceholders()
-                .Where(x => x.TemplateId == TemplateId)
-                .ToList();
+            _templatePlaceholderRepository = templatePlaceholderRepository;
         }
 
         public async Task ExecuteOperation(int decreeId)
         {
-            var firstNameId = _placeholderList.FirstOrDefault(x => x.Name == "firstName").Id;
-            var lastNameId = _placeholderList.FirstOrDefault(x => x.Name == "lastName").Id;
-            var secondNameId = _placeholderList.FirstOrDefault(x => x.Name == "secondName").Id;
-            var newDivisionNumberId = _placeholderList.FirstOrDefault(x => x.Name == "newDivisionNumber").Id;
+            var templatePlaceholderSpecification = new TemplatePlaceholders.TemplatePlaceholdersByTemplateId(TemplateId);
+            var placeholderList = await _templatePlaceholderRepository.GetListBySpecAsync(templatePlaceholderSpecification);
+
+            var firstNameId = placeholderList.FirstOrDefault(x => x.Name == "firstName").Id;
+            var lastNameId = placeholderList.FirstOrDefault(x => x.Name == "lastName").Id;
+            var secondNameId = placeholderList.FirstOrDefault(x => x.Name == "secondName").Id;
+            var newDivisionNumberId = placeholderList.FirstOrDefault(x => x.Name == "newDivisionNumber").Id;
 
             var decreeDataSpecification = new DecreeDatas.DecreeDataUnitCredDivisionNumber(firstNameId, lastNameId, secondNameId, newDivisionNumberId, decreeId);
             var divisionNumber = await _decreeDataRepository.GetListBySpecAsync(decreeDataSpecification);

@@ -58,7 +58,7 @@ namespace MilitaryManager.Core.Entities.UnitEntity
         {
             public UnitByFirstLastSecondNames(string firstName, string lastName, string secondName)
             {
-                Query.Where(x => x.FirstName == firstName || x.LastName == lastName || x.SecondName == secondName);
+                Query.Where(x => x.FirstName == firstName && x.LastName == lastName && x.SecondName == secondName);
             }
         }
     }
