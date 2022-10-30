@@ -1,5 +1,5 @@
 <p>unit-tree-and-info works!</p>
 <div class="content-section implementation p-d-inline-flex" id="container">
-  <app-units-list (idCHANGE2)="onClick($event)"></app-units-list>
+  <app-units-list (outputIdChangedInUnitListComponent)="transferIdFromUnitListToMainComponent($event)"></app-units-list>
   <app-unit-info [idChild1]="id"></app-unit-info>
 </div>

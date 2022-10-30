@@ -26,7 +26,7 @@ export class UnitInfoComponent implements OnInit, OnChanges {
 
 
   ngOnInit(): void {
-    this.showLastName();
+    this.showFullUnitInfo();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -34,10 +34,10 @@ export class UnitInfoComponent implements OnInit, OnChanges {
     console.log(changes);
     // console.log(changes[this.idChild1]);
     // this.idChild1 = changes[this.idChild1];
-    this.showLastName();
+    this.showFullUnitInfo();
   }
 
-  showLastName() {
+  showFullUnitInfo() {
 
     console.log(this.idChild1);
     this.unitsService.single.getById(this.idChild1)

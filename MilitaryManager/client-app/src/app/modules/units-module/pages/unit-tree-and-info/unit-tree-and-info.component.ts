@@ -16,7 +16,7 @@ export class UnitTreeAndInfoComponent implements OnInit {
 
   public id: number = 9;
 
-  public onClick(someNumber: number): void {
+  public transferIdFromUnitListToMainComponent(someNumber: number): void {
     console.log(this.id)
     this.id = someNumber;
   }

@@ -13,7 +13,6 @@
       </div>
       <hr>
 
-
       <div class="p-float-label">
         <input type="text" pInputText id="firstNameInput" [(ngModel)]="unit.firstName" readonly>
         <label for="firstNameInput">Ім'я</label>
@@ -33,8 +32,6 @@
         <label for="divisionInput">Підрозділ</label>
       </div>
       <hr>
-
-      <!--        <input type="text" pInputText  [(ngModel)]="unit.division.name"  readonly>-->
 
       <!--        commander-->
       <div class="p-float-label">
@@ -64,19 +61,18 @@
   <!--profiles-->
   <div class="content-section implementation p-d-flex">
     <div class="card">
-
       <p>Додаткова інформація про бійця</p>
-
-      <!--  pib-->
       <hr>
+
       <div class="p-float-label" *ngFor="let profile of unit.profiles">
         <span>{{profile.name}}: </span>
         <!--          <span>{{profile.value}}</span>-->
         <div>
           <input type="text" pInputText [(ngModel)]="profile.value" readonly>
         </div>
+        <hr>
       </div>
-      <hr>
+
 
     </div>
   </div>
@@ -85,30 +81,19 @@
   <!-- equipment-->
   <div class="content-section implementation p-d-flex">
     <div class="card">
-
       <p>Обладнання бійця</p>
       <hr>
       <div class="p-float-label">
         <input type="text" pInputText value="Обладнання1" readonly>
         <label for="lastNameInput">Обладнання1</label>
       </div>
-
       <hr>
 
     </div>
-    <!--    </div>-->
-
-
-    <!--  </div>-->
-
-
-    <!--    <button pButton type="button" label="Click" ></button>-->
-
   </div>
 
 </div>
 
 <br>
-<button pButton type="button" (click)="showLastName()">show last name</button>
+<button pButton type="button" (click)="showFullUnitInfo()">show last name</button>
 <br>
-<p>id = {{idChild1}}</p>
