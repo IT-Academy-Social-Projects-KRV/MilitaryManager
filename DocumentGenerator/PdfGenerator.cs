@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 using DocumentGenerator.DataObjects;
 using DocumentGenerator.Interfaces;
 using PdfSharpCore.Drawing;
@@ -101,6 +102,18 @@ namespace DocumentGenerator
             if (_activeTopPosition > _currentPage.Height.Value - _currentPage.TrimMargins.Bottom) AddPage();
         }
 
+        public void AddImage(string imagePath, double width, double height)
+        {
+            var wwwrootPath = Regex.Match(_path,
+                                         String.Format(@".+{0}", "wwwroot"),
+                                         RegexOptions.IgnoreCase).Value;
+            XImage img = XImage.FromFile(Path.Combine(wwwrootPath, imagePath));
+            var rect = new XRect((_currentPage.Width - width) / 2, _activeTopPosition, width, height);
+            AddRetreat(height + 10);
+            Gfx.DrawImage(img, rect);
+            img.Dispose();
+        }
+
         public void AddRetreat(double height)
         {
             _activeTopPosition += height;
@@ -120,6 +133,6 @@ namespace DocumentGenerator
 			}
 		}
 
-		#endregion
-	}
+        #endregion
+    }
 }

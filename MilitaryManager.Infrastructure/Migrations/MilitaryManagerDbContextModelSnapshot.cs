@@ -34,6 +34,182 @@ namespace MilitaryManager.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Attributes","Unit");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Розмір ноги"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Розмір голови"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Розмір протигазу"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Тип форми"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Група крові"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Нагорода"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Клас захисту"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Назва"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Виробник"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Калібр"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "Вид стрілецької зброї"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "Тип калібру"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "Спосіб дії"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "Спосіб впливу"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = "Тип прицілу"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Name = "Тип ПНБ"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Name = "Зріст"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Name = "Вага"
+                        });
+                });
+
+            modelBuilder.Entity("MilitaryManager.Core.Entities.AttributeValueEntity.AttributeValue", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AttributeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AttributeId");
+
+                    b.ToTable("AttributeValues","Unit");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AttributeId = 4,
+                            Value = "Стандарт NATO"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AttributeId = 4,
+                            Value = "Стандарт України"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AttributeId = 5,
+                            Value = "I+"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AttributeId = 5,
+                            Value = "I-"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AttributeId = 5,
+                            Value = "II+"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AttributeId = 5,
+                            Value = "II-"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AttributeId = 5,
+                            Value = "III+"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AttributeId = 5,
+                            Value = "III-"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AttributeId = 5,
+                            Value = "IV+"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            AttributeId = 5,
+                            Value = "IV-"
+                        });
                 });
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.AuditEntities.ChangeEntity.Change", b =>
@@ -103,6 +279,11 @@ namespace MilitaryManager.Infrastructure.Migrations
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.AuditEntities.ChangeValueEntity.ChangeValue", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<int>("ChangeId")
                         .HasColumnType("int");
 
@@ -116,7 +297,9 @@ namespace MilitaryManager.Infrastructure.Migrations
                     b.Property<object>("OldValue")
                         .HasColumnType("sql_variant");
 
-                    b.HasKey("ChangeId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChangeId");
 
                     b.HasIndex("ColumnName");
 
@@ -148,7 +331,7 @@ namespace MilitaryManager.Infrastructure.Migrations
                         },
                         new
                         {
-                            Name = "DivisionsId",
+                            Name = "DivisionId",
                             TableName = "Units"
                         },
                         new
@@ -163,7 +346,7 @@ namespace MilitaryManager.Infrastructure.Migrations
                         },
                         new
                         {
-                            Name = "PositionsId",
+                            Name = "PositionId",
                             TableName = "Units"
                         },
                         new
@@ -261,6 +444,11 @@ namespace MilitaryManager.Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)")
                         .HasMaxLength(450);
 
+                    b.Property<string>("DecreeNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(256)")
@@ -269,6 +457,11 @@ namespace MilitaryManager.Infrastructure.Migrations
                     b.Property<string>("Path")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
 
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
@@ -299,6 +492,11 @@ namespace MilitaryManager.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
+
+                    b.Property<string>("DivisionNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -402,6 +600,238 @@ namespace MilitaryManager.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Positions","Unit");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Бойовий медик взводу"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Вогнеметник"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Водій"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Головний сержант"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Головний старшина"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Гранатометник"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Сапер розмінування"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Командир відділення"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Командир взводу"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Командир гармати"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "Командир гранатомета"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "Командир зенітної ракетної самохідної установки"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "Командир міномета"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "Командир самохідної артилерійської установки"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = "Командир танка"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Name = "Командир установки"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Name = "Кулеметник"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Name = "Кухар"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Name = "Льотчик-оператор "
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Name = "Льотчик-штурман "
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Name = "Машиніст"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Name = "Медична сестра"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Name = "Механік"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Name = "Механік-водій"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Name = "Мінер"
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Name = "Мінометник"
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Name = "Молодша медична сестра"
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Name = "Навідник-оператор"
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Name = "Начальник автомобільної колони"
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Name = "Начальник інформаційно-аналітичної групи"
+                        },
+                        new
+                        {
+                            Id = 31,
+                            Name = "Начальник балістичної станції"
+                        },
+                        new
+                        {
+                            Id = 32,
+                            Name = "Начальник відділення"
+                        },
+                        new
+                        {
+                            Id = 33,
+                            Name = "Начальник групи"
+                        },
+                        new
+                        {
+                            Id = 34,
+                            Name = "Начальник вузла зв'язку"
+                        },
+                        new
+                        {
+                            Id = 35,
+                            Name = "Розвідник"
+                        },
+                        new
+                        {
+                            Id = 36,
+                            Name = "Сапер"
+                        },
+                        new
+                        {
+                            Id = 37,
+                            Name = "Стрілець-снайпер"
+                        },
+                        new
+                        {
+                            Id = 38,
+                            Name = "Сержант резерву"
+                        },
+                        new
+                        {
+                            Id = 39,
+                            Name = "Солдат резерву"
+                        },
+                        new
+                        {
+                            Id = 40,
+                            Name = "Снайпер (1 категорії)"
+                        },
+                        new
+                        {
+                            Id = 41,
+                            Name = "Снайпер (2 категорії)"
+                        },
+                        new
+                        {
+                            Id = 42,
+                            Name = "Старшина команди"
+                        },
+                        new
+                        {
+                            Id = 43,
+                            Name = "Стрілець"
+                        },
+                        new
+                        {
+                            Id = 44,
+                            Name = "Стрілець-зенітник"
+                        },
+                        new
+                        {
+                            Id = 45,
+                            Name = "Технік"
+                        },
+                        new
+                        {
+                            Id = 46,
+                            Name = "Черговий"
+                        });
                 });
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.ProfileEntity.Profile", b =>
@@ -446,6 +876,123 @@ namespace MilitaryManager.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Ranks","Unit");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Курсант"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Молодший лейтенант"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Лейтенант"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Старший лейтенант"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Капітан"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Майор"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Підполковник"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Полковник"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Бригадний генерал"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Генерал-майор"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "Генерал-лейтенант"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "Генерал"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "Рекрут"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "Солдат"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = "Старший солдат"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Name = "Молодший сержант"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Name = "Сержант"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Name = "Старший сержант"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Name = "Головний сержант"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Name = "Штаб-сержант"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Name = "Майстер-сержант"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Name = "Старший майстер-сержант"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Name = "Головний майстер-сержант"
+                        });
                 });
 
             modelBuilder.Entity("MilitaryManager.Core.Entities.SignedPdfEntity.SignedPdf", b =>
@@ -456,6 +1003,11 @@ namespace MilitaryManager.Infrastructure.Migrations
                     b.Property<string>("Path")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
 
                     b.HasKey("Id");
 
@@ -562,6 +1114,18 @@ namespace MilitaryManager.Infrastructure.Migrations
                             Id = 1,
                             Path = "data/document_templates/template_01.xml",
                             Type = "Протокол"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Path = "data/document_templates/template_02.xml",
+                            Type = "Виплата"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Path = "data/document_templates/template_03.xml",
+                            Type = "Переведення"
                         });
                 });
 
@@ -627,6 +1191,15 @@ namespace MilitaryManager.Infrastructure.Migrations
                     b.ToTable("UnitUsers","Unit");
                 });
 
+            modelBuilder.Entity("MilitaryManager.Core.Entities.AttributeValueEntity.AttributeValue", b =>
+                {
+                    b.HasOne("MilitaryManager.Core.Entities.AttributeEntity.Attribute", "Attribute")
+                        .WithMany("AttributeValues")
+                        .HasForeignKey("AttributeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("MilitaryManager.Core.Entities.AuditEntities.ChangeEntity.Change", b =>
                 {
                     b.HasOne("MilitaryManager.Core.Entities.AuditEntities.ChangeTypeEntity.ChangeType", "ChangeType")
@@ -645,8 +1218,8 @@ namespace MilitaryManager.Infrastructure.Migrations
             modelBuilder.Entity("MilitaryManager.Core.Entities.AuditEntities.ChangeValueEntity.ChangeValue", b =>
                 {
                     b.HasOne("MilitaryManager.Core.Entities.AuditEntities.ChangeEntity.Change", "Change")
-                        .WithOne("ChangeValue")
-                        .HasForeignKey("MilitaryManager.Core.Entities.AuditEntities.ChangeValueEntity.ChangeValue", "ChangeId")
+                        .WithMany("ChangeValues")
+                        .HasForeignKey("ChangeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

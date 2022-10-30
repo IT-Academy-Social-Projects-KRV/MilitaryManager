@@ -1,6 +1,8 @@
-import {BaseModel} from "./base.model";
+import { BaseModel } from "./base.model";
 
 export class RankModel extends BaseModel {
-  public Name: string | null = null;
-
+    constructor(Id:number|null=null ,
+        public Name:string | null=null){
+        super(Id);
+    }
 }

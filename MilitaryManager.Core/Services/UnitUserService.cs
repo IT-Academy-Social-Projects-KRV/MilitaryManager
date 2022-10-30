@@ -32,12 +32,13 @@ namespace MilitaryManager.Core.Services
             return await _unitUserRepository.GetFirstBySpecAsync(specification);
         }
 
-        public async Task<UnitUser> CreateUnitUserAsync(UnitDTO unit)
+        public async Task<UnitUser> CreateUnitUserAsync(UnitRequestDTO unit)
         {
             var newUnit = await _unitService.CreateUnitAsync(unit);
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var newUnitUser = await _unitUserRepository.AddAsync(new UnitUser { Id = newUnit.Id, UserId = userId });
-
+            await _unitUserRepository.SaveChangesAcync();
+            
             return newUnitUser;
         }
     }

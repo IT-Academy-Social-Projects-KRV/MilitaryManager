@@ -12,6 +12,7 @@ namespace MilitaryManager.Core.Entities.DecreeEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string DecreeNumber { get; set; }
         public string Path { get; set; }
         public string CreatedBy { get; set; }
         public DateTime TimeStamp { get; set; }
@@ -21,5 +22,6 @@ namespace MilitaryManager.Core.Entities.DecreeEntity
         public Status Status { get; set; }
         public SignedPdf SignedPdf { get; set; }
         public ICollection<StatusHistory> StatusHistories { get; set; }
+        public byte[] RowVersion { get; set; }
     }
 }

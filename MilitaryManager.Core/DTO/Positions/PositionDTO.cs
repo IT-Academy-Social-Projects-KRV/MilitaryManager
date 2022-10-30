@@ -10,7 +10,5 @@ namespace MilitaryManager.Core.DTO.Positions
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
-        public List<UnitDTO> Units { get; set; }
     }
 }

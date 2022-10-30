@@ -13,7 +13,11 @@ namespace MilitaryManager.Core.Entities.AuditEntities.ChangeValueEntity
         public void Configure(EntityTypeBuilder<ChangeValue> builder)
         {
             builder
-                .HasKey(x => x.ChangeId);
+                .HasKey(x => x.Id);
+
+            builder
+                .Property(x => x.ChangeId)
+                .IsRequired();
 
             builder
                 .Property(x => x.ColumnName)
@@ -21,8 +25,8 @@ namespace MilitaryManager.Core.Entities.AuditEntities.ChangeValueEntity
 
             builder
                 .HasOne(x => x.Change)
-                .WithOne(x => x.ChangeValue)
-                .HasForeignKey<ChangeValue>(x => x.ChangeId);
+                .WithMany(x => x.ChangeValues)
+                .HasForeignKey(x => x.ChangeId);
 
             builder
                 .HasOne(x => x.Column)

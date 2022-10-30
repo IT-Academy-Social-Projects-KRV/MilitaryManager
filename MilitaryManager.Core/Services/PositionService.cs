@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using MilitaryManager.Core.DTO.Positions;
-using MilitaryManager.Core.DTO.Units;
 using MilitaryManager.Core.Entities.PositionEntity;
-using MilitaryManager.Core.Entities.UnitEntity;
 using MilitaryManager.Core.Interfaces.Repositories;
 using MilitaryManager.Core.Interfaces.Services;
 using System;
@@ -28,34 +26,6 @@ namespace MilitaryManager.Core.Services
             var positions = await _positionRepository.GetAllAsync();
 
             return _mapper.Map<IEnumerable<PositionDTO>>(positions);
-        }
-
-        public Task<PositionDTO> CreatePositionAsync(PositionDTO query)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<PositionDTO> UpdatePositionAsync(PositionDTO query)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<PositionDTO> DeletePositionAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<PositionDTO>> GetPositionsAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public async Task<PositionDTO> GetPositionByIdAsync(int id)
-        {
-            var units = await _positionRepository.GetByKeyAsync(id);
-
-            return _mapper.Map<PositionDTO>(units);
         }
     }
 }

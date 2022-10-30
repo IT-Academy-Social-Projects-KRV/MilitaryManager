@@ -56,6 +56,7 @@ namespace MilitaryManager.Attachments.API.Controllers
             string jsonData = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
             int templateId;
             string decreeName;
+            string decreeNumber;
             var modelValues = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonData);
             try
             {
@@ -63,13 +64,14 @@ namespace MilitaryManager.Attachments.API.Controllers
                 modelValues.Remove("templateId");
                 decreeName = (string)modelValues["decreeName"];
                 modelValues.Remove("decreeName");
+                decreeNumber = (string)modelValues["decreeNumber"];
             }
             catch (Exception)
             {
                 return BadRequest("Request body should include \"templateId\" and \"decreeName\" fields. The rest fields for template data");
             }
             jsonData = JsonConvert.SerializeObject(modelValues);
-            var decree = await _decreeService.GenerateDecreeAsync(_webRootPath, templateId, decreeName, jsonData);
+            var decree = await _decreeService.GenerateDecreeAsync(_webRootPath, templateId, decreeName, decreeNumber, jsonData);
             return CreatedAtRoute(nameof(GetById), new { id = decree.Id }, decree);
         }
 

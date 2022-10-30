@@ -1,5 +1,8 @@
-import {BaseModel} from "./base.model";
+import { BaseModel } from "./base.model";
 
 export class AttributeModel extends BaseModel {
-  public name: string | null = null;
+    constructor(Id:number|null=null ,
+        public name:string | null=null){
+        super(Id);
+    }
 }

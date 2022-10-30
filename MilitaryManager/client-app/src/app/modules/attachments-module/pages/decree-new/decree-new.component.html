@@ -1,0 +1,31 @@
+<p-tabView [controlClose]="true" (onClose)="handleClose($event)" [(activeIndex)]="currentTab">    
+    <p-tabPanel header="Шаблони" leftIcon="pi pi-file">
+        <div class="p-d-flex p-flex-row-reverse template-header">
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" placeholder="Назва" />
+            </span> 
+        </div>
+        <div class="p-d-flex p-flex-row">                
+            <div *ngFor="let template of templates" class="p-card p-p-1 p-md-3 p-d-flex p-flex-column">
+                <div class="p-card-header p-d-flex p-jc-center p-pt-4">
+                    <i class="pi pi-copy" style="font-size: 3rem"></i>
+                </div>
+                <div class="p-card-body p-d-flex p-flex-column p-ai-center p-col">
+                    <div class="p-card-title p-col p-text-center">
+                        {{template.type}}
+                    </div>
+                    <div class="p-card-subtitle">
+                        Наказ
+                    </div>
+                    <div class="p-card-footer">
+                        <button pButton pRipple icon="pi pi-check" type="button" label="Select" class="p-button-outlined" (click)="addNewDocument(template.id, template.type)"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </p-tabPanel>
+    <p-tabPanel *ngFor="let tab of tabs; let i = index" header="{{tab}}" [closable]="true">
+        <div #tabDoc></div>
+    </p-tabPanel>
+</p-tabView>

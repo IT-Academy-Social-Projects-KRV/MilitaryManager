@@ -7,7 +7,12 @@ import { Test2Component } from './components/test2/test2.component';
 import { HomeComponent } from './components/home/home.component';
 import { AppLayoutComponent } from './layout/app.layout.component';
 import { AddCommanderComponent } from './components/add-commander/add-commander.component';
+import  { AdminGuard } from './guards/AdminGuard'
+import { UnitCommanderGuard } from './guards/UnitCommanderGuard'
+import { SubUnitCommanderGuard } from './guards/SubUnitCommanderGuard'
+import { ProfileComponent } from "./components/profile/profile/profile.component";
 import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
+import {LogComponent} from "./components/log/log.component";
 
 const routes: Routes = [
     {path:'', component:AppLayoutComponent,
@@ -16,17 +21,23 @@ const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'test1', component: Test1Component },
     { path: 'test2', component: Test2Component },
-    { path: 'addCommander', component: AddCommanderComponent },
+    { path: 'addCommander', component: AddCommanderComponent, canActivate: [AdminGuard] },
+    { path: 'decree', loadChildren: () => import("./modules/attachments-module/attachments.module").then(m => m.AttachmentsModule) },
     { path: 'finishRegistration', component: FinishRegistrationComponent},
+    { path: 'logs', component: LogComponent },
     { path: 'units', loadChildren: () => import("./modules/units-module/units.module").then(m => m.UnitsModule) },
     { path: 'divisions', loadChildren: () => import("./modules/division-module/division.module").then(m => m.DivisionModule) },
+    { path: 'equipment', loadChildren: () => import("./modules/equipment/equipment.module").then(m => m.EquipmentModule) },
     { path: 'SignInCallback', component: SigninRedirectCallbackComponent },
     { path: 'SignOutCallback', component: SignoutRedirectCallbackComponent },
+    { path: 'profile', component: ProfileComponent },
+    { path: 'attachments', loadChildren: () => import("./modules/attachments-module/attachments.module").then(m => m.AttachmentsModule) },
     { path: '**', redirectTo: 'home' }
   ]}
   ];
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
+    providers: [AdminGuard, UnitCommanderGuard, SubUnitCommanderGuard]
 })
 export class AppRoutingModule { }

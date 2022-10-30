@@ -19,11 +19,12 @@ export class SigninRedirectCallbackComponent implements OnInit {
         this.unitUser.GetUnitUser(user.profile.sub)
           .subscribe(res => {
             if(res){
-              console.log("home");
               this._router.navigate(['/'], { replaceUrl: true });
             }
-          },
-          error => {this._router.navigateByUrl('finishRegistration');}
+            else{
+              this._router.navigateByUrl('finishRegistration');
+            }
+          }
           )
       })
   }

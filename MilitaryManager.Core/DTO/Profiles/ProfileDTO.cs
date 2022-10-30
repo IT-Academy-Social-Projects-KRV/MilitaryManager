@@ -15,6 +15,5 @@ namespace MilitaryManager.Core.DTO.Profiles
         public string Value { get; set; }
 
         public AttributeDTO Attribute { get; set; }
-        public UnitDTO Unit { get; set; }
     }
 }

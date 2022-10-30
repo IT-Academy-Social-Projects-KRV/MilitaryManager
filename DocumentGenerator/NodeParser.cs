@@ -32,7 +32,8 @@ namespace DocumentGenerator
                 new TitleNodeParsingRule(modelValues),
                 new PNodeParsingRule(modelValues),
                 new RetNodeParsingRule(modelValues),
-                new ListNodeParsingRule(modelValues)
+                new ListNodeParsingRule(modelValues),
+                new ImgNodeParsingRule(modelValues)
             };
         }
 

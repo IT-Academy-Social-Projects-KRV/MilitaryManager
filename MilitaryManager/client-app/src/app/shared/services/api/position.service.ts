@@ -1,20 +1,18 @@
-import {Injectable} from "@angular/core";
-import {UnitModel} from "../../models/unit.model";
-import {HttpService} from "../core/http.service";
-import {BaseService} from "../core/base.service";
-import {ClientConfigurationService} from "../core/client-configuration.service";
-import {ServiceType} from "../core/serviceType";
-import {catchError, map, Observable} from "rxjs";
-import {BaseModel} from "../../models/base.model";
+import { Injectable } from '@angular/core';
+import { ClientConfigurationService } from '../core/client-configuration.service';
+import { HttpService } from '../core/http.service';
+import { ServiceType } from '../core/serviceType';
+import { BaseService } from "../core/base.service";
+import { PositionModel } from '../../models/position.model';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class PositionService extends BaseService<any> {
+export class PositionService extends BaseService<any>{
 
   constructor(
     private httpService: HttpService,
     configService: ClientConfigurationService) {
-    super(httpService, 'unit', configService, UnitModel, ServiceType.units);
+    super(httpService, 'position', configService, PositionModel, ServiceType.units);
   }
 }

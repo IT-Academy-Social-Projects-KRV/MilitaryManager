@@ -1,0 +1,84 @@
+﻿{
+	"title": "Протокол зі створення ініціативної групи",
+	"subTitle": "Пояснення щодо документу",
+	"templateData": [
+		{
+			"name": "city",
+			"type": "autoComplete",
+			"value": "",
+			"maxSearchResults": 7,
+			"dataSourceLink": "/data/cities.json"
+		},
+		{
+			"name": "street",
+			"type": "autoComplete",
+			"value": "",
+			"maxSearchResults": 7,
+			"dataSourceLink": "/data/streets_rivne.json"
+		},
+		{
+			"name": "number",
+			"type": "text",
+			"value": ""
+		},
+		{
+			"name": "date",
+			"type": "date",
+			"value": ""
+		},
+		{
+			"name": "owners",
+			"type": "list",
+			"template": {
+				"firstProp": "owner",
+				"secondProp": "flatnum",
+				"img": "/icons/house-icon.png",
+				"controls": [
+					{
+						"name": "owner",
+						"type": "autoComplete",
+						"value": "",
+						"maxSearchResults": 7,
+						"dataSourceLink": "/api/users/getcollection",
+						"itemFormat": "[id] [firstName] [lastName]"
+					},
+					{
+						"name": "flatnum",
+						"type": "text",
+						"value": ""
+					}
+				]
+			}
+		},
+		{
+			"name": "dayschedule",
+			"type": "list",
+			"template": {
+				"firstProp": "text",
+				"img": "/icons/house-icon.png",
+				"controls": [
+					{
+						"name": "text",
+						"type": "text",
+						"value": ""
+					}
+				]
+			}
+		},
+		{
+			"name": "scheduleResults",
+			"type": "list",
+			"template": {
+				"firstProp": "text",
+				"img": "/icons/house-icon.png",
+				"controls": [
+					{
+						"name": "text",
+						"type": "text",
+						"value": ""
+					}
+				]
+			}
+		}
+	]
+}

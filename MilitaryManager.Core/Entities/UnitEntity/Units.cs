@@ -36,7 +36,8 @@ namespace MilitaryManager.Core.Entities.UnitEntity
                     .Include(x => x.Parent)
                     .Include(x => x.Profiles)
                     .Include(x => x.UnitToEquipments)
-                    .Include(x => x.EquipmentToWarehouseMan);
+                    .Include(x => x.EquipmentToWarehouseMan)
+                    .Include(x => x.Division); 
             }
         }
 
@@ -50,7 +51,6 @@ namespace MilitaryManager.Core.Entities.UnitEntity
                     .Include(x => x.Position)
                     .Include(x => x.Parent)
                     .Include(x => x.Profiles).ThenInclude(x => x.Attribute)
-                    //.Include(x => x.Profiles)
                     .Include(x => x.UnitToEquipments).ThenInclude(x => x.Equipment).ThenInclude(x => x.EntityToAttributes).ThenInclude(x => x.Attribute)
                     .Include(x => x.EquipmentToWarehouseMan)
                     .Include(x => x.Division)

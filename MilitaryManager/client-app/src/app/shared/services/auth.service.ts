@@ -18,7 +18,7 @@ export class AuthService {
       authority: "https://localhost:5007",
       client_id: "angular",
       redirect_uri: `${location.origin}/SignInCallback`,
-      scope: "openid profile unitsAPI",
+      scope: "openid profile unitsAPI IdentityServerApi attachmentsAPI",
       response_type: "code",
       post_logout_redirect_uri: `${location.origin}/SignOutCallback`,
       stateStore: new WebStorageStateStore({ store: new CookieStorage() }),
@@ -59,6 +59,13 @@ export class AuthService {
          return !!user && !user.expired ? user.access_token : null;
     })
   }
+  public getUserId = (): Promise<string> => {
+    // @ts-ignore
+    return this._userManager.getUser()
+      .then(user => {
+        return user?.profile.sub;
+      })
+  }
 
   public isAuthenticated = (): Promise<boolean> => {
     return this._userManager.getUser()
@@ -73,6 +80,10 @@ export class AuthService {
       }
       return false;
     })
+  }
+
+  public getCurrentUser() {
+    return this._user;
   }
 
   private checkUser = (user : User): boolean => {

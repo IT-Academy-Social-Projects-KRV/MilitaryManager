@@ -13,7 +13,13 @@ import { SignoutRedirectCallbackComponent } from './components/signout-redirect-
 import { HomeComponent } from './components/home/home.component';
 import { AppLayoutModule } from './layout/app.layout.module';
 import { AddCommanderComponent } from './components/add-commander/add-commander.component';
+import {ProfileComponent} from "./components/profile/profile/profile.component";
 import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LogComponent } from "./components/log/log.component";
+import { TableModule } from 'primeng/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TabViewModule } from 'primeng/tabview';
 
 @NgModule({
   declarations: [
@@ -22,15 +28,22 @@ import { FinishRegistrationComponent } from './components/finish-registration/fi
     Test2Component,
     SigninRedirectCallbackComponent,
     SignoutRedirectCallbackComponent,
+    LogComponent,
     HomeComponent,
     AddCommanderComponent,
-    FinishRegistrationComponent,
+    ProfileComponent,
+    FinishRegistrationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     PrimeNgComponentsModule,
-    AppLayoutModule
+    AppLayoutModule,
+    ReactiveFormsModule,
+    AppLayoutModule,
+    TableModule,
+    TabViewModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     services,

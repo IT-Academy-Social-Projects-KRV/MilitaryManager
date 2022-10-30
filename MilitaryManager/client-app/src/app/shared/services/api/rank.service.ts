@@ -1,20 +1,18 @@
-import {Injectable} from "@angular/core";
-import {UnitModel} from "../../models/unit.model";
-import {HttpService} from "../core/http.service";
-import {BaseService} from "../core/base.service";
-import {ClientConfigurationService} from "../core/client-configuration.service";
-import {ServiceType} from "../core/serviceType";
-import {catchError, map, Observable} from "rxjs";
-import {BaseModel} from "../../models/base.model";
+import { Injectable } from '@angular/core';
+import { RankModel } from '../../models/rank.model';
+import { BaseService } from "../core/base.service";
+import { ClientConfigurationService } from '../core/client-configuration.service';
+import { HttpService } from '../core/http.service';
+import { ServiceType } from '../core/serviceType';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class RankService extends BaseService<any> {
+export class RankService extends BaseService<any>{
 
   constructor(
     private httpService: HttpService,
     configService: ClientConfigurationService) {
-    super(httpService, 'unit', configService, UnitModel, ServiceType.units);
+    super(httpService, 'rank', configService, RankModel, ServiceType.units);
   }
 }

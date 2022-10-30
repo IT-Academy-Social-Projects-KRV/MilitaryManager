@@ -11,5 +11,6 @@ namespace MilitaryManager.Core.Entities.SignedPdfEntity
         public int Id { get; set; }
         public string Path { get; set; }
         public Decree Decree { get; set; }
+        public byte[] RowVersion { get; set; }
     }
 }

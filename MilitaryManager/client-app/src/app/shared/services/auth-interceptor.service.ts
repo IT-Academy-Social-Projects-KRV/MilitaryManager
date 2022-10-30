@@ -14,10 +14,12 @@ export class AuthInterceptorService implements HttpInterceptor {
     return from(
       this._authService.getAccessToken()
       .then(token => {
-        // overrides any custom headers
-        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-        const authRequest = req.clone({ headers });
-        return next.handle(authRequest).toPromise();
+        req = req.clone({
+          setHeaders: {
+            Authorization: `Bearer ${token}`,
+          }
+        });
+        return next.handle(req).toPromise();
       })
     )
   }

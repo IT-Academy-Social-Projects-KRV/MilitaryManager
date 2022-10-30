@@ -1,7 +1,4 @@
 ﻿using Ardalis.Specification;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MilitaryManager.Core.Entities.AuditEntities.ChangeEntity
 {
@@ -13,7 +10,7 @@ namespace MilitaryManager.Core.Entities.AuditEntities.ChangeEntity
             {
                 Query
                     .Where(x => x.Id == id)
-                    .Include(x => x.ChangeValue);
+                    .Include(x => x.ChangeValues);
             }
         }
     }

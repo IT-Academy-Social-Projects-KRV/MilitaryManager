@@ -11,6 +11,10 @@ namespace MilitaryManager.Core.Entities.DecreeEntity
                    .HasMaxLength(256)
                    .IsRequired();
 
+            builder.Property(decree => decree.DecreeNumber)
+                   .HasMaxLength(20)
+                   .IsRequired();
+
             builder.Property(decree => decree.Path)
                    .IsRequired();
 
@@ -21,6 +25,9 @@ namespace MilitaryManager.Core.Entities.DecreeEntity
             builder.Property(decree => decree.TimeStamp)
                    .HasColumnType("datetime2")
                    .IsRequired();
+
+            builder.Property(decree => decree.RowVersion)
+               .IsRowVersion();
         }
     }
 }

@@ -23,12 +23,5 @@ namespace MilitaryManager.Units.API.Controllers
         {
             return Ok(await _positionService.GetAllPositionsAsync());
         }
-
-        [HttpGet]
-        [Route("{id}")]
-        public async Task<IActionResult> GetPosition([FromRoute] int id)
-        {
-            return Ok(await _positionService.GetPositionByIdAsync(id));
-        }
     }
 }

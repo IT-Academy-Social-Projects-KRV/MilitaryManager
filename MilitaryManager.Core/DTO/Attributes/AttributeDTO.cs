@@ -11,7 +11,6 @@ namespace MilitaryManager.Core.DTO.Attributes
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
         public List<ProfileDTO> Profiles { get; set; }
         public List<EntityToAttributeDTO> EntityToAttributes { get; set; }
     }

@@ -1,0 +1,71 @@
+<p-tabView [controlClose]="true" (onClose)="handleClose($event)" [(activeIndex)]="currentTab">
+    <p-tabPanel header="Амуніція" leftIcon="pi pi-file">
+        <div class="p-d-flex p-flex-row-reverse template-header m-2">
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" placeholder="Назва" />
+            </span>
+        </div>
+        <p-table #dt [value]="equipment" [scrollable]="true" [globalFilterFields]="['regNum']" scrollHeight="50vh">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th *ngFor="let col of cols" [ngStyle]="{'width': col.width}">
+                        {{col.header}}
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-entity>
+                <tr>
+                    <td>
+                        {{entity.regNum}}
+                    </td>
+                    <td>
+                        {{entity.unit==null?'':entity.unit.firstName}} {{entity.unit==null?'':entity.unit.secondName}} {{entity.unit==null?'':entity.unit.lastName}}
+                    </td>
+                    <td>
+                        {{entity.divisionName}}
+                    </td>
+                    <td>
+                        {{entity.givenDate==null?'':entity.givenDate| date : 'dd.MM.yyyy HH:mm'}}
+                    </td>
+                    <td [ngStyle]="{'width': '5%'}">
+                        <button pButton pRipple type="button" icon="pi pi-info-circle" (click)="showAttributesInfo(entity)" [class]="'p-button-rounded p-button-text p-mr-2'"></button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="5">Амуніції не знайдено.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </p-tabPanel>
+    <p-tabPanel *ngFor="let tab of tabs; let i = index"  header="{{tab.regNum}}" [closable]="true">
+        <p-fieldset legend="Основна інформація">
+            <div class="p-grid p-mt-2">
+                <div class=" p-col-4">
+                    <h5>Реєстаційний номер</h5>
+                    <input type="text" pInputText [disabled]="true" [(ngModel)]="tab.regNum"/>
+                </div>
+                <div class=" p-col-4">
+                    <h5>Дата видачі</h5>
+                    <input type="text" pInputText [disabled]="true" [value]="tab.givenDate==null? empty: tab.givenDate| date : 'dd.MM.yyyy HH:mm'"/>
+                </div>
+                <div class=" p-col-4">
+                    <h5>Ким надано</h5>
+                    <input type="text" pInputText [disabled]="true" [value]="tab.warehouseman==null? empty: tab.warehouseman?.firstName + ' ' + tab.warehouseman?.secondName+' ' +tab.warehouseman?.lastName"/>
+                </div>
+            </div>
+        </p-fieldset>
+        <div class="mt-3">
+            <p-fieldset legend="Атрибути" class="mt-2">
+                <div class="p-grid p-mt-4">
+                    <div *ngFor="let attribute of tab.entityToAttributes" class=" p-col-6">
+                        <h5>{{attribute.attributeName}}</h5>
+                        <input type="text" pInputText [disabled]="true" [(ngModel)]=" attribute.value" />
+                    </div>
+                </div>
+            </p-fieldset>
+        </div>
+    </p-tabPanel>
+</p-tabView>
