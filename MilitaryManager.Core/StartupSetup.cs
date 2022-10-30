@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using MilitaryManager.Core.Helpers;
+using MilitaryManager.Core.Helpers.Policy;
 using MilitaryManager.Core.Interfaces.Services;
 using MilitaryManager.Core.Services;
 
@@ -34,6 +36,16 @@ namespace MilitaryManager.Core
 
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
+        }
+
+        public static void AddPolicyServices(this IServiceCollection services)
+        {
+            services.AddTransient<IAuthorizationHandler, WorkspaceRolesAuthorizationHandler>();
+            services.AddAuthorization(opts =>
+            {
+                opts.AddPolicy("DivisionIdLimit",
+                    policy => policy.Requirements.Add(new WorkspaceRolesRequirement()));
+            });
         }
     }
 }

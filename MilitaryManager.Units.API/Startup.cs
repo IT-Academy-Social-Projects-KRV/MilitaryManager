@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MilitaryManager.Core;
 using MilitaryManager.Infrastructure;
+using System.Collections.Generic;
 
 namespace MilitaryManager.Units.API
 {
@@ -40,6 +41,25 @@ namespace MilitaryManager.Units.API
                });
             services.AddSwaggerGen(c =>
             {
+                c.AddSecurityDefinition("Basic", new OpenApiSecurityScheme
+                {
+                    Description = "Basic auth added to authorization header",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Scheme = "basic",
+                    Type = SecuritySchemeType.Http
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Basic" }
+                        },
+                        new List<string>()
+                    }
+                });
                 c.SwaggerDoc("Units", new OpenApiInfo { Title = "Unit", Version = "v1" });
                 c.SwaggerDoc("Divisions", new OpenApiInfo { Title = "Division", Version = "v1" });
                 c.SwaggerDoc("Audit", new OpenApiInfo { Title = "Audit", Version = "v1" });
@@ -51,6 +71,7 @@ namespace MilitaryManager.Units.API
             services.AddCustomUnitsServices();
             services.AddAutoMapper();
             services.AddRepositories();
+            services.AddPolicyServices();
             services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));
             services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddHttpContextAccessor();
