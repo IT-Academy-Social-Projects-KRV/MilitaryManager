@@ -88,7 +88,7 @@ namespace MilitaryManager.Attachments.API.Controllers
                 _logger.LogError(ex, $"Template for {templateName} document is not available");
             }
 
-            var unit = _unitService.GetUnitsByIdAsync(5).Result;
+            var unit = _unitService.GetUnitAsync(5).Result;
             var obj = new { lastName = unit.LastName, firstName = unit.FirstName };
             var jsonData = JsonConvert.SerializeObject(obj);
 
