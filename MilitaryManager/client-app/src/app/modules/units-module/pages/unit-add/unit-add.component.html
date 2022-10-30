@@ -3,22 +3,19 @@
     <form (submit)="AddUnit()" [formGroup]="unitForm">
         <div class="p-grid p-mt-4">
             <div class=" p-col-4">
-                <span class="p-float-label p-mt-2">
-                    <input id="float-input" type="text" pInputText formControlName="lastName">
-                    <label for="float-input">Прізвище</label>
-                </span>
+                <div class="p-inputgroup">
+                    <input id="float-input" type="text" placeholder="Прізвище" pInputText formControlName="lastName">
+                </div>
             </div>
             <div class=" p-col-4">
-                <span class="p-float-label p-mt-2">
-                    <input id="float-input" type="text" pInputText formControlName="firstName">
-                    <label for="float-input">Ім'я</label>
-                </span>
+                <div class="p-inputgroup">
+                    <input id="float-input" type="text" placeholder="Ім'я" pInputText formControlName="firstName">
+                </div>
             </div>
             <div class=" p-col-4">
-                <span class="p-float-label p-mt-2">
-                    <input id="float-input" type="text" pInputText formControlName="secondName">
-                    <label for="float-input">По батькові</label>
-                </span>
+                <div class="p-inputgroup">
+                    <input id="float-input" type="text" placeholder="По батькові" pInputText formControlName="secondName">
+                </div>
             </div>
         </div>
         <div class="p-grid p-mt-2">
@@ -43,44 +40,37 @@
         </div>
         <div class="p-grid p-mt-2">
             <div class=" p-col-4">
-                <span class="p-float-label p-mt-2">
-                    <input id="float-input" type="text" pInputText formControlName="footSize">
-                    <label for="float-input">Розмір ноги</label>
-                </span>
+                <div class="p-inputgroup">
+                    <input id="float-input" type="text" placeholder="Розмір ноги" pInputText formControlName="footSize">
+                </div>
             </div>
             <div class=" p-col-4">
-                <span class="p-float-label p-mt-2">
-                    <input id="float-input" type="text" pInputText formControlName="headSize">
-                    <label for="float-input">Розмір голови</label>
-                </span>
+                <div class="p-inputgroup">
+                    <input id="float-input" type="text" placeholder="Розмір голови" pInputText formControlName="headSize">
+                </div>
             </div>
             <div class=" p-col-4">
-                <span class="p-float-label p-mt-2">
-                    <input id="float-input" type="text" pInputText formControlName="gasMaskSize">
-                    <label for="float-input">Розмір противогазу</label>
-                </span>
+                <div class="p-inputgroup">
+                    <input id="float-input" type="text" placeholder="Розмір противогазу" pInputText formControlName="gasMaskSize">
+                </div>
             </div>
-            <div class=" p-col-4">
-                <span class="p-float-label p-mt-2">
-                    <input id="float-input" type="text" pInputText formControlName="weight">
-                    <label for="float-input">Вага</label>
-                </span>
+            <div class=" p-col-3">
+                <div class="p-inputgroup">
+                    <input id="float-input" type="text" placeholder="Вага" pInputText formControlName="weight">
+                </div>
             </div>
-            <div class=" p-col-4">
-                <span class="p-float-label p-mt-2">
-                    <input id="float-input" type="text" pInputText formControlName="height">
-                    <label for="float-input">Зріст</label>
-                </span>
+            <div class=" p-col-3">
+                <div class="p-inputgroup">
+                    <input id="float-input" type="text" placeholder="Зріст" pInputText formControlName="height">
+                </div>
             </div>
-        </div>
-        <div class="p-grid p-mt-2">
-            <div class=" p-col-4">
+            <div class=" p-col-3">
                 <span class>
                     <p-dropdown [options]="uniforms" formControlName="uniform" placeholder="Тип форми"
                         [showClear]="true"></p-dropdown>
                 </span>
             </div>
-            <div class=" p-col-6">
+            <div class=" p-col-3">
                 <span class>
                     <p-dropdown [options]="blood_types" formControlName="bloodType" placeholder="Група крові"
                         [showClear]="true"></p-dropdown>
