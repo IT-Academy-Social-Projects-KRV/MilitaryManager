@@ -19,7 +19,7 @@ export class UnitInfoComponent implements OnInit, OnChanges {
 
   @Input() idChild1: number = 9;
 
-  unit: UnitModel = new UnitModel(0);
+  unit: UnitModel = new UnitModel();
   parentFullName: string = "";
   divisionName: string = "";
 
