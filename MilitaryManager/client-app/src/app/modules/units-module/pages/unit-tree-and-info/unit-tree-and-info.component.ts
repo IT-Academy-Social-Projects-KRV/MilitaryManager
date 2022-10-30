@@ -13,11 +13,9 @@ export class UnitTreeAndInfoComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   public id: number = 9;
 
   public transferIdFromUnitListToMainComponent(someNumber: number): void {
-    console.log(this.id)
     this.id = someNumber;
   }
 }

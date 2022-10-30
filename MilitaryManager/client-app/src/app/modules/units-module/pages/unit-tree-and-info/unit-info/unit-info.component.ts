@@ -29,10 +29,6 @@ export class UnitInfoComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('ngOnChanges')
-    console.log(changes);
-    // console.log(changes[this.idChild1]);
-    // this.idChild1 = changes[this.idChild1];
     this.showFullUnitInfo();
   }
 
@@ -43,7 +39,6 @@ export class UnitInfoComponent implements OnInit, OnChanges {
       .subscribe((u) => {
         this.unit = u;
 
-
         if (this.unit.parent != null) {
           this.parentFullName = `${this.unit?.parent?.lastName} ${this.unit?.parent?.firstName} ${this.unit?.parent?.secondName}`;
         } else {
@@ -51,10 +46,6 @@ export class UnitInfoComponent implements OnInit, OnChanges {
         }
 
         this.divisionName = this.unit?.division.name;
-
-
-        console.log(this.unit)
-
       });
   }
 }
