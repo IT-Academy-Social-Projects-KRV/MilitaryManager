@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {UnitModel} from "../../../../../shared/models/unit.model";
-import {UnitsService} from "../../../../../shared/services/api/unit.service";
+import {UnitModel} from "../../../../shared/models/unit.model";
+import {UnitsService} from "../../../../shared/services/api/unit.service";
 
 import {
   logExperimentalWarnings
