@@ -24,7 +24,6 @@ export class UnitInfoComponent implements OnInit, OnChanges {
   divisionName: string = "";
 
 
-
   ngOnInit(): void {
     this.showFullUnitInfo();
   }
@@ -55,12 +54,7 @@ export class UnitInfoComponent implements OnInit, OnChanges {
 
 
         console.log(this.unit)
-        // console.log(this.unit.profiles[0].name);
-        // console.log(this.unit.profiles[0].value);
+
       });
   }
-
-
-
-
 }
