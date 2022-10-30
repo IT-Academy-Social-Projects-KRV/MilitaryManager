@@ -14,6 +14,10 @@ export class UnitsListComponent implements OnInit {
   units: TreeNode<UnitModel>[] = [];
 
   loading: boolean = false;
+  parentFullName: string = "";
+  divisionName: string = "";
+  idInUnitList: number;
+  @Output() outputIdChangedInUnitListComponent: EventEmitter<number> = new EventEmitter();
 
   constructor(
     private unitsService: UnitsService) {
@@ -50,25 +54,10 @@ export class UnitsListComponent implements OnInit {
     }
   }
 
-  unit: UnitModel = new UnitModel(0);
-  parentFullName: string = "";
-  divisionName: string = "";
-
-
   nodeSelect(event: any) {
-
     if (event.node) {
-
       this.idInUnitList = event.node.id;
-
-
       this.outputIdChangedInUnitListComponent.emit(this.idInUnitList);
     }
   }
-
-
-  idInUnitList : number;
-
-  @Output() outputIdChangedInUnitListComponent: EventEmitter<number> = new EventEmitter();
-
 }

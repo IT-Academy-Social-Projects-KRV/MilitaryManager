@@ -14,18 +14,16 @@ import {
 })
 export class UnitInfoComponent implements OnInit, OnChanges {
 
-  constructor(private unitsService: UnitsService) {
-  }
-
-  @Input() idChild1: number = 9;
+  @Input() idChild1: number;
 
   unit: UnitModel = new UnitModel();
   parentFullName: string = "";
   divisionName: string = "";
 
+  constructor(private unitsService: UnitsService) {
+  }
 
   ngOnInit(): void {
-    this.showFullUnitInfo();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -33,19 +31,17 @@ export class UnitInfoComponent implements OnInit, OnChanges {
   }
 
   showFullUnitInfo() {
-
-    console.log(this.idChild1);
     this.unitsService.single.getById(this.idChild1)
       .subscribe((u) => {
         this.unit = u;
 
         if (this.unit.parent != null) {
-          this.parentFullName = `${this.unit?.parent?.lastName} ${this.unit?.parent?.firstName} ${this.unit?.parent?.secondName}`;
+          this.parentFullName = `${this.unit.parent.lastName} ${this.unit.parent.firstName} ${this.unit.parent.secondName}`;
         } else {
           this.parentFullName = 'Немає';
         }
 
-        this.divisionName = this.unit?.division.name;
+        this.divisionName = this.unit.division.name;
       });
   }
 }
