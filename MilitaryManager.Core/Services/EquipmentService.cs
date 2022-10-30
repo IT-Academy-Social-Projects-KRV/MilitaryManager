@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using MilitaryManager.Core.DTO.Entities;
+using MilitaryManager.Core.DTO.Units;
 using MilitaryManager.Core.Entities.EntityEntity;
 using MilitaryManager.Core.Entities.EntityToAttributeEntity;
+using MilitaryManager.Core.Entities.EquipmentToUnitEntity;
 using MilitaryManager.Core.Interfaces.Repositories;
 using MilitaryManager.Core.Interfaces.Services;
 using System;
@@ -14,12 +16,16 @@ namespace MilitaryManager.Core.Services
     {
         protected readonly IRepository<Entity, int> _entityRepository;
         protected readonly IRepository<EntityToAttribute, int> _entityToAttributeRepository;
+        protected readonly IRepository<UnitToEquipment, int> _unitToEquipmentRepository;
         protected readonly IMapper _mapper;
-        public EquipmentService(IRepository<Entity, int> entityRepository, IMapper mapper, IRepository<EntityToAttribute, int> entityToAttributeRepository)
+        public EquipmentService(IRepository<Entity, int> entityRepository,
+            IMapper mapper, IRepository<EntityToAttribute, int> entityToAttributeRepository,
+            IRepository<UnitToEquipment, int> unitToEquipmentRepository)
         {
             _entityRepository = entityRepository;
             _mapper = mapper;
             _entityToAttributeRepository = entityToAttributeRepository; 
+            _unitToEquipmentRepository = unitToEquipmentRepository;
         }
         public async Task<EntityRequestDTO> CreateEntityAsync(EntityRequestDTO dto)
         {
@@ -27,13 +33,16 @@ namespace MilitaryManager.Core.Services
             var newEntity = await _entityRepository.AddAsync(entity);
             await _entityRepository.SaveChangesAcync();
 
-            //foreach (var value in dto.EntityToAttributes)
-            //{
-            //    value.EntityId = newEntity.Id;
-            //    var entityToAttribute = _mapper.Map<EntityToAttribute>(value);
-            //    await _entityToAttributeRepository.AddAsync(entityToAttribute);
-            //    await _entityToAttributeRepository.SaveChangesAcync();
-            //}
+            var unitToEquip = new UnitToEquipmentRequestDTO { 
+                Id = newEntity.Id,
+                DivisionId = dto.Division.Id,
+                GivenById = dto.Warehouseman?.Id,
+                GivenDate = dto.GivenDate,
+                UnitId = dto.Unit?.Id };
+
+            var mapunitToEquip = _mapper.Map<UnitToEquipment>(unitToEquip);
+            await _unitToEquipmentRepository.AddAsync(mapunitToEquip);
+            await _unitToEquipmentRepository.SaveChangesAcync();
 
             return _mapper.Map<EntityRequestDTO>(newEntity);
         }
