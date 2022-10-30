@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { UnitModel } from 'src/app/shared/models/unit.model';
-import { UnitsService } from 'src/app/shared/services/api/unit.service';
-import {ClientConfigurationService} from "../../../../shared/services/core/client-configuration.service";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {UnitModel} from 'src/app/shared/models/unit.model';
+import {UnitsService} from 'src/app/shared/services/api/unit.service';
 import {TreeNode} from "primeng/api";
 
 
@@ -16,22 +15,23 @@ export class UnitsListComponent implements OnInit {
 
   loading: boolean = false;
 
-  constructor(private unitsService: UnitsService,
-              private clientConfigService: ClientConfigurationService) { }
+  constructor(
+    private unitsService: UnitsService) {
+  }
 
   ngOnInit() {
     this.loading = true;
     setTimeout(() => {
       this.unitsService.collection.getAll()
-        .subscribe(  (units) => {
-        units.forEach( (unit) => {
-          unit.label = `${unit.lastName} ${unit.firstName}`;
-          unit.expandedIcon = "pi pi-user-minus";
-          unit.collapsedIcon = "pi pi-user-plus";
-          unit.leaf = false;
-        })
+        .subscribe((units) => {
+          units.forEach((unit) => {
+            unit.label = `${unit.lastName} ${unit.firstName}`;
+            unit.expandedIcon = "pi pi-user-minus";
+            unit.collapsedIcon = "pi pi-user-plus";
+            unit.leaf = false;
+          })
           this.units = units;
-      });
+        });
       this.loading = false;
     });
   }
@@ -39,7 +39,7 @@ export class UnitsListComponent implements OnInit {
   nodeExpand(event: any) {
     if (event.node) {
       this.unitsService.collection.getListById(event.node.id).subscribe((units) => {
-        units.forEach( (unit) => {
+        units.forEach((unit) => {
           unit.label = `${unit.lastName} ${unit.firstName}`;
           unit.expandedIcon = "pi pi-user-minus";
           unit.collapsedIcon = "pi pi-user-plus";
@@ -49,4 +49,26 @@ export class UnitsListComponent implements OnInit {
       });
     }
   }
+
+  unit: UnitModel = new UnitModel(0);
+  parentFullName: string = "";
+  divisionName: string = "";
+
+
+  nodeSelect(event: any) {
+
+    if (event.node) {
+
+      this.idInUnitList = event.node.id;
+
+
+      this.outputIdChangedInUnitListComponent.emit(this.idInUnitList);
+    }
+  }
+
+
+  idInUnitList : number;
+
+  @Output() outputIdChangedInUnitListComponent: EventEmitter<number> = new EventEmitter();
+
 }
