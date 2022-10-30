@@ -24,11 +24,5 @@ namespace MilitaryManager.Core.DTO.Units
         public string Position { get; set; }
         public List<AttributeWithValueDTO> Profiles { get; set; }
         public List<UnitToEquipmentDTO> UnitToEquipments { get; set; }
-
-
-        public List<AttributeWithValueDTO> Profiles { get; set; }
-
-
-
     }
 }
