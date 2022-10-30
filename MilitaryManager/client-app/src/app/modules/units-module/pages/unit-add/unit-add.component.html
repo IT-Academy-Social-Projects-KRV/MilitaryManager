@@ -39,45 +39,50 @@
             </div>
         </div>
         <div class="p-grid p-mt-2">
-            <div class=" p-col-4">
-                <div class="p-inputgroup">
-                    <input id="float-input" type="text" placeholder="Розмір ноги" pInputText formControlName="footSize">
-                </div>
+            <div class=" p-col-4  p-inputgroup">
+                <span class=" p-float-label p-mt-2">
+                    <input id="float-input" type="text" pInputText formControlName="footSize">
+                    <label for="float-input">Розмір ноги</label>
+                </span>
             </div>
-            <div class=" p-col-4">
-                <div class="p-inputgroup">
-                    <input id="float-input" type="text" placeholder="Розмір голови" pInputText formControlName="headSize">
-                </div>
+            <div class=" p-col-4 p-inputgroup">
+                <span class="p-float-label p-mt-2">
+                    <input id="float-input" type="text" pInputText formControlName="headSize">
+                    <label for="float-input">Розмір голови</label>
+                </span>
             </div>
-            <div class=" p-col-4">
-                <div class="p-inputgroup">
-                    <input id="float-input" type="text" placeholder="Розмір противогазу" pInputText formControlName="gasMaskSize">
-                </div>
+            <div class=" p-col-4 p-inputgroup">
+                <span class="p-float-label p-mt-2">
+                    <input id="float-input" type="text" pInputText formControlName="gasMaskSize">
+                    <label for="float-input">Розмір противогазу</label>
+                </span>
             </div>
-            <div class=" p-col-3">
-                <div class="p-inputgroup">
-                    <input id="float-input" type="text" placeholder="Вага" pInputText formControlName="weight">
-                </div>
+            <div class=" p-col-3 p-inputgroup">
+                <span class="p-float-label p-mt-2">
+                    <input id="float-input" type="text" pInputText formControlName="weight">
+                    <label for="float-input">Вага</label>
+                </span>
             </div>
-            <div class=" p-col-3">
-                <div class="p-inputgroup">
-                    <input id="float-input" type="text" placeholder="Зріст" pInputText formControlName="height">
-                </div>
+            <div class=" p-col-3 p-inputgroup">
+                <span class="p-float-label p-mt-2">
+                    <input id="float-input" type="text" pInputText formControlName="height">
+                    <label for="float-input">Зріст</label>
+                </span>
             </div>
-            <div class=" p-col-3">
+            <div class=" p-col-3 p-mt-2">
                 <span class>
                     <p-dropdown [options]="uniforms" formControlName="uniform" placeholder="Тип форми"
                         [showClear]="true"></p-dropdown>
                 </span>
             </div>
-            <div class=" p-col-3">
+            <div class=" p-col-3 p-mt-2">
                 <span class>
                     <p-dropdown [options]="blood_types" formControlName="bloodType" placeholder="Група крові"
                         [showClear]="true"></p-dropdown>
                 </span>
             </div>
         </div>
-        <div class=" p-col-4">
+        <div class=" p-col-4 p-mt-2">
             <p-button type="submit" class="p-button-outlined" class="p-button-lg" label="Додати бійця"></p-button>
             <p-messages></p-messages>
         </div>
