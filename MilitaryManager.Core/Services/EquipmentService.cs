@@ -27,13 +27,13 @@ namespace MilitaryManager.Core.Services
             var newEntity = await _entityRepository.AddAsync(entity);
             await _entityRepository.SaveChangesAcync();
 
-            foreach (var value in dto.EntityToAttributes)
-            {
-                value.EntityId = newEntity.Id;
-                var entityToAttribute = _mapper.Map<EntityToAttribute>(value);
-                await _entityToAttributeRepository.AddAsync(entityToAttribute);
-                await _entityToAttributeRepository.SaveChangesAcync();
-            }
+            //foreach (var value in dto.EntityToAttributes)
+            //{
+            //    value.EntityId = newEntity.Id;
+            //    var entityToAttribute = _mapper.Map<EntityToAttribute>(value);
+            //    await _entityToAttributeRepository.AddAsync(entityToAttribute);
+            //    await _entityToAttributeRepository.SaveChangesAcync();
+            //}
 
             return _mapper.Map<EntityRequestDTO>(newEntity);
         }
