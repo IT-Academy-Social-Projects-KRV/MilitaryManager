@@ -217,7 +217,7 @@ namespace MilitaryManager.Core.Services
             decree.StatusId = (int)DecreeStatus.COMPLETED;
             await new DecreeExecutor(_decreeDataRepository, _divisionRepository, _unitRepository, _templatePlaceholderRepository)
                 .ExecuteOperation(decree.TemplateId, decree.Id);
-            await ConcurrencyCheck(id);
+            await _decreeRepository.SaveChangesAcync();
             return _mapper.Map<DecreeDTO>(decree);
         }
 
