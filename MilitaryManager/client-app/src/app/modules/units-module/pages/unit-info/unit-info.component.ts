@@ -24,10 +24,17 @@ export class UnitInfoComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    console.log('onInit');
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.showFullUnitInfo();
+    console.log('onChanges');
+    if (this.idChild1 == null) {
+      console.log('this.idChild1 == null')
+    }
+    if (this.idChild1 != null) {
+      this.showFullUnitInfo();
+    }
   }
 
   showFullUnitInfo() {

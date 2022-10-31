@@ -1,4 +1,4 @@
 <div class="content-section implementation p-d-inline-flex" id="container">
-  <app-units-list (outputIdChangedInUnitListComponent)="transferIdFromUnitListToMainComponent($event)"></app-units-list>
-  <app-unit-info [idChild1]="id"></app-unit-info>
+  <app-units-list class="unit-list" (outputIdChangedInUnitListComponent)="transferIdFromUnitListToMainComponent($event)"></app-units-list>
+  <app-unit-info class="unit-info" [idChild1]="id"></app-unit-info>
 </div>
