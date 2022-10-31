@@ -46,6 +46,8 @@ export class UnitInfoComponent implements OnInit, OnChanges {
 
         this.divisionName = this.unit.division.name;
       });
+    console.log(this.unit.unitToEquipments);
+    console.log(this.unit.entities);
   }
 
   edit(){

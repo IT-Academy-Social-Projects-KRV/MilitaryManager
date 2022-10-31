@@ -4,6 +4,7 @@ import {UnitToEquipmentModel} from "./unitToEquipment.model";
 import {DivisionModel} from "./division.model";
 import {RankModel} from "./rank.model";
 import {PositionModel} from "./position.model";
+import {EntityModel} from "./entity.model";
 
 export class UnitModel extends BaseModel {
 
@@ -22,7 +23,9 @@ export class UnitModel extends BaseModel {
     public division: DivisionModel | null = null,
     public parent: UnitModel | null = null,
     public subUnits: UnitModel[] | null = null,
-    public unitToEquipments: UnitToEquipmentModel[] | null = null
+    public unitToEquipments: UnitToEquipmentModel[] | null = null,
+    public entities: EntityModel[] | null = null
+
   ) {
     super(Id);
   }

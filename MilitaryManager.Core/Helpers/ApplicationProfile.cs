@@ -21,6 +21,7 @@ using MilitaryManager.Core.Entities.RankEntity;
 using MilitaryManager.Core.Entities.TemplateEntity;
 using MilitaryManager.Core.Entities.UnitEntity;
 using System.IO;
+using System.Linq;
 
 namespace MilitaryManager.Core.Helpers
 {
@@ -61,6 +62,19 @@ namespace MilitaryManager.Core.Helpers
             CreateMap<ChangeValue, ChangeValuesDTO>();
             CreateMap<Profile, AttributeWithValueDTO>()
                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Attribute.Name));
+
+            CreateMap<UnitToEquipment, UnitToEquipmentWithValueDTO>()
+                .ForMember(dest => dest.RegNum, opt => opt.MapFrom(src => src.Equipment.RegNum))
+                .ForMember(dest => dest.GivenByName,
+                    opt => opt.MapFrom(src => src.Unit.LastName + " " + src.Unit.FirstName + " " + src.Unit.SecondName))
+                .ForMember(dest => dest.DivisionName, opt => opt.MapFrom(src => src.Division.Name))
+                .ForMember(dest => dest.Value,
+                    opt => opt.MapFrom(src =>
+                        src.Equipment.EntityToAttributes.FirstOrDefault(x => x.EntityId == src.Equipment.Id).Value))
+                .ForMember(dest => dest.Name,
+                    opt => opt.MapFrom(src =>
+                        src.Equipment.EntityToAttributes.FirstOrDefault(x => x.EntityId == src.Equipment.Id).Attribute
+                            .Name));
         }
     }
 }

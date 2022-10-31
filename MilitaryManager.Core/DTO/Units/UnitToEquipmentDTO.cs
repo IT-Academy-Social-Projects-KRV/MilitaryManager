@@ -24,4 +24,15 @@ namespace MilitaryManager.Core.DTO.Units
         public UnitDTO Unit { get; set; }
         public UnitDTO Warehouseman { get; set; }
     }
+
+    public class UnitToEquipmentWithValueDTO
+    {
+        public int Id { get; set; }
+        public string RegNum { get; set; }
+        public string GivenByName { get; set; }
+        public string DivisionName { get; set; }
+        public string Name { get; set; }
+        public string Value { get; set; }
+        public DateTime? GivenDate { get; set; }
+    }
 }
