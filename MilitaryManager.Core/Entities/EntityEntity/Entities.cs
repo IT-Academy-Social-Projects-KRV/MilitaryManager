@@ -9,8 +9,11 @@ namespace MilitaryManager.Core.Entities.EntityEntity
             public EntityById(int id)
             {
                 Query
-                    .Include(x => x.EntityToAttributes)
-                    .Where(x => x.Id == id);
+                     .Include(x => x.UnitToEquipment)
+                     .ThenInclude(x => x.Warehouseman)
+                     .Include(x => x.EntityToAttributes)
+                     .ThenInclude(x => x.Attribute)
+                     .Where(x => x.Id == id);
             }
         }
         internal class GetEntities : Specification<Entity>
@@ -18,7 +21,12 @@ namespace MilitaryManager.Core.Entities.EntityEntity
             public GetEntities()
             {
                 Query
-                    .Include(x => x.EntityToAttributes);
+                    .Include(x => x.UnitToEquipment)
+                    .ThenInclude(x => x.Division)
+                    .Include(x => x.UnitToEquipment)
+                    .ThenInclude(x => x.Unit)
+                    .Include(x => x.UnitToEquipment)
+                    .ThenInclude(x => x.Warehouseman);
             }
         }
     }

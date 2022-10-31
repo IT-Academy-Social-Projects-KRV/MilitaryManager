@@ -2,14 +2,13 @@
 using AutoMapper;
 using MilitaryManager.Core.DTO.Divisions;
 using MilitaryManager.Core.Entities.DivisionEntity;
-using MilitaryManager.Core.Entities.DivivsionEntity;
 using MilitaryManager.Core.Interfaces.Repositories;
 using MilitaryManager.Core.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using static MilitaryManager.Core.Entities.DivivsionEntity.Divisions;
+using static MilitaryManager.Core.Entities.DivisionEntity.Divisions;
 
 namespace MilitaryManager.Core.Services
 {

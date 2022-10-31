@@ -16,6 +16,9 @@ namespace MilitaryManager.Core.Entities.SignedPdfEntity
             builder.HasOne(signedPdf => signedPdf.Decree)
                    .WithOne(decree => decree.SignedPdf)
                    .HasForeignKey<SignedPdf>(signedPdf => signedPdf.Id);
+
+            builder.Property(decree => decree.RowVersion)
+               .IsRowVersion();
         }
     }
 }

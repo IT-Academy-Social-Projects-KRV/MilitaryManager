@@ -20,6 +20,8 @@ using MilitaryManager.Core.Entities.RankEntity;
 using MilitaryManager.Core.Entities.UnitEntity;
 using MilitaryManager.Infrastructure.Data.SeedData;
 using MilitaryManager.Core.Entities.AttributeValueEntity;
+using MilitaryManager.Core.Entities.DecreeDataEntity;
+using MilitaryManager.Core.Entities.TemplatePlaceholderEntity;
 
 namespace MilitaryManager.Infrastructure.Data
 {
@@ -54,6 +56,8 @@ namespace MilitaryManager.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new ColumnConfiguration());
             modelBuilder.ApplyConfiguration(new TableConfiguration());
             modelBuilder.ApplyConfiguration(new AttributeValueConfiguration());
+            modelBuilder.ApplyConfiguration(new TemplatePlaceholderConfiguration());
+            modelBuilder.ApplyConfiguration(new DecreeDataConfiguration());
 
             modelBuilder.Entity<ChangeValue>(entity =>
             {
@@ -80,6 +84,8 @@ namespace MilitaryManager.Infrastructure.Data
         public DbSet<StatusHistory> StatusHistories { get; set; }
         public DbSet<Template> Templates { get; set; }
         public DbSet<SignedPdf> SignedPdfs { get; set; }
+        public DbSet<TemplatePlaceholder> TemplatePlaceholders { get; set; }
+        public DbSet<DecreeData> DecreeDatas { get; set; }
         public DbSet<Change> Changes { get; set; }
         public DbSet<ChangeType> ChangeType { get; set; }
         public DbSet<ChangeValue> ChangeValue { get; set; }

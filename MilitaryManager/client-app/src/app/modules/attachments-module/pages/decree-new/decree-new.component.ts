@@ -2,6 +2,7 @@ import { Component, ComponentRef, OnInit, QueryList, ViewChildren, ViewContainer
 import { TemplateModel } from 'src/app/shared/models/template.model';
 import { ApiService } from 'src/app/shared/services/api/api.service';
 import { DecreeAddComponent } from '../decree-add/decree-add.component';
+import { TransferComponent } from '../templates/transfer/transfer.component';
 
 @Component({
   selector: 'app-decree-new',
@@ -31,9 +32,18 @@ export class DecreeNewComponent implements OnInit {
       if(this.targets.length > 0)
       {
         const target: ViewContainerRef = this.targets.toArray()[this.tabs.length - 1];
-        this.componentRef = target.createComponent(DecreeAddComponent);
-        this.componentRef.instance.templateId=id;
-        this.componentRef.instance.templateType=type;
+        switch(id) {
+          case 3: {
+            this.componentRef = target.createComponent(TransferComponent);
+            this.componentRef.instance.templateId=id;
+            break;
+          }
+          default: {
+            this.componentRef = target.createComponent(DecreeAddComponent);
+            this.componentRef.instance.templateId=id;
+            this.componentRef.instance.templateType=type;
+          }
+        }
       }
     }, 1)    
   }

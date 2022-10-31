@@ -1,4 +1,5 @@
 ﻿using MilitaryManager.Core.Entities.DecreeEntity;
+using MilitaryManager.Core.Entities.TemplatePlaceholderEntity;
 using MilitaryManager.Core.Interfaces;
 using System.Collections.Generic;
 
@@ -10,5 +11,6 @@ namespace MilitaryManager.Core.Entities.TemplateEntity
         public string Type { get; set; }
         public string Path { get; set; }
         public ICollection<Decree> Decrees { get; set; }
+        public ICollection<TemplatePlaceholder> TemplatePlaceholders { get; set; }
     }
 }

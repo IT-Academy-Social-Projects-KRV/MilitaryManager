@@ -24,7 +24,7 @@ export class AppMenuComponent implements OnInit {
                 label: 'Бійці',
                 items: [
                     { label: 'Бійці', icon: 'pi pi-fw pi-users', routerLink: ['/units/list'] },
-                    { label: 'Додати бійця', icon: 'pi pi-fw pi-user-plus', routerLink: ['/units/edit'] }
+                    { label: 'Додати бійця', icon: 'pi pi-fw pi-user-plus', routerLink: ['/units/add'] }
                 ]
             },
             {
@@ -44,8 +44,8 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Зброя',
                 items: [
-                    { label: 'Зброя', icon: 'pi pi-fw pi-shield', routerLink: ['/'] },
-                    { label: 'Додати зброю', icon: 'pi pi-fw pi-plus', routerLink: ['/'] },
+                    { label: 'Зброя', icon: 'pi pi-fw pi-shield', routerLink: ['/equipment/list'] },
+                    { label: 'Додати зброю', icon: 'pi pi-fw pi-plus', routerLink: ['/equipment/new'] },
                 ]
             },
             {

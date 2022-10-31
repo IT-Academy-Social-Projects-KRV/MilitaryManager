@@ -2719,8 +2719,8 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   border: 1px solid #dee2e6;
   border-width: 1px 0 2px 0;
   font-weight: 600;
-  color: #212529;
-  background: #00bbff;
+  color: #ffffff;
+  background: #007bff;
   transition: box-shadow 0.15s;
 }
 .p-datatable .p-datatable-tfoot > tr > td {
@@ -3544,7 +3544,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 .p-paginator .p-paginator-pages .p-paginator-page {
   background-color: #ffffff;
   border: 1px solid #dee2e6;
-  color: #00bbff;
+  color: #007bff;
   min-width: 2.357rem;
   height: 2.357rem;
   margin: 0 0 0 -1px;
