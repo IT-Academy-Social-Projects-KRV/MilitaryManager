@@ -13,7 +13,7 @@ export class UnitTreeAndInfoComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public id: number = 9;
+  public id: number;
 
   public transferIdFromUnitListToMainComponent(someNumber: number): void {
     this.id = someNumber;
