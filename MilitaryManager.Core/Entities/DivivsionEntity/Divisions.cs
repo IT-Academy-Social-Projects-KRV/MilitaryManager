@@ -19,5 +19,13 @@ namespace MilitaryManager.Core.Entities.DivisionEntity
                 Query.Where(x => x.DivisionNumber == divisionNumber);
             }
         }
+
+        internal class DivisionById : Specification<Division>
+        {
+            public DivisionById(int id)
+            {
+                Query.Include(x => x.Id == id);
+            }
+        }
     }
 }
