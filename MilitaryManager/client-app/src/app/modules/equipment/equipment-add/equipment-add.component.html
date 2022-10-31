@@ -1,0 +1,87 @@
+<div class="surface-card p-4 shadow-2 border-round w-full lg:w-12">
+    <div class="p-grid p-mt-2 ml-4">
+        <h2>Додати амуніцію</h2>
+    </div>
+    <form (submit)="EndRegistrationBtn()" [formGroup]="equipmentForm">
+        <div class="p-grid p-mt-2 ml-4">
+            <div class="p-grid p-mt-2">
+                <div class=" p-col-4">
+                    <span class="p-float-label p-mt-2">
+                        <input id="float-input" type="text" pInputText formControlName="regNum" class="redclass==true?ng-invalid ng-dirty:'">
+                        <label for="float-input">Реєстаційний номер</label>
+                    </span>
+                </div>
+                <div class=" p-col-4">
+                    <span class="p-float-label p-mt-2">
+                        <p-dropdown [options]="divisions" formControlName="division" placeholder="Частина" class="redclass==true?ng-invalid ng-dirty:'"
+                            optionLabel="name"  [showClear]="true"></p-dropdown>
+                    </span>
+                </div>
+                <div class=" p-col-4">
+                    <span class="p-float-label p-mt-2">
+                        <input id="float-input" type="text" pInputText formControlName="name" class="redclass==true?ng-invalid ng-dirty:'">
+                        <label for="float-input">Назва</label>
+                    </span>
+                </div>
+                <div class=" p-col-4">
+                    <span class="p-float-label p-mt-2">
+                        <input id="float-input" type="text" pInputText formControlName="manufacturer" class="redclass==true?ng-invalid ng-dirty:'">
+                        <label for="float-input">Виробник</label>
+                    </span>
+                </div>
+                <div class=" p-col-4">
+                    <span class="p-float-label p-mt-2">
+                        <input id="float-input" type="text" pInputText formControlName="class" class="redclass==true?ng-invalid ng-dirty:'">
+                        <label for="float-input">Клас захисту</label>
+                    </span>
+                </div>
+                <div class=" p-col-4">
+                    <span class="p-float-label p-mt-2">
+                        <input id="float-input" type="text" pInputText formControlName="caliber">
+                        <label for="float-input">Калібр</label>
+                    </span>
+                </div>
+                <div class=" p-col-4">
+                    <span class="p-float-label p-mt-2">
+                        <input id="float-input" type="text" pInputText formControlName="small_arms_type">
+                        <label for="float-input">Вид стрілецької зброї</label>
+                    </span>
+                </div>
+                <div class=" p-col-4">
+                    <span class="p-float-label p-mt-2">
+                        <input id="float-input" type="text" pInputText formControlName="caliber_type">
+                        <label for="float-input">Тип калібру</label>
+                    </span>
+                </div>
+                <div class=" p-col-4">
+                    <span class="p-float-label p-mt-2">
+                        <input id="float-input" type="text" pInputText formControlName="mode_of_action" class="redclass==true?ng-invalid ng-dirty:'">
+                        <label for="float-input">Спосіб дії</label>
+                    </span>
+                </div>
+                <div class=" p-col-4">
+                    <span class="p-float-label p-mt-2">
+                        <input id="float-input" type="text" pInputText formControlName="mode_of_influence" class="redclass==true?ng-invalid ng-dirty:'">
+                        <label for="float-input">Спосіб впливу</label>
+                    </span>
+                </div>
+                <div class=" p-col-4">
+                    <span class="p-float-label p-mt-2">
+                        <input id="float-input" type="text" pInputText formControlName="sight_type">
+                        <label for="float-input">Тип прицілу</label>
+                    </span>
+                </div>
+                <div class=" p-col-4">
+                    <span class="p-float-label p-mt-2">
+                        <input id="float-input" type="text" pInputText formControlName="pnb_type">
+                        <label for="float-input">Тип ПНБ</label>
+                    </span>
+                </div>
+            </div>
+            <div class=" p-col-4">
+                <p-button type="submit" label="Додати"></p-button>
+                <p-messages></p-messages>
+            </div>
+        </div>
+    </form>
+</div>
