@@ -1,7 +1,4 @@
 ﻿using Ardalis.Specification;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MilitaryManager.Core.Entities.DecreeDataEntity
 {
@@ -19,10 +16,11 @@ namespace MilitaryManager.Core.Entities.DecreeDataEntity
         {
             public DecreeDataUnitCredDivisionNumber(int firstNameId, int lastNameId, int secondNameId, int divisionNumberId, int decreeId)
             {
-                Query.Where(x => x.TemplatePlaceholderId == firstNameId && x.DecreeId == decreeId ||
-                                 x.TemplatePlaceholderId == lastNameId && x.DecreeId == decreeId ||
-                                 x.TemplatePlaceholderId == secondNameId && x.DecreeId == decreeId ||
-                                 x.TemplatePlaceholderId == divisionNumberId && x.DecreeId == decreeId);
+                Query.Where(x => (x.TemplatePlaceholderId == firstNameId ||
+                                 x.TemplatePlaceholderId == lastNameId ||
+                                 x.TemplatePlaceholderId == secondNameId ||
+                                 x.TemplatePlaceholderId == divisionNumberId) && 
+                                 x.DecreeId == decreeId);
             }
         }
     }
