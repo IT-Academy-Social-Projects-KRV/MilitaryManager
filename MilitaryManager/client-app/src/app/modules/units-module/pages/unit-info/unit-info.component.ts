@@ -19,6 +19,7 @@ export class UnitInfoComponent implements OnInit, OnChanges {
   unit: UnitModel = new UnitModel();
   parentFullName: string = "";
   divisionName: string = "";
+  readonly: boolean = true;
 
   constructor(private unitsService: UnitsService) {
   }
@@ -45,5 +46,9 @@ export class UnitInfoComponent implements OnInit, OnChanges {
 
         this.divisionName = this.unit.division.name;
       });
+  }
+
+  edit(){
+    this.readonly = false;
   }
 }
