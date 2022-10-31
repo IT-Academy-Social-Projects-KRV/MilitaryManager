@@ -1,8 +1,5 @@
 ﻿using Ardalis.Specification;
 using MilitaryManager.Core.Entities.UnitEntity;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MilitaryManager.Core.Entities.UnitUserEntity
 {
@@ -13,6 +10,7 @@ namespace MilitaryManager.Core.Entities.UnitUserEntity
             public UnitUserByUserId(string id)
             {
                 Query
+                    .Include(x => x.Unit)
                     .Where(x => x.UserId == id);
             }
         }
