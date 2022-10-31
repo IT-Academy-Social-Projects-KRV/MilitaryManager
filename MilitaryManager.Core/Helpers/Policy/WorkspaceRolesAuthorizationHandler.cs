@@ -7,9 +7,11 @@ using MilitaryManager.Core.Interfaces.Repositories;
 using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace MilitaryManager.Core.Helpers.Policy
 {
@@ -19,9 +21,10 @@ namespace MilitaryManager.Core.Helpers.Policy
         private readonly IRepository<UnitUser, int> _unitUserRepository;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public WorkspaceRolesAuthorizationHandler(IRepository<Unit, int> unitRepository, IHttpContextAccessor httpContextAccessor)
+        public WorkspaceRolesAuthorizationHandler(IRepository<Unit, int> unitRepository, IRepository<UnitUser, int> unitUserRepository, IHttpContextAccessor httpContextAccessor)
         {
             _unitRepository = unitRepository;
+            _unitUserRepository = unitUserRepository;
             _httpContextAccessor = httpContextAccessor;
         }
 
@@ -33,7 +36,7 @@ namespace MilitaryManager.Core.Helpers.Policy
 
             if (userId == null)
             {
-                return;
+                new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
 
             var comander = (await _unitUserRepository.GetFirstBySpecAsync(new UnitUsers.UnitUserByUserId(userId))).Unit;
@@ -65,6 +68,8 @@ namespace MilitaryManager.Core.Helpers.Policy
             {
                 context.Succeed(requirement);
             }
+
+            new HttpStatusCodeResult(HttpStatusCode.Forbidden);
         }
     }
 }

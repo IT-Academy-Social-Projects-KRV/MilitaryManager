@@ -20,7 +20,6 @@ namespace MilitaryManager.Units.API.Controllers
 
 
         [HttpGet]
-        [Authorize(Policy = "DivisionIdLimit")]
         [Route("collection")]
         public async Task<IActionResult> GetRootTree()
         {
@@ -28,7 +27,6 @@ namespace MilitaryManager.Units.API.Controllers
         }
 
         [HttpGet]
-        [Authorize(Policy = "DivisionIdLimit")]
         [Route("collection/{id}")]
         public async Task<IActionResult> GetTreeNode([FromRoute] int id)
         {
