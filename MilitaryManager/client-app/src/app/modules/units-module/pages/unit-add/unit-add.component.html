@@ -1,0 +1,90 @@
+<div class="surface-card p-4 shadow-2 border-round w-full lg:w-12">
+    <h2>Додайте бійця</h2>
+    <form (submit)="AddUnit()" [formGroup]="unitForm">
+        <div class="p-grid p-mt-4">
+            <div class=" p-col-4">
+                <div class="p-inputgroup">
+                    <input id="float-input" type="text" placeholder="Прізвище" pInputText formControlName="lastName">
+                </div>
+            </div>
+            <div class=" p-col-4">
+                <div class="p-inputgroup">
+                    <input id="float-input" type="text" placeholder="Ім'я" pInputText formControlName="firstName">
+                </div>
+            </div>
+            <div class=" p-col-4">
+                <div class="p-inputgroup">
+                    <input id="float-input" type="text" placeholder="По батькові" pInputText formControlName="secondName">
+                </div>
+            </div>
+        </div>
+        <div class="p-grid p-mt-2">
+            <div class=" p-col-4">
+                <span class>
+                    <p-dropdown [options]="ranks" formControlName="rankId" placeholder="Ранг" optionLabel="name"
+                        optionValue="id" [showClear]="true"></p-dropdown>
+                </span>
+            </div>
+            <div class=" p-col-4">
+                <span class>
+                    <p-dropdown [options]="positions" formControlName="positionId" placeholder="Посада"
+                        optionLabel="name" optionValue="id" [showClear]="true"></p-dropdown>
+                </span>
+            </div>
+            <div class=" p-col-4">
+                <span class>
+                    <p-dropdown [options]="divisions" formControlName="divisionId" placeholder="Частина"
+                        optionLabel="name" optionValue="id" [showClear]="true"></p-dropdown>
+                </span>
+            </div>
+        </div>
+        <div class="p-grid p-mt-2">
+            <div class=" p-col-4  p-inputgroup">
+                <span class=" p-float-label p-mt-2">
+                    <input id="float-input" type="text" pInputText formControlName="footSize">
+                    <label for="float-input">Розмір ноги</label>
+                </span>
+            </div>
+            <div class=" p-col-4 p-inputgroup">
+                <span class="p-float-label p-mt-2">
+                    <input id="float-input" type="text" pInputText formControlName="headSize">
+                    <label for="float-input">Розмір голови</label>
+                </span>
+            </div>
+            <div class=" p-col-4 p-inputgroup">
+                <span class="p-float-label p-mt-2">
+                    <input id="float-input" type="text" pInputText formControlName="gasMaskSize">
+                    <label for="float-input">Розмір противогазу</label>
+                </span>
+            </div>
+            <div class=" p-col-3 p-inputgroup">
+                <span class="p-float-label p-mt-2">
+                    <input id="float-input" type="text" pInputText formControlName="weight">
+                    <label for="float-input">Вага</label>
+                </span>
+            </div>
+            <div class=" p-col-3 p-inputgroup">
+                <span class="p-float-label p-mt-2">
+                    <input id="float-input" type="text" pInputText formControlName="height">
+                    <label for="float-input">Зріст</label>
+                </span>
+            </div>
+            <div class=" p-col-3 p-mt-2">
+                <span class>
+                    <p-dropdown [options]="uniforms" formControlName="uniform" placeholder="Тип форми"
+                        [showClear]="true"></p-dropdown>
+                </span>
+            </div>
+            <div class=" p-col-3 p-mt-2">
+                <span class>
+                    <p-dropdown [options]="blood_types" formControlName="bloodType" placeholder="Група крові"
+                        [showClear]="true"></p-dropdown>
+                </span>
+            </div>
+        </div>
+        <div class=" p-col-4 p-mt-2">
+            <p-button type="submit" class="p-button-outlined" class="p-button-lg" label="Додати бійця"></p-button>
+            <p-messages></p-messages>
+        </div>
+    </form>
+</div>

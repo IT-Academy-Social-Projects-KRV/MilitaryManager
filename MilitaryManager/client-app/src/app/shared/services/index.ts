@@ -8,6 +8,8 @@ import { UnitUserService } from "./api/unit-user.service";
 import { DecreeService } from "./api/decree.service";
 import { TemplateService } from "./api/template.service";
 import { PdfService } from "./api/pdf.service";
+import { UnitsInfoService } from "./api/unitInfo.service";
+import { DivisionsService } from "./api/division.service";
 
 export const services = [
     HttpService,
@@ -19,5 +21,7 @@ export const services = [
     TemplateService,
     PdfService,
     ApiService,
-    UnitUserService
+    UnitUserService,
+    UnitsInfoService,
+    DivisionsService,
 ]

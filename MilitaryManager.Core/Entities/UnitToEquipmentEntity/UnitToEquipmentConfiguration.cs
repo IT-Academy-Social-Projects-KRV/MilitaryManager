@@ -17,8 +17,7 @@ namespace MilitaryManager.Core.Entities.EquipmentToUnitEntity
                 .HasForeignKey<UnitToEquipment>(x => x.Id);
 
             builder
-                .Property(x => x.GivenDate)
-                .IsRequired();
+                .Property(x => x.GivenDate);
 
             builder
                 .HasOne(x => x.Unit)
