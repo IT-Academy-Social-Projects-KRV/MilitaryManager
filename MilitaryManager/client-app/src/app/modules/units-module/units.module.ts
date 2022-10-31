@@ -26,7 +26,7 @@ import { UnitAddComponent } from './pages/unit-add/unit-add.component';
       {path: '', redirectTo: 'list', pathMatch: 'full'},
       {path: 'list', component: UnitTreeAndInfoComponent},
       {path: 'edit', component: UnitEditComponent},
-      { path: 'add', component: UnitAddComponent },
+      {path: 'add', component: UnitAddComponent },
       {path: '**', redirectTo: 'list'}
     ])
   ]
