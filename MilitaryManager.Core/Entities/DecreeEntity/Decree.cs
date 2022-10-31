@@ -1,4 +1,5 @@
-﻿using MilitaryManager.Core.Entities.SignedPdfEntity;
+﻿using MilitaryManager.Core.Entities.DecreeDataEntity;
+using MilitaryManager.Core.Entities.SignedPdfEntity;
 using MilitaryManager.Core.Entities.StatusEntity;
 using MilitaryManager.Core.Entities.StatusHistoryEntity;
 using MilitaryManager.Core.Entities.TemplateEntity;
@@ -23,5 +24,6 @@ namespace MilitaryManager.Core.Entities.DecreeEntity
         public SignedPdf SignedPdf { get; set; }
         public ICollection<StatusHistory> StatusHistories { get; set; }
         public byte[] RowVersion { get; set; }
+        public ICollection<DecreeData> DecreeDatas { get; set; }
     }
 }

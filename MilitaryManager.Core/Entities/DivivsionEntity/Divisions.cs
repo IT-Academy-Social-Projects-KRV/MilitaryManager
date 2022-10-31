@@ -1,7 +1,6 @@
 ﻿using Ardalis.Specification;
-using MilitaryManager.Core.Entities.DivisionEntity;
 
-namespace MilitaryManager.Core.Entities.DivivsionEntity
+namespace MilitaryManager.Core.Entities.DivisionEntity
 {
     public class Divisions
     {
@@ -12,6 +11,15 @@ namespace MilitaryManager.Core.Entities.DivivsionEntity
                 Query.Include(x => x.SubDivisions);
             }
         }
+
+        internal class DivisionByNumber : Specification<Division>
+        {
+            public DivisionByNumber(string divisionNumber)
+            {
+                Query.Where(x => x.DivisionNumber == divisionNumber);
+            }
+        }
+
         internal class DivisionById : Specification<Division>
         {
             public DivisionById(int id)

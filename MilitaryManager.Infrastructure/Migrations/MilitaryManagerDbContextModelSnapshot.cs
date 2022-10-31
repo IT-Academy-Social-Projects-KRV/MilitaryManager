@@ -432,6 +432,32 @@ namespace MilitaryManager.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("MilitaryManager.Core.Entities.DecreeDataEntity.DecreeData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DecreeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TemplatePlaceholderId")
+                        .HasColumnType("int");
+
+                    b.Property<object>("Value")
+                        .IsRequired()
+                        .HasColumnType("sql_variant");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DecreeId");
+
+                    b.HasIndex("TemplatePlaceholderId");
+
+                    b.ToTable("DecreeDatas");
+                });
+
             modelBuilder.Entity("MilitaryManager.Core.Entities.DecreeEntity.Decree", b =>
                 {
                     b.Property<int>("Id")
@@ -1129,6 +1155,318 @@ namespace MilitaryManager.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("MilitaryManager.Core.Entities.TemplatePlaceholderEntity.TemplatePlaceholder", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<int>("TemplateId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TemplateId");
+
+                    b.ToTable("TemplatePlaceholders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "decreeNumber",
+                            TemplateId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "currentDate",
+                            TemplateId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "city",
+                            TemplateId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "street",
+                            TemplateId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "number",
+                            TemplateId = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "date",
+                            TemplateId = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "owner",
+                            TemplateId = 1
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "flatnum",
+                            TemplateId = 1
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "text",
+                            TemplateId = 1
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "currentDate",
+                            TemplateId = 2
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "city",
+                            TemplateId = 2
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "decreeNumber",
+                            TemplateId = 2
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "lastName",
+                            TemplateId = 2
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "firstName",
+                            TemplateId = 2
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = "unitNumber",
+                            TemplateId = 2
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Name = "day",
+                            TemplateId = 2
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Name = "month",
+                            TemplateId = 2
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Name = "year",
+                            TemplateId = 2
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Name = "decreeNumber2",
+                            TemplateId = 2
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Name = "unitNumberNew",
+                            TemplateId = 2
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Name = "newPlace",
+                            TemplateId = 2
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Name = "unitNumber",
+                            TemplateId = 2
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Name = "percent",
+                            TemplateId = 2
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Name = "anotherPercent",
+                            TemplateId = 2
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Name = "first",
+                            TemplateId = 2
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Name = "father",
+                            TemplateId = 2
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Name = "commanderDivisionNumber",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Name = "currentDate",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Name = "city",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Name = "decreeNumber",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 31,
+                            Name = "lastName",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 32,
+                            Name = "firstName",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 33,
+                            Name = "secondName",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 34,
+                            Name = "soldireDivisionNumber",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 35,
+                            Name = "assignmentDate",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 36,
+                            Name = "assignmentNumber",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 37,
+                            Name = "assignmentDivisionNumber",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 38,
+                            Name = "newDivisionNumber",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 39,
+                            Name = "dismissDate",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 40,
+                            Name = "divisionNumber",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 41,
+                            Name = "percent",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 42,
+                            Name = "increasePercent",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 43,
+                            Name = "serviceDateFrom",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 44,
+                            Name = "serviceDateTo",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 45,
+                            Name = "commanderRank",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 46,
+                            Name = "commanderLastName",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 47,
+                            Name = "commanderFirstName",
+                            TemplateId = 3
+                        },
+                        new
+                        {
+                            Id = 48,
+                            Name = "commanderSecondName",
+                            TemplateId = 3
+                        });
+                });
+
             modelBuilder.Entity("MilitaryManager.Core.Entities.UnitEntity.Unit", b =>
                 {
                     b.Property<int>("Id")
@@ -1239,6 +1577,21 @@ namespace MilitaryManager.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MilitaryManager.Core.Entities.DecreeDataEntity.DecreeData", b =>
+                {
+                    b.HasOne("MilitaryManager.Core.Entities.DecreeEntity.Decree", "Decree")
+                        .WithMany("DecreeDatas")
+                        .HasForeignKey("DecreeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MilitaryManager.Core.Entities.TemplatePlaceholderEntity.TemplatePlaceholder", "TemplatePlaceholder")
+                        .WithMany("DecreeDatas")
+                        .HasForeignKey("TemplatePlaceholderId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("MilitaryManager.Core.Entities.DecreeEntity.Decree", b =>
                 {
                     b.HasOne("MilitaryManager.Core.Entities.StatusEntity.Status", "Status")
@@ -1343,6 +1696,15 @@ namespace MilitaryManager.Infrastructure.Migrations
                         .WithMany("OldStatuses")
                         .HasForeignKey("OldStatusId")
                         .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MilitaryManager.Core.Entities.TemplatePlaceholderEntity.TemplatePlaceholder", b =>
+                {
+                    b.HasOne("MilitaryManager.Core.Entities.TemplateEntity.Template", "Template")
+                        .WithMany("TemplatePlaceholders")
+                        .HasForeignKey("TemplateId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 

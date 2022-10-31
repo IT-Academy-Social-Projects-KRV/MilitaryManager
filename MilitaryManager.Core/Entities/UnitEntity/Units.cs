@@ -57,5 +57,12 @@ namespace MilitaryManager.Core.Entities.UnitEntity
                     .Where(x => x.Id == id);
             }
         }
+        internal class UnitByFirstLastSecondNames : Specification<Unit>
+        {
+            public UnitByFirstLastSecondNames(string firstName, string lastName, string secondName)
+            {
+                Query.Where(x => x.FirstName == firstName && x.LastName == lastName && x.SecondName == secondName);
+            }
+        }
     }
 }
