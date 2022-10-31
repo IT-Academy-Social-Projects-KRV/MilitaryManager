@@ -13,6 +13,7 @@ import { SubUnitCommanderGuard } from './guards/SubUnitCommanderGuard'
 import { ProfileComponent } from "./components/profile/profile/profile.component";
 import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
 import {LogComponent} from "./components/log/log.component";
+import { CommandersGuard } from './guards/CommandersGuard';
 
 const routes: Routes = [
     {path:'', component:AppLayoutComponent,
@@ -27,7 +28,7 @@ const routes: Routes = [
     { path: 'logs', component: LogComponent },
     { path: 'units', loadChildren: () => import("./modules/units-module/units.module").then(m => m.UnitsModule) },
     { path: 'divisions', loadChildren: () => import("./modules/division-module/division.module").then(m => m.DivisionModule) },
-    { path: 'equipment', loadChildren: () => import("./modules/equipment/equipment.module").then(m => m.EquipmentModule) },
+    { path: 'equipment', loadChildren: () => import("./modules/equipment/equipment.module").then(m => m.EquipmentModule), canActivate: [CommandersGuard] },
     { path: 'SignInCallback', component: SigninRedirectCallbackComponent },
     { path: 'SignOutCallback', component: SignoutRedirectCallbackComponent },
     { path: 'profile', component: ProfileComponent },
@@ -38,6 +39,6 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule],
-    providers: [AdminGuard, UnitCommanderGuard, SubUnitCommanderGuard]
+    providers: [AdminGuard, UnitCommanderGuard, SubUnitCommanderGuard, CommandersGuard]
 })
 export class AppRoutingModule { }

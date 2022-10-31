@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MilitaryManager.Core.DTO.Entities;
-using MilitaryManager.Core.DTO.Units;
 using MilitaryManager.Core.Entities.EntityEntity;
 using MilitaryManager.Core.Entities.EntityToAttributeEntity;
 using MilitaryManager.Core.Entities.EquipmentToUnitEntity;
@@ -33,15 +32,14 @@ namespace MilitaryManager.Core.Services
             var newEntity = await _entityRepository.AddAsync(entity);
             await _entityRepository.SaveChangesAcync();
 
-            var unitToEquip = new UnitToEquipmentRequestDTO { 
+            var unitToEquip = new UnitToEquipment{ 
                 Id = newEntity.Id,
                 DivisionId = dto.Division.Id,
                 GivenById = dto.Warehouseman?.Id,
                 GivenDate = dto.GivenDate,
                 UnitId = dto.Unit?.Id };
 
-            var mapunitToEquip = _mapper.Map<UnitToEquipment>(unitToEquip);
-            await _unitToEquipmentRepository.AddAsync(mapunitToEquip);
+            await _unitToEquipmentRepository.AddAsync(unitToEquip);
             await _unitToEquipmentRepository.SaveChangesAcync();
 
             return _mapper.Map<EntityRequestDTO>(newEntity);
