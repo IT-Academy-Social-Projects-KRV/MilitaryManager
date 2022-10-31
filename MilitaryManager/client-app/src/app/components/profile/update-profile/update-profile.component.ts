@@ -2,18 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {PositionModel} from "../../../shared/models/position.model";
 import {AttributeModel} from "../../../shared/models/attribute.model";
 import {RankModel} from "../../../shared/models/rank.model";
-import {UnitUserService} from "../../../shared/services/api/unit-user.service";
-import {PositionService} from "../../../shared/services/api/position.service";
-import {RankService} from "../../../shared/services/api/rank.service";
-import {AttributeService} from "../../../shared/services/api/attribute.service";
 import {Router} from "@angular/router";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../../shared/services/auth.service";
-import {UnitsService} from "../../../shared/services/api/unit.service";
 import {UnitModel} from "../../../shared/models/unit.model";
 import {ProfileModel} from "../../../shared/models/profile.model";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MessageService} from "primeng/api";
+import {ApiService} from "../../../shared/services/api/api.service";
 
 export enum AttributesName
 {
@@ -86,34 +81,28 @@ export class UpdateProfileComponent implements OnInit {
     Height: ['', [Validators.required, this.heightValueValidator]]
   })
 
-  constructor(private _unitUserService : UnitUserService,
-              private _rankService: RankService,
-              private _attributeService: AttributeService,
-              private _positionService: PositionService,
+  constructor(
               private _router: Router,
               private _formBuilder: FormBuilder,
-              private _authService: AuthService,
-              private _unitService: UnitsService,
-              private _messageService: MessageService) { }
+              private _messageService: MessageService,
+              private _apiService: ApiService) { }
 
   ngOnInit(): void {
-    this._positionService.collection.getAll().subscribe(pos => {this.pos = pos});
-    this._rankService.collection.getAll().subscribe(ranks => {this.ranks = ranks});
-    this._attributeService.collection.getAll().subscribe((attributes)=>
-    {
+    this._apiService.positions.collection.getAll().subscribe(pos => {this.pos = pos})
+    this._apiService.ranks.collection.getAll().subscribe(ranks => {this.ranks = ranks})
+    this._apiService.attributes.collection.getAll().subscribe(attributes => {
       this.attributes = attributes
-      this._attributeService.GetAttributeValues(this.attributes.filter(x=>x.name?.includes("Група крові"))[0].id).subscribe((blood_types) => {this.blood_types = blood_types});
-      this._attributeService.GetAttributeValues(this.attributes.filter(x=>x.name?.includes("Тип форми"))[0].id).subscribe((uniforms) => {this.uniforms = uniforms});
-    });
+      this._apiService.attributes.GetAttributeValues(this.attributes.filter(x=>x.name?.includes("Група крові"))[0].id).subscribe((blood_types) => {this.blood_types = blood_types});
+      this._apiService.attributes.GetAttributeValues(this.attributes.filter(x=>x.name?.includes("Тип форми"))[0].id).subscribe((uniforms) => {this.uniforms = uniforms});
+    })
 
-    const userId = this._authService.getUserId();
+    const userId = this._apiService.auth.getUserId();
     userId.then((value) => {
-      this._unitUserService.GetUnitUser(value)
+      this._apiService.unitUser.GetUnitUser(value)
         .subscribe(result => {
-          this._unitService.single.getById(result["id"])
+          this._apiService.units.single.getById(result["id"])
             .subscribe(result => {
               this.unitModel = result;
-              console.log(result)
               this.updateProfileForm.get("LastName").setValue(this.unitModel.lastName)
               this.updateProfileForm.get("FirstName").setValue(this.unitModel.firstName)
               this.updateProfileForm.get("SecondName").setValue(this.unitModel.secondName)
@@ -160,7 +149,7 @@ export class UpdateProfileComponent implements OnInit {
         this.attributes.find(x => x.name==this.unitModel.profiles[i].name)?.id, this.unitModel.id,
         this.updateProfileForm.get(AttributesName[i])?.value, null));
     }
-    this._unitService.single.update(updatedUnit).subscribe(
+    this._apiService.units.single.update(updatedUnit).subscribe(
       data => {
         this._messageService.add({ severity: 'success', summary: 'Дані оновлено!'});
         setTimeout(() => {this._router.navigate(['/profile'], { replaceUrl: true })}, 2000);
