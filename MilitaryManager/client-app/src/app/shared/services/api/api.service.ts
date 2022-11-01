@@ -24,7 +24,7 @@ export class ApiService {
         public ranks: RankService,
         public positions: PositionService,
         public auth: AuthService,
-        public attributes: AttributeService
+        public attributes: AttributeService,
         public unitsInfoService: UnitsInfoService,
         public divisionService: DivisionsService,
     ) {
