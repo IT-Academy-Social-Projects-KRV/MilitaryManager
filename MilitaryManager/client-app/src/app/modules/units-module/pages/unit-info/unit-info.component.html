@@ -31,8 +31,6 @@
               </span>
             </div>
 
-
-
             <!--         division-->
             <div class="p-mt-5">
               <span class="p-float-label ">
@@ -65,7 +63,7 @@
             </span>
             </div>
             <div class="p-mt-5">
-              <button pButton type="button" label="Редагувати солдата" *ngIf="isReadonly" class="p-button-outlined" (click)="edit(unit)"></button>
+              <button pButton type="button" label="Редагувати солдата" *ngIf="isReadonly" class="p-button-outlined" (click)="edit()"></button>
               <button pButton type="button" label="Зберегти" *ngIf="!isReadonly" class="p-button-raised" icon="pi pi-check" (click)="save()"></button>
             </div>
           </div>
@@ -75,18 +73,18 @@
     <p-tabPanel header="Мед картка">
       <div class="content-section implementation p-d-flex">
         <div class="card">
-          <p>Додаткова інформація про бійця</p>
-          <hr>
-
-          <div class="p-float-label" *ngFor="let profile of testArr">
-            <span>{{profile.name}}: </span>
-            <div>
-              <input type="text" pInputText [(ngModel)]="profile.value" readonly>
+            <p>Додаткова інформація про бійця</p>
+            <hr>
+  
+            <div class="p-float-label" *ngFor="let profile of testArr">
+              <span>{{profile.name}}: </span>
+              <div>
+                <input type="text" pInputText [(ngModel)]="profile.value" [readonly]="isReadonly">
+              </div>
             </div>
-            <br>
-          </div>
 
-
+            <button pButton type="button" label="Редагувати" *ngIf="isReadonly" class="p-button-outlined" (click)="edit()"></button>
+            <button pButton type="button" label="Зберегти" *ngIf="!isReadonly" class="p-button-raised" icon="pi pi-check" (click)="save()"></button>
         </div>
       </div>
     </p-tabPanel>

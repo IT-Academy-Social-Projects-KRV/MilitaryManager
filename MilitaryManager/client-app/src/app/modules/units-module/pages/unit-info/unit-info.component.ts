@@ -9,11 +9,12 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MessageService } from 'primeng/api';
 import { AttributeModel } from 'src/app/shared/models/attribute.model';
 import { ApiService } from 'src/app/shared/services/api/api.service';
+import { ProfileModel } from 'src/app/shared/models/profile.model';
 
 
 type testObject = {
-  name: String,
-  value: String
+  name: string | any,
+  value: string
 }
 
 @Component({
@@ -35,7 +36,6 @@ export class UnitInfoComponent implements OnInit, OnChanges {
   testArr: testObject[] = [];
 
   isReadonly: boolean = true;
-  clonedUnit: { [s: string]: UnitModel; } = {};
   attributes: AttributeModel[] = [];
 
   personalInfoForm: FormGroup = this._formBuilder.group({
@@ -48,8 +48,7 @@ export class UnitInfoComponent implements OnInit, OnChanges {
     ParentName: ['', Validators.required]
   })
 
-  medCardForm: FormGroup = this._formBuilder.group({
-  })
+  medCardForm: FormGroup = this._formBuilder.group({ })
 
   constructor(private unitsService: UnitsService, private _formBuilder: FormBuilder, private messageService: MessageService, private _apiService: ApiService) {
   }
@@ -68,11 +67,15 @@ export class UnitInfoComponent implements OnInit, OnChanges {
     this.unitsService.single.getById(this.idChild1)
       .subscribe((u) => {
         this.unit = u;
+        
+        this.medCardForm = this._formBuilder.group({ })
 
         this.unit.profiles.forEach((profile) =>{
           this.medCardForm.addControl(profile.name, new FormControl(profile.value));
-        })
+        }) 
         
+        this.testArr=[]
+
         for(let key of Object.keys(this.medCardForm.value)){
           this.testArr.push({
             name:key,
@@ -105,12 +108,16 @@ export class UnitInfoComponent implements OnInit, OnChanges {
       });
   }
 
-  edit(unit: UnitModel){
+  edit(){
     this.isReadonly = false;
-    let editUnit: UnitModel = this.personalInfoForm.value;
-    this.clonedUnit[unit.id] = editUnit;
   }
-  save() {
+
+  save(){
+    this.savePersonalInfo();
+    this.saveMedCard();
+  }
+
+  savePersonalInfo() {
     this.isReadonly = true;
     this.unit.firstName = this.personalInfoForm.get("FirstName").value;
     this.unit.lastName = this.personalInfoForm.get("LastName").value;
@@ -118,6 +125,20 @@ export class UnitInfoComponent implements OnInit, OnChanges {
     for(let i = 0; i < this.unit.profiles.length; i++) {
       this.unit.profiles[i].unitId = this.unit._id;
       this.unit.profiles[i].attributeId = this.attributes.find(x => x.name==this.unit.profiles[i].name)?.id
+    }
+    this.unitsService.single.update(this.unit).subscribe(
+      () =>  this.messageService.add({ severity: 'success', summary: 'Солдата відредаговано' }),
+      () => this.messageService.add({ severity: 'error', summary: 'Виникла помилка!'})
+    );
+  }
+
+  saveMedCard() {
+    this.isReadonly = true;
+    
+    for(let i = 0; i < this.unit.profiles.length; i++) {
+      this.unit.profiles[i] = new ProfileModel(this.unit.profiles[i].id,
+        this.attributes.find(x => x.name==this.unit.profiles[i].name)?.id, this.unit.id,
+        this.testArr[i].value, null, this.testArr[i].name)
     }
     this.unitsService.single.update(this.unit).subscribe(
       () =>  this.messageService.add({ severity: 'success', summary: 'Солдата відредаговано' }),
