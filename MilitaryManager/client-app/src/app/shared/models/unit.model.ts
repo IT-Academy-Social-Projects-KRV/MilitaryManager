@@ -7,6 +7,7 @@ import {PositionModel} from "./position.model";
 
 export class UnitModel extends BaseModel {
 
+
   constructor(
     Id: number | null = null,
     public lastName: string | null = null,

@@ -12,6 +12,7 @@ import { UnitCommanderGuard } from './guards/UnitCommanderGuard'
 import { SubUnitCommanderGuard } from './guards/SubUnitCommanderGuard'
 import { ProfileComponent } from "./components/profile/profile/profile.component";
 import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
+import {UpdateProfileComponent} from "./components/profile/update-profile/update-profile.component";
 import {LogComponent} from "./components/log/log.component";
 import { CommandersGuard } from './guards/CommandersGuard';
 
@@ -32,6 +33,7 @@ const routes: Routes = [
     { path: 'SignInCallback', component: SigninRedirectCallbackComponent },
     { path: 'SignOutCallback', component: SignoutRedirectCallbackComponent },
     { path: 'profile', component: ProfileComponent },
+    { path: 'updateProfile', component: UpdateProfileComponent },
     { path: 'attachments', loadChildren: () => import("./modules/attachments-module/attachments.module").then(m => m.AttachmentsModule) },
     { path: '**', redirectTo: 'home' }
   ]}

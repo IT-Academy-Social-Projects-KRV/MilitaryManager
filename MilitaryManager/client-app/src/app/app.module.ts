@@ -16,10 +16,12 @@ import { AddCommanderComponent } from './components/add-commander/add-commander.
 import {ProfileComponent} from "./components/profile/profile/profile.component";
 import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UpdateProfileComponent } from './components/profile/update-profile/update-profile.component';
 import { LogComponent } from "./components/log/log.component";
 import { TableModule } from 'primeng/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TabViewModule } from 'primeng/tabview';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { TabViewModule } from 'primeng/tabview';
     HomeComponent,
     AddCommanderComponent,
     ProfileComponent,
-    FinishRegistrationComponent
+    FinishRegistrationComponent,
+    UpdateProfileComponent
   ],
   imports: [
     BrowserModule,
