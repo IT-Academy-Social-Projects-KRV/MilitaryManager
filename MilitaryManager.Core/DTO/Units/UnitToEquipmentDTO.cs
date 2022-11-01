@@ -8,6 +8,7 @@ using MilitaryManager.Core.Entities.UnitEntity;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using MilitaryManager.Core.DTO.Attributes;
 
 namespace MilitaryManager.Core.DTO.Units
 {
@@ -34,5 +35,7 @@ namespace MilitaryManager.Core.DTO.Units
         public string Name { get; set; }
         public string Value { get; set; }
         public DateTime? GivenDate { get; set; }
+
+        public List<AttributeWithValueDTO> NameValue { get; set; }
     }
 }

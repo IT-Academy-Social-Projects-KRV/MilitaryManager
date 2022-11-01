@@ -26,6 +26,7 @@ export class UnitModel extends BaseModel {
     public unitToEquipments: UnitToEquipmentModel[] | null = null,
     public entities: EntityModel[] | null = null
 
+
   ) {
     super(Id);
   }

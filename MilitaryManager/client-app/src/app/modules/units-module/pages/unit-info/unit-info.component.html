@@ -18,24 +18,23 @@
 
           <div class="p-mt-5">
           <span class="p-float-label">
-            <input type="text" pInputText id="firstNameInput" [(ngModel)]="unit.firstName"  [readonly]="readonly">
+            <input type="text" pInputText id="firstNameInput" [(ngModel)]="unit.firstName" [readonly]="readonly">
             <label for="firstNameInput">Ім'я</label>
           </span>
           </div>
 
           <div class="p-mt-5">
             <span class="p-float-label ">
-              <input type="text" pInputText id="middleNameInput" [(ngModel)]="unit.secondName"  [readonly]="readonly">
+              <input type="text" pInputText id="middleNameInput" [(ngModel)]="unit.secondName" [readonly]="readonly">
               <label for="middleNameInput">По батькові</label>
             </span>
           </div>
 
 
-
           <!--         division-->
           <div class="p-mt-5">
             <span class="p-float-label ">
-            <input type="text" pInputText id="divisionInput" [(ngModel)]="divisionName"  [readonly]="readonly">
+            <input type="text" pInputText id="divisionInput" [(ngModel)]="divisionName" [readonly]="readonly">
             <label for="divisionInput">Підрозділ</label>
             </span>
           </div>
@@ -43,7 +42,7 @@
           <!--        commander-->
           <div class="p-mt-5">
             <span class="p-float-label ">
-            <input type="text" pInputText id="parentInput" [(ngModel)]="parentFullName"  [readonly]="readonly">
+            <input type="text" pInputText id="parentInput" [(ngModel)]="parentFullName" [readonly]="readonly">
             <label for="parentInput">Командир</label>
             </span>
           </div>
@@ -51,7 +50,7 @@
           <!--       rank-->
           <div class="p-mt-5">
             <span class="p-float-label ">
-            <input type="text" pInputText id="rankInput" [(ngModel)]="unit.rank"  [readonly]="readonly">
+            <input type="text" pInputText id="rankInput" [(ngModel)]="unit.rank" [readonly]="readonly">
             <label for="rankInput">Ранг</label>
             </span>
           </div>
@@ -59,7 +58,7 @@
           <!--       position-->
           <div class="p-mt-5">
             <span class="p-float-label ">
-            <input type="text" pInputText id="positionInput" [(ngModel)]="unit.position"  [readonly]="readonly">
+            <input type="text" pInputText id="positionInput" [(ngModel)]="unit.position" [readonly]="readonly">
             <label for="positionInput">Позиція</label>
           </span>
           </div>
@@ -78,7 +77,7 @@
             <span>{{profile.name}}: </span>
             <!--          <span>{{profile.value}}</span>-->
             <div>
-              <input type="text" pInputText [(ngModel)]="profile.value"  [readonly]="readonly">
+              <input type="text" pInputText [(ngModel)]="profile.value" [readonly]="readonly">
             </div>
             <br>
           </div>
@@ -93,10 +92,21 @@
         <div class="card">
           <p>Обладнання бійця</p>
           <hr>
-          <div class="p-float-label">
-            <input type="text" pInputText value="Обладнання1" readonly>
-            <label for="lastNameInput">Обладнання1</label>
-          </div>
+          <p-table [value]="" [paginator]="true" [rows]="10"
+                   [showCurrentPageReport]="true" responsiveLayout="scroll"
+                   currentPageReportTemplate="Показати з {first} по {last} із {totalRecords}
+    записів" [rowsPerPageOptions]="[10,25,50]" dataKey="id">
+            <ng-template pTemplate="header">
+              <tr>
+                <th style="width: 3rem"></th>
+                <th>ІД</th>
+                <th>Сутність</th>
+                <th>ІД сутності</th>
+                <th>Код дії</th>
+                <th>Дата</th>
+              </tr>
+            </ng-template>
+          </p-table>
           <hr>
 
         </div>

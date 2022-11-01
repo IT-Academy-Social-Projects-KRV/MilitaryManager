@@ -21,4 +21,5 @@ namespace MilitaryManager.Core.DTO.Attributes
         public string Name { get; set; }
         public string Value { get; set; }
     }
+    //List<AttributeWithValueDTO>
 }
