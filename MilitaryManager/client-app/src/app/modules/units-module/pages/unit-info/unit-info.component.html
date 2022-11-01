@@ -62,9 +62,11 @@
             <input type="text" pInputText id="positionInput" [(ngModel)]="unit.position" readonly>
             <label for="positionInput">Позиція</label>
           </span>
+          </div>          
+          
+          <div *ngIf="unit.id!" class="p-mt-5">
+            <p-button [routerLink]="['/decree/new', { unitId: unit.id }]" type="button" label="Створити наказ" icon="pi pi-plus"></p-button>
           </div>
-
-
         </div>
       </div>
     </p-tabPanel>

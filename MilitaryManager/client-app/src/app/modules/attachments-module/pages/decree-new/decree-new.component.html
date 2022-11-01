@@ -1,6 +1,12 @@
 <p-tabView [controlClose]="true" (onClose)="handleClose($event)" [(activeIndex)]="currentTab">    
     <p-tabPanel header="Шаблони" leftIcon="pi pi-file">
-        <div class="p-d-flex p-flex-row-reverse template-header">
+        <div class="p-d-flex p-jc-between template-header p-pb-3">
+            <div>                
+                <span *ngIf="selectedUnit!" class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                    <input type="text" pInputText placeholder="Боєць" value="{{selectedUnit?.lastName + ' ' + selectedUnit?.firstName + ' ' + selectedUnit?.secondName}}" [readonly]="true">         
+                </span>
+            </div>
             <span class="p-input-icon-left">
                 <i class="pi pi-search"></i>
                 <input pInputText type="text" placeholder="Назва" />
