@@ -93,39 +93,42 @@
           <div class="p-d-flex p-flex-row-reverse template-header m-2">
             <span class="p-input-icon-left">
                 <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Назва" />
+                <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Назва"/>
             </span>
-        </div>
-        <p-table #dt [value]="equipment" [scrollable]="true" [globalFilterFields]="['regNum']" scrollHeight="50vh">
+          </div>
+
+          <p-table #dt [value]="equipment" [scrollable]="true" [globalFilterFields]="['regNum']" scrollHeight="50vh">
             <ng-template pTemplate="header">
-                <tr>
-                    <th *ngFor="let col of cols" [ngStyle]="{'width': col.width}">
-                        {{col.header}}
-                    </th>
-                </tr>
+              <tr>
+                <th *ngFor="let col of cols" [ngStyle]="{'width': col.width}">
+                  {{col.header}}
+                </th>
+              </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-entity>
-                <tr>
-                    <td>
-                        {{entity.RegNum== null? '': entity.RegNum}}
-                    </td>
-                    <td>
-                        {{entity.GivenByName== null? '': entity.GivenByName}}
-                    </td>
-                    <td>
-                        {{entity.DivisionName == null? '': entity.DivisionName}}
-                    </td>
-                    <td>
-                        {{entity.GivenDate==null?'':entity.GivenDate| date : 'dd.MM.yyyy HH:mm'}}
-                    </td>
-                </tr>
+
+            <ng-template pTemplate="body" let-element>
+              <tr>
+                <td>
+                  {{element.regNum}}
+                </td>
+                <td>
+                  {{element.givenByName}}
+                </td>
+                <td>
+                  {{element.divisionName}}
+                </td>
+                <td>
+                  {{element.givenDate| date : 'dd.MM.yyyy HH:mm'}}
+                </td>
+              </tr>
             </ng-template>
+
             <ng-template pTemplate="emptymessage">
-                <tr>
-                    <td colspan="5">Амуніції не знайдено.</td>
-                </tr>
+              <tr>
+                <td colspan="5">Амуніції не знайдено.</td>
+              </tr>
             </ng-template>
-        </p-table>
+          </p-table>
 
         </div>
       </div>
