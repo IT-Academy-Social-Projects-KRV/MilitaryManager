@@ -9,7 +9,7 @@ import {ProfileModel} from "../../../shared/models/profile.model";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MessageService} from "primeng/api";
 import {ApiService} from "../../../shared/services/api/api.service";
-import {updateProfile} from "../../../validators/updateProfile";
+import {ProfileValidators} from "../../../validators/updateProfile";
 
 export enum AttributesName
 {
@@ -43,21 +43,20 @@ export class UpdateProfileComponent implements OnInit {
     SecondName: ['', Validators.required],
     Rank: ['', Validators.required],
     Position: ['', Validators.required],
-    FootSize: ['', [Validators.required, this._validator.footSizeValueValidator]],
-    HeadSize: ['', [Validators.required, this._validator.headSizeValueValidator]],
-    GasMaskSize: ['', [Validators.required, this._validator.gasMaskSizeValueValidator]],
+    FootSize: ['', [Validators.required, ProfileValidators.footSizeValueValidator]],
+    HeadSize: ['', [Validators.required, ProfileValidators.headSizeValueValidator]],
+    GasMaskSize: ['', [Validators.required, ProfileValidators.gasMaskSizeValueValidator]],
     Uniform: ['', Validators.required],
     BloodType: ['', Validators.required],
-    Weight: ['', [Validators.required, this._validator.weightValueValidator]],
-    Height: ['', [Validators.required, this._validator.heightValueValidator]]
+    Weight: ['', [Validators.required, ProfileValidators.weightValueValidator]],
+    Height: ['', [Validators.required, ProfileValidators.heightValueValidator]]
   })
 
   constructor(
               private _router: Router,
               private _formBuilder: FormBuilder,
               private _messageService: MessageService,
-              private _apiService: ApiService,
-              private _validator: updateProfile) { }
+              private _apiService: ApiService) { }
 
   ngOnInit(): void {
     this._apiService.positions.collection.getAll().subscribe(pos => {this.pos = pos})
