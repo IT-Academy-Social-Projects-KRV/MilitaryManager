@@ -104,29 +104,11 @@ export class UnitInfoComponent implements OnInit, OnChanges {
     this.isReadonly = false;
   }
 
-  save(){
-    this.savePersonalInfo();
-    this.saveMedCard();
-  }
-
-  savePersonalInfo() {
+  save() {
     this.isReadonly = true;
     this.unit.firstName = this.personalInfoForm.get("FirstName").value;
     this.unit.lastName = this.personalInfoForm.get("LastName").value;
     this.unit.secondName = this.personalInfoForm.get("SecondName").value;
-    for(let i = 0; i < this.unit.profiles.length; i++) {
-      this.unit.profiles[i].unitId = this.unit._id;
-      this.unit.profiles[i].attributeId = this.attributes.find(x => x.name==this.unit.profiles[i].name)?.id
-    }
-    this.unitsService.single.update(this.unit).subscribe(
-      () =>  this.messageService.add({ severity: 'success', summary: 'Солдата відредаговано' }),
-      () => this.messageService.add({ severity: 'error', summary: 'Виникла помилка!'})
-    );
-  }
-
-  saveMedCard() {
-    this.isReadonly = true;
-    
     for(let i = 0; i < this.unit.profiles.length; i++) {
       this.unit.profiles[i] = new ProfileModel(this.unit.profiles[i].id,
         this.attributes.find(x => x.name==this.unit.profiles[i].name)?.id, this.unit.id,

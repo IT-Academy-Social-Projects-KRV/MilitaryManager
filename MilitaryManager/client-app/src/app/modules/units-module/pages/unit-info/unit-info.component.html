@@ -76,15 +76,21 @@
             <p>Додаткова інформація про бійця</p>
             <hr>
   
-            <div class="p-float-label" *ngFor="let profile of testArr">
-              <span>{{profile.name}}: </span>
+            <div class="p-float-label p-mt-5" *ngFor="let profile of testArr">
+              <span class="p-float-label">
+                <input type="text" id="profileName" pInputText [(ngModel)]="profile.value" [readonly]="isReadonly">
+                <label for="profileName">{{profile.name}}</label>
+              </span>
               <div>
-                <input type="text" pInputText [(ngModel)]="profile.value" [readonly]="isReadonly">
+
               </div>
             </div>
 
-            <button pButton type="button" label="Редагувати" *ngIf="isReadonly" class="p-button-outlined" (click)="edit()"></button>
-            <button pButton type="button" label="Зберегти" *ngIf="!isReadonly" class="p-button-raised" icon="pi pi-check" (click)="save()"></button>
+            <div class="p-mt-5">
+              <button pButton type="button" label="Редагувати" *ngIf="isReadonly" class="p-button-outlined" (click)="edit()"></button>
+              <button pButton type="button" label="Зберегти" *ngIf="!isReadonly" class="p-button-raised" icon="pi pi-check" (click)="save()"></button>
+            </div>
+            
         </div>
       </div>
     </p-tabPanel>
