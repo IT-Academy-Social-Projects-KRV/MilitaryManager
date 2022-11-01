@@ -48,8 +48,6 @@ export class UnitInfoComponent implements OnInit, OnChanges {
     ParentName: ['', Validators.required]
   })
 
-  medCardForm: FormGroup = this._formBuilder.group({ })
-
   constructor(private unitsService: UnitsService, private _formBuilder: FormBuilder, private messageService: MessageService, private _apiService: ApiService) {
   }
 
@@ -67,21 +65,15 @@ export class UnitInfoComponent implements OnInit, OnChanges {
     this.unitsService.single.getById(this.idChild1)
       .subscribe((u) => {
         this.unit = u;
-        
-        this.medCardForm = this._formBuilder.group({ })
 
-        this.unit.profiles.forEach((profile) =>{
-          this.medCardForm.addControl(profile.name, new FormControl(profile.value));
-        }) 
-        
         this.testArr=[]
 
-        for(let key of Object.keys(this.medCardForm.value)){
+        this.unit.profiles.forEach((profile) =>{
           this.testArr.push({
-            name:key,
-            value:this.medCardForm.value[key]
+            name:profile.name,
+            value:profile.value
           })
-        }
+        }) 
 
         if (this.unit.parent != null) {
           this.parentFullName = `${this.unit.parent.lastName} ${this.unit.parent.firstName} ${this.unit.parent.secondName}`;
