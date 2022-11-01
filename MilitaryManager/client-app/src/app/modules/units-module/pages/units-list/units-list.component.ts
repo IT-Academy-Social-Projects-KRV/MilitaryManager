@@ -57,7 +57,6 @@ export class UnitsListComponent implements OnInit {
   nodeSelect(event: any) {
     if (event.node) {
       this.idInUnitList = event.node.id;
-      console.log(this.idInUnitList);
       this.outputIdChangedInUnitListComponent.emit(this.idInUnitList);
     }
   }
