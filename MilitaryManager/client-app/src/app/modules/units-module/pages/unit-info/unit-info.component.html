@@ -61,6 +61,11 @@
                 <label for="positionInput">Позиція</label>
               </span>
             </div>
+
+            <div *ngIf="unit.id!" class="p-mt-5">
+              <p-button [routerLink]="['/decree/new', { unitId: unit.id }]" type="button" label="Створити наказ" icon="pi pi-plus"></p-button>
+            </div>
+
             <div class="p-mt-5">
               <button pButton type="button" label="Редагувати солдата" *ngIf="isReadonly" class="p-button-outlined" (click)="edit()"></button>
               <button pButton type="button" label="Зберегти" *ngIf="!isReadonly" class="p-button-raised" icon="pi pi-check" (click)="save()"></button>
@@ -85,10 +90,6 @@
             <div class="p-mt-5">
               <button pButton type="button" label="Редагувати" *ngIf="isReadonly" class="p-button-outlined" (click)="edit()"></button>
               <button pButton type="button" label="Зберегти" *ngIf="!isReadonly" class="p-button-raised" icon="pi pi-check" (click)="save()"></button>
-            </div>
-
-            <div *ngIf="unit.id!" class="p-mt-5">
-              <p-button [routerLink]="['/decree/new', { unitId: unit.id }]" type="button" label="Створити наказ" icon="pi pi-plus"></p-button>
             </div>
         </div>
       </div>
