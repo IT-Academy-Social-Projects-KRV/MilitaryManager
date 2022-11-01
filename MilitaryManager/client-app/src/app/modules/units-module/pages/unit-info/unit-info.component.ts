@@ -12,7 +12,7 @@ import { ApiService } from 'src/app/shared/services/api/api.service';
 import { ProfileModel } from 'src/app/shared/models/profile.model';
 
 
-type testObject = {
+type Attribute = {
   name: string | any,
   value: string
 }
@@ -32,8 +32,7 @@ export class UnitInfoComponent implements OnInit, OnChanges {
   parentFullName: string = "";
   divisionName: string = "";
 
-  
-  testArr: testObject[] = [];
+  personalFile: Attribute[] = [];
 
   isReadonly: boolean = true;
   attributes: AttributeModel[] = [];
@@ -48,12 +47,15 @@ export class UnitInfoComponent implements OnInit, OnChanges {
     ParentName: ['', Validators.required]
   })
 
-  constructor(private unitsService: UnitsService, private _formBuilder: FormBuilder, private messageService: MessageService, private _apiService: ApiService) {
+  constructor(private unitsService: UnitsService,
+              private _formBuilder: FormBuilder,
+              private messageService: MessageService,
+              private _apiService: ApiService) {
   }
 
   ngOnInit(): void {
     this._apiService.attributes.collection.getAll().subscribe(attributes => {
-      this.attributes = attributes
+      this.attributes = attributes;
     })
   }
 
@@ -66,10 +68,10 @@ export class UnitInfoComponent implements OnInit, OnChanges {
       .subscribe((u) => {
         this.unit = u;
 
-        this.testArr=[]
+        this.personalFile=[]
 
         this.unit.profiles.forEach((profile) =>{
-          this.testArr.push({
+          this.personalFile.push({
             name:profile.name,
             value:profile.value
           })
@@ -112,7 +114,7 @@ export class UnitInfoComponent implements OnInit, OnChanges {
     for(let i = 0; i < this.unit.profiles.length; i++) {
       this.unit.profiles[i] = new ProfileModel(this.unit.profiles[i].id,
         this.attributes.find(x => x.name==this.unit.profiles[i].name)?.id, this.unit.id,
-        this.testArr[i].value, null, this.testArr[i].name)
+        this.personalFile[i].value, null, this.personalFile[i].name)
     }
     this.unitsService.single.update(this.unit).subscribe(
       () =>  this.messageService.add({ severity: 'success', summary: 'Солдата відредаговано' }),

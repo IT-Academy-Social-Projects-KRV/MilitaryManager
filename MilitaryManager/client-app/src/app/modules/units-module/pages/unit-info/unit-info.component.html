@@ -5,23 +5,22 @@
       <div class="content-section implementation p-d-flex">
         <form [formGroup]="personalInfoForm">
           <div class="card">
-
             <p>Інформація про бійця</p>
             <hr>
 
             <!--  pib-->
             <div class="p-mt-5">
-            <span class="p-float-label">
-              <input type="text" pInputText id="lastNameInput" formControlName="LastName" [readonly]="isReadonly">
-              <label for="lastNameInput">Прізвище</label>
-            </span>
+              <span class="p-float-label">
+                <input type="text" pInputText id="lastNameInput" formControlName="LastName" [readonly]="isReadonly">
+                <label for="lastNameInput">Прізвище</label>
+              </span>
             </div>
 
             <div class="p-mt-5">
-            <span class="p-float-label">
-              <input type="text" pInputText id="firstNameInput" formControlName="FirstName" [readonly]="isReadonly">
-              <label for="firstNameInput">Ім'я</label>
-            </span>
+              <span class="p-float-label">
+                <input type="text" pInputText id="firstNameInput" formControlName="FirstName" [readonly]="isReadonly">
+                <label for="firstNameInput">Ім'я</label>
+              </span>
             </div>
 
             <div class="p-mt-5">
@@ -34,33 +33,33 @@
             <!--         division-->
             <div class="p-mt-5">
               <span class="p-float-label ">
-              <input type="text" pInputText id="divisionInput" formControlName="Division" readonly>
-              <label for="divisionInput">Підрозділ</label>
+                <input type="text" pInputText id="divisionInput" formControlName="Division" readonly>
+                <label for="divisionInput">Підрозділ</label>
               </span>
             </div>
 
             <!--        commander-->
             <div class="p-mt-5">
               <span class="p-float-label ">
-              <input type="text" pInputText id="parentInput" formControlName="ParentName" readonly>
-              <label for="parentInput">Командир</label>
+                <input type="text" pInputText id="parentInput" formControlName="ParentName" readonly>
+                <label for="parentInput">Командир</label>
               </span>
             </div>
 
             <!--       rank-->
             <div class="p-mt-5">
               <span class="p-float-label ">
-              <input type="text" pInputText id="rankInput" formControlName="Rank" readonly>
-              <label for="rankInput">Ранг</label>
+                <input type="text" pInputText id="rankInput" formControlName="Rank" readonly>
+                <label for="rankInput">Ранг</label>
               </span>
             </div>
 
             <!--       position-->
             <div class="p-mt-5">
               <span class="p-float-label ">
-              <input type="text" pInputText id="positionInput" formControlName="Position" readonly>
-              <label for="positionInput">Позиція</label>
-            </span>
+                <input type="text" pInputText id="positionInput" formControlName="Position" readonly>
+                <label for="positionInput">Позиція</label>
+              </span>
             </div>
             <div class="p-mt-5">
               <button pButton type="button" label="Редагувати солдата" *ngIf="isReadonly" class="p-button-outlined" (click)="edit()"></button>
@@ -70,27 +69,23 @@
         </form>
       </div>
     </p-tabPanel>
-    <p-tabPanel header="Мед картка">
+    <p-tabPanel header="Особова справа">
       <div class="content-section implementation p-d-flex">
         <div class="card">
             <p>Додаткова інформація про бійця</p>
             <hr>
   
-            <div class="p-float-label p-mt-5" *ngFor="let profile of testArr">
+            <div class="p-float-label p-mt-5" *ngFor="let profile of personalFile">
               <span class="p-float-label">
                 <input type="text" id="profileName" pInputText [(ngModel)]="profile.value" [readonly]="isReadonly">
                 <label for="profileName">{{profile.name}}</label>
               </span>
-              <div>
-
-              </div>
             </div>
 
             <div class="p-mt-5">
               <button pButton type="button" label="Редагувати" *ngIf="isReadonly" class="p-button-outlined" (click)="edit()"></button>
               <button pButton type="button" label="Зберегти" *ngIf="!isReadonly" class="p-button-raised" icon="pi pi-check" (click)="save()"></button>
             </div>
-            
         </div>
       </div>
     </p-tabPanel>
@@ -104,10 +99,8 @@
             <label for="lastNameInput">Обладнання1</label>
           </div>
           <hr>
-
         </div>
       </div>
     </p-tabPanel>
   </p-tabView>
-
 </div>
