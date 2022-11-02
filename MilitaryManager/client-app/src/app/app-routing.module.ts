@@ -24,17 +24,17 @@ const routes: Routes = [
     { path: 'test1', component: Test1Component },
     { path: 'test2', component: Test2Component },
     { path: 'addCommander', component: AddCommanderComponent, canActivate: [AdminGuard] },
-    { path: 'decree', loadChildren: () => import("./modules/attachments-module/attachments.module").then(m => m.AttachmentsModule) },
+    { path: 'decree', loadChildren: () => import("./modules/attachments-module/attachments.module").then(m => m.AttachmentsModule), canActivate: [CommandersGuard] },
     { path: 'finishRegistration', component: FinishRegistrationComponent},
     { path: 'logs', component: LogComponent },
     { path: 'units', loadChildren: () => import("./modules/units-module/units.module").then(m => m.UnitsModule), canActivate: [CommandersGuard] },
-    { path: 'divisions', loadChildren: () => import("./modules/division-module/division.module").then(m => m.DivisionModule) },
+    { path: 'divisions', loadChildren: () => import("./modules/division-module/division.module").then(m => m.DivisionModule), canActivate: [CommandersGuard] },
     { path: 'equipment', loadChildren: () => import("./modules/equipment/equipment.module").then(m => m.EquipmentModule), canActivate: [CommandersGuard] },
     { path: 'SignInCallback', component: SigninRedirectCallbackComponent },
     { path: 'SignOutCallback', component: SignoutRedirectCallbackComponent },
-    { path: 'profile', component: ProfileComponent },
+    { path: 'profile', component: ProfileComponent, canActivate: [CommandersGuard] },
     { path: 'updateProfile', component: UpdateProfileComponent },
-    { path: 'attachments', loadChildren: () => import("./modules/attachments-module/attachments.module").then(m => m.AttachmentsModule) },
+    { path: 'attachments', loadChildren: () => import("./modules/attachments-module/attachments.module").then(m => m.AttachmentsModule), canActivate: [CommandersGuard] },
     { path: '**', redirectTo: 'home' }
   ]}
   ];
