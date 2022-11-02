@@ -28,7 +28,7 @@ const routes: Routes = [
     { path: 'finishRegistration', component: FinishRegistrationComponent},
     { path: 'logs', component: LogComponent },
     { path: 'units', loadChildren: () => import("./modules/units-module/units.module").then(m => m.UnitsModule), canActivate: [CommandersGuard] },
-    { path: 'divisions', loadChildren: () => import("./modules/division-module/division.module").then(m => m.DivisionModule), canActivate: [CommandersGuard] },
+    { path: 'divisions', loadChildren: () => import("./modules/division-module/division.module").then(m => m.DivisionModule) },
     { path: 'equipment', loadChildren: () => import("./modules/equipment/equipment.module").then(m => m.EquipmentModule), canActivate: [CommandersGuard] },
     { path: 'SignInCallback', component: SigninRedirectCallbackComponent },
     { path: 'SignOutCallback', component: SignoutRedirectCallbackComponent },
