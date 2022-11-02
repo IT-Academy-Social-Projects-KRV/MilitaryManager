@@ -2,8 +2,6 @@ import {BaseModel} from "./base.model";
 import {ProfileModel} from "./profile.model";
 import {UnitToEquipmentModel} from "./unitToEquipment.model";
 import {DivisionModel} from "./division.model";
-import {RankModel} from "./rank.model";
-import {PositionModel} from "./position.model";
 import {EntityModel} from "./entity.model";
 
 export class UnitModel extends BaseModel {

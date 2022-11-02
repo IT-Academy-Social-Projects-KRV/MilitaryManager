@@ -2,15 +2,11 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
 import {UnitModel} from "../../../../shared/models/unit.model";
 import {UnitsService} from "../../../../shared/services/api/unit.service";
 
-import {
-  logExperimentalWarnings
-} from "@angular-devkit/build-angular/src/builders/browser-esbuild/experimental-warnings";
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MessageService} from 'primeng/api';
 import {AttributeModel} from 'src/app/shared/models/attribute.model';
 import {ApiService} from 'src/app/shared/services/api/api.service';
 import {ProfileModel} from 'src/app/shared/models/profile.model';
-import {EntityModel} from 'src/app/shared/models/entity.model';
 import {Table} from 'primeng/table';
 import {EquipmentService} from 'src/app/shared/services/api/equipment.service';
 import {UnitToEquipmentModel} from 'src/app/shared/models/unitToEquipment.model';
@@ -39,7 +35,6 @@ export class UnitInfoComponent implements OnInit, OnChanges {
 
 
   unit: UnitModel = new UnitModel();
-  unitInfo: UnitModel = new UnitModel();
   parentFullName: string = "";
   divisionName: string = "";
   readonly: boolean = true;
