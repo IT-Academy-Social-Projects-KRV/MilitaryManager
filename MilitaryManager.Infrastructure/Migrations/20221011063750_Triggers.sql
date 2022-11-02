@@ -1,4 +1,4 @@
-USE Units;
+USE MilitaryManager;
 
 GO
 
