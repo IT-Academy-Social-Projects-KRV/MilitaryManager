@@ -79,7 +79,7 @@
         <div class="card">
             <p>Додаткова інформація про бійця</p>
             <hr>
-  
+
             <div class="p-float-label p-mt-5" *ngFor="let profile of personalFile">
               <span class="p-float-label">
                 <input type="text" id="profileName" pInputText [(ngModel)]="profile.value" [readonly]="isReadonly">
@@ -100,11 +100,7 @@
         <div class="card">
           <p>Обладнання бійця</p>
           <hr>
-          <div class="p-float-label">
-            <input type="text" pInputText value="Обладнання1" readonly>
-            <label for="lastNameInput">Обладнання1</label>
-          </div>
-          <hr>
+
           <div class="p-d-flex p-flex-row-reverse template-header m-2">
             <span class="p-input-icon-left">
                 <i class="pi pi-search"></i>

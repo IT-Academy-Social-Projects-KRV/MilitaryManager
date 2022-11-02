@@ -62,7 +62,8 @@ export class UnitInfoComponent implements OnInit, OnChanges {
   constructor(private unitsService: UnitsService,
               private _formBuilder: FormBuilder,
               private messageService: MessageService,
-              private _apiService: ApiService) {
+              private _apiService: ApiService,
+              private equipmentService: EquipmentService) {
   }
 
   ngOnInit(): void {
@@ -99,7 +100,7 @@ export class UnitInfoComponent implements OnInit, OnChanges {
             name:profile.name,
             value:profile.value
           })
-        }) 
+        })
 
         if (this.unit.parent != null) {
           this.parentFullName = `${this.unit.parent.lastName} ${this.unit.parent.firstName} ${this.unit.parent.secondName}`;
@@ -122,7 +123,7 @@ export class UnitInfoComponent implements OnInit, OnChanges {
           this.personalInfoForm.get("ParentName").setValue("Немає");
         }
 
-        
+
 
         this.equipment = this.unit.unitToEquipments;
       });
