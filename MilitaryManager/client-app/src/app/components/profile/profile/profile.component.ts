@@ -3,6 +3,7 @@ import {UnitUserService} from "../../../shared/services/api/unit-user.service";
 import {AuthService} from "../../../shared/services/auth.service";
 import {UnitsService} from "../../../shared/services/api/unit.service";
 import {UnitModel} from "../../../shared/models/unit.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -17,7 +18,10 @@ export class ProfileComponent implements OnInit {
   position: string | null | undefined = '';
   unitModel: UnitModel;
 
-  constructor(private _unitUserService : UnitUserService, private _authService: AuthService, private _unitService: UnitsService) {
+  constructor(private _unitUserService : UnitUserService,
+              private _authService: AuthService,
+              private _unitService: UnitsService,
+              private _router: Router) {
   }
 
   ngOnInit(): void {
@@ -34,5 +38,8 @@ export class ProfileComponent implements OnInit {
             })
         })
     })
+  }
+  navigateToUpdate() {
+    this._router.navigate(["/updateProfile"])
   }
 }

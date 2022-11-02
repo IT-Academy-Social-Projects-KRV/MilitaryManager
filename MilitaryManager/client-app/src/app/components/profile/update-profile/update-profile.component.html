@@ -1,0 +1,33 @@
+<form (submit)="update()" [formGroup]="updateProfileForm">
+  <div class="card">
+    <h5>Прізвище</h5>
+    <input type="text" pInputText  class="input" size="50px" formControlName="LastName">
+    <h5>Ім'я</h5>
+    <input type="text" pInputText size="50px" formControlName="FirstName">
+    <h5>По батькові</h5>
+    <input type="text" pInputText  size="50px" formControlName="SecondName">
+    <h5>Звання</h5>
+    <p-dropdown  [options]="ranks" optionLabel="name"  optionValue="name"  formControlName="Rank"></p-dropdown>
+    <h5>Посада</h5>
+    <p-dropdown  [options]="pos" optionLabel="name" optionValue="name"  formControlName="Position"></p-dropdown>
+    <h5>Розмір ноги</h5>
+    <input type="text" pInputText size="50px" formControlName="FootSize">
+    <h5>Розмір голови</h5>
+    <input type="text" pInputText size="50px" formControlName="HeadSize">
+    <h5>Розмір противогазу</h5>
+    <input type="text" pInputText size="50px" formControlName="GasMaskSize">
+    <h5>Уніформа</h5>
+    <p-dropdown  [options]="uniforms" formControlName="Uniform"></p-dropdown>
+    <h5>Група крові</h5>
+    <p-dropdown [options]="blood_types" formControlName="BloodType"></p-dropdown>
+    <h5>Вага</h5>
+    <input type="text" pInputText size="50px" formControlName="Weight">
+    <h5>Зріст</h5>
+    <input type="text" pInputText size="50px" formControlName="Height">
+    <br>
+    <div id="updateButton">
+      <p-button  type="submit" label="Оновити" ></p-button>
+    </div>
+  </div>
+</form>
+

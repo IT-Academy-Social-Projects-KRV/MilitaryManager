@@ -111,7 +111,6 @@ export class DecreeListComponent implements OnInit {
   }
 
   completeDecree = (event: Event, id: number) => {
-    console.log("clicked on complete " + id)
     this.confirmationService.confirm({
       target: event.target as HTMLButtonElement,
       message: 'This action will change decree status to Comleted. Continue?',

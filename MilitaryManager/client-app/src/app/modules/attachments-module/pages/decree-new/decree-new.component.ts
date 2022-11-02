@@ -1,5 +1,7 @@
 import { Component, ComponentRef, OnInit, QueryList, ViewChildren, ViewContainerRef } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { TemplateModel } from 'src/app/shared/models/template.model';
+import { UnitModel } from 'src/app/shared/models/unit.model';
 import { ApiService } from 'src/app/shared/services/api/api.service';
 import { DecreeAddComponent } from '../decree-add/decree-add.component';
 import { TransferComponent } from '../templates/transfer/transfer.component';
@@ -17,11 +19,21 @@ export class DecreeNewComponent implements OnInit {
   @ViewChildren('tabDoc', { read: ViewContainerRef })
   targets!: QueryList<any>;
   private componentRef!: ComponentRef<any>;
+  selectedUnit!: UnitModel;
 
-  constructor(public apiService: ApiService) { }
+  constructor(public apiService: ApiService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.apiService.templates.collection.getAll().subscribe(res => { this.templates = res })
+    this.route.params.subscribe((params: Params) => {
+      let unitId = params['unitId']
+      if (unitId!) {
+        this.apiService.units.single.getById(unitId).subscribe((unit: UnitModel) => {
+          this.selectedUnit = unit;
+        })
+      }
+    });
   }  
 
   addNewDocument(id: number | null, type: string | null) {
@@ -36,6 +48,10 @@ export class DecreeNewComponent implements OnInit {
           case 3: {
             this.componentRef = target.createComponent(TransferComponent);
             this.componentRef.instance.templateId=id;
+            if(this.selectedUnit!) {
+              this.componentRef.instance.selectedUnit = this.selectedUnit;
+              this.componentRef.instance.selectedUnits.push(this.selectedUnit)
+            }
             break;
           }
           default: {

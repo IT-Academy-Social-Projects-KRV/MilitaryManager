@@ -1,88 +1,96 @@
 <div class="content-section implementation p-d-flex">
-
-  <p-tabView class="unit-info">
+  <p-toast></p-toast>
+  <p-tabView>
     <p-tabPanel header="Інформація про бійця">
       <div class="content-section implementation p-d-flex">
-        <div class="card">
+        <form [formGroup]="personalInfoForm">
+          <div class="card">
+            <p>Інформація про бійця</p>
+            <hr>
 
-          <p>Інформація про бійця</p>
-          <hr>
+            <!--  pib-->
+            <div class="p-mt-5">
+              <span class="p-float-label">
+                <input type="text" pInputText id="lastNameInput" formControlName="LastName" [readonly]="isReadonly">
+                <label for="lastNameInput">Прізвище</label>
+              </span>
+            </div>
 
-          <!--  pib-->
-          <div class="p-mt-5">
-          <span class="p-float-label">
-            <input type="text" pInputText id="lastNameInput" [(ngModel)]="unit.lastName" [readonly]="readonly">
-            <label for="lastNameInput">Прізвище</label>
-          </span>
+            <div class="p-mt-5">
+              <span class="p-float-label">
+                <input type="text" pInputText id="firstNameInput" formControlName="FirstName" [readonly]="isReadonly">
+                <label for="firstNameInput">Ім'я</label>
+              </span>
+            </div>
+
+            <div class="p-mt-5">
+              <span class="p-float-label ">
+                <input type="text" pInputText id="middleNameInput" formControlName="SecondName" [readonly]="isReadonly">
+                <label for="middleNameInput">По батькові</label>
+              </span>
+            </div>
+
+            <!--         division-->
+            <div class="p-mt-5">
+              <span class="p-float-label ">
+                <input type="text" pInputText id="divisionInput" formControlName="Division" readonly>
+                <label for="divisionInput">Підрозділ</label>
+              </span>
+            </div>
+
+            <!--        commander-->
+            <div class="p-mt-5">
+              <span class="p-float-label ">
+                <input type="text" pInputText id="parentInput" formControlName="ParentName" readonly>
+                <label for="parentInput">Командир</label>
+              </span>
+            </div>
+
+            <!--       rank-->
+            <div class="p-mt-5">
+              <span class="p-float-label ">
+                <input type="text" pInputText id="rankInput" formControlName="Rank" readonly>
+                <label for="rankInput">Ранг</label>
+              </span>
+            </div>
+
+            <!--       position-->
+            <div class="p-mt-5">
+              <span class="p-float-label ">
+                <input type="text" pInputText id="positionInput" formControlName="Position" readonly>
+                <label for="positionInput">Позиція</label>
+              </span>
+            </div>
+
+            <div *ngIf="unit.id!" class="p-mt-5">
+              <p-button [routerLink]="['/decree/new', { unitId: unit.id }]" type="button" label="Створити наказ" icon="pi pi-plus"></p-button>
+            </div>
+
+            <div class="p-mt-5">
+              <button pButton type="button" label="Редагувати солдата" *ngIf="isReadonly" class="p-button-outlined" (click)="edit()"></button>
+              <button pButton type="button" label="Зберегти" *ngIf="!isReadonly" class="p-button-raised" icon="pi pi-check" (click)="save()"></button>
+            </div>
           </div>
-
-          <div class="p-mt-5">
-          <span class="p-float-label">
-            <input type="text" pInputText id="firstNameInput" [(ngModel)]="unit.firstName" [readonly]="readonly">
-            <label for="firstNameInput">Ім'я</label>
-          </span>
-          </div>
-
-          <div class="p-mt-5">
-            <span class="p-float-label ">
-              <input type="text" pInputText id="middleNameInput" [(ngModel)]="unit.secondName" [readonly]="readonly">
-              <label for="middleNameInput">По батькові</label>
-            </span>
-          </div>
-
-
-          <!--         division-->
-          <div class="p-mt-5">
-            <span class="p-float-label ">
-            <input type="text" pInputText id="divisionInput" [(ngModel)]="divisionName" [readonly]="readonly">
-            <label for="divisionInput">Підрозділ</label>
-            </span>
-          </div>
-
-          <!--        commander-->
-          <div class="p-mt-5">
-            <span class="p-float-label ">
-            <input type="text" pInputText id="parentInput" [(ngModel)]="parentFullName" [readonly]="readonly">
-            <label for="parentInput">Командир</label>
-            </span>
-          </div>
-
-          <!--       rank-->
-          <div class="p-mt-5">
-            <span class="p-float-label ">
-            <input type="text" pInputText id="rankInput" [(ngModel)]="unit.rank" [readonly]="readonly">
-            <label for="rankInput">Ранг</label>
-            </span>
-          </div>
-
-          <!--       position-->
-          <div class="p-mt-5">
-            <span class="p-float-label ">
-            <input type="text" pInputText id="positionInput" [(ngModel)]="unit.position" [readonly]="readonly">
-            <label for="positionInput">Позиція</label>
-          </span>
-          </div>
-
-
-        </div>
+        </form>
       </div>
     </p-tabPanel>
     <p-tabPanel header="Особова справа">
       <div class="content-section implementation p-d-flex">
         <div class="card">
-          <p>Додаткова інформація про бійця</p>
-          <hr>
-
-          <div class="p-float-label" *ngFor="let profile of unit.profiles">
-            <span>{{profile.name}}: </span>
-            <!--          <span>{{profile.value}}</span>-->
-            <div>
-              <input type="text" pInputText [(ngModel)]="profile.value" [readonly]="readonly">
+            <p>Додаткова інформація про бійця</p>
+            <hr>
+  
+            <div class="p-float-label p-mt-5" *ngFor="let profile of personalFile">
+              <span class="p-float-label">
+                <input type="text" id="profileName" pInputText [(ngModel)]="profile.value" [readonly]="isReadonly">
+                <label for="profileName">{{profile.name}}</label>
+              </span>
             </div>
-            <br>
-          </div>
 
-
+            <div class="p-mt-5">
+              <button pButton type="button" label="Редагувати" *ngIf="isReadonly" class="p-button-outlined" (click)="edit()"></button>
+              <button pButton type="button" label="Зберегти" *ngIf="!isReadonly" class="p-button-raised" icon="pi pi-check" (click)="save()"></button>
+            </div>
         </div>
       </div>
     </p-tabPanel>
@@ -90,6 +98,13 @@
     <p-tabPanel header="Обладнання бійця">
       <div class="content-section implementation p-d-flex">
         <div class="card">
+          <p>Обладнання бійця</p>
+          <hr>
+          <div class="p-float-label">
+            <input type="text" pInputText value="Обладнання1" readonly>
+            <label for="lastNameInput">Обладнання1</label>
+          </div>
+          <hr>
           <div class="p-d-flex p-flex-row-reverse template-header m-2">
             <span class="p-input-icon-left">
                 <i class="pi pi-search"></i>
