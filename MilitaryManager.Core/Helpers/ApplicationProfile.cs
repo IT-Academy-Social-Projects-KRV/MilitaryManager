@@ -70,14 +70,6 @@ namespace MilitaryManager.Core.Helpers
                 .ForMember(dest => dest.DivisionName, opt => opt.MapFrom(src => src.Division.Name))
                 .ForMember(dest => dest.NameValue, opt => opt.MapFrom(src => src.Equipment.EntityToAttributes));
 
-            //.ForMember(dest => dest.Value,
-            //    opt => opt.MapFrom(src =>
-            //        src.Equipment.EntityToAttributes.FirstOrDefault(x => x.EntityId == src.Equipment.Id).Value))
-            //.ForMember(dest => dest.Name,
-            //    opt => opt.MapFrom(src =>
-            //        src.Equipment.EntityToAttributes.FirstOrDefault(x => x.EntityId == src.Equipment.Id).Attribute
-            //            .Name));
-
             CreateMap<EntityToAttribute, AttributeWithValueDTO>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Attribute.Name));
         }

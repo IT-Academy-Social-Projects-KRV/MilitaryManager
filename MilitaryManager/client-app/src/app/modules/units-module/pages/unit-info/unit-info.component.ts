@@ -5,11 +5,11 @@ import {UnitsService} from "../../../../shared/services/api/unit.service";
 import {
   logExperimentalWarnings
 } from "@angular-devkit/build-angular/src/builders/browser-esbuild/experimental-warnings";
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MessageService } from 'primeng/api';
-import { AttributeModel } from 'src/app/shared/models/attribute.model';
-import { ApiService } from 'src/app/shared/services/api/api.service';
-import { ProfileModel } from 'src/app/shared/models/profile.model';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {MessageService} from 'primeng/api';
+import {AttributeModel} from 'src/app/shared/models/attribute.model';
+import {ApiService} from 'src/app/shared/services/api/api.service';
+import {ProfileModel} from 'src/app/shared/models/profile.model';
 import {EntityModel} from 'src/app/shared/models/entity.model';
 import {Table} from 'primeng/table';
 import {EquipmentService} from 'src/app/shared/services/api/equipment.service';
@@ -93,12 +93,12 @@ export class UnitInfoComponent implements OnInit, OnChanges {
       .subscribe((u) => {
         this.unit = u;
 
-        this.personalFile=[]
+        this.personalFile = []
 
-        this.unit.profiles.forEach((profile) =>{
+        this.unit.profiles.forEach((profile) => {
           this.personalFile.push({
-            name:profile.name,
-            value:profile.value
+            name: profile.name,
+            value: profile.value
           })
         })
 
@@ -116,14 +116,11 @@ export class UnitInfoComponent implements OnInit, OnChanges {
         this.personalInfoForm.get("Rank").setValue(this.unit.rank);
         this.personalInfoForm.get("Position").setValue(this.unit.position);
         this.personalInfoForm.get("Division").setValue(this.unit.division.name);
-        if(this.unit.parent!){
+        if (this.unit.parent!) {
           this.personalInfoForm.get("ParentName").setValue(this.unit.parent.lastName + " " + this.unit.parent.firstName + " " + this.unit.parent.secondName);
-        }
-        else{
+        } else {
           this.personalInfoForm.get("ParentName").setValue("Немає");
         }
-
-
 
         this.equipment = this.unit.unitToEquipments;
       });
@@ -134,7 +131,7 @@ export class UnitInfoComponent implements OnInit, OnChanges {
     this.table.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 
-  edit(){
+  edit() {
     this.isReadonly = false;
   }
 
@@ -143,14 +140,14 @@ export class UnitInfoComponent implements OnInit, OnChanges {
     this.unit.firstName = this.personalInfoForm.get("FirstName").value;
     this.unit.lastName = this.personalInfoForm.get("LastName").value;
     this.unit.secondName = this.personalInfoForm.get("SecondName").value;
-    for(let i = 0; i < this.unit.profiles.length; i++) {
+    for (let i = 0; i < this.unit.profiles.length; i++) {
       this.unit.profiles[i] = new ProfileModel(this.unit.profiles[i].id,
-        this.attributes.find(x => x.name==this.unit.profiles[i].name)?.id, this.unit.id,
+        this.attributes.find(x => x.name == this.unit.profiles[i].name)?.id, this.unit.id,
         this.personalFile[i].value, null, this.personalFile[i].name)
     }
     this.unitsService.single.update(this.unit).subscribe(
-      () =>  this.messageService.add({ severity: 'success', summary: 'Солдата відредаговано' }),
-      () => this.messageService.add({ severity: 'error', summary: 'Виникла помилка!'})
+      () => this.messageService.add({severity: 'success', summary: 'Солдата відредаговано'}),
+      () => this.messageService.add({severity: 'error', summary: 'Виникла помилка!'})
     );
   }
 }
