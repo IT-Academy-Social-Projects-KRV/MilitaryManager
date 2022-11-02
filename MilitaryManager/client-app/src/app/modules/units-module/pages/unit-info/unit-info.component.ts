@@ -72,15 +72,6 @@ export class UnitInfoComponent implements OnInit, OnChanges {
 
   }
 
-  edit() {
-    this.readonly = false;
-  }
-
-  show(): void {
-    console.log(this.unit);
-    console.log(this.unit.unitToEquipments);
-  }
-
   applyFilterGlobal($event: Event, stringVal: string) {
     this.table.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
