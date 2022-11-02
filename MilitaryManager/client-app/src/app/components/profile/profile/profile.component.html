@@ -5,7 +5,7 @@
   <input type="text" pInputText [(ngModel)]="rank" size="50px" readonly>
   <h5>Посада</h5>
   <input type="text" pInputText [(ngModel)]="position" size="50px" readonly>
-  <div *ngFor="let attribute of unitModel.profiles" class="margin">
+  <div *ngFor="let attribute of unitModel?.profiles" class="margin">
       <h5>
         {{attribute.name}}
       </h5>
