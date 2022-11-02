@@ -2,10 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using MilitaryManager.Core.Services.StoreService;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MilitaryManager.Infrastructure.Services.StoreServices
@@ -18,7 +15,7 @@ namespace MilitaryManager.Infrastructure.Services.StoreServices
         {
             _configuration = configuration;
         }
-        public async Task StoreDataAsync(IFormFile uploadedFile)
+        public async Task<string> StoreDataAsync(IFormFile uploadedFile)
         {
             string connectionString = _configuration.GetValue<string>("AzureConfiguration:ConnectionString");
             string containerName = _configuration.GetValue<string>("AzureConfiguration:ContainerName");
@@ -32,7 +29,10 @@ namespace MilitaryManager.Infrastructure.Services.StoreServices
                     await container.UploadBlobAsync(uploadedFile.FileName, stream);
                 }
 
+                return container.Uri.ToString() + uploadedFile.FileName;
             }
+
+            return string.Empty;
         }
     }
 }

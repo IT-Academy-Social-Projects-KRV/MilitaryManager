@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using MilitaryManager.Core.Services.StoreService;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MilitaryManager.Infrastructure.Services.StoreServices
@@ -16,16 +14,20 @@ namespace MilitaryManager.Infrastructure.Services.StoreServices
         {
             _webRootPath = webHostEnvironment.WebRootPath;
         }
-        public async Task StoreDataAsync(IFormFile uploadedFile)
+        public async Task<string> StoreDataAsync(IFormFile uploadedFile)
         {
+            string path = String.Empty;
+
             if (uploadedFile != null)
             {
-                string path = "/documents/" + uploadedFile.FileName;
+                path = "/documents/" + uploadedFile.FileName;
                 using (var fileStream = new FileStream(_webRootPath + path, FileMode.Create))
                 {
                     await uploadedFile.CopyToAsync(fileStream);
                 }
             }
+
+            return path;
         }
     }
 }
