@@ -37,10 +37,11 @@ export class UnitInfoComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.cols = [
-      {field: 'regNum', header: 'Реєстраційний номер'},
-      {field: 'soldier', header: 'Надано ким'},
-      {field: 'division', header: 'Частина'},
-      {field: 'date', header: 'Дата видачі'}
+      {field: 'expansion', header: '', width: '4rem'},
+      {field: 'regNum', header: 'Реєстраційний номер', width: '25%'},
+      {field: 'soldier', header: 'Надано ким', width: '25%'},
+      {field: 'division', header: 'Частина', width: '25%'},
+      {field: 'date', header: 'Дата видачі', width: '25%'}
     ];
     this.equipmentService.collection.getAll().subscribe(res => {
       this.equipment = res
