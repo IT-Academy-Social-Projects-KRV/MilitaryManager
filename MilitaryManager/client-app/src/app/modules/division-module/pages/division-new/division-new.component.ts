@@ -16,7 +16,7 @@ export class DivisionNewComponent implements OnInit {
     name: ["", Validators.required],
     divisionNumber: ["", Validators.required],
     address: ["", Validators.required],
-    parentId: [0]
+    parentId: [null]
   })
 
   divisions: DivisionModel[] = [];

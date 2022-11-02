@@ -79,7 +79,7 @@
         <div class="card">
             <p>Додаткова інформація про бійця</p>
             <hr>
-  
+
             <div class="p-float-label p-mt-5" *ngFor="let profile of personalFile">
               <span class="p-float-label">
                 <input type="text" id="profileName" pInputText [(ngModel)]="profile.value" [readonly]="isReadonly">
@@ -94,18 +94,92 @@
         </div>
       </div>
     </p-tabPanel>
+
     <p-tabPanel header="Обладнання бійця">
       <div class="content-section implementation p-d-flex">
         <div class="card">
           <p>Обладнання бійця</p>
           <hr>
-          <div class="p-float-label">
-            <input type="text" pInputText value="Обладнання1" readonly>
-            <label for="lastNameInput">Обладнання1</label>
+
+          <div class="p-d-flex p-flex-row-reverse template-header m-2">
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Номер"/>
+            </span>
           </div>
-          <hr>
+
+          <p-table #dt [value]="equipment" dataKey="regNum" [scrollable]="true" [globalFilterFields]="['regNum']" scrollHeight="50vh">
+            <ng-template pTemplate="header">
+              <tr>
+                <th *ngFor="let col of cols" [ngStyle]="{'width': col.width}">
+                  {{col.header}}
+                </th>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-element let-expanded="expanded">
+              <tr>
+                <td [ngStyle]="{'width': '4rem'}">
+                  <button type="button" pButton pRipple
+                    [pRowToggler]="element" class="p-button-text p-button-rounded
+                    p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                </td>
+                <td [ngStyle]="{'width': '25%'}">
+                  {{element.regNum}}
+                </td>
+                <td [ngStyle]="{'width': '25%'}">
+                  {{element.givenByName}}
+                </td>
+                <td [ngStyle]="{'width': '25%'}">
+                  {{element.divisionName}}
+                </td>
+                <td [ngStyle]="{'width': '25%'}">
+                  {{element.givenDate| date : 'dd.MM.yyyy HH:mm'}}
+                </td>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="rowexpansion" let-element>
+              <tr>
+                <td colspan="5">
+                  <div class="p-p-3">
+                    <p-table [value]="element.nameValue" dataKey="id">
+                      <ng-template pTemplate="header">
+                        <tr>
+                          <th [ngStyle]="{'width': '4rem'}">ID</th>
+                          <th>Назва</th>
+                          <th>Значення</th>
+                        </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body" let-nameValue>
+                        <tr>
+                          <td>{{nameValue.id}}</td>
+                          <td>{{nameValue.name}}</td>
+                          <td>{{nameValue.value}}</td>
+                        </tr>
+                      </ng-template>
+                      <ng-template pTemplate="emptymessage">
+                        <tr>
+                          <td colspan="4" id="emptymessage">Дані відсутні</td>
+                        </tr>
+                      </ng-template>
+                    </p-table>
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td colspan="5">Амуніції не знайдено.</td>
+              </tr>
+            </ng-template>
+          </p-table>
+
         </div>
       </div>
     </p-tabPanel>
   </p-tabView>
+
+
 </div>

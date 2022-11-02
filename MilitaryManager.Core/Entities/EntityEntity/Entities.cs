@@ -10,7 +10,7 @@ namespace MilitaryManager.Core.Entities.EntityEntity
             {
                 Query
                      .Include(x => x.UnitToEquipment)
-                     .ThenInclude(x => x.Warehouseman)
+                     .ThenInclude(x => x.GivenBy)
                      .Include(x => x.EntityToAttributes)
                      .ThenInclude(x => x.Attribute)
                      .Where(x => x.Id == id);
@@ -26,7 +26,7 @@ namespace MilitaryManager.Core.Entities.EntityEntity
                     .Include(x => x.UnitToEquipment)
                     .ThenInclude(x => x.Unit)
                     .Include(x => x.UnitToEquipment)
-                    .ThenInclude(x => x.Warehouseman);
+                    .ThenInclude(x => x.GivenBy);
             }
         }
     }

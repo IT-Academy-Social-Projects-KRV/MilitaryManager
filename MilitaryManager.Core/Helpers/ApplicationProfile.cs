@@ -21,6 +21,7 @@ using MilitaryManager.Core.Entities.RankEntity;
 using MilitaryManager.Core.Entities.TemplateEntity;
 using MilitaryManager.Core.Entities.UnitEntity;
 using System.IO;
+using System.Linq;
 
 namespace MilitaryManager.Core.Helpers
 {
@@ -47,7 +48,7 @@ namespace MilitaryManager.Core.Helpers
             CreateMap<EntityRequestDTO, Entity>().ReverseMap()
                 .ForMember(dest => dest.Division, opt => opt.MapFrom(src => src.UnitToEquipment.Division))
                 .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.UnitToEquipment.Unit))
-                .ForMember(dest => dest.Warehouseman, opt => opt.MapFrom(src => src.UnitToEquipment.Warehouseman))
+                .ForMember(dest => dest.Warehouseman, opt => opt.MapFrom(src => src.UnitToEquipment.GivenBy))
                 .ForMember(dest => dest.GivenDate, opt => opt.MapFrom(src => src.UnitToEquipment.GivenDate));
             CreateMap<EntityToAttributeDTO, EntityToAttribute>().ReverseMap();
             CreateMap<EntityToAttributeRequestDTO, EntityToAttribute>().ReverseMap()
@@ -61,6 +62,16 @@ namespace MilitaryManager.Core.Helpers
             CreateMap<ChangeValue, ChangeValuesDTO>();
             CreateMap<Profile, AttributeWithValueDTO>()
                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Attribute.Name));
+
+            CreateMap<UnitToEquipment, UnitToEquipmentWithValueDTO>()
+                .ForMember(dest => dest.RegNum, opt => opt.MapFrom(src => src.Equipment.RegNum))
+                .ForMember(dest => dest.GivenByName,
+                    opt => opt.MapFrom(src => src.GivenBy.LastName + " " + src.GivenBy.FirstName + " " + src.GivenBy.SecondName))
+                .ForMember(dest => dest.DivisionName, opt => opt.MapFrom(src => src.Division.Name))
+                .ForMember(dest => dest.NameValue, opt => opt.MapFrom(src => src.Equipment.EntityToAttributes));
+
+            CreateMap<EntityToAttribute, AttributeWithValueDTO>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Attribute.Name));
         }
     }
 }

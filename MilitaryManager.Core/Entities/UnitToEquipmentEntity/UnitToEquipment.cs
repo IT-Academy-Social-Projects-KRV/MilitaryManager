@@ -19,6 +19,6 @@ namespace MilitaryManager.Core.Entities.EquipmentToUnitEntity
         public Division Division { get; set; }
         public Entity Equipment { get; set; }
         public Unit Unit { get; set; }
-        public Unit Warehouseman { get; set; }
+        public Unit GivenBy { get; set; }
     }
 }

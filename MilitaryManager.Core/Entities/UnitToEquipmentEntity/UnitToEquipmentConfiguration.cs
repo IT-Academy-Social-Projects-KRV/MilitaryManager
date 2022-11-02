@@ -25,7 +25,7 @@ namespace MilitaryManager.Core.Entities.EquipmentToUnitEntity
                 .HasForeignKey(x => x.UnitId);
 
             builder
-                .HasOne(x => x.Warehouseman)
+                .HasOne(x => x.GivenBy)
                 .WithMany(x => x.EquipmentToWarehouseMan)
                 .HasForeignKey(x => x.GivenById);
 
