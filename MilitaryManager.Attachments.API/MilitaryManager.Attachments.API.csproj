@@ -37,7 +37,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Exceptions\" />
 		<Folder Include="wwwroot\documents\" />
 	</ItemGroup>
 
