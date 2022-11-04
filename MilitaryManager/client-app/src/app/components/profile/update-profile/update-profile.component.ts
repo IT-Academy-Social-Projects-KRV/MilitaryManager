@@ -49,7 +49,9 @@ export class UpdateProfileComponent implements OnInit {
     Uniform: ['', Validators.required],
     BloodType: ['', Validators.required],
     Weight: ['', [Validators.required, ProfileValidators.weightValueValidator]],
-    Height: ['', [Validators.required, ProfileValidators.heightValueValidator]]
+    Height: ['', [Validators.required, ProfileValidators.heightValueValidator]],
+    DivisionId: [0],
+    ParentId: [0],
   })
 
   constructor(
@@ -77,6 +79,10 @@ export class UpdateProfileComponent implements OnInit {
               this.updateProfileForm.get("LastName").setValue(this.unitModel.lastName)
               this.updateProfileForm.get("FirstName").setValue(this.unitModel.firstName)
               this.updateProfileForm.get("SecondName").setValue(this.unitModel.secondName)
+              this.updateProfileForm.get("Rank").setValue(this.unitModel.rank)
+              this.updateProfileForm.get("Position").setValue(this.unitModel.position)
+              this.updateProfileForm.get("DivisionId").setValue(this.unitModel.division.id)
+              this.updateProfileForm.get("ParentId").setValue(this.unitModel.parentId)
               for(let i = 0; i < this.unitModel.profiles.length; i++) {
                 this.updateProfileForm.get(AttributesName[i]).setValue(this.unitModel.profiles[i].value)
               }
