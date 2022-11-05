@@ -1,16 +1,19 @@
- <div class="card">
+<div class="card">
   <p-table [value]="logs" [paginator]="true" [rows]="10"
-    [showCurrentPageReport]="true" responsiveLayout="scroll"
-    currentPageReportTemplate="Показати з {first} по {last} із {totalRecords}
-    записів" [rowsPerPageOptions]="[10,25,50]" dataKey="id">
+           [showCurrentPageReport]="true" responsiveLayout="scroll"
+           sortMode="single"
+           sortField="date"
+           [sortOrder]="-1"
+           currentPageReportTemplate="Показати з {first} по {last} із {totalRecords}
+           записів" [rowsPerPageOptions]="[10,25,50]" dataKey="id">
     <ng-template pTemplate="header">
       <tr>
         <th style="width: 3rem"></th>
-        <th>ІД</th>
-        <th>Сутність</th>
-        <th>ІД сутності</th>
-        <th>Код дії</th>
-        <th>Дата</th>
+        <th pSortableColumn="id">ІД<p-sortIcon field="id"></p-sortIcon></th>
+        <th pSortableColumn="tableName">Сутність<p-sortIcon field="tableName"></p-sortIcon></th>
+        <th pSortableColumn="rowId">ІД сутності<p-sortIcon field="rowId"></p-sortIcon></th>
+        <th pSortableColumn="changeTypeCode">Код дії<p-sortIcon field="changeTypeCode"></p-sortIcon></th>
+        <th pSortableColumn="date">Дата<p-sortIcon field="date"></p-sortIcon></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-log let-expanded="expanded">
